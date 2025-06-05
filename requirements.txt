@@ -8,4 +8,7 @@ google-adk
 pandas
 openpyxl
 tqdm
+Pillow
+pymysql
+jupyter
 # pywin32

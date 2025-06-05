@@ -3,9 +3,9 @@ from openai import OpenAI
 import json
 
 class WeChatStyleAnalyzer:
-    def __init__(self):
+    def __init__(self, api_key):
         self.client = OpenAI(
-            api_key=os.environ.get("AI_STUDIO_API_KEY"),
+            api_key=api_key,
             base_url="https://aistudio.baidu.com/llm/lmapi/v3",
         )
 
@@ -21,11 +21,37 @@ class WeChatStyleAnalyzer:
                 "status": "success" | "error",
                 "message": "错误信息（如果有）",
                 "data": {
-                    "language_features": {...},
-                    "emotional_features": {...},
-                    "interaction_features": {...},
-                    "personal_features": {...},
-                    "wechat_features": {...}
+                    "语言特征": {
+                        "用词特点": str,
+                        "句式结构": str,
+                        "标点符号使用特点": str,
+                        "语气词使用频率": str,
+                        "表情符号使用情况": str
+                    },
+                    "情感特征": {
+                        "情感倾向": str,
+                        "情感强度": str,
+                        "情感表达方式": str,
+                        "情绪变化趋势": str
+                    },
+                    "交互特征": {
+                        "回复速度": str,
+                        "消息长度分布": str,
+                        "话题转换频率": str,
+                        "互动方式": str
+                    },
+                    "个性化特征": {
+                        "独特的表达方式": str,
+                        "习惯用语": str,
+                        "口头禅": str,
+                        "个人特色": str
+                    },
+                    "微信特有特征": {
+                        "表情包使用情况": str,
+                        "语音/图片/视频等多媒体使用情况": str,
+                        "引用/转发消息的使用情况": str,
+                        "群聊/私聊的互动特点": str
+                    }
                 }
             }
         """
@@ -121,7 +147,7 @@ class WeChatStyleAnalyzer:
 
 def main():
     # 使用示例
-    analyzer = WeChatStyleAnalyzer()
+    analyzer = WeChatStyleAnalyzer(api_key="your_api_key")
     
     # 示例图片URL列表
     image_urls = [

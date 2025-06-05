@@ -1,0 +1,11 @@
+openai
+python-dotenv
+opencv-python
+python-pptx 
+PyPDF2
+python-docx
+google-adk
+pandas
+openpyxl
+tqdm
+# pywin32

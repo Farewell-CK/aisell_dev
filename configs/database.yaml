@@ -1,0 +1,9 @@
+database:
+  host: 120.77.8.73
+  port: 9010
+  username: root
+  password: sale159753
+  name: sale
+  type: utf8mb4
+  pool_size: 10
+  timeout: 30

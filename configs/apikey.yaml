@@ -1,0 +1,15 @@
+api_keys:
+  qwen:
+    api_key: sk-ad30851f6a47453a8b2c56ec4da32957
+    base_url: https://dashscope.aliyuncs.com/compatible-mode/v1
+  deepseek:
+    api_key: sk-d0dcd1cb9600485d951f604146e3f1ea
+    base_url: https://api.deepseek.com
+  ernie:
+    api_key: ae467bfa991e56e0e996a60820b93e9455f7e6bd
+    base_url: https://aistudio.baidu.com/llm/lmapi/v3
+  gaode:
+    api_key: af8a9fd3dac89fe58d1ab4a2fa142a30
+  
+  openweather:
+    api_key: fdfaba4dcbf1ddb354b4b30337b4dea4

@@ -6,18 +6,17 @@ from contextlib import AsyncExitStack
 import datetime
 from zoneinfo import ZoneInfo
 from google.adk.agents import Agent, LlmAgent, SequentialAgent, ParallelAgent
-from google.adk.models.lite_llm import LiteLlm # 用于多模型支持
+from google.adk.models.lite_llm import LiteLlm
 from google.adk.sessions import InMemorySessionService, DatabaseSessionService
 from google.adk.tools.mcp_tool.mcp_toolset import MCPToolset, StdioServerParameters
 from google.adk.runners import Runner
-from google.genai import types # 用于创建消息 Content/Parts
+from google.genai import types
 
 from .tools import speech_to_text, image_comprehension, video_comprehension, generate_customer_portrait, generate_customer_behavior, generate_product_offer, generate_base_info, generate_strategy, generate_role
 from .prompts import preprocess_prompt, customer_portrait_prompt, customer_behavior_prompt, product_offer_prompt,personification_output_prompt
 
-# 加载环境变量
-from dotenv import load_dotenv
-load_dotenv()
+# 导入配置加载器
+from utils.config_loader import ConfigLoader
 
 import warnings
 # 忽略所有警告
@@ -43,6 +42,8 @@ db_url = "sqlite:///./database/my_agent_data.db"
 session_service = DatabaseSessionService(db_url=db_url)
 print("Session service created.")
 
+# 初始化配置加载器
+config = ConfigLoader()
 
 # 获取环境变量
 qwen_api_key = os.getenv("Qwen_API_KEY")
@@ -51,12 +52,11 @@ qwen_base_url = os.getenv("Qwen_BASE_URL")
 deepseek_api_key = os.getenv("Deepseek_API_KEY")
 deepseek_base_url = os.getenv("Deepseek_BASE_URL")
 
-
 # 配置模型
 deepseek_model = LiteLlm(
     model="deepseek/deepseek-chat",  
-    api_key=deepseek_api_key,
-    api_base=deepseek_base_url
+    api_key=config.get_api_key('deepseek'),
+    api_base=config.get_api_key('deepseek', 'base_url')
 )
 
 qwen_model = LiteLlm(
@@ -64,8 +64,6 @@ qwen_model = LiteLlm(
     api_key=qwen_api_key,
     api_base=qwen_base_url
 )
-
-
 
 customer_portrait_agent = LlmAgent(
     name="customer_portrait_agent",
@@ -99,10 +97,6 @@ personification_output_agent = LlmAgent(
     tools=[],
 )
 
-
-
-
-
 # 这个为根agent，整个workflow的输入源
 inputs_preprocess_agent = LlmAgent(
     name="inputs_preprocess_agent",
@@ -112,60 +106,6 @@ inputs_preprocess_agent = LlmAgent(
     tools=[speech_to_text, image_comprehension, video_comprehension],
     output_key="text",
 )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 # async def create_agent():
 #   """从 MCP 服务器获取工具。"""
@@ -190,6 +130,5 @@ inputs_preprocess_agent = LlmAgent(
 #       tools=tools,
 #   )
 #   return agent, exit_stack
-
 
 # root_agent = create_agent()

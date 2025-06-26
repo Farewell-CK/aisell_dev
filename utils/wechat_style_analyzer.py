@@ -19,7 +19,6 @@ class WeChatStyleAnalyzer:
             dict: 包含状态和分析结果的字典
             {
                 "status": "success" | "error",
-                "message": "错误信息（如果有）",
                 "data": {
                     "语言特征": {
                         "用词特点": str,
@@ -104,7 +103,44 @@ class WeChatStyleAnalyzer:
    - 引用/转发消息的使用情况
    - 群聊/私聊的互动特点
 
-请以JSON格式输出分析结果，包含以上所有维度的具体特征描述。字数控制在1000字以内。"""
+请以JSON格式输出分析结果，包含以上所有维度的具体特征描述。字数控制在1000字以内。
+输出格式如下：
+```json
+{
+    "语言特征": {
+        "用词特点": str,
+        "句式结构": str,
+        "标点符号使用特点": str,
+        "语气词使用频率": str,
+        "表情符号使用情况": str
+    },
+    "情感特征": {
+        "情感倾向": str,
+        "情感强度": str,
+        "情感表达方式": str,
+        "情绪变化趋势": str
+    },
+    "交互特征": {
+        "回复速度": str,
+        "消息长度分布": str,
+        "话题转换频率": str,
+        "互动方式": str
+    },
+    "个性化特征": {
+        "独特的表达方式": str,
+        "习惯用语": str,
+        "口头禅": str,
+        "个人特色": str
+    },
+    "微信特有特征": {
+        "表情包使用情况": str,
+        "语音/图片/视频等多媒体使用情况": str,
+        "引用/转发消息的使用情况": str,
+        "群聊/私聊的互动特点": str
+    }
+}
+```
+"""
                     },
                     *messages
                 ]
@@ -119,30 +155,27 @@ class WeChatStyleAnalyzer:
             if len(completion.choices) > 0:
                 try:
                     # 尝试解析返回的JSON字符串
-                    result = json.loads(completion.choices[0].message.content)
+                    result = json.loads(completion.choices[0].message.content.strip("```json").strip("```"))
                     return {
                         "status": "success",
-                        "message": "分析成功",
                         "data": result
                     }
                 except json.JSONDecodeError:
                     return {
                         "status": "error",
-                        "message": "返回结果格式错误",
-                        "data": None
+                        "data": "无法解析返回的JSON数据"
                     }
             else:
                 return {
                     "status": "error",
-                    "message": "未获取到分析结果",
-                    "data": None
+                    "data": "没有返回结果"
                 }
 
         except Exception as e:
             return {
                 "status": "error",
-                "message": f"分析过程出错: {str(e)}",
-                "data": None
+                # "message": f"分析过程出错: {str(e)}",
+                "data": f"分析过程出错: {str(e)}"
             }
 
 def main():

@@ -1,3 +1,6 @@
+import os
+import requests
+import json
 from tools.database import DatabaseManager
 
 def generate_customer_portrait(user_input: str) -> dict:

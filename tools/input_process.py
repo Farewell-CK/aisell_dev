@@ -4,7 +4,6 @@ from datetime import datetime
 from http import HTTPStatus
 from openai import OpenAI
 from dashscope.audio.asr import Transcription
-import json
 # 加载环境变量
 from dotenv import load_dotenv
 load_dotenv()
@@ -207,7 +206,7 @@ def analyze_chat_style(image_path: str) -> dict:
     """
     try:
         # 使用微信聊天解析器解析截图
-        from utils.wechat_chat_parser import WeChatChatParser
+        from utils.wechat_style_analyzer import WeChatChatParser
         parser = WeChatChatParser()
         parse_result = parser.parse_chat_image(image_path)
         

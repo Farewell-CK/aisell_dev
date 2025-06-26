@@ -18,6 +18,7 @@ app = FastAPI(title="AI Agent Service", description="A service for AI agents to 
 class AgentRequest(BaseModel):
     tenant_id: str
     task_id: str
+    belong_chat_id: str | None = None
     wechat_id: str
     user_input: str
     # 你可以根据实际需求添加更多字段

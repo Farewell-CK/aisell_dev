@@ -17,7 +17,7 @@ class OpeningGenerator:
         tenant_id: int,
         task_id: int,
         wechat_id: int,
-        session_id: str,
+        # session_id: str,
         # customer_info: Dict[str, str],
         # sales_info: Dict[str, str],
         # context: str = ""

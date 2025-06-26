@@ -10,7 +10,7 @@ import sys
 # 添加项目根目录到Python路径
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
-from api.description_api_serve import app
+# from api.description_api_serve import app
 
 if __name__ == "__main__":
     # 配置服务器参数

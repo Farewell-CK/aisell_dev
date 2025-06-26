@@ -33,7 +33,7 @@ class ReferrerInfo(BaseModel):
 class PersonalizedOpeningRequest(BaseModel):
     tenant_id: int
     wechat_id: int
-    session_id: str
+    task_id: str
     # customer_info: CustomerInfo
     # sales_info: SalesInfo
     # context: Optional[str] = ""
@@ -97,13 +97,13 @@ async def generate_personalized_opening(request: PersonalizedOpeningRequest):
         tenant_id = request.tenant_id
         task_id = request.task_id
         wechat_id = request.wechat_id
-        session_id = request.session_id
+        # session_id = request.session_id
         generator = OpeningGenerator()
         result = await generator.generate_personalized_opening(
             tenant_id,
             task_id,
             wechat_id,
-            session_id
+            # session_id
         )
         # 只返回状态，后续做消息通知
         return {

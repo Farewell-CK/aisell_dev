@@ -24,12 +24,12 @@ def convert_to_chinese_num(number: int) -> str:
     # 使用字典的 .get() 方法，如果数字不在映射中，可以返回一个默认值（例如，空字符串或None）
     return num_map.get(number, '')
 
-# 示例
-print(f"1 转换为：{convert_to_chinese_num(1)}")
-print(f"2 转换为：{convert_to_chinese_num(2)}")
-print(f"5 转换为：{convert_to_chinese_num(5)}")
-print(f"0 转换为：{convert_to_chinese_num(0)}")
-print(f"10 转换为（超出范围）：{convert_to_chinese_num(10)}") # 会返回空字符串
+# # 示例
+# print(f"1 转换为：{convert_to_chinese_num(1)}")
+# print(f"2 转换为：{convert_to_chinese_num(2)}")
+# print(f"5 转换为：{convert_to_chinese_num(5)}")
+# print(f"0 转换为：{convert_to_chinese_num(0)}")
+# print(f"10 转换为（超出范围）：{convert_to_chinese_num(10)}") # 会返回空字符串
 
 
 def format_forbidden_content(forbidden_items: list) -> str:

@@ -2,7 +2,7 @@ import asyncio
 import os
 import json
 from prompts.prompts import split_sentence_prompt
-from openai import OpenAI
+from openai import AsyncOpenAI
 import logging
 from google.genai import types # For creating message Content/Parts
 from google.adk.runners import Runner # 导入 Runner 用于类型提示
@@ -173,7 +173,7 @@ async def chat_qwen(api_key : str, prompt : str) -> str:
     Returns:
         response: 响应
     """
-    client = OpenAI(
+    client = AsyncOpenAI(
         api_key=api_key,
         base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",
     )
@@ -195,7 +195,7 @@ async def chat_test(api_key : str, system_prompt : str, query : str) -> str:
         response: 响应
     """
     
-    client = OpenAI(
+    client = AsyncOpenAI(
         api_key=api_key,
         base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",
     ) 
@@ -217,7 +217,7 @@ async def split_sentence(api_key : str, sentence : str) -> list[str]:
     Returns:
         response: 响应
     """
-    client = OpenAI(
+    client = AsyncOpenAI(
         api_key=api_key,
         base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",
     )

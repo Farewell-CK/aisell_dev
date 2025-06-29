@@ -5,6 +5,9 @@ from prompts.prompts import split_sentence_prompt
 from openai import OpenAI
 import logging
 from google.genai import types # For creating message Content/Parts
+from google.adk.runners import Runner # 导入 Runner 用于类型提示
+from google.adk.events import InvocationContext # 导入 InvocationContext 以便在 Agent 内部解释状态访问
+from typing import Dict, Any # 用于 Dict 和 Any 类型提示
 
 # 配置日志记录器
 logger = logging.getLogger(__name__)
@@ -12,7 +15,50 @@ logger = logging.getLogger(__name__)
 # @title Define Agent Interaction Function
 from google.genai import types # For creating message Content/Parts
 
-async def call_agent_async(query, runner, user_id, session_id):
+
+async def call_agent_async_v2(query: str, runner: Runner, user_id: str, session_id: str, request_body: dict) -> str:
+    """
+    向智能体发送查询并打印最终响应。
+    Args:
+        query: 用户输入
+        runner: 智能体运行器实例
+        user_id: 用户ID //对应我们的task_id
+        session_id: 会话ID //对应我们的session_id
+        request_body: 整个请求体，将被存储到session.state
+    Returns:
+        final_response_text: 最终响应
+    """
+    logger.info(f"User Query: {query}")
+
+    # 以 ADK 格式准备用户消息
+    content = types.Content(role='user', parts=[types.Part(text=query)])
+
+    final_response_text = "智能体没有产生最终响应。" # 默认值
+
+    # 关键概念：run_async 执行智能体逻辑并产生事件。
+    # 我们遍历事件以找到最终答案。
+    # 将 request_body 存储到 additional_state 中，使其可在 Agent 的 session.state 中访问
+    async for event in runner.run_async(
+        user_id=user_id,
+        session_id=session_id,
+        new_message=content,
+        additional_state={"request_data": request_body} # 将整个请求体存储在 'request_data' 键下
+    ):
+        # 你可以取消注释下面的行以查看执行期间的*所有*事件
+        # print(f"  [事件] 作者：{event.author}，类型：{type(event).__name__}，最终：{event.is_final_response()}，内容：{event.content}")
+
+        # 关键概念：is_final_response() 标记轮次的结束消息。
+        if event.is_final_response():
+            if event.content and event.content.parts:
+                # 假设第一部分中的文本响应
+                final_response_text = event.content.parts[0].text
+            elif event.actions and event.actions.escalate: # 处理潜在错误/升级
+                final_response_text = f"智能体升级：{event.error_message or '无特定消息。'}"
+                # 如果需要，在这里添加更多检查（例如，特定错误代码）
+            break # 找到最终响应后停止处理事件
+    logger.info(f"Agent Response: {final_response_text}")
+    return final_response_text
+async def call_agent_async_v1(query, runner, user_id, session_id):
     """
     Sends a query to the agent and prints the final response.
     Args:
@@ -48,6 +94,75 @@ async def call_agent_async(query, runner, user_id, session_id):
     logger.info(f"Agent Response: {final_response_text}")
     return final_response_text
 
+async def call_agent_async(query: str, runner: Runner, user_id: str, session_id: str, request_body: Dict[str, Any]) -> str:
+    """
+    向智能体发送查询并打印最终响应。
+    Args:
+        query: 用户输入
+        runner: 智能体运行器实例
+        user_id: 用户ID //对应我们的tenant_id
+        session_id: 会话ID //对应我们的session_id
+        request_body: 整个请求体，将被存储到session.state
+    Returns:
+        final_response_text: 最终响应
+    """
+    logger.info(f"User Query: {query}")
+
+    # 1. 尝试获取现有会话
+    session = await runner.session_service.get_session(
+        app_name=runner.app_name, # Runner 实例在 main.py 中已设置 app_name
+        user_id=user_id,
+        session_id=session_id
+    )
+
+    # 2. 根据会话是否存在来初始化或更新其状态
+    if not session:
+        # 如果会话不存在 (第一次请求)，创建新会话并用 request_body 初始化其状态
+        logger.info(f"创建新会话: {session_id} for user: {user_id}")
+        session = await runner.session_service.create_session(
+            app_name=runner.app_name,
+            user_id=user_id,
+            session_id=session_id,
+            state=request_body # 使用 request_body 初始化新会话的 state
+        )
+    else:
+        # 如果会话已存在，创建一个系统事件来更新会话状态
+        # 使用 state_delta 可以确保新的或更新的字段被合并到现有状态中
+        logger.info(f"更新现有会话: {session_id} 的状态。")
+        current_time = time.time() # 获取当前时间戳用于事件
+        state_update_event = Event(
+            invocation_id=f"inv_{session_id}_{int(current_time)}", # 生成一个唯一的调用 ID
+            author="system", # 表明这是一个系统级的状态更新事件
+            actions=EventActions(state_delta=request_body), # 使用 state_delta 来合并请求体内容
+            timestamp=current_time
+        )
+        await runner.session_service.append_event(session, state_update_event)
+
+    # 3. 准备用户消息
+    content = types.Content(role='user', parts=[types.Part(text=query)])
+
+    final_response_text = "智能体没有产生最终响应。" # 默认值
+
+    # 4. 运行 Agent。此时，会话状态（以及 Agent 的 invocation_context.state）
+    # 应该已经包含了 request_body 中的所有字段。
+    # 由于我们在此处手动管理了会话状态的更新，Runner.run_async 不再需要额外的 state 参数。
+    async for event in runner.run_async(
+        user_id=user_id,
+        session_id=session_id,
+        new_message=content,
+        # additional_state 参数在您提供的 Runner 源码中不存在，因此不再使用
+    ):
+        # 你可以取消注释下面的行以查看执行期间的*所有*事件
+        # print(f"  [事件] 作者：{event.author}，类型：{type(event).__name__}，最终：{event.is_final_response()}，内容：{event.content}")
+
+        if event.is_final_response():
+            if event.content and event.content.parts:
+                final_response_text = event.content.parts[0].text
+            elif event.actions and event.actions.escalate:
+                final_response_text = f"智能体升级：{event.error_message or '无特定消息。'}"
+            break # 找到最终响应后停止处理事件
+    logger.info(f"Agent Response: {final_response_text}")
+    return final_response_text
 
 async def chat_qwen(api_key : str, prompt : str) -> str:
     """

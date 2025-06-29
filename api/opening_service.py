@@ -109,7 +109,7 @@ async def generate_personalized_opening(request: PersonalizedOpeningRequest):
         return {
             "tenant_id": tenant_id,
             "task_id": task_id,
-            "session_id": session_id,
+            # "session_id": session_id,
             "status": "success"
         }
     except Exception as e:

@@ -1,12 +1,13 @@
-import asyncio
-import os
+import time
 import json
 from prompts.prompts import split_sentence_prompt
 from openai import AsyncOpenAI
 import logging
 from google.genai import types # For creating message Content/Parts
 from google.adk.runners import Runner # 导入 Runner 用于类型提示
-from google.adk.events import InvocationContext # 导入 InvocationContext 以便在 Agent 内部解释状态访问
+from google.adk.events import Event, EventActions
+from utils.config_loader import ConfigLoader
+
 from typing import Dict, Any # 用于 Dict 和 Any 类型提示
 
 # 配置日志记录器
@@ -15,6 +16,7 @@ logger = logging.getLogger(__name__)
 # @title Define Agent Interaction Function
 from google.genai import types # For creating message Content/Parts
 
+config = ConfigLoader()
 
 async def call_agent_async_v2(query: str, runner: Runner, user_id: str, session_id: str, request_body: dict) -> str:
     """
@@ -164,7 +166,7 @@ async def call_agent_async(query: str, runner: Runner, user_id: str, session_id:
     logger.info(f"Agent Response: {final_response_text}")
     return final_response_text
 
-async def chat_qwen(api_key : str, prompt : str) -> str:
+async def chat_qwen(prompt : str) -> str:
     """
     调用qwen模型
     Args:
@@ -173,6 +175,7 @@ async def chat_qwen(api_key : str, prompt : str) -> str:
     Returns:
         response: 响应
     """
+    api_key = config.get_api_key('qwen', 'api_key')
     client = AsyncOpenAI(
         api_key=api_key,
         base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",

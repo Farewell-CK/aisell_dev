@@ -1,7 +1,9 @@
 # main.py
 import os
+import json
 import asyncio
 from typing import Dict, Any
+from datetime import datetime
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 
@@ -11,6 +13,7 @@ from google.adk.sessions import DatabaseSessionService
 from google.adk.runners import Runner
 from agents import root_agent
 from utils.chat import call_agent_async
+from tools.notify import send_chat
 import logging
 
 # 配置日志记录器
@@ -35,54 +38,130 @@ runner = Runner(
     session_service=session_service,
 )
 
-app = FastAPI(title="AI Agent Service", description="A service for AI agents to process user requests.")
+app = FastAPI(title="AI Sales Agent Service", description="A service for AI agents to process user requests.")
 
 # 定义请求体模型
 class AgentRequest(BaseModel):
-    tenant_id: str
-    task_id: str
+    tenant_id: str # 租户id
+    task_id: str # 任务id 等于user_id
     belong_chat_id: str | None = None # 工作机登录的微信id
-    wechat_id: str
-    user_input: str
+    wechat_id: str # 客户微信id 等于session_id, 工作机微信正在和某个客户聊天, 客户微信id是工作机微信id的客户
+    session_id: str # 会话id 等于wechat_id
+    user_input: list[dict] # 用户输入的各类信息（文本、图片、视频）
+    """
+    user_input: list[dict] = [
+        {"type": "text", "content": "你好", "timestamp": "2025-06-10 10:00:00"},
+        {"type": "image", "url": "www.baidu.com/xxx.jpg", "timestamp": "2025-06-10 10:00:02"},
+        {"type": "video", "url": "www.baidu.com/xxx.mp4", "timestamp": "2025-06-10 10:00:03"},
+        {"type": "location", "local_info": "位置信息", "timestamp": "2025-06-10 10:00:04"}
+    ]
+    """
     # 你可以根据实际需求添加更多字段
-    session_id: str | None = None
+    # session_id: str | None = None
     # other_context: Dict[str, Any] | None = None
 
 # 定义响应体模型
 class AgentResponse(BaseModel):
     status: str
     message: str
-    output_data: Dict[str, Any] | None = None
-    error: str | None = None
+    tenant_id: str
+    task_id: str
+    belong_chat_id: str | None = None
+    wechat_id: str
+    session_id: str
+    # user_input: list[dict]
+    # output_data: Dict[str, Any] | None = None
+    # error: str | None = None
 
-@app.post("/process_user_input", response_model=AgentResponse)
-async def process_user_input(request: AgentRequest):
+async def process_agent_background(request: AgentRequest):
+    """
+    后台处理智能体请求的函数
+    """
     user_id = request.task_id
-    current_session_id = request.session_id 
-    logger.info(f"Received request for user_id: {user_id}, session_id: {current_session_id}")
-
+    current_session_id = request.session_id
+    
     try:
+        logger.info(f"开始后台处理请求 - user_id: {user_id}, session_id: {current_session_id}")
+        
+        # 调用智能体处理
         agent_response_text = await call_agent_async(
             query=request.user_input,
             runner=runner,
             user_id=user_id,
             session_id=current_session_id,
-            request_body=request.model_dump() # 传递整个请求体
+            request_body=request.model_dump()
         )
+        agent_response = json.loads(agent_response_text.strip("```json").strip("```"))
+        
+        logger.info(f"智能体处理完成 - user_id: {user_id}, session_id: {current_session_id}")
+        
+        # 发送通知给后端
+        try:
+            current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            await send_chat(
+                tenant_id=request.tenant_id,
+                task_id=request.task_id,
+                session_id=request.session_id,
+                chat_content=[{
+                    "type": "response", ## 后端根据type来判断是否成功
+                    "content": agent_response,
+                    "timestamp": current_time
+                }]
+            )
+            logger.info(f"通知发送成功 - user_id: {user_id}, session_id: {current_session_id}")
+        except Exception as notify_error:
+            logger.error(f"发送通知失败 - user_id: {user_id}, session_id: {current_session_id}, error: {notify_error}")
+            
+    except Exception as e:
+        logger.exception(f"后台处理失败 - user_id: {user_id}, session_id: {current_session_id}, error: {e}")
+        # 发送错误通知
+        try:
+            current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            await send_chat(
+                tenant_id=request.tenant_id,
+                task_id=request.task_id,
+                session_id=request.session_id,
+                chat_content=[{
+                    "type": "error",
+                    "content": f"处理失败: {str(e)}",
+                    "timestamp": current_time
+                }]
+            )
+        except Exception as notify_error:
+            logger.error(f"发送错误通知失败 - user_id: {user_id}, session_id: {current_session_id}, error: {notify_error}")
 
+@app.post("/process_user_input", response_model=AgentResponse)
+async def process_user_input(request: AgentRequest):
+    user_id = request.task_id
+    current_session_id = request.session_id 
+    logger.info(f"收到请求 - user_id: {user_id}, session_id: {current_session_id}")
+
+    try:
+        # 立即启动后台任务处理
+        asyncio.create_task(process_agent_background(request))
+        
+        # 立即返回响应，不等待智能体处理完成
         return AgentResponse(
-            status="success",
-            message="Agent processed the request successfully.",
-            output_data={"agent_text_response": agent_response_text}
+            status="processing",
+            message="请求已接收，正在后台处理中。",
+            tenant_id=request.tenant_id,
+            task_id=request.task_id,
+            belong_chat_id=request.belong_chat_id,
+            wechat_id=request.wechat_id,
+            session_id=request.session_id
         )
     except Exception as e:
-        logger.exception(f"Error processing request for user_id: {user_id}, session_id: {current_session_id}")
+        logger.exception(f"处理请求失败 - user_id: {user_id}, session_id: {current_session_id}")
         raise HTTPException(
             status_code=500,
             detail=AgentResponse(
                 status="error",
                 message="Failed to process request due to an internal error.",
-                error=str(e)
+                tenant_id=request.tenant_id,
+                task_id=request.task_id,
+                belong_chat_id=request.belong_chat_id,
+                wechat_id=request.wechat_id,
+                session_id=request.session_id
             ).model_dump_json()
         )
 
@@ -90,4 +169,4 @@ async def process_user_input(request: AgentRequest):
 # 在终端中执行: uvicorn main:app --reload
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=11435)

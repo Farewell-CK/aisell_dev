@@ -1,4 +1,5 @@
 import os
+import json
 from openai import OpenAI
 from tools.database import DatabaseManager
 from tools.notify import send_prohibit_notify
@@ -7,7 +8,7 @@ from prompts.prompts import role_prompt , get_role_prompt
 from utils.db_queries import select_base_info, select_talk_style, select_knowledge, select_product
 
 
-async def extract_prohibit(api_key,content: str) -> list[str]:
+async def extract_prohibit(content: str) -> list[str]:
     """
     从内容中提取禁止做的事情。
     Args:
@@ -22,10 +23,10 @@ async def extract_prohibit(api_key,content: str) -> list[str]:
 {content}
 注意：只需要输出列表，不要输出其他内容,以json格式输出
 """
-    response = await chat_qwen(api_key,prompt)
+    response = await chat_qwen(prompt)
     return response
 
-async def extract_sale_flow(api_key,content: str) -> list[str]:
+async def extract_sale_flow(content: str) -> list[str]:
     """
     从内容中提取销售流程。
     """
@@ -35,10 +36,10 @@ async def extract_sale_flow(api_key,content: str) -> list[str]:
 {content}
 注意：只需要输出列表，不要输出其他内容,以json格式输出
 """
-    response = await chat_qwen(api_key,prompt)
+    response = await chat_qwen(prompt)
     return response
 
-async def create_role(api_key,tenant_id,task_id):
+async def create_role(tenant_id,task_id):
     """
     创建角色
     Args:
@@ -53,9 +54,9 @@ async def create_role(api_key,tenant_id,task_id):
     talk_style = select_talk_style(tenant_id,task_id)
     knowledge = select_knowledge(tenant_id,task_id)
     product = select_product(tenant_id,task_id)
-    content = await chat_qwen(api_key,get_role_prompt(base_info, knowledge, product, talk_style))
-    prohibit = await extract_prohibit(api_key,content)
-    sale_flow = await extract_sale_flow(api_key,content)
+    content = await chat_qwen(get_role_prompt(base_info, knowledge, product, talk_style))
+    prohibit = await extract_prohibit(content)
+    sale_flow = await extract_sale_flow(content)
     # 发送禁止做的事情 && 销售流程通知
-    await send_prohibit_notify(tenant_id,task_id,prohibit,sale_flow)
+    await send_prohibit_notify(tenant_id,task_id,json.loads(prohibit.strip('```').strip('```json')),json.loads(sale_flow.strip('```').strip('```json')))
     return content

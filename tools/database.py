@@ -104,7 +104,7 @@ class DatabaseManager:
                 
             return formatted_results
 
-    def execute_insert(self, query: str, params: dict = None) -> int:
+    def execute_insert(self, query: str) -> int:
         """
         执行插入操作。
 
@@ -117,7 +117,7 @@ class DatabaseManager:
         """
         try:
             with self.engine.connect() as connection:
-                result = connection.execute(text(query), params or {})
+                result = connection.execute(text(query))
                 connection.commit()
                 return result.rowcount
         except Exception as e:

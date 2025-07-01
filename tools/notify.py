@@ -1,6 +1,11 @@
 import requests
 import json
 import os 
+import aiohttp
+import asyncio
+from datetime import datetime
+from tools.database import DatabaseManager
+db = DatabaseManager()
 
 async def send_order_notification(tenant_id,task_id,session_id,order_notification):
     """
@@ -90,7 +95,7 @@ async def send_customer_behavior(tenant_id,task_id,session_id,customer_behavior)
     response = requests.post(url, headers=headers, data=json.dumps(data))
     return response.json()
 
-async def send_prohibit_notify(tenant_id,task_id,prohibit_list, sale_flow):
+async def send_prohibit_notify(tenant_id,strategy_id,prohibit_list, sale_flow):
     """
     发送禁止做的事情 && 销售流程通知
     Args:
@@ -101,18 +106,50 @@ async def send_prohibit_notify(tenant_id,task_id,prohibit_list, sale_flow):
     Returns:
         response: 响应
     """
-    url = f"{os.getenv('NOTIFY_URL')}/api/v1/notify/prohibit"
-    headers = {
-        "Authorization": f"Bearer {os.getenv('NOTIFY_API_KEY')}"
-    }
-    data = {
-        "tenant_id": tenant_id,
-        "task_id": task_id,
-        "prohibit_list": prohibit_list,
-        "sale_flow": sale_flow
-    }
-    response = requests.post(url, headers=headers, data=json.dumps(data))
-    return response.json()
+    for prohibit in prohibit_list:
+        insert_query = f"""
+        INSERT INTO sale_forbidden (
+        strategy_id,
+        text,
+        tenant_id,
+        create_by,
+        create_time,
+        is_del
+    ) VALUES (
+        '{strategy_id}',
+        '{prohibit}',
+        '{tenant_id}',
+        'admin',
+        NOW(),
+        0
+    );
+        """
+        db.execute_insert(insert_query)
+    for i,flow in enumerate(sale_flow):
+        insert_query = f"""
+        INSERT INTO sale_process (
+            strategy_id,
+            title,
+            text,
+            sort,
+            tenant_id,
+            create_by,
+            create_time,
+            is_del
+        ) VALUES (
+            '{strategy_id}',
+            '{flow['title']}',
+            '{flow['description']}',
+            '{i}',
+            '{tenant_id}',
+            'admin',
+            NOW(),
+            0
+        );
+
+        """
+        db.execute_insert(insert_query)
+    return True
 
 async def send_chat_test(tenant_id,task_id,chat_test):
     """
@@ -146,10 +183,30 @@ async def send_chat(tenant_id,task_id,session_id,chat_content):
         chat_content: 聊天内容 是一个列表
     Returns:
         response: 响应
+
+    chat_content : 
+    {
+         "content_list": [
+         {
+            "type": "text",
+            "content": "回复内容1"
+         },
+         {
+            "type": "file",
+            "url": "需要给客户发送的文件URL"
+         }
+         ],
+         "collaborate_list": [协作事项id1, 协作事项id2, 协作事项id3],
+         "follow_up": {
+            "is_follow_up": 1, 
+            "follow_up_content": ["跟单内容1", "跟单内容2", "跟单内容3"]
+         },
+         "need_assistance": 1,
+      }
     """
     url = f"{os.getenv('NOTIFY_URL')}/api/v1/notify/chat"
     headers = {
-        "Authorization": f"Bearer {os.getenv('NOTIFY_API_KEY')}"
+        "Content-Type": "application/json"
     }
     data = {
         "tenant_id": tenant_id,
@@ -157,5 +214,11 @@ async def send_chat(tenant_id,task_id,session_id,chat_content):
         "session_id": session_id,
         "chat_content": chat_content # 聊天内容 是一个列表
     }
-    response = requests.post(url, headers=headers, data=json.dumps(data))
-    return response.json()
+    
+    try:
+        async with aiohttp.ClientSession() as session:
+            async with session.post(url, headers=headers, json=data) as response:
+                return await response.json()
+    except Exception as e:
+        print(f"发送聊天通知失败: {e}")
+        return {"error": str(e)}

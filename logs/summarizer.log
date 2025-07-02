@@ -51,3 +51,681 @@ Traceback (most recent call last):
     raise ImportError(msg)
 ImportError: Missing optional dependency 'xlrd'. Install xlrd >= 2.0.1 for xls Excel support Use pip or conda to install xlrd.
 2025-06-29 22:31:07,249 - WARNING - file_description - summarize_table - 701 - 无法读取或表格为空: /tmp/tmpuugpxin_.xls，总结中止。
+2025-06-30 23:25:31,741 - INFO - file_description - summarize_single_image - 383 - 开始处理单张图片总结: /tmp/tmp_z7azg3t.jpg
+2025-06-30 23:25:31,741 - INFO - file_description - get_image_url_dict - 356 - 输入为本地文件路径，将进行Base64编码: /tmp/tmp_z7azg3t.jpg
+2025-06-30 23:25:31,743 - INFO - file_description - encode_image - 334 - 图片 '/tmp/tmp_z7azg3t.jpg' Base64编码成功。编码后数据长度(部分): 100...
+2025-06-30 23:25:31,747 - INFO - file_description - get_image_url_dict - 371 - 推断出图片 '/tmp/tmp_z7azg3t.jpg' 的MIME类型为: image/jpeg
+2025-06-30 23:25:31,747 - INFO - file_description - summarize_single_image - 398 - 向模型 'ernie-4.5-8k-preview' 发送单图总结请求。图片来源: /tmp/tmp_z7azg3t.jpg
+2025-06-30 23:25:32,124 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://aistudio.baidu.com/llm/lmapi/v3/chat/completions "HTTP/1.1 400 Bad Request"
+2025-06-30 23:25:32,127 - ERROR - file_description - summarize_single_image - 425 - 使用模型分析单张图片 '/tmp/tmp_z7azg3t.jpg' 时出错: Error code: 400 - {'logId': '87786f1b9254d36cb4ec2a65ebcdd02a', 'errorCode': 40405, 'errorMsg': '暂不支持该模型'}
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/file_description.py", line 413, in summarize_single_image
+    response = self.client.chat.completions.create(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 925, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1239, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1034, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'logId': '87786f1b9254d36cb4ec2a65ebcdd02a', 'errorCode': 40405, 'errorMsg': '暂不支持该模型'}
+2025-06-30 23:44:20,467 - INFO - file_description - summarize_single_image - 383 - 开始处理单张图片总结: /tmp/tmp_yljqy87.jpg
+2025-06-30 23:44:20,467 - INFO - file_description - get_image_url_dict - 356 - 输入为本地文件路径，将进行Base64编码: /tmp/tmp_yljqy87.jpg
+2025-06-30 23:44:20,468 - INFO - file_description - encode_image - 334 - 图片 '/tmp/tmp_yljqy87.jpg' Base64编码成功。编码后数据长度(部分): 100...
+2025-06-30 23:44:20,468 - INFO - file_description - get_image_url_dict - 371 - 推断出图片 '/tmp/tmp_yljqy87.jpg' 的MIME类型为: image/jpeg
+2025-06-30 23:44:20,469 - INFO - file_description - summarize_single_image - 398 - 向模型 'ernie-4.5-8k-preview' 发送单图总结请求。图片来源: /tmp/tmp_yljqy87.jpg
+2025-06-30 23:44:21,315 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://aistudio.baidu.com/llm/lmapi/v3/chat/completions "HTTP/1.1 400 Bad Request"
+2025-06-30 23:44:21,317 - ERROR - file_description - summarize_single_image - 425 - 使用模型分析单张图片 '/tmp/tmp_yljqy87.jpg' 时出错: Error code: 400 - {'logId': '699f221cd88b0a91241b49ca2d5b28ee', 'errorCode': 40405, 'errorMsg': '暂不支持该模型'}
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/file_description.py", line 413, in summarize_single_image
+    response = self.client.chat.completions.create(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 925, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1239, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1034, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'logId': '699f221cd88b0a91241b49ca2d5b28ee', 'errorCode': 40405, 'errorMsg': '暂不支持该模型'}
+2025-06-30 23:46:45,237 - INFO - file_description - summarize_document - 1593 - 开始总结文档: /tmp/tmpldhwq8_5.docx
+2025-06-30 23:46:45,237 - INFO - file_description - extract_docx_content - 1461 - 开始提取DOCX内容: /tmp/tmpldhwq8_5.docx
+2025-06-30 23:46:45,261 - INFO - file_description - extract_docx_content - 1488 - DOCX共有 85 个原始段落。
+2025-06-30 23:46:45,286 - INFO - file_description - extract_docx_content - 1521 - DOCX内容提取完成: /tmp/tmpldhwq8_5.docx
+2025-06-30 23:46:45,286 - INFO - file_description - summarize_document - 1619 - 提取的文档内容序列化后字符串长度: 3714
+2025-06-30 23:46:45,286 - INFO - file_description - summarize_document - 1656 - 向 LLM (ernie-4.5-turbo-128k) 发送请求进行文档总结...
+2025-06-30 23:46:45,386 - INFO - file_description - summarize_single_image - 383 - 开始处理单张图片总结: /tmp/tmp8yeydp7g.jpeg
+2025-06-30 23:46:45,386 - INFO - file_description - get_image_url_dict - 356 - 输入为本地文件路径，将进行Base64编码: /tmp/tmp8yeydp7g.jpeg
+2025-06-30 23:46:45,387 - INFO - file_description - encode_image - 334 - 图片 '/tmp/tmp8yeydp7g.jpeg' Base64编码成功。编码后数据长度(部分): 100...
+2025-06-30 23:46:45,387 - INFO - file_description - get_image_url_dict - 371 - 推断出图片 '/tmp/tmp8yeydp7g.jpeg' 的MIME类型为: image/jpeg
+2025-06-30 23:46:45,387 - INFO - file_description - summarize_single_image - 398 - 向模型 'ernie-4.5-8k-preview' 发送单图总结请求。图片来源: /tmp/tmp8yeydp7g.jpeg
+2025-06-30 23:46:45,441 - INFO - file_description - summarize_table - 698 - 开始总结表格: /tmp/tmp_micff4r.xlsx
+2025-06-30 23:46:45,442 - INFO - file_description - read_table - 567 - 尝试读取表格源: /tmp/tmp_micff4r.xlsx
+2025-06-30 23:46:45,442 - INFO - file_description - read_table - 626 - 输入为本地文件路径: /tmp/tmp_micff4r.xlsx
+2025-06-30 23:46:45,442 - INFO - file_description - read_table - 628 - 本地文件格式: .xlsx
+2025-06-30 23:46:45,531 - INFO - file_description - summarize_table - 698 - 开始总结表格: /tmp/tmp7zo1i0i3.xlsx
+2025-06-30 23:46:45,531 - INFO - file_description - read_table - 567 - 尝试读取表格源: /tmp/tmp7zo1i0i3.xlsx
+2025-06-30 23:46:45,532 - INFO - file_description - read_table - 626 - 输入为本地文件路径: /tmp/tmp7zo1i0i3.xlsx
+2025-06-30 23:46:45,532 - INFO - file_description - read_table - 628 - 本地文件格式: .xlsx
+2025-06-30 23:46:45,668 - INFO - file_description - read_table - 632 - 成功读取本地 Excel 文件: /tmp/tmp_micff4r.xlsx
+2025-06-30 23:46:45,671 - INFO - file_description - get_table_info - 658 - 开始提取表格信息，行数: 3, 列数: 2
+2025-06-30 23:46:45,679 - INFO - file_description - read_table - 632 - 成功读取本地 Excel 文件: /tmp/tmp7zo1i0i3.xlsx
+2025-06-30 23:46:45,683 - INFO - file_description - get_table_info - 670 - 找到数值列: []
+2025-06-30 23:46:45,683 - INFO - file_description - get_table_info - 658 - 开始提取表格信息，行数: 5, 列数: 10
+2025-06-30 23:46:45,684 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://aistudio.baidu.com/llm/lmapi/v3/chat/completions "HTTP/1.1 400 Bad Request"
+2025-06-30 23:46:45,685 - INFO - file_description - get_table_info - 687 - 表格信息提取完成。
+2025-06-30 23:46:45,690 - INFO - file_description - get_table_info - 670 - 找到数值列: ['描述', '产品图片', '购买链接', '最低起售量', '标准售价', '最低售价']
+2025-06-30 23:46:45,691 - WARNING - file_description - get_table_info - 673 - 数值列 '描述' 完全为空，统计值将为 NaN 或引发错误。
+2025-06-30 23:46:45,692 - WARNING - file_description - get_table_info - 673 - 数值列 '产品图片' 完全为空，统计值将为 NaN 或引发错误。
+2025-06-30 23:46:45,694 - WARNING - file_description - get_table_info - 673 - 数值列 '购买链接' 完全为空，统计值将为 NaN 或引发错误。
+2025-06-30 23:46:45,699 - INFO - file_description - get_table_info - 687 - 表格信息提取完成。
+2025-06-30 23:46:45,701 - ERROR - file_description - summarize_single_image - 425 - 使用模型分析单张图片 '/tmp/tmp8yeydp7g.jpeg' 时出错: Error code: 400 - {'logId': '172d61def0995602cf4a1a006fcecf28', 'errorCode': 40405, 'errorMsg': '暂不支持该模型'}
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/file_description.py", line 413, in summarize_single_image
+    response = self.client.chat.completions.create(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 925, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1239, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1034, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'logId': '172d61def0995602cf4a1a006fcecf28', 'errorCode': 40405, 'errorMsg': '暂不支持该模型'}
+2025-06-30 23:46:45,706 - INFO - file_description - summarize_table - 714 - 表格信息字符串长度: 185
+2025-06-30 23:46:45,706 - INFO - file_description - summarize_table - 715 - 数据示例字符串长度: 147
+2025-06-30 23:46:45,707 - INFO - file_description - summarize_table - 748 - 向 LLM 发送请求进行表格总结...
+2025-06-30 23:46:45,717 - INFO - file_description - summarize_table - 714 - 表格信息字符串长度: 1362
+2025-06-30 23:46:45,717 - INFO - file_description - summarize_table - 715 - 数据示例字符串长度: 383
+2025-06-30 23:46:45,717 - INFO - file_description - summarize_table - 748 - 向 LLM 发送请求进行表格总结...
+2025-06-30 23:46:45,872 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://aistudio.baidu.com/llm/lmapi/v3/chat/completions "HTTP/1.1 400 Bad Request"
+2025-06-30 23:46:45,874 - ERROR - file_description - summarize_table - 762 - 调用 LLM 分析表格时出错: Error code: 400 - {'logId': 'a8b82ef4f78bbb8f2e61db1f14bf16ba', 'errorCode': 40405, 'errorMsg': '暂不支持该模型'}
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/file_description.py", line 749, in summarize_table
+    response = self.client.chat.completions.create(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 925, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1239, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1034, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'logId': 'a8b82ef4f78bbb8f2e61db1f14bf16ba', 'errorCode': 40405, 'errorMsg': '暂不支持该模型'}
+2025-06-30 23:46:45,880 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://aistudio.baidu.com/llm/lmapi/v3/chat/completions "HTTP/1.1 400 Bad Request"
+2025-06-30 23:46:45,881 - ERROR - file_description - summarize_table - 762 - 调用 LLM 分析表格时出错: Error code: 400 - {'logId': '4c4f06ec39e4e65d0a0f745bebecb7a0', 'errorCode': 40405, 'errorMsg': '暂不支持该模型'}
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/file_description.py", line 749, in summarize_table
+    response = self.client.chat.completions.create(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 925, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1239, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1034, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'logId': '4c4f06ec39e4e65d0a0f745bebecb7a0', 'errorCode': 40405, 'errorMsg': '暂不支持该模型'}
+2025-06-30 23:46:45,974 - INFO - file_description - summarize_single_image - 383 - 开始处理单张图片总结: /tmp/tmp3z78tvrg.jpeg
+2025-06-30 23:46:45,975 - INFO - file_description - get_image_url_dict - 356 - 输入为本地文件路径，将进行Base64编码: /tmp/tmp3z78tvrg.jpeg
+2025-06-30 23:46:45,976 - INFO - file_description - encode_image - 334 - 图片 '/tmp/tmp3z78tvrg.jpeg' Base64编码成功。编码后数据长度(部分): 100...
+2025-06-30 23:46:45,976 - INFO - file_description - get_image_url_dict - 371 - 推断出图片 '/tmp/tmp3z78tvrg.jpeg' 的MIME类型为: image/jpeg
+2025-06-30 23:46:45,977 - INFO - file_description - summarize_single_image - 398 - 向模型 'ernie-4.5-8k-preview' 发送单图总结请求。图片来源: /tmp/tmp3z78tvrg.jpeg
+2025-06-30 23:46:46,169 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://aistudio.baidu.com/llm/lmapi/v3/chat/completions "HTTP/1.1 400 Bad Request"
+2025-06-30 23:46:46,171 - ERROR - file_description - summarize_single_image - 425 - 使用模型分析单张图片 '/tmp/tmp3z78tvrg.jpeg' 时出错: Error code: 400 - {'logId': 'bebf4f956a69f9a015d0a88b92ba8b02', 'errorCode': 40405, 'errorMsg': '暂不支持该模型'}
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/file_description.py", line 413, in summarize_single_image
+    response = self.client.chat.completions.create(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 925, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1239, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1034, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'logId': 'bebf4f956a69f9a015d0a88b92ba8b02', 'errorCode': 40405, 'errorMsg': '暂不支持该模型'}
+2025-06-30 23:47:13,981 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://aistudio.baidu.com/llm/lmapi/v3/chat/completions "HTTP/1.1 200 OK"
+2025-06-30 23:47:13,987 - INFO - file_description - summarize_document - 1677 - LLM 文档总结接收成功，长度: 1425
+2025-06-30 23:48:10,911 - INFO - file_description - summarize_document - 1593 - 开始总结文档: /tmp/tmp7klv169u.pdf
+2025-06-30 23:48:10,912 - INFO - file_description - extract_pdf_content - 1383 - 开始提取PDF内容: /tmp/tmp7klv169u.pdf
+2025-06-30 23:48:10,921 - INFO - file_description - extract_pdf_content - 1411 - PDF共有 16 页。
+2025-06-30 23:48:11,788 - INFO - file_description - extract_pdf_content - 1439 - PDF内容提取完成: /tmp/tmp7klv169u.pdf
+2025-06-30 23:48:11,789 - INFO - file_description - summarize_document - 1619 - 提取的文档内容序列化后字符串长度: 3831
+2025-06-30 23:48:11,789 - INFO - file_description - summarize_document - 1656 - 向 LLM (ernie-4.5-turbo-128k) 发送请求进行文档总结...
+2025-06-30 23:48:12,053 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://aistudio.baidu.com/llm/lmapi/v3/chat/completions "HTTP/1.1 200 OK"
+2025-06-30 23:48:12,054 - INFO - file_description - summarize_document - 1677 - LLM 文档总结接收成功，长度: 43
+2025-06-30 23:48:16,250 - INFO - file_description - summarize_document - 1593 - 开始总结文档: /tmp/tmpxa1twr8y.pdf
+2025-06-30 23:48:16,250 - INFO - file_description - extract_pdf_content - 1383 - 开始提取PDF内容: /tmp/tmpxa1twr8y.pdf
+2025-06-30 23:48:16,258 - INFO - file_description - extract_pdf_content - 1411 - PDF共有 16 页。
+2025-06-30 23:48:17,075 - INFO - file_description - extract_pdf_content - 1439 - PDF内容提取完成: /tmp/tmpxa1twr8y.pdf
+2025-06-30 23:48:17,075 - INFO - file_description - summarize_document - 1619 - 提取的文档内容序列化后字符串长度: 3831
+2025-06-30 23:48:17,076 - INFO - file_description - summarize_document - 1656 - 向 LLM (ernie-4.5-turbo-128k) 发送请求进行文档总结...
+2025-06-30 23:48:18,133 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://aistudio.baidu.com/llm/lmapi/v3/chat/completions "HTTP/1.1 200 OK"
+2025-06-30 23:48:18,135 - INFO - file_description - summarize_document - 1677 - LLM 文档总结接收成功，长度: 43
+2025-06-30 23:48:50,682 - INFO - file_description - summarize_document - 1593 - 开始总结文档: /tmp/tmp7uf9k5p1.docx
+2025-06-30 23:48:50,682 - INFO - file_description - extract_docx_content - 1461 - 开始提取DOCX内容: /tmp/tmp7uf9k5p1.docx
+2025-06-30 23:48:50,688 - INFO - file_description - extract_docx_content - 1488 - DOCX共有 85 个原始段落。
+2025-06-30 23:48:50,709 - INFO - file_description - extract_docx_content - 1521 - DOCX内容提取完成: /tmp/tmp7uf9k5p1.docx
+2025-06-30 23:48:50,709 - INFO - file_description - summarize_document - 1619 - 提取的文档内容序列化后字符串长度: 3714
+2025-06-30 23:48:50,709 - INFO - file_description - summarize_document - 1656 - 向 LLM (ernie-4.5-turbo-128k) 发送请求进行文档总结...
+2025-06-30 23:48:50,737 - INFO - file_description - summarize_document - 1593 - 开始总结文档: /tmp/tmp52cy42cc.docx
+2025-06-30 23:48:50,737 - INFO - file_description - extract_docx_content - 1461 - 开始提取DOCX内容: /tmp/tmp52cy42cc.docx
+2025-06-30 23:48:50,741 - INFO - file_description - extract_docx_content - 1488 - DOCX共有 85 个原始段落。
+2025-06-30 23:48:50,762 - INFO - file_description - extract_docx_content - 1521 - DOCX内容提取完成: /tmp/tmp52cy42cc.docx
+2025-06-30 23:48:50,762 - INFO - file_description - summarize_document - 1619 - 提取的文档内容序列化后字符串长度: 3714
+2025-06-30 23:48:50,762 - INFO - file_description - summarize_document - 1656 - 向 LLM (ernie-4.5-turbo-128k) 发送请求进行文档总结...
+2025-06-30 23:48:52,172 - INFO - file_description - summarize_single_image - 383 - 开始处理单张图片总结: /tmp/tmpzsqb97ia.jpeg
+2025-06-30 23:48:52,172 - INFO - file_description - get_image_url_dict - 356 - 输入为本地文件路径，将进行Base64编码: /tmp/tmpzsqb97ia.jpeg
+2025-06-30 23:48:52,173 - INFO - file_description - encode_image - 334 - 图片 '/tmp/tmpzsqb97ia.jpeg' Base64编码成功。编码后数据长度(部分): 100...
+2025-06-30 23:48:52,173 - INFO - file_description - get_image_url_dict - 371 - 推断出图片 '/tmp/tmpzsqb97ia.jpeg' 的MIME类型为: image/jpeg
+2025-06-30 23:48:52,173 - INFO - file_description - summarize_single_image - 398 - 向模型 'ernie-4.5-8k-preview' 发送单图总结请求。图片来源: /tmp/tmpzsqb97ia.jpeg
+2025-06-30 23:48:52,446 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://aistudio.baidu.com/llm/lmapi/v3/chat/completions "HTTP/1.1 400 Bad Request"
+2025-06-30 23:48:52,448 - ERROR - file_description - summarize_single_image - 425 - 使用模型分析单张图片 '/tmp/tmpzsqb97ia.jpeg' 时出错: Error code: 400 - {'logId': 'f49b43b7b9440ba3540e0bea5fad0fd9', 'errorCode': 40405, 'errorMsg': '暂不支持该模型'}
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/file_description.py", line 413, in summarize_single_image
+    response = self.client.chat.completions.create(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 925, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1239, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1034, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'logId': 'f49b43b7b9440ba3540e0bea5fad0fd9', 'errorCode': 40405, 'errorMsg': '暂不支持该模型'}
+2025-06-30 23:48:53,225 - INFO - file_description - summarize_single_image - 383 - 开始处理单张图片总结: /tmp/tmpigsoh31m.jpeg
+2025-06-30 23:48:53,226 - INFO - file_description - get_image_url_dict - 356 - 输入为本地文件路径，将进行Base64编码: /tmp/tmpigsoh31m.jpeg
+2025-06-30 23:48:53,226 - INFO - file_description - encode_image - 334 - 图片 '/tmp/tmpigsoh31m.jpeg' Base64编码成功。编码后数据长度(部分): 100...
+2025-06-30 23:48:53,226 - INFO - file_description - get_image_url_dict - 371 - 推断出图片 '/tmp/tmpigsoh31m.jpeg' 的MIME类型为: image/jpeg
+2025-06-30 23:48:53,227 - INFO - file_description - summarize_single_image - 398 - 向模型 'ernie-4.5-8k-preview' 发送单图总结请求。图片来源: /tmp/tmpigsoh31m.jpeg
+2025-06-30 23:48:53,429 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://aistudio.baidu.com/llm/lmapi/v3/chat/completions "HTTP/1.1 400 Bad Request"
+2025-06-30 23:48:53,430 - ERROR - file_description - summarize_single_image - 425 - 使用模型分析单张图片 '/tmp/tmpigsoh31m.jpeg' 时出错: Error code: 400 - {'logId': '5b84de10b7494f7d873c6492e60f7b0b', 'errorCode': 40405, 'errorMsg': '暂不支持该模型'}
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/file_description.py", line 413, in summarize_single_image
+    response = self.client.chat.completions.create(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 925, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1239, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1034, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'logId': '5b84de10b7494f7d873c6492e60f7b0b', 'errorCode': 40405, 'errorMsg': '暂不支持该模型'}
+2025-06-30 23:48:55,021 - INFO - file_description - summarize_document - 1593 - 开始总结文档: /tmp/tmpmddbq218.pdf
+2025-06-30 23:48:55,021 - INFO - file_description - extract_pdf_content - 1383 - 开始提取PDF内容: /tmp/tmpmddbq218.pdf
+2025-06-30 23:48:55,120 - INFO - file_description - extract_pdf_content - 1411 - PDF共有 104 页。
+2025-06-30 23:48:58,075 - INFO - file_description - summarize_single_image - 383 - 开始处理单张图片总结: /tmp/tmplfafpfz1.jpeg
+2025-06-30 23:48:58,086 - INFO - file_description - get_image_url_dict - 356 - 输入为本地文件路径，将进行Base64编码: /tmp/tmplfafpfz1.jpeg
+2025-06-30 23:48:58,102 - INFO - file_description - encode_image - 334 - 图片 '/tmp/tmplfafpfz1.jpeg' Base64编码成功。编码后数据长度(部分): 100...
+2025-06-30 23:48:58,112 - INFO - file_description - get_image_url_dict - 371 - 推断出图片 '/tmp/tmplfafpfz1.jpeg' 的MIME类型为: image/jpeg
+2025-06-30 23:48:58,123 - INFO - file_description - summarize_single_image - 398 - 向模型 'ernie-4.5-8k-preview' 发送单图总结请求。图片来源: /tmp/tmplfafpfz1.jpeg
+2025-06-30 23:48:58,336 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://aistudio.baidu.com/llm/lmapi/v3/chat/completions "HTTP/1.1 400 Bad Request"
+2025-06-30 23:48:58,358 - ERROR - file_description - summarize_single_image - 425 - 使用模型分析单张图片 '/tmp/tmplfafpfz1.jpeg' 时出错: Error code: 400 - {'logId': '2b817c29f977650f53220c6fb88bb80d', 'errorCode': 40405, 'errorMsg': '暂不支持该模型'}
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/file_description.py", line 413, in summarize_single_image
+    response = self.client.chat.completions.create(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 925, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1239, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1034, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'logId': '2b817c29f977650f53220c6fb88bb80d', 'errorCode': 40405, 'errorMsg': '暂不支持该模型'}
+2025-06-30 23:49:00,168 - INFO - file_description - extract_pdf_content - 1439 - PDF内容提取完成: /tmp/tmpmddbq218.pdf
+2025-06-30 23:49:00,169 - INFO - file_description - summarize_document - 1619 - 提取的文档内容序列化后字符串长度: 54417
+2025-06-30 23:49:00,169 - INFO - file_description - summarize_document - 1656 - 向 LLM (ernie-4.5-turbo-128k) 发送请求进行文档总结...
+2025-06-30 23:49:01,750 - INFO - file_description - summarize_document - 1593 - 开始总结文档: /tmp/tmpmm1zycik.pdf
+2025-06-30 23:49:01,750 - INFO - file_description - extract_pdf_content - 1383 - 开始提取PDF内容: /tmp/tmpmm1zycik.pdf
+2025-06-30 23:49:01,758 - INFO - file_description - extract_pdf_content - 1411 - PDF共有 16 页。
+2025-06-30 23:49:02,587 - INFO - file_description - extract_pdf_content - 1439 - PDF内容提取完成: /tmp/tmpmm1zycik.pdf
+2025-06-30 23:49:02,588 - INFO - file_description - summarize_document - 1619 - 提取的文档内容序列化后字符串长度: 3831
+2025-06-30 23:49:02,588 - INFO - file_description - summarize_document - 1656 - 向 LLM (ernie-4.5-turbo-128k) 发送请求进行文档总结...
+2025-06-30 23:49:02,875 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://aistudio.baidu.com/llm/lmapi/v3/chat/completions "HTTP/1.1 200 OK"
+2025-06-30 23:49:02,877 - INFO - file_description - summarize_document - 1677 - LLM 文档总结接收成功，长度: 43
+2025-06-30 23:49:03,189 - INFO - file_description - summarize_document - 1593 - 开始总结文档: /tmp/tmpb9zuibb9.pdf
+2025-06-30 23:49:03,189 - INFO - file_description - extract_pdf_content - 1383 - 开始提取PDF内容: /tmp/tmpb9zuibb9.pdf
+2025-06-30 23:49:03,199 - INFO - file_description - extract_pdf_content - 1411 - PDF共有 16 页。
+2025-06-30 23:49:04,160 - INFO - file_description - extract_pdf_content - 1439 - PDF内容提取完成: /tmp/tmpb9zuibb9.pdf
+2025-06-30 23:49:04,160 - INFO - file_description - summarize_document - 1619 - 提取的文档内容序列化后字符串长度: 3831
+2025-06-30 23:49:04,160 - INFO - file_description - summarize_document - 1656 - 向 LLM (ernie-4.5-turbo-128k) 发送请求进行文档总结...
+2025-06-30 23:49:04,354 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://aistudio.baidu.com/llm/lmapi/v3/chat/completions "HTTP/1.1 200 OK"
+2025-06-30 23:49:04,356 - INFO - file_description - summarize_document - 1677 - LLM 文档总结接收成功，长度: 43
+2025-06-30 23:49:04,602 - INFO - file_description - summarize_ppt - 1117 - 开始总结PPT: /tmp/tmp1g9yr50_.pptx
+2025-06-30 23:49:04,602 - INFO - file_description - extract_ppt_content - 985 - 开始提取文件内容: /tmp/tmp1g9yr50_.pptx
+2025-06-30 23:49:04,602 - INFO - file_description - extract_ppt_content - 1041 - 输入为本地文件路径: /tmp/tmp1g9yr50_.pptx
+2025-06-30 23:49:04,602 - INFO - file_description - extract_ppt_content - 1061 - 正在使用 python-pptx 解析: /tmp/tmp1g9yr50_.pptx
+2025-06-30 23:49:04,645 - INFO - file_description - extract_ppt_content - 1064 - 文件共有 20 张幻灯片。
+2025-06-30 23:49:04,650 - INFO - file_description - extract_ppt_content - 1086 - 内容提取完成: /tmp/tmp1g9yr50_.pptx
+2025-06-30 23:49:04,651 - INFO - file_description - summarize_ppt - 1127 - 提取的PPT内容字符串长度: 1626
+2025-06-30 23:49:04,651 - INFO - file_description - summarize_ppt - 1158 - 向 LLM (ernie-4.5-8k-preview) 发送请求进行PPT总结...
+2025-06-30 23:49:04,836 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://aistudio.baidu.com/llm/lmapi/v3/chat/completions "HTTP/1.1 400 Bad Request"
+2025-06-30 23:49:04,837 - ERROR - file_description - summarize_ppt - 1172 - 调用 LLM 分析PPT时出错: Error code: 400 - {'logId': '65b2adb7c5a41f6b26cc369f3dae7a5a', 'errorCode': 40405, 'errorMsg': '暂不支持该模型'}
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/file_description.py", line 1159, in summarize_ppt
+    response = self.client.chat.completions.create(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 925, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1239, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1034, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'logId': '65b2adb7c5a41f6b26cc369f3dae7a5a', 'errorCode': 40405, 'errorMsg': '暂不支持该模型'}
+2025-06-30 23:49:07,196 - INFO - file_description - summarize_single_image - 383 - 开始处理单张图片总结: /tmp/tmpp4pvj7cy.jpg
+2025-06-30 23:49:07,197 - INFO - file_description - get_image_url_dict - 356 - 输入为本地文件路径，将进行Base64编码: /tmp/tmpp4pvj7cy.jpg
+2025-06-30 23:49:07,197 - INFO - file_description - encode_image - 334 - 图片 '/tmp/tmpp4pvj7cy.jpg' Base64编码成功。编码后数据长度(部分): 100...
+2025-06-30 23:49:07,197 - INFO - file_description - get_image_url_dict - 371 - 推断出图片 '/tmp/tmpp4pvj7cy.jpg' 的MIME类型为: image/jpeg
+2025-06-30 23:49:07,197 - INFO - file_description - summarize_single_image - 398 - 向模型 'ernie-4.5-8k-preview' 发送单图总结请求。图片来源: /tmp/tmpp4pvj7cy.jpg
+2025-06-30 23:49:07,434 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://aistudio.baidu.com/llm/lmapi/v3/chat/completions "HTTP/1.1 400 Bad Request"
+2025-06-30 23:49:07,435 - ERROR - file_description - summarize_single_image - 425 - 使用模型分析单张图片 '/tmp/tmpp4pvj7cy.jpg' 时出错: Error code: 400 - {'logId': 'e0c64d57809648753d8b4affb3d2b338', 'errorCode': 40405, 'errorMsg': '暂不支持该模型'}
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/file_description.py", line 413, in summarize_single_image
+    response = self.client.chat.completions.create(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 925, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1239, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1034, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'logId': 'e0c64d57809648753d8b4affb3d2b338', 'errorCode': 40405, 'errorMsg': '暂不支持该模型'}
+2025-06-30 23:49:10,350 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://aistudio.baidu.com/llm/lmapi/v3/chat/completions "HTTP/1.1 200 OK"
+2025-06-30 23:49:10,352 - INFO - file_description - summarize_document - 1677 - LLM 文档总结接收成功，长度: 1347
+2025-06-30 23:49:11,821 - INFO - file_description - summarize_single_image - 383 - 开始处理单张图片总结: /tmp/tmpptewyz8j.jpg
+2025-06-30 23:49:11,822 - INFO - file_description - get_image_url_dict - 356 - 输入为本地文件路径，将进行Base64编码: /tmp/tmpptewyz8j.jpg
+2025-06-30 23:49:11,822 - INFO - file_description - encode_image - 334 - 图片 '/tmp/tmpptewyz8j.jpg' Base64编码成功。编码后数据长度(部分): 100...
+2025-06-30 23:49:11,822 - INFO - file_description - get_image_url_dict - 371 - 推断出图片 '/tmp/tmpptewyz8j.jpg' 的MIME类型为: image/jpeg
+2025-06-30 23:49:11,823 - INFO - file_description - summarize_single_image - 398 - 向模型 'ernie-4.5-8k-preview' 发送单图总结请求。图片来源: /tmp/tmpptewyz8j.jpg
+2025-06-30 23:49:11,988 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://aistudio.baidu.com/llm/lmapi/v3/chat/completions "HTTP/1.1 400 Bad Request"
+2025-06-30 23:49:11,989 - ERROR - file_description - summarize_single_image - 425 - 使用模型分析单张图片 '/tmp/tmpptewyz8j.jpg' 时出错: Error code: 400 - {'logId': '6ceb15ff218e200f3a828510c8da4407', 'errorCode': 40405, 'errorMsg': '暂不支持该模型'}
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/file_description.py", line 413, in summarize_single_image
+    response = self.client.chat.completions.create(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 925, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1239, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1034, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'logId': '6ceb15ff218e200f3a828510c8da4407', 'errorCode': 40405, 'errorMsg': '暂不支持该模型'}
+2025-06-30 23:49:14,281 - INFO - file_description - summarize_single_image - 383 - 开始处理单张图片总结: /tmp/tmp_d62rqff.jpg
+2025-06-30 23:49:14,281 - INFO - file_description - get_image_url_dict - 356 - 输入为本地文件路径，将进行Base64编码: /tmp/tmp_d62rqff.jpg
+2025-06-30 23:49:14,282 - INFO - file_description - encode_image - 334 - 图片 '/tmp/tmp_d62rqff.jpg' Base64编码成功。编码后数据长度(部分): 100...
+2025-06-30 23:49:14,282 - INFO - file_description - get_image_url_dict - 371 - 推断出图片 '/tmp/tmp_d62rqff.jpg' 的MIME类型为: image/jpeg
+2025-06-30 23:49:14,282 - INFO - file_description - summarize_single_image - 398 - 向模型 'ernie-4.5-8k-preview' 发送单图总结请求。图片来源: /tmp/tmp_d62rqff.jpg
+2025-06-30 23:49:14,440 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://aistudio.baidu.com/llm/lmapi/v3/chat/completions "HTTP/1.1 400 Bad Request"
+2025-06-30 23:49:14,441 - ERROR - file_description - summarize_single_image - 425 - 使用模型分析单张图片 '/tmp/tmp_d62rqff.jpg' 时出错: Error code: 400 - {'logId': '24679739383f9235575d1ad51ceef055', 'errorCode': 40405, 'errorMsg': '暂不支持该模型'}
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/file_description.py", line 413, in summarize_single_image
+    response = self.client.chat.completions.create(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 925, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1239, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1034, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'logId': '24679739383f9235575d1ad51ceef055', 'errorCode': 40405, 'errorMsg': '暂不支持该模型'}
+2025-06-30 23:49:16,831 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://aistudio.baidu.com/llm/lmapi/v3/chat/completions "HTTP/1.1 200 OK"
+2025-06-30 23:49:16,834 - INFO - file_description - summarize_document - 1677 - LLM 文档总结接收成功，长度: 1532
+2025-06-30 23:49:31,507 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://aistudio.baidu.com/llm/lmapi/v3/chat/completions "HTTP/1.1 200 OK"
+2025-06-30 23:49:31,509 - INFO - file_description - summarize_document - 1677 - LLM 文档总结接收成功，长度: 1689
+2025-06-30 23:49:58,265 - INFO - file_description - summarize_table - 698 - 开始总结表格: /tmp/tmpsfurh233.xlsx
+2025-06-30 23:49:58,266 - INFO - file_description - read_table - 567 - 尝试读取表格源: /tmp/tmpsfurh233.xlsx
+2025-06-30 23:49:58,266 - INFO - file_description - read_table - 626 - 输入为本地文件路径: /tmp/tmpsfurh233.xlsx
+2025-06-30 23:49:58,266 - INFO - file_description - read_table - 628 - 本地文件格式: .xlsx
+2025-06-30 23:49:58,291 - INFO - file_description - read_table - 632 - 成功读取本地 Excel 文件: /tmp/tmpsfurh233.xlsx
+2025-06-30 23:49:58,291 - INFO - file_description - get_table_info - 658 - 开始提取表格信息，行数: 3, 列数: 2
+2025-06-30 23:49:58,293 - INFO - file_description - get_table_info - 670 - 找到数值列: []
+2025-06-30 23:49:58,293 - INFO - file_description - get_table_info - 687 - 表格信息提取完成。
+2025-06-30 23:49:58,294 - INFO - file_description - summarize_table - 714 - 表格信息字符串长度: 185
+2025-06-30 23:49:58,295 - INFO - file_description - summarize_table - 715 - 数据示例字符串长度: 147
+2025-06-30 23:49:58,295 - INFO - file_description - summarize_table - 748 - 向 LLM 发送请求进行表格总结...
+2025-06-30 23:49:58,470 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://aistudio.baidu.com/llm/lmapi/v3/chat/completions "HTTP/1.1 400 Bad Request"
+2025-06-30 23:49:58,471 - ERROR - file_description - summarize_table - 762 - 调用 LLM 分析表格时出错: Error code: 400 - {'logId': 'fc3eddc2e7d74b46253626cb2425c17f', 'errorCode': 40405, 'errorMsg': '暂不支持该模型'}
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/file_description.py", line 749, in summarize_table
+    response = self.client.chat.completions.create(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 925, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1239, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1034, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'logId': 'fc3eddc2e7d74b46253626cb2425c17f', 'errorCode': 40405, 'errorMsg': '暂不支持该模型'}
+2025-06-30 23:50:01,543 - INFO - file_description - summarize_table - 698 - 开始总结表格: /tmp/tmp_x2nfkls.xlsx
+2025-06-30 23:50:01,544 - INFO - file_description - read_table - 567 - 尝试读取表格源: /tmp/tmp_x2nfkls.xlsx
+2025-06-30 23:50:01,544 - INFO - file_description - read_table - 626 - 输入为本地文件路径: /tmp/tmp_x2nfkls.xlsx
+2025-06-30 23:50:01,544 - INFO - file_description - read_table - 628 - 本地文件格式: .xlsx
+2025-06-30 23:50:01,566 - INFO - file_description - read_table - 632 - 成功读取本地 Excel 文件: /tmp/tmp_x2nfkls.xlsx
+2025-06-30 23:50:01,566 - INFO - file_description - get_table_info - 658 - 开始提取表格信息，行数: 3, 列数: 2
+2025-06-30 23:50:01,567 - INFO - file_description - get_table_info - 670 - 找到数值列: []
+2025-06-30 23:50:01,567 - INFO - file_description - get_table_info - 687 - 表格信息提取完成。
+2025-06-30 23:50:01,569 - INFO - file_description - summarize_table - 714 - 表格信息字符串长度: 185
+2025-06-30 23:50:01,569 - INFO - file_description - summarize_table - 715 - 数据示例字符串长度: 147
+2025-06-30 23:50:01,569 - INFO - file_description - summarize_table - 748 - 向 LLM 发送请求进行表格总结...
+2025-06-30 23:50:01,666 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://aistudio.baidu.com/llm/lmapi/v3/chat/completions "HTTP/1.1 400 Bad Request"
+2025-06-30 23:50:01,667 - ERROR - file_description - summarize_table - 762 - 调用 LLM 分析表格时出错: Error code: 400 - {'logId': '96bdffee4ee2b43863183bb0779e4986', 'errorCode': 40405, 'errorMsg': '暂不支持该模型'}
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/file_description.py", line 749, in summarize_table
+    response = self.client.chat.completions.create(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 925, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1239, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1034, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'logId': '96bdffee4ee2b43863183bb0779e4986', 'errorCode': 40405, 'errorMsg': '暂不支持该模型'}
+2025-06-30 23:50:09,449 - INFO - file_description - summarize_table - 698 - 开始总结表格: /tmp/tmp552c7z63.xlsx
+2025-06-30 23:50:09,450 - INFO - file_description - read_table - 567 - 尝试读取表格源: /tmp/tmp552c7z63.xlsx
+2025-06-30 23:50:09,450 - INFO - file_description - read_table - 626 - 输入为本地文件路径: /tmp/tmp552c7z63.xlsx
+2025-06-30 23:50:09,450 - INFO - file_description - read_table - 628 - 本地文件格式: .xlsx
+2025-06-30 23:50:09,471 - INFO - file_description - read_table - 632 - 成功读取本地 Excel 文件: /tmp/tmp552c7z63.xlsx
+2025-06-30 23:50:09,472 - INFO - file_description - get_table_info - 658 - 开始提取表格信息，行数: 3, 列数: 2
+2025-06-30 23:50:09,473 - INFO - file_description - get_table_info - 670 - 找到数值列: []
+2025-06-30 23:50:09,473 - INFO - file_description - get_table_info - 687 - 表格信息提取完成。
+2025-06-30 23:50:09,474 - INFO - file_description - summarize_table - 714 - 表格信息字符串长度: 185
+2025-06-30 23:50:09,475 - INFO - file_description - summarize_table - 715 - 数据示例字符串长度: 147
+2025-06-30 23:50:09,475 - INFO - file_description - summarize_table - 748 - 向 LLM 发送请求进行表格总结...
+2025-06-30 23:50:09,654 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://aistudio.baidu.com/llm/lmapi/v3/chat/completions "HTTP/1.1 400 Bad Request"
+2025-06-30 23:50:09,656 - ERROR - file_description - summarize_table - 762 - 调用 LLM 分析表格时出错: Error code: 400 - {'logId': 'f3d2d2712d32afb4a6a2f07d27632730', 'errorCode': 40405, 'errorMsg': '暂不支持该模型'}
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/file_description.py", line 749, in summarize_table
+    response = self.client.chat.completions.create(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 925, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1239, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1034, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'logId': 'f3d2d2712d32afb4a6a2f07d27632730', 'errorCode': 40405, 'errorMsg': '暂不支持该模型'}
+2025-07-01 10:59:48,940 - INFO - file_description - summarize_single_image - 383 - 开始处理单张图片总结: /tmp/tmp0i33kko9.jpg
+2025-07-01 10:59:48,940 - INFO - file_description - get_image_url_dict - 356 - 输入为本地文件路径，将进行Base64编码: /tmp/tmp0i33kko9.jpg
+2025-07-01 10:59:48,941 - INFO - file_description - encode_image - 334 - 图片 '/tmp/tmp0i33kko9.jpg' Base64编码成功。编码后数据长度(部分): 100...
+2025-07-01 10:59:48,941 - INFO - file_description - get_image_url_dict - 371 - 推断出图片 '/tmp/tmp0i33kko9.jpg' 的MIME类型为: image/jpeg
+2025-07-01 10:59:48,941 - INFO - file_description - summarize_single_image - 398 - 向模型 'ernie-4.5-8k-preview' 发送单图总结请求。图片来源: /tmp/tmp0i33kko9.jpg
+2025-07-01 10:59:49,538 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://aistudio.baidu.com/llm/lmapi/v3/chat/completions "HTTP/1.1 400 Bad Request"
+2025-07-01 10:59:49,539 - ERROR - file_description - summarize_single_image - 425 - 使用模型分析单张图片 '/tmp/tmp0i33kko9.jpg' 时出错: Error code: 400 - {'logId': '737a730e66dbd34f69fdd8b701107def', 'errorCode': 40405, 'errorMsg': '暂不支持该模型'}
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/file_description.py", line 413, in summarize_single_image
+    response = self.client.chat.completions.create(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 925, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1239, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1034, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'logId': '737a730e66dbd34f69fdd8b701107def', 'errorCode': 40405, 'errorMsg': '暂不支持该模型'}
+2025-07-01 11:00:14,107 - INFO - file_description - summarize_single_image - 383 - 开始处理单张图片总结: /tmp/tmpnqkviqq6.jpg
+2025-07-01 11:00:14,107 - INFO - file_description - get_image_url_dict - 356 - 输入为本地文件路径，将进行Base64编码: /tmp/tmpnqkviqq6.jpg
+2025-07-01 11:00:14,108 - INFO - file_description - encode_image - 334 - 图片 '/tmp/tmpnqkviqq6.jpg' Base64编码成功。编码后数据长度(部分): 100...
+2025-07-01 11:00:14,109 - INFO - file_description - get_image_url_dict - 371 - 推断出图片 '/tmp/tmpnqkviqq6.jpg' 的MIME类型为: image/jpeg
+2025-07-01 11:00:14,109 - INFO - file_description - summarize_single_image - 398 - 向模型 'ernie-4.5-8k-preview' 发送单图总结请求。图片来源: /tmp/tmpnqkviqq6.jpg
+2025-07-01 11:00:14,615 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://aistudio.baidu.com/llm/lmapi/v3/chat/completions "HTTP/1.1 400 Bad Request"
+2025-07-01 11:00:14,616 - ERROR - file_description - summarize_single_image - 425 - 使用模型分析单张图片 '/tmp/tmpnqkviqq6.jpg' 时出错: Error code: 400 - {'logId': '44b1abdd220a11ec042bd834fd412279', 'errorCode': 40405, 'errorMsg': '暂不支持该模型'}
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/file_description.py", line 413, in summarize_single_image
+    response = self.client.chat.completions.create(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 925, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1239, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1034, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'logId': '44b1abdd220a11ec042bd834fd412279', 'errorCode': 40405, 'errorMsg': '暂不支持该模型'}
+2025-07-01 20:08:23,635 - INFO - file_description - summarize_single_image - 383 - 开始处理单张图片总结: /tmp/tmpn5_o5lv_.jpeg
+2025-07-01 20:08:23,635 - INFO - file_description - get_image_url_dict - 356 - 输入为本地文件路径，将进行Base64编码: /tmp/tmpn5_o5lv_.jpeg
+2025-07-01 20:08:23,636 - INFO - file_description - encode_image - 334 - 图片 '/tmp/tmpn5_o5lv_.jpeg' Base64编码成功。编码后数据长度(部分): 100...
+2025-07-01 20:08:23,636 - INFO - file_description - get_image_url_dict - 371 - 推断出图片 '/tmp/tmpn5_o5lv_.jpeg' 的MIME类型为: image/jpeg
+2025-07-01 20:08:23,636 - INFO - file_description - summarize_single_image - 398 - 向模型 'ernie-4.5-8k-preview' 发送单图总结请求。图片来源: /tmp/tmpn5_o5lv_.jpeg
+2025-07-01 20:08:25,251 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://aistudio.baidu.com/llm/lmapi/v3/chat/completions "HTTP/1.1 400 Bad Request"
+2025-07-01 20:08:25,253 - ERROR - file_description - summarize_single_image - 425 - 使用模型分析单张图片 '/tmp/tmpn5_o5lv_.jpeg' 时出错: Error code: 400 - {'logId': 'ad89725f37fc92e10482f6596e210308', 'errorCode': 40405, 'errorMsg': '暂不支持该模型'}
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/file_description.py", line 413, in summarize_single_image
+    response = self.client.chat.completions.create(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 925, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1239, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1034, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'logId': 'ad89725f37fc92e10482f6596e210308', 'errorCode': 40405, 'errorMsg': '暂不支持该模型'}
+2025-07-01 20:15:38,112 - INFO - file_description - summarize_single_image - 383 - 开始处理单张图片总结: /tmp/tmpwuycwe_7.jpeg
+2025-07-01 20:15:38,112 - INFO - file_description - get_image_url_dict - 356 - 输入为本地文件路径，将进行Base64编码: /tmp/tmpwuycwe_7.jpeg
+2025-07-01 20:15:38,113 - INFO - file_description - encode_image - 334 - 图片 '/tmp/tmpwuycwe_7.jpeg' Base64编码成功。编码后数据长度(部分): 100...
+2025-07-01 20:15:38,113 - INFO - file_description - get_image_url_dict - 371 - 推断出图片 '/tmp/tmpwuycwe_7.jpeg' 的MIME类型为: image/jpeg
+2025-07-01 20:15:38,114 - INFO - file_description - summarize_single_image - 398 - 向模型 'ernie-4.5-8k-preview' 发送单图总结请求。图片来源: /tmp/tmpwuycwe_7.jpeg
+2025-07-01 20:15:38,791 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://aistudio.baidu.com/llm/lmapi/v3/chat/completions "HTTP/1.1 400 Bad Request"
+2025-07-01 20:15:38,793 - ERROR - file_description - summarize_single_image - 425 - 使用模型分析单张图片 '/tmp/tmpwuycwe_7.jpeg' 时出错: Error code: 400 - {'logId': 'b42bfa21e2f9d37acbb76c56de589a94', 'errorCode': 40405, 'errorMsg': '暂不支持该模型'}
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/file_description.py", line 413, in summarize_single_image
+    response = self.client.chat.completions.create(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 925, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1239, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1034, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'logId': 'b42bfa21e2f9d37acbb76c56de589a94', 'errorCode': 40405, 'errorMsg': '暂不支持该模型'}
+2025-07-01 20:17:01,739 - INFO - file_description - summarize_table - 698 - 开始总结表格: /tmp/tmp4l1uqeva.xlsx
+2025-07-01 20:17:01,739 - INFO - file_description - read_table - 567 - 尝试读取表格源: /tmp/tmp4l1uqeva.xlsx
+2025-07-01 20:17:01,739 - INFO - file_description - read_table - 626 - 输入为本地文件路径: /tmp/tmp4l1uqeva.xlsx
+2025-07-01 20:17:01,739 - INFO - file_description - read_table - 628 - 本地文件格式: .xlsx
+2025-07-01 20:17:01,772 - INFO - file_description - read_table - 632 - 成功读取本地 Excel 文件: /tmp/tmp4l1uqeva.xlsx
+2025-07-01 20:17:01,772 - INFO - file_description - get_table_info - 658 - 开始提取表格信息，行数: 5, 列数: 10
+2025-07-01 20:17:01,775 - INFO - file_description - get_table_info - 670 - 找到数值列: ['描述', '产品图片', '购买链接', '最低起售量', '标准售价', '最低售价']
+2025-07-01 20:17:01,776 - WARNING - file_description - get_table_info - 673 - 数值列 '描述' 完全为空，统计值将为 NaN 或引发错误。
+2025-07-01 20:17:01,776 - WARNING - file_description - get_table_info - 673 - 数值列 '产品图片' 完全为空，统计值将为 NaN 或引发错误。
+2025-07-01 20:17:01,776 - WARNING - file_description - get_table_info - 673 - 数值列 '购买链接' 完全为空，统计值将为 NaN 或引发错误。
+2025-07-01 20:17:01,778 - INFO - file_description - get_table_info - 687 - 表格信息提取完成。
+2025-07-01 20:17:01,783 - INFO - file_description - summarize_table - 714 - 表格信息字符串长度: 1362
+2025-07-01 20:17:01,783 - INFO - file_description - summarize_table - 715 - 数据示例字符串长度: 383
+2025-07-01 20:17:01,783 - INFO - file_description - summarize_table - 748 - 向 LLM 发送请求进行表格总结...
+2025-07-01 20:17:02,167 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://aistudio.baidu.com/llm/lmapi/v3/chat/completions "HTTP/1.1 400 Bad Request"
+2025-07-01 20:17:02,169 - ERROR - file_description - summarize_table - 762 - 调用 LLM 分析表格时出错: Error code: 400 - {'logId': '93e8153d9dff9267baf5962070fd8df8', 'errorCode': 40405, 'errorMsg': '暂不支持该模型'}
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/file_description.py", line 749, in summarize_table
+    response = self.client.chat.completions.create(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 925, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1239, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1034, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'logId': '93e8153d9dff9267baf5962070fd8df8', 'errorCode': 40405, 'errorMsg': '暂不支持该模型'}
+2025-07-02 09:44:28,167 - INFO - file_description - summarize_single_image - 383 - 开始处理单张图片总结: /tmp/tmpmiz2959e.jpg
+2025-07-02 09:44:28,169 - INFO - file_description - get_image_url_dict - 356 - 输入为本地文件路径，将进行Base64编码: /tmp/tmpmiz2959e.jpg
+2025-07-02 09:44:28,171 - INFO - file_description - encode_image - 334 - 图片 '/tmp/tmpmiz2959e.jpg' Base64编码成功。编码后数据长度(部分): 100...
+2025-07-02 09:44:28,171 - INFO - file_description - get_image_url_dict - 371 - 推断出图片 '/tmp/tmpmiz2959e.jpg' 的MIME类型为: image/jpeg
+2025-07-02 09:44:28,172 - INFO - file_description - summarize_single_image - 398 - 向模型 'ernie-4.5-8k-preview' 发送单图总结请求。图片来源: /tmp/tmpmiz2959e.jpg
+2025-07-02 09:44:29,093 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://aistudio.baidu.com/llm/lmapi/v3/chat/completions "HTTP/1.1 400 Bad Request"
+2025-07-02 09:44:29,095 - ERROR - file_description - summarize_single_image - 425 - 使用模型分析单张图片 '/tmp/tmpmiz2959e.jpg' 时出错: Error code: 400 - {'logId': '4dffb255383501f271359ec732d7cdd3', 'errorCode': 40405, 'errorMsg': '暂不支持该模型'}
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/file_description.py", line 413, in summarize_single_image
+    response = self.client.chat.completions.create(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 925, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1239, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1034, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'logId': '4dffb255383501f271359ec732d7cdd3', 'errorCode': 40405, 'errorMsg': '暂不支持该模型'}
+2025-07-02 09:44:34,698 - INFO - file_description - summarize_single_image - 383 - 开始处理单张图片总结: /tmp/tmpw7pr3735.jpg
+2025-07-02 09:44:34,698 - INFO - file_description - get_image_url_dict - 356 - 输入为本地文件路径，将进行Base64编码: /tmp/tmpw7pr3735.jpg
+2025-07-02 09:44:34,700 - INFO - file_description - encode_image - 334 - 图片 '/tmp/tmpw7pr3735.jpg' Base64编码成功。编码后数据长度(部分): 100...
+2025-07-02 09:44:34,700 - INFO - file_description - get_image_url_dict - 371 - 推断出图片 '/tmp/tmpw7pr3735.jpg' 的MIME类型为: image/jpeg
+2025-07-02 09:44:34,700 - INFO - file_description - summarize_single_image - 398 - 向模型 'ernie-4.5-8k-preview' 发送单图总结请求。图片来源: /tmp/tmpw7pr3735.jpg
+2025-07-02 09:44:35,272 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://aistudio.baidu.com/llm/lmapi/v3/chat/completions "HTTP/1.1 400 Bad Request"
+2025-07-02 09:44:35,274 - ERROR - file_description - summarize_single_image - 425 - 使用模型分析单张图片 '/tmp/tmpw7pr3735.jpg' 时出错: Error code: 400 - {'logId': 'cfc73e04c9a7bc8b349986df2c5a5fb1', 'errorCode': 40405, 'errorMsg': '暂不支持该模型'}
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/file_description.py", line 413, in summarize_single_image
+    response = self.client.chat.completions.create(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 925, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1239, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1034, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'logId': 'cfc73e04c9a7bc8b349986df2c5a5fb1', 'errorCode': 40405, 'errorMsg': '暂不支持该模型'}
+2025-07-02 09:44:43,429 - INFO - file_description - summarize_single_image - 383 - 开始处理单张图片总结: /tmp/tmpmlk2ohxp.jpg
+2025-07-02 09:44:43,429 - INFO - file_description - get_image_url_dict - 356 - 输入为本地文件路径，将进行Base64编码: /tmp/tmpmlk2ohxp.jpg
+2025-07-02 09:44:43,431 - INFO - file_description - encode_image - 334 - 图片 '/tmp/tmpmlk2ohxp.jpg' Base64编码成功。编码后数据长度(部分): 100...
+2025-07-02 09:44:43,431 - INFO - file_description - get_image_url_dict - 371 - 推断出图片 '/tmp/tmpmlk2ohxp.jpg' 的MIME类型为: image/jpeg
+2025-07-02 09:44:43,431 - INFO - file_description - summarize_single_image - 398 - 向模型 'ernie-4.5-8k-preview' 发送单图总结请求。图片来源: /tmp/tmpmlk2ohxp.jpg
+2025-07-02 09:44:43,911 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://aistudio.baidu.com/llm/lmapi/v3/chat/completions "HTTP/1.1 400 Bad Request"
+2025-07-02 09:44:43,913 - ERROR - file_description - summarize_single_image - 425 - 使用模型分析单张图片 '/tmp/tmpmlk2ohxp.jpg' 时出错: Error code: 400 - {'logId': '2e14330a6d18dddba88d0f4abe6a5b0d', 'errorCode': 40405, 'errorMsg': '暂不支持该模型'}
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/file_description.py", line 413, in summarize_single_image
+    response = self.client.chat.completions.create(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 925, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1239, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1034, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'logId': '2e14330a6d18dddba88d0f4abe6a5b0d', 'errorCode': 40405, 'errorMsg': '暂不支持该模型'}
+2025-07-02 09:46:39,837 - INFO - file_description - summarize_document - 1593 - 开始总结文档: /tmp/tmpqofqdz9b.docx
+2025-07-02 09:46:39,838 - INFO - file_description - extract_docx_content - 1461 - 开始提取DOCX内容: /tmp/tmpqofqdz9b.docx
+2025-07-02 09:46:39,845 - INFO - file_description - extract_docx_content - 1488 - DOCX共有 3 个原始段落。
+2025-07-02 09:46:39,847 - INFO - file_description - extract_docx_content - 1521 - DOCX内容提取完成: /tmp/tmpqofqdz9b.docx
+2025-07-02 09:46:39,847 - INFO - file_description - summarize_document - 1619 - 提取的文档内容序列化后字符串长度: 201
+2025-07-02 09:46:39,847 - INFO - file_description - summarize_document - 1656 - 向 LLM (ernie-4.5-turbo-128k) 发送请求进行文档总结...
+2025-07-02 09:46:50,013 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://aistudio.baidu.com/llm/lmapi/v3/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 09:46:50,015 - INFO - file_description - summarize_document - 1677 - LLM 文档总结接收成功，长度: 567
+2025-07-02 16:52:01,321 - INFO - file_description - __init__ - 59 - TextSummarizer 初始化完成。Chunk size: 4000, Overlap size: 200
+2025-07-02 16:52:01,361 - INFO - file_description - __init__ - 322 - ImageSummarizer 初始化完成。API base_url: https://aistudio.baidu.com/llm/lmapi/v3/, Model: ernie-4.5-8k-preview
+2025-07-02 16:52:01,401 - INFO - file_description - __init__ - 550 - TableSummarizer 初始化完成。API base_url: https://aistudio.baidu.com/llm/lmapi/v3
+2025-07-02 16:52:01,441 - INFO - file_description - __init__ - 914 - PPTSummarizer 初始化完成。API base_url: https://aistudio.baidu.com/llm/lmapi/v3/, Model: ernie-4.5-8k-preview
+2025-07-02 16:52:01,441 - INFO - file_description - __init__ - 915 - 确保 LibreOffice (soffice) 已安装并在系统 PATH 中，以便支持 .ppt 文件转换。
+2025-07-02 16:52:01,480 - INFO - file_description - __init__ - 1341 - DocumentSummarizer 初始化完成。API base_url: https://aistudio.baidu.com/llm/lmapi/v3/, Model: ernie-4.5-turbo-128k, Chunk Size: 4000, Overlap Size: 200
+2025-07-02 16:52:01,481 - WARNING - file_description - __init__ - 1345 - 注意: 当前 summarize_document 方法会将整个提取的文档内容作为单个JSON字符串发送给LLM。即使 ernie-4.5-turbo-128k 支持长上下文，对于超大文档，将结构化JSON直接传入仍需注意实际token消耗和成本。类中定义的 chunk_size, overlap_size 和 split_text 方法目前未用于对提取的文档原始文本内容进行分块总结。如需更精细或成本优化的超长文档处理，请考虑修改 summarize_document 以实现基于原始文本的分块和可能的分层总结策略。
+2025-07-02 16:52:01,520 - INFO - file_description - __init__ - 1831 - VideoSummarizer 初始化完成。API base_url: https://dashscope.aliyuncs.com/compatible-mode/v1, Model: qwen-vl-max-latest
+2025-07-02 16:52:01,520 - WARNING - file_description - __init__ - 1832 - 当前版本主要支持通过 URL 处理视频。本地视频文件处理功能尚未完全实现。

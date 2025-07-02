@@ -39,7 +39,7 @@ async def extract_sale_flow(content: str) -> list[str]:
     response = await chat_qwen(prompt)
     return response
 
-async def create_role(tenant_id,task_id):
+async def create_role(tenant_id,task_id,strategy_id):
     """
     创建角色
     Args:
@@ -58,5 +58,5 @@ async def create_role(tenant_id,task_id):
     prohibit = await extract_prohibit(content)
     sale_flow = await extract_sale_flow(content)
     # 发送禁止做的事情 && 销售流程通知
-    await send_prohibit_notify(tenant_id,task_id,json.loads(prohibit.strip('```').strip('```json')),json.loads(sale_flow.strip('```').strip('```json')))
+    await send_prohibit_notify(tenant_id,strategy_id,json.loads(prohibit.strip('```').strip('```json')),json.loads(sale_flow.strip('```').strip('```json')))
     return content

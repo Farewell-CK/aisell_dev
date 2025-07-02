@@ -6,8 +6,8 @@ api_keys:
     api_key: sk-d0dcd1cb9600485d951f604146e3f1ea
     base_url: https://api.deepseek.com
   ernie:
-    api_key: ae467bfa991e56e0e996a60820b93e9455f7e6bd
-    base_url: https://aistudio.baidu.com/llm/lmapi/v3
+    api_key: bce-v3/ALTAK-wKuFEIj8EXZqIDOquAnsT/678c3407baba1a9b64ab889a7f7becd7dc3a4591
+    base_url: https://qianfan.baidubce.com/v2
   gaode:
     api_key: af8a9fd3dac89fe58d1ab4a2fa142a30
   

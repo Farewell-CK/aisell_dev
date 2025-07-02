@@ -3,6 +3,7 @@ from pydantic import BaseModel
 from typing import List
 import os
 from utils.wechat_style_analyzer import WeChatStyleAnalyzer
+import logging
 
 app = FastAPI(
     title="微信聊天风格分析服务",
@@ -16,6 +17,20 @@ if not API_KEY:
     raise ValueError("请设置环境变量 BAIDU_API_KEY")
 
 analyzer = WeChatStyleAnalyzer(api_key=API_KEY)
+
+log_dir = "logs"
+os.makedirs(log_dir, exist_ok=True)
+log_file = os.path.join(log_dir, "wechat_style_service.log")
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s",
+    handlers=[
+        logging.FileHandler(log_file, encoding='utf-8'),
+        logging.StreamHandler()
+    ]
+)
+logger = logging.getLogger(__name__)
 
 class ImageUrlsRequest(BaseModel):
     image_urls: List[str]

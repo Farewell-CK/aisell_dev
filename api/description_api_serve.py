@@ -26,7 +26,7 @@ import threading
 load_dotenv()
 
 # 获取API密钥
-API_KEY = os.getenv("Ernie_API_KEY")
+API_KEY = os.getenv("Ernie_API_KEY", "bce-v3/ALTAK-wKuFEIj8EXZqIDOquAnsT/678c3407baba1a9b64ab889a7f7becd7dc3a4591")
 if not API_KEY:
     raise ValueError("未找到ERNIE_API_KEY环境变量")
 qwen_api_key = os.getenv("Qwen_API_KEY")

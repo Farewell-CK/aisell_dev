@@ -41,7 +41,7 @@ class OpeningGenerator:
             response = await chat_qwen(self.api_key, prompt)
             return {
                 "status": "success",
-                "opening": response.strip(),
+                "opening": json.loads(response.strip("```").strip("```json")),
                 "type": "personalized"
             }
         except Exception as e:

@@ -10,7 +10,18 @@ from utils.db_queries import select_sale_prompt
 import os
 
 # 配置日志
-logging.basicConfig(level=logging.INFO)
+log_dir = "logs"
+os.makedirs(log_dir, exist_ok=True)
+log_file = os.path.join(log_dir, "chat_test_service.log")
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s",
+    handlers=[
+        logging.FileHandler(log_file, encoding='utf-8'),
+        logging.StreamHandler()
+    ]
+)
 logger = logging.getLogger(__name__)
 
 # 创建FastAPI应用

@@ -6,7 +6,7 @@ class WeChatStyleAnalyzer:
     def __init__(self, api_key):
         self.client = OpenAI(
             api_key=api_key,
-            base_url="https://aistudio.baidu.com/llm/lmapi/v3",
+            base_url="https://qianfan.baidubce.com/v2",
         )
 
     def analyze_chat_style(self, image_urls):
@@ -147,7 +147,7 @@ class WeChatStyleAnalyzer:
             }
 
             completion = self.client.chat.completions.create(
-                model="ernie-4.5-8k-preview",
+                model="ernie-4.5-turbo-vl-preview",
                 messages=[prompt],
                 stream=False,
             )

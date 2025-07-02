@@ -3,6 +3,22 @@ from pydantic import BaseModel
 from typing import Dict, List, Optional
 import asyncio
 from utils.opening_generator import OpeningGenerator, generate_opening
+import logging
+import os
+
+log_dir = "logs"
+os.makedirs(log_dir, exist_ok=True)
+log_file = os.path.join(log_dir, "opening_service.log")
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s",
+    handlers=[
+        logging.FileHandler(log_file, encoding='utf-8'),
+        logging.StreamHandler()
+    ]
+)
+logger = logging.getLogger(__name__)
 
 app = FastAPI(title="开场白生成服务", description="自动生成个性化聊天开场白")
 
@@ -21,11 +37,6 @@ class SalesInfo(BaseModel):
     advantage: Optional[str] = ""
     scenarios: Optional[str] = ""
 
-class EventInfo(BaseModel):
-    event_name: str
-    event_time: Optional[str] = ""
-    event_location: Optional[str] = ""
-
 class ReferrerInfo(BaseModel):
     name: str
     relationship: Optional[str] = "朋友"
@@ -34,32 +45,6 @@ class PersonalizedOpeningRequest(BaseModel):
     tenant_id: int
     wechat_id: int
     task_id: str
-    # customer_info: CustomerInfo
-    # sales_info: SalesInfo
-    # context: Optional[str] = ""
-
-class IndustryOpeningRequest(BaseModel):
-    industry: str
-    customer_info: CustomerInfo
-    sales_info: SalesInfo
-
-class EventOpeningRequest(BaseModel):
-    event_type: str
-    event_info: EventInfo
-    customer_info: CustomerInfo
-    sales_info: SalesInfo
-
-class ReferralOpeningRequest(BaseModel):
-    referrer_info: ReferrerInfo
-    customer_info: CustomerInfo
-    sales_info: SalesInfo
-
-class MultipleOpeningsRequest(BaseModel):
-    customer_info: CustomerInfo
-    sales_info: SalesInfo
-    opening_types: Optional[List[str]] = None
-    context: Optional[str] = ""
-
 # 响应模型
 class OpeningResponse(BaseModel):
     tenant_id: int
@@ -68,12 +53,6 @@ class OpeningResponse(BaseModel):
     status: str
     # opening: Optional[str] = None
 
-class MultipleOpeningsResponse(BaseModel):
-    tenant_id: int
-    task_id: int
-    session_id: str
-    status: str
-    openings: List[OpeningResponse]
 
 @app.get("/")
 async def root():
@@ -83,10 +62,6 @@ async def root():
         "version": "1.0.0",
         "endpoints": [
             "/generate/personalized",
-            "/generate/industry", 
-            "/generate/event",
-            "/generate/referral",
-            "/generate/multiple"
         ]
     }
 
@@ -110,75 +85,17 @@ async def generate_personalized_opening(request: PersonalizedOpeningRequest):
             "tenant_id": tenant_id,
             "task_id": task_id,
             # "session_id": session_id,
-            "status": "success"
+            "status": "success",
+            "opening": result["opening"]
         }
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"生成个性化开场白失败: {str(e)}")
-
-@app.post("/generate/industry", response_model=OpeningResponse)
-async def generate_industry_opening(request: IndustryOpeningRequest):
-    """生成行业针对性开场白"""
-    try:
-        generator = OpeningGenerator()
-        result = await generator.generate_industry_opening(
-            request.industry,
-            request.sales_info.model_dump(),
-            request.sales_info.model_dump()
-        )
-        return OpeningResponse(**result)
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"生成行业开场白失败: {str(e)}")
-
-@app.post("/generate/event", response_model=OpeningResponse)
-async def generate_event_opening(request: EventOpeningRequest):
-    """生成事件开场白"""
-    try:
-        generator = OpeningGenerator()
-        result = await generator.generate_event_opening(
-            request.event_type,
-            request.event_info.model_dump(),
-            request.sales_info.model_dump()
-        )
-        return OpeningResponse(**result)
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"生成事件开场白失败: {str(e)}")
-
-@app.post("/generate/referral", response_model=OpeningResponse)
-async def generate_referral_opening(request: ReferralOpeningRequest):
-    """生成推荐人开场白"""
-    try:
-        generator = OpeningGenerator()
-        result = await generator.generate_referral_opening(
-            request.referrer_info.model_dump(),
-            request.customer_info.model_dump(),
-            request.sales_info.model_dump()
-        )
-        return OpeningResponse(**result)
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"生成推荐开场白失败: {str(e)}")
-
-@app.post("/generate/multiple", response_model=MultipleOpeningsResponse)
-async def generate_multiple_openings(request: MultipleOpeningsRequest):
-    """生成多种类型的开场白"""
-    try:
-        generator = OpeningGenerator()
-        result = await generator.generate_multiple_openings(
-            request.customer_info.model_dump(),
-            request.sales_info.model_dump(),
-            request.opening_types
-        )
-        
-        # 转换响应格式
-        openings = []
-        for opening in result['openings']:
-            openings.append(OpeningResponse(**opening))
-        
-        return MultipleOpeningsResponse(
-            status=result['status'],
-            openings=openings
-        )
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"生成多种开场白失败: {str(e)}")
+        return {
+            "tenant_id": tenant_id,
+            "task_id": task_id,
+            "status": "error",
+            "message": str(e)
+        }
+        # raise HTTPException(status_code=500, detail=f"生成个性化开场白失败: {str(e)}")
 
 @app.get("/health")
 async def health_check():

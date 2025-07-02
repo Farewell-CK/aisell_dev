@@ -3,8 +3,24 @@ from pydantic import BaseModel
 from typing import Optional
 import asyncio
 from utils.create_role import create_role
+import logging
+import os
 
 app = FastAPI(title="角色创建服务", description="异步创建销售角色并立即响应")
+
+log_dir = "logs"
+os.makedirs(log_dir, exist_ok=True)
+log_file = os.path.join(log_dir, "create_role_service.log")
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s",
+    handlers=[
+        logging.FileHandler(log_file, encoding='utf-8'),
+        logging.StreamHandler()
+    ]
+)
+logger = logging.getLogger(__name__)
 
 class CreateRoleRequest(BaseModel):
     tenant_id: str

@@ -52,7 +52,7 @@ class TextSummarizer:
         """
         self.client = OpenAI(
             api_key=api_key,
-            base_url="https://aistudio.baidu.com/llm/lmapi/v3" # 百度文心API的兼容OpenAI接口地址
+            base_url="https://qianfan.baidubce.com/v2" # 百度文心API的兼容OpenAI接口地址
         )
         self.chunk_size = 4000  # 每个块的最大字符数
         self.overlap_size = 200  # 块之间的重叠字符数
@@ -316,9 +316,9 @@ class ImageSummarizer:
         """
         self.client = OpenAI(
             api_key=api_key,
-            base_url="https://aistudio.baidu.com/llm/lmapi/v3"
+            base_url="https://qianfan.baidubce.com/v2"
         )
-        self.model_name = "ernie-4.5-8k-preview" # 您指定的模型
+        self.model_name = "ernie-4.5-turbo-vl-preview" # 您指定的模型
         logging.info(f"ImageSummarizer 初始化完成。API base_url: {self.client.base_url}, Model: {self.model_name}")
 
     def encode_image(self, image_path: str) -> Optional[str]:
@@ -545,9 +545,9 @@ class TableSummarizer:
         """
         self.client = OpenAI(
             api_key=api_key,
-            base_url="https://aistudio.baidu.com/llm/lmapi/v3"
+            base_url="https://qianfan.baidubce.com/v2"
         )
-        logging.info(f"TableSummarizer 初始化完成。API base_url: https://aistudio.baidu.com/llm/lmapi/v3")
+        logging.info(f"TableSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2")
 
     def is_valid_url(self, url: str) -> bool:
         """简单的URL格式检查"""
@@ -908,7 +908,7 @@ class PPTSummarizer:
         """
         self.client = OpenAI(
             api_key=api_key,
-            base_url="https://aistudio.baidu.com/llm/lmapi/v3"
+            base_url="https://qianfan.baidubce.com/v2"
         )
         self.model_name = "ernie-4.5-8k-preview" # 您指定的模型
         logging.info(f"PPTSummarizer 初始化完成。API base_url: {self.client.base_url}, Model: {self.model_name}")
@@ -1333,7 +1333,7 @@ class DocumentSummarizer:
         """
         self.client = OpenAI(
             api_key=api_key,
-            base_url="https://aistudio.baidu.com/llm/lmapi/v3"
+            base_url="https://qianfan.baidubce.com/v2"
         )
         self.chunk_size = 4000
         self.overlap_size = 200

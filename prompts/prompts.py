@@ -206,7 +206,7 @@ def get_chat_prompt_supplement(tenant_id: int, task_id: int) -> str:
       ### 10. 输出格式
       输出内容包括（需要结合follow_up_agent和collaborate_agent的输出结果）：
       1、回复内容
-      2、协作事项
+      2、协作事项内容，需要结合collaborate_agent的输出结果，如果需要协作，则需要输出协作事项内容，否则不需要输出。
       3、跟单事项
       4、是否需要协助, 1表示需要，0表示不需要(你能解决问题则就不需要)
       输出格式为json，格式如下：
@@ -230,7 +230,7 @@ def get_chat_prompt_supplement(tenant_id: int, task_id: int) -> str:
             "url": "需要给客户发送的文件URL"
          }}
          ],
-         "collaborate_list": [协作事项id1, 协作事项id2, 协作事项id3],
+         "collaborate_list": [协作事项内容1, 协作事项内容2, 协作事项内容3],
          "follow_up": {{
             "is_follow_up": 1, 
             "follow_up_content": ["跟单内容1", "跟单内容2", "跟单内容3"]
@@ -517,10 +517,10 @@ collaborate_prompt = """
 
 1、使用select_collaborate_matters工具查询协作事项
 2、根据协作事项的title，判断客户是否需要协作
-3、如果需要协作，则返回协作事项的id
+3、如果需要协作，则返回协作事项的内容
 4、如果不需要协作，则返回"None"
-注意：你需要交付给"chat_agent"的协作事项，是协作事项的id
-输出格式为：触发的协作事项: [协作事项id1, 协作事项id2, 协作事项id3]
+注意：你需要交付给"chat_agent"的协作事项，是协作事项的内容
+输出格式为：触发的协作事项: [协作事项内容1, 协作事项内容2, 协作事项内容3]
 """
 
 follow_up_prompt = """

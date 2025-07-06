@@ -1,0 +1,7 @@
+[
+  {
+    "timestamp": "2025-07-06T01:01:19.850483",
+    "query": "是的是的",
+    "response": "看起来你遇到了一个数据库查询错误：\npymysql.err.OperationalError 错误信息如上。\n这个错误的核心在于SQL语句中的UUID写法。\nsp.tenant_id = 9091a000-33a1-4021-9f3a-a2f492d1bc16\n你在SQL中未将UUID用引号包裹。\nMySQL尝试将其解析为列名。\n但该列名并不存在。\n因此报错提示Unknown column '9091a000'。\n解决方法是给字符串值加上单引号。\n正确的SQL应如示例所示。\nSELECT sp.test_prompt FROM sale_prompt sp\nWHERE sp.task_id = 17\nAND sp.tenant_id = '9091a000-33a1-4021-9f3a-a2f492d1bc16'\nAND sp.is_del = 0;\n如果你使用Python+SQLAlchemy\n请确保采用参数化查询方式。\nquery定义后通过db.session.execute执行。\n传入task_id和tenant_id作为参数。\n这样可避免SQL注入和引号问题。\n如需进一步帮助，请提供代码或ORM模型定义。"
+  }
+]

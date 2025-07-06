@@ -10,6 +10,12 @@ import sys
 # 添加项目根目录到Python路径
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
+# 导入统一的日志配置
+from utils.logger_config import get_api_logger
+
+# 获取API服务的日志记录器
+logger = get_api_logger()
+
 # from api.description_api_serve import app
 
 if __name__ == "__main__":
@@ -18,11 +24,11 @@ if __name__ == "__main__":
     port = int(os.getenv("PORT", 11431))
     reload = os.getenv("RELOAD", "false").lower() == "true"
     
-    print(f"启动异步文档总结API服务...")
-    print(f"服务地址: http://{host}:{port}")
-    print(f"自动重载: {reload}")
-    print(f"API文档: http://{host}:{port}/docs")
-    print(f"API文档(ReDoc): http://{host}:{port}/redoc")
+    logger.info("启动异步文档总结API服务...")
+    logger.info(f"服务地址: http://{host}:{port}")
+    logger.info(f"自动重载: {reload}")
+    logger.info(f"API文档: http://{host}:{port}/docs")
+    logger.info(f"API文档(ReDoc): http://{host}:{port}/redoc")
     
     # 启动服务器
     uvicorn.run(

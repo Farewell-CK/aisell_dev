@@ -1,6 +1,9 @@
 from tools.database import DatabaseManager
 from typing import Dict, Any
+from utils.logger_config import get_database_logger
+
 db_manager = DatabaseManager()
+logger = get_database_logger()
 
 
 def insert_sale_ai_data_record(ai_type: int, ai_text: str, ai_status: int, tenant_id: int, create_by: str = 'system') -> bool:
@@ -43,10 +46,10 @@ def insert_sale_ai_data_record(ai_type: int, ai_text: str, ai_status: int, tenan
     """
     try:
         db_manager.execute_query(query)
-        print(f"成功插入 AI 数据记录：tenant_id={tenant_id}, type={ai_type}, status={ai_status}") # Successfully inserted AI data record
+        logger.info(f"成功插入 AI 数据记录：tenant_id={tenant_id}, type={ai_type}, status={ai_status}")
         return True
     except Exception as e:
-        print(f"插入 AI 数据记录失败：{e}") # Failed to insert AI data record
+        logger.error(f"插入 AI 数据记录失败：{e}", exc_info=True)
         return False
     
 def update_sale_ai_data_status(record_id: int, tenant_id: int, new_ai_status: int = 1, ai_text: str = None) -> bool:
@@ -76,11 +79,11 @@ def update_sale_ai_data_status(record_id: int, tenant_id: int, new_ai_status: in
         AND is_del = 0; -- 仅更新未被逻辑删除的记录
     """
     try:
-        db_manager.execute_query(query)
-        # print(f"成功更新 AI 数据记录 ID={record_id} 的状态为 {new_ai_status}") # Successfully updated AI data record ID={record_id} status to {new_ai_status}
+        db_manager.execute_update(query)
+        logger.info(f"成功更新 AI 数据记录 ID={record_id} 的状态为 {new_ai_status}")
         return True
     except Exception as e:
-        # print(f"更新 AI 数据记录 ID={record_id} 状态失败：{e}") # Failed to update AI data record ID={record_id} status
+        logger.error(f"更新 AI 数据记录 ID={record_id} 状态失败：{e}", exc_info=True)
         return False
     
 
@@ -106,7 +109,7 @@ def insert_chat_style(tenant_id: int, task_id: int, chat_style: str):
 
 def insert_customer_behavior(tenant_id: int, belong_wechat_id: int, wechat_id: int, customer_behavior_title: str, customer_behavior_content: str, create_by: str = 'system') -> str:
     """
-    插入客户行为信息。 注意：task_id 对应的是sale_wechat_behavior表中的belong_wechat_id
+    插入客户行为信息。 
     Args:
         tenant_id: 租户id
         belong_wechat_id: 所属微信id
@@ -220,7 +223,7 @@ def get_task_status(record_id: int, tenant_id: int) -> Dict[str, Any]:
         else:
             return None
     except Exception as e:
-        print(f"查询任务状态失败：{e}")
+        logger.error(f"查询任务状态失败：{e}", exc_info=True)
         return None
 
 def get_last_insert_id() -> int:
@@ -238,5 +241,5 @@ def get_last_insert_id() -> int:
         else:
             return 0
     except Exception as e:
-        print(f"获取最后插入ID失败：{e}")
+        logger.error(f"获取最后插入ID失败：{e}", exc_info=True)
         return 0

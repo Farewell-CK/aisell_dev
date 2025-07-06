@@ -11,6 +11,7 @@ from utils.file_description import (
     VideoSummarizer
 )
 from utils.db_insert import update_sale_ai_data_status, insert_sale_ai_data_record, get_task_status, get_last_insert_id
+from utils.logger_config import get_api_logger
 from dotenv import load_dotenv
 import requests
 from pathlib import Path
@@ -22,11 +23,15 @@ import asyncio
 from pydantic import BaseModel
 import threading
 
+# 获取API服务的日志记录器
+logger = get_api_logger()
+
 # 加载环境变量
 load_dotenv()
 
 # 获取API密钥
-API_KEY = os.getenv("Ernie_API_KEY", "bce-v3/ALTAK-wKuFEIj8EXZqIDOquAnsT/678c3407baba1a9b64ab889a7f7becd7dc3a4591")
+# API_KEY = os.getenv("Ernie_API_KEY", "bce-v3/ALTAK-wKuFEIj8EXZqIDOquAnsT/678c3407baba1a9b64ab889a7f7becd7dc3a4591")
+API_KEY = 'bce-v3/ALTAK-cezjDqTjarAi7KJqkjxsf/e821050b6df24c4b721c5dfd5c32f9126dfca856'
 if not API_KEY:
     raise ValueError("未找到ERNIE_API_KEY环境变量")
 qwen_api_key = os.getenv("Qwen_API_KEY")
@@ -69,7 +74,7 @@ document_summarizer = DocumentSummarizer(API_KEY)
 video_summarizer = VideoSummarizer(qwen_api_key, qwen_base_url)
 
 # 定义请求模型
-class DocumentSummaryRequest(BaseModel):
+class DocumentSummaryRequest(BaseModel):    
     data_id: int
     tenant_id: int
     url: str
@@ -125,6 +130,8 @@ def process_document_summary(data_id: int, tenant_id: int, url: str, file_type: 
             os.remove(file_path)
         elif file_type == 4:  # 视频
             result = video_summarizer.summarize_video(url)
+            if "视频时发生错误" in result:
+                result = "分析视频时发生错误:he video file is too long."
         elif file_type == 5:  # pdf/docx
             file_path = download_file(url)
             result = document_summarizer.summarize_document(file_path)
@@ -133,13 +140,13 @@ def process_document_summary(data_id: int, tenant_id: int, url: str, file_type: 
             raise ValueError(f"不支持的文件类型: {file_type}")
         
         # 更新任务状态为完成
-        update_sale_ai_data_status(data_id, tenant_id, new_ai_status=1, ai_text=result)
+        update_sale_ai_data_status(data_id, tenant_id, new_ai_status=2, ai_text=f"{result}")
         
     except Exception as e:
         # 更新任务状态为失败
         error_message = f"处理失败: {str(e)}"
         update_sale_ai_data_status(data_id, tenant_id, new_ai_status=3, ai_text=error_message)
-        print(f"任务 {data_id} 处理失败: {str(e)}")
+        logger.error(f"任务 {data_id} 处理失败: {str(e)}", exc_info=True)
 
 @app.post("/api/summarize/document-async")
 async def summarize_document_async(request: DocumentSummaryRequest):

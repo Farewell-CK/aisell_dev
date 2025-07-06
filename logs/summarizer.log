@@ -729,3 +729,754 @@ openai.BadRequestError: Error code: 400 - {'logId': '2e14330a6d18dddba88d0f4abe6
 2025-07-02 16:52:01,481 - WARNING - file_description - __init__ - 1345 - 注意: 当前 summarize_document 方法会将整个提取的文档内容作为单个JSON字符串发送给LLM。即使 ernie-4.5-turbo-128k 支持长上下文，对于超大文档，将结构化JSON直接传入仍需注意实际token消耗和成本。类中定义的 chunk_size, overlap_size 和 split_text 方法目前未用于对提取的文档原始文本内容进行分块总结。如需更精细或成本优化的超长文档处理，请考虑修改 summarize_document 以实现基于原始文本的分块和可能的分层总结策略。
 2025-07-02 16:52:01,520 - INFO - file_description - __init__ - 1831 - VideoSummarizer 初始化完成。API base_url: https://dashscope.aliyuncs.com/compatible-mode/v1, Model: qwen-vl-max-latest
 2025-07-02 16:52:01,520 - WARNING - file_description - __init__ - 1832 - 当前版本主要支持通过 URL 处理视频。本地视频文件处理功能尚未完全实现。
+2025-07-02 17:02:02,118 - INFO - file_description - summarize_ppt - 1117 - 开始总结PPT: /tmp/tmpzpigztpp.ppt
+2025-07-02 17:02:02,119 - INFO - file_description - extract_ppt_content - 985 - 开始提取文件内容: /tmp/tmpzpigztpp.ppt
+2025-07-02 17:02:02,119 - INFO - file_description - extract_ppt_content - 1041 - 输入为本地文件路径: /tmp/tmpzpigztpp.ppt
+2025-07-02 17:02:02,119 - INFO - file_description - extract_ppt_content - 1044 - 检测到本地 .ppt 文件，尝试转换为 .pptx: /tmp/tmpzpigztpp.ppt
+2025-07-02 17:02:02,119 - INFO - file_description - convert_ppt_to_pptx - 930 - 开始将PPT文件 '/tmp/tmpzpigztpp.ppt' 转换为PPTX格式。
+2025-07-02 17:02:02,120 - INFO - file_description - convert_ppt_to_pptx - 945 - 执行转换命令: soffice --headless --invisible --convert-to pptx --outdir /tmp/tmpnh6b_91a /tmp/tmpzpigztpp.ppt
+2025-07-02 17:02:07,152 - INFO - file_description - convert_ppt_to_pptx - 947 - LibreOffice转换成功。Stdout: convert /tmp/tmpzpigztpp.ppt -> /tmp/tmpnh6b_91a/tmpzpigztpp.pptx using filter : Impress MS PowerPoint 2007 XML
+
+2025-07-02 17:02:07,153 - INFO - file_description - convert_ppt_to_pptx - 956 - PPTX文件已成功转换并保存到: /tmp/tmpnh6b_91a/tmpzpigztpp.pptx
+2025-07-02 17:02:07,153 - INFO - file_description - extract_ppt_content - 1052 - 本地 .ppt 文件已成功转换为 .pptx: /tmp/tmpnh6b_91a/tmpzpigztpp.pptx
+2025-07-02 17:02:07,153 - INFO - file_description - extract_ppt_content - 1061 - 正在使用 python-pptx 解析: /tmp/tmpnh6b_91a/tmpzpigztpp.pptx
+2025-07-02 17:02:07,166 - INFO - file_description - extract_ppt_content - 1064 - 文件共有 1 张幻灯片。
+2025-07-02 17:02:07,168 - INFO - file_description - extract_ppt_content - 1086 - 内容提取完成: /tmp/tmpzpigztpp.ppt
+2025-07-02 17:02:07,168 - INFO - file_description - extract_ppt_content - 1102 - 已清理 soffice 转换输出的临时目录: /tmp/tmpnh6b_91a
+2025-07-02 17:02:07,169 - INFO - file_description - summarize_ppt - 1127 - 提取的PPT内容字符串长度: 150
+2025-07-02 17:02:07,169 - INFO - file_description - summarize_ppt - 1158 - 向 LLM (ernie-4.5-8k-preview) 发送请求进行PPT总结...
+2025-07-02 17:02:07,416 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://aistudio.baidu.com/llm/lmapi/v3/chat/completions "HTTP/1.1 400 Bad Request"
+2025-07-02 17:02:07,419 - ERROR - file_description - summarize_ppt - 1172 - 调用 LLM 分析PPT时出错: Error code: 400 - {'logId': '5ebce382a664d3c08c0739f60d336f8b', 'errorCode': 40405, 'errorMsg': '暂不支持该模型'}
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/file_description.py", line 1159, in summarize_ppt
+    response = self.client.chat.completions.create(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 925, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1239, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1034, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'logId': '5ebce382a664d3c08c0739f60d336f8b', 'errorCode': 40405, 'errorMsg': '暂不支持该模型'}
+2025-07-02 21:15:41,791 - INFO - file_description - __init__ - 59 - TextSummarizer 初始化完成。Chunk size: 4000, Overlap size: 200
+2025-07-02 21:15:41,835 - INFO - file_description - __init__ - 322 - ImageSummarizer 初始化完成。API base_url: https://aistudio.baidu.com/llm/lmapi/v3/, Model: ernie-4.5-8k-preview
+2025-07-02 21:15:41,879 - INFO - file_description - __init__ - 550 - TableSummarizer 初始化完成。API base_url: https://aistudio.baidu.com/llm/lmapi/v3
+2025-07-02 21:15:41,923 - INFO - file_description - __init__ - 914 - PPTSummarizer 初始化完成。API base_url: https://aistudio.baidu.com/llm/lmapi/v3/, Model: ernie-4.5-8k-preview
+2025-07-02 21:15:41,924 - INFO - file_description - __init__ - 915 - 确保 LibreOffice (soffice) 已安装并在系统 PATH 中，以便支持 .ppt 文件转换。
+2025-07-02 21:15:41,968 - INFO - file_description - __init__ - 1341 - DocumentSummarizer 初始化完成。API base_url: https://aistudio.baidu.com/llm/lmapi/v3/, Model: ernie-4.5-turbo-128k, Chunk Size: 4000, Overlap Size: 200
+2025-07-02 21:15:41,968 - WARNING - file_description - __init__ - 1345 - 注意: 当前 summarize_document 方法会将整个提取的文档内容作为单个JSON字符串发送给LLM。即使 ernie-4.5-turbo-128k 支持长上下文，对于超大文档，将结构化JSON直接传入仍需注意实际token消耗和成本。类中定义的 chunk_size, overlap_size 和 split_text 方法目前未用于对提取的文档原始文本内容进行分块总结。如需更精细或成本优化的超长文档处理，请考虑修改 summarize_document 以实现基于原始文本的分块和可能的分层总结策略。
+2025-07-02 21:15:42,012 - INFO - file_description - __init__ - 1831 - VideoSummarizer 初始化完成。API base_url: https://dashscope.aliyuncs.com/compatible-mode/v1, Model: qwen-vl-max-latest
+2025-07-02 21:15:42,012 - WARNING - file_description - __init__ - 1832 - 当前版本主要支持通过 URL 处理视频。本地视频文件处理功能尚未完全实现。
+2025-07-02 21:15:44,066 - INFO - file_description - __init__ - 59 - TextSummarizer 初始化完成。Chunk size: 4000, Overlap size: 200
+2025-07-02 21:15:44,107 - INFO - file_description - __init__ - 322 - ImageSummarizer 初始化完成。API base_url: https://aistudio.baidu.com/llm/lmapi/v3/, Model: ernie-4.5-8k-preview
+2025-07-02 21:15:44,148 - INFO - file_description - __init__ - 550 - TableSummarizer 初始化完成。API base_url: https://aistudio.baidu.com/llm/lmapi/v3
+2025-07-02 21:15:44,189 - INFO - file_description - __init__ - 914 - PPTSummarizer 初始化完成。API base_url: https://aistudio.baidu.com/llm/lmapi/v3/, Model: ernie-4.5-8k-preview
+2025-07-02 21:15:44,189 - INFO - file_description - __init__ - 915 - 确保 LibreOffice (soffice) 已安装并在系统 PATH 中，以便支持 .ppt 文件转换。
+2025-07-02 21:15:44,230 - INFO - file_description - __init__ - 1341 - DocumentSummarizer 初始化完成。API base_url: https://aistudio.baidu.com/llm/lmapi/v3/, Model: ernie-4.5-turbo-128k, Chunk Size: 4000, Overlap Size: 200
+2025-07-02 21:15:44,230 - WARNING - file_description - __init__ - 1345 - 注意: 当前 summarize_document 方法会将整个提取的文档内容作为单个JSON字符串发送给LLM。即使 ernie-4.5-turbo-128k 支持长上下文，对于超大文档，将结构化JSON直接传入仍需注意实际token消耗和成本。类中定义的 chunk_size, overlap_size 和 split_text 方法目前未用于对提取的文档原始文本内容进行分块总结。如需更精细或成本优化的超长文档处理，请考虑修改 summarize_document 以实现基于原始文本的分块和可能的分层总结策略。
+2025-07-02 21:15:44,271 - INFO - file_description - __init__ - 1831 - VideoSummarizer 初始化完成。API base_url: https://dashscope.aliyuncs.com/compatible-mode/v1, Model: qwen-vl-max-latest
+2025-07-02 21:15:44,272 - WARNING - file_description - __init__ - 1832 - 当前版本主要支持通过 URL 处理视频。本地视频文件处理功能尚未完全实现。
+2025-07-02 21:21:08,086 - INFO - file_description - summarize_ppt - 1117 - 开始总结PPT: /tmp/tmp5ugkoww1.pptx
+2025-07-02 21:21:08,087 - INFO - file_description - extract_ppt_content - 985 - 开始提取文件内容: /tmp/tmp5ugkoww1.pptx
+2025-07-02 21:21:08,087 - INFO - file_description - extract_ppt_content - 1041 - 输入为本地文件路径: /tmp/tmp5ugkoww1.pptx
+2025-07-02 21:21:08,087 - INFO - file_description - extract_ppt_content - 1061 - 正在使用 python-pptx 解析: /tmp/tmp5ugkoww1.pptx
+2025-07-02 21:21:08,097 - INFO - file_description - extract_ppt_content - 1064 - 文件共有 0 张幻灯片。
+2025-07-02 21:21:08,098 - INFO - file_description - extract_ppt_content - 1086 - 内容提取完成: /tmp/tmp5ugkoww1.pptx
+2025-07-02 21:21:08,098 - ERROR - file_description - summarize_ppt - 1122 - 无法提取或内容为空: /tmp/tmp5ugkoww1.pptx。错误: 
+2025-07-02 21:26:56,332 - INFO - file_description - summarize_ppt - 1117 - 开始总结PPT: /tmp/tmpzdwjjtg7.pptx
+2025-07-02 21:26:56,332 - INFO - file_description - extract_ppt_content - 985 - 开始提取文件内容: /tmp/tmpzdwjjtg7.pptx
+2025-07-02 21:26:56,333 - INFO - file_description - extract_ppt_content - 1041 - 输入为本地文件路径: /tmp/tmpzdwjjtg7.pptx
+2025-07-02 21:26:56,333 - INFO - file_description - extract_ppt_content - 1061 - 正在使用 python-pptx 解析: /tmp/tmpzdwjjtg7.pptx
+2025-07-02 21:26:56,343 - INFO - file_description - extract_ppt_content - 1064 - 文件共有 0 张幻灯片。
+2025-07-02 21:26:56,343 - INFO - file_description - extract_ppt_content - 1086 - 内容提取完成: /tmp/tmpzdwjjtg7.pptx
+2025-07-02 21:26:56,344 - ERROR - file_description - summarize_ppt - 1122 - 无法提取或内容为空: /tmp/tmpzdwjjtg7.pptx。错误: 
+2025-07-02 21:27:46,764 - INFO - file_description - summarize_ppt - 1117 - 开始总结PPT: /tmp/tmp6xo9ujh8.pptx
+2025-07-02 21:27:46,765 - INFO - file_description - extract_ppt_content - 985 - 开始提取文件内容: /tmp/tmp6xo9ujh8.pptx
+2025-07-02 21:27:46,765 - INFO - file_description - extract_ppt_content - 1041 - 输入为本地文件路径: /tmp/tmp6xo9ujh8.pptx
+2025-07-02 21:27:46,765 - INFO - file_description - extract_ppt_content - 1061 - 正在使用 python-pptx 解析: /tmp/tmp6xo9ujh8.pptx
+2025-07-02 21:27:46,776 - INFO - file_description - extract_ppt_content - 1064 - 文件共有 0 张幻灯片。
+2025-07-02 21:27:46,776 - INFO - file_description - extract_ppt_content - 1086 - 内容提取完成: /tmp/tmp6xo9ujh8.pptx
+2025-07-02 21:27:46,776 - ERROR - file_description - summarize_ppt - 1122 - 无法提取或内容为空: /tmp/tmp6xo9ujh8.pptx。错误: 
+2025-07-02 21:28:27,061 - INFO - file_description - summarize_single_image - 383 - 开始处理单张图片总结: /tmp/tmp1362zwbt.png
+2025-07-02 21:28:27,061 - INFO - file_description - get_image_url_dict - 356 - 输入为本地文件路径，将进行Base64编码: /tmp/tmp1362zwbt.png
+2025-07-02 21:28:27,062 - INFO - file_description - encode_image - 334 - 图片 '/tmp/tmp1362zwbt.png' Base64编码成功。编码后数据长度(部分): 100...
+2025-07-02 21:28:27,067 - INFO - file_description - get_image_url_dict - 371 - 推断出图片 '/tmp/tmp1362zwbt.png' 的MIME类型为: image/png
+2025-07-02 21:28:27,067 - INFO - file_description - summarize_single_image - 398 - 向模型 'ernie-4.5-8k-preview' 发送单图总结请求。图片来源: /tmp/tmp1362zwbt.png
+2025-07-02 21:28:27,739 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://aistudio.baidu.com/llm/lmapi/v3/chat/completions "HTTP/1.1 400 Bad Request"
+2025-07-02 21:28:27,742 - ERROR - file_description - summarize_single_image - 425 - 使用模型分析单张图片 '/tmp/tmp1362zwbt.png' 时出错: Error code: 400 - {'logId': '200687357975033541355acf874ee3c1', 'errorCode': 40405, 'errorMsg': '暂不支持该模型'}
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/file_description.py", line 413, in summarize_single_image
+    response = self.client.chat.completions.create(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 925, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1239, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1034, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'logId': '200687357975033541355acf874ee3c1', 'errorCode': 40405, 'errorMsg': '暂不支持该模型'}
+2025-07-02 21:44:30,414 - INFO - file_description - summarize_ppt - 1117 - 开始总结PPT: /tmp/tmp27l1oe25.pptx
+2025-07-02 21:44:30,414 - INFO - file_description - extract_ppt_content - 985 - 开始提取文件内容: /tmp/tmp27l1oe25.pptx
+2025-07-02 21:44:30,414 - INFO - file_description - extract_ppt_content - 1041 - 输入为本地文件路径: /tmp/tmp27l1oe25.pptx
+2025-07-02 21:44:30,414 - INFO - file_description - extract_ppt_content - 1061 - 正在使用 python-pptx 解析: /tmp/tmp27l1oe25.pptx
+2025-07-02 21:44:30,459 - INFO - file_description - extract_ppt_content - 1064 - 文件共有 20 张幻灯片。
+2025-07-02 21:44:30,465 - INFO - file_description - extract_ppt_content - 1086 - 内容提取完成: /tmp/tmp27l1oe25.pptx
+2025-07-02 21:44:30,465 - INFO - file_description - summarize_ppt - 1127 - 提取的PPT内容字符串长度: 1626
+2025-07-02 21:44:30,465 - INFO - file_description - summarize_ppt - 1158 - 向 LLM (ernie-4.5-8k-preview) 发送请求进行PPT总结...
+2025-07-02 21:44:30,674 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://aistudio.baidu.com/llm/lmapi/v3/chat/completions "HTTP/1.1 400 Bad Request"
+2025-07-02 21:44:30,676 - ERROR - file_description - summarize_ppt - 1172 - 调用 LLM 分析PPT时出错: Error code: 400 - {'logId': '0aca23611c71dbc31bfb4ff9403a99dd', 'errorCode': 40405, 'errorMsg': '暂不支持该模型'}
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/file_description.py", line 1159, in summarize_ppt
+    response = self.client.chat.completions.create(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 925, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1239, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1034, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'logId': '0aca23611c71dbc31bfb4ff9403a99dd', 'errorCode': 40405, 'errorMsg': '暂不支持该模型'}
+2025-07-02 21:47:08,485 - INFO - file_description - summarize_ppt - 1117 - 开始总结PPT: /tmp/tmp4fh9kkad.pptx
+2025-07-02 21:47:08,485 - INFO - file_description - extract_ppt_content - 985 - 开始提取文件内容: /tmp/tmp4fh9kkad.pptx
+2025-07-02 21:47:08,485 - INFO - file_description - extract_ppt_content - 1041 - 输入为本地文件路径: /tmp/tmp4fh9kkad.pptx
+2025-07-02 21:47:08,485 - INFO - file_description - extract_ppt_content - 1061 - 正在使用 python-pptx 解析: /tmp/tmp4fh9kkad.pptx
+2025-07-02 21:47:08,545 - INFO - file_description - extract_ppt_content - 1064 - 文件共有 20 张幻灯片。
+2025-07-02 21:47:08,550 - INFO - file_description - extract_ppt_content - 1086 - 内容提取完成: /tmp/tmp4fh9kkad.pptx
+2025-07-02 21:47:08,551 - INFO - file_description - summarize_ppt - 1127 - 提取的PPT内容字符串长度: 1626
+2025-07-02 21:47:08,551 - INFO - file_description - summarize_ppt - 1158 - 向 LLM (ernie-4.5-8k-preview) 发送请求进行PPT总结...
+2025-07-02 21:47:08,774 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://aistudio.baidu.com/llm/lmapi/v3/chat/completions "HTTP/1.1 400 Bad Request"
+2025-07-02 21:47:08,776 - ERROR - file_description - summarize_ppt - 1172 - 调用 LLM 分析PPT时出错: Error code: 400 - {'logId': 'ad36653aa45ae287d43ca2b151fc3892', 'errorCode': 40405, 'errorMsg': '暂不支持该模型'}
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/file_description.py", line 1159, in summarize_ppt
+    response = self.client.chat.completions.create(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 925, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1239, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1034, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'logId': 'ad36653aa45ae287d43ca2b151fc3892', 'errorCode': 40405, 'errorMsg': '暂不支持该模型'}
+2025-07-02 21:47:33,039 - INFO - file_description - summarize_ppt - 1117 - 开始总结PPT: /tmp/tmp056p31od.pptx
+2025-07-02 21:47:33,040 - INFO - file_description - extract_ppt_content - 985 - 开始提取文件内容: /tmp/tmp056p31od.pptx
+2025-07-02 21:47:33,040 - INFO - file_description - extract_ppt_content - 1041 - 输入为本地文件路径: /tmp/tmp056p31od.pptx
+2025-07-02 21:47:33,040 - INFO - file_description - extract_ppt_content - 1061 - 正在使用 python-pptx 解析: /tmp/tmp056p31od.pptx
+2025-07-02 21:47:33,077 - INFO - file_description - extract_ppt_content - 1064 - 文件共有 20 张幻灯片。
+2025-07-02 21:47:33,082 - INFO - file_description - extract_ppt_content - 1086 - 内容提取完成: /tmp/tmp056p31od.pptx
+2025-07-02 21:47:33,083 - INFO - file_description - summarize_ppt - 1127 - 提取的PPT内容字符串长度: 1626
+2025-07-02 21:47:33,083 - INFO - file_description - summarize_ppt - 1158 - 向 LLM (ernie-4.5-8k-preview) 发送请求进行PPT总结...
+2025-07-02 21:47:33,260 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://aistudio.baidu.com/llm/lmapi/v3/chat/completions "HTTP/1.1 400 Bad Request"
+2025-07-02 21:47:33,261 - ERROR - file_description - summarize_ppt - 1172 - 调用 LLM 分析PPT时出错: Error code: 400 - {'logId': 'def2a05ccf9e901d45b737251d4179d5', 'errorCode': 40405, 'errorMsg': '暂不支持该模型'}
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/file_description.py", line 1159, in summarize_ppt
+    response = self.client.chat.completions.create(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 925, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1239, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1034, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'logId': 'def2a05ccf9e901d45b737251d4179d5', 'errorCode': 40405, 'errorMsg': '暂不支持该模型'}
+2025-07-02 21:53:42,176 - INFO - file_description - __init__ - 59 - TextSummarizer 初始化完成。Chunk size: 4000, Overlap size: 200
+2025-07-02 21:53:42,216 - INFO - file_description - __init__ - 322 - ImageSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2/, Model: ernie-4.5-turbo-vl-preview
+2025-07-02 21:53:42,255 - INFO - file_description - __init__ - 550 - TableSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2
+2025-07-02 21:53:42,295 - INFO - file_description - __init__ - 914 - PPTSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2/, Model: ernie-4.5-8k-preview
+2025-07-02 21:53:42,295 - INFO - file_description - __init__ - 915 - 确保 LibreOffice (soffice) 已安装并在系统 PATH 中，以便支持 .ppt 文件转换。
+2025-07-02 21:53:42,335 - INFO - file_description - __init__ - 1341 - DocumentSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2/, Model: ernie-4.5-turbo-128k, Chunk Size: 4000, Overlap Size: 200
+2025-07-02 21:53:42,335 - WARNING - file_description - __init__ - 1345 - 注意: 当前 summarize_document 方法会将整个提取的文档内容作为单个JSON字符串发送给LLM。即使 ernie-4.5-turbo-128k 支持长上下文，对于超大文档，将结构化JSON直接传入仍需注意实际token消耗和成本。类中定义的 chunk_size, overlap_size 和 split_text 方法目前未用于对提取的文档原始文本内容进行分块总结。如需更精细或成本优化的超长文档处理，请考虑修改 summarize_document 以实现基于原始文本的分块和可能的分层总结策略。
+2025-07-02 21:53:42,374 - INFO - file_description - __init__ - 1831 - VideoSummarizer 初始化完成。API base_url: https://dashscope.aliyuncs.com/compatible-mode/v1, Model: qwen-vl-max-latest
+2025-07-02 21:53:42,375 - WARNING - file_description - __init__ - 1832 - 当前版本主要支持通过 URL 处理视频。本地视频文件处理功能尚未完全实现。
+2025-07-02 21:53:44,406 - INFO - file_description - __init__ - 59 - TextSummarizer 初始化完成。Chunk size: 4000, Overlap size: 200
+2025-07-02 21:53:44,446 - INFO - file_description - __init__ - 322 - ImageSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2/, Model: ernie-4.5-turbo-vl-preview
+2025-07-02 21:53:44,486 - INFO - file_description - __init__ - 550 - TableSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2
+2025-07-02 21:53:44,527 - INFO - file_description - __init__ - 914 - PPTSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2/, Model: ernie-4.5-8k-preview
+2025-07-02 21:53:44,527 - INFO - file_description - __init__ - 915 - 确保 LibreOffice (soffice) 已安装并在系统 PATH 中，以便支持 .ppt 文件转换。
+2025-07-02 21:53:44,567 - INFO - file_description - __init__ - 1341 - DocumentSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2/, Model: ernie-4.5-turbo-128k, Chunk Size: 4000, Overlap Size: 200
+2025-07-02 21:53:44,567 - WARNING - file_description - __init__ - 1345 - 注意: 当前 summarize_document 方法会将整个提取的文档内容作为单个JSON字符串发送给LLM。即使 ernie-4.5-turbo-128k 支持长上下文，对于超大文档，将结构化JSON直接传入仍需注意实际token消耗和成本。类中定义的 chunk_size, overlap_size 和 split_text 方法目前未用于对提取的文档原始文本内容进行分块总结。如需更精细或成本优化的超长文档处理，请考虑修改 summarize_document 以实现基于原始文本的分块和可能的分层总结策略。
+2025-07-02 21:53:44,607 - INFO - file_description - __init__ - 1831 - VideoSummarizer 初始化完成。API base_url: https://dashscope.aliyuncs.com/compatible-mode/v1, Model: qwen-vl-max-latest
+2025-07-02 21:53:44,607 - WARNING - file_description - __init__ - 1832 - 当前版本主要支持通过 URL 处理视频。本地视频文件处理功能尚未完全实现。
+2025-07-02 21:54:45,245 - INFO - file_description - summarize_table - 698 - 开始总结表格: /tmp/tmp_cnagky7.xlsx
+2025-07-02 21:54:45,245 - INFO - file_description - read_table - 567 - 尝试读取表格源: /tmp/tmp_cnagky7.xlsx
+2025-07-02 21:54:45,245 - INFO - file_description - read_table - 626 - 输入为本地文件路径: /tmp/tmp_cnagky7.xlsx
+2025-07-02 21:54:45,245 - INFO - file_description - read_table - 628 - 本地文件格式: .xlsx
+2025-07-02 21:54:45,424 - INFO - file_description - read_table - 632 - 成功读取本地 Excel 文件: /tmp/tmp_cnagky7.xlsx
+2025-07-02 21:54:45,425 - INFO - file_description - get_table_info - 658 - 开始提取表格信息，行数: 5, 列数: 10
+2025-07-02 21:54:45,429 - INFO - file_description - get_table_info - 670 - 找到数值列: ['描述', '产品图片', '购买链接', '最低起售量', '标准售价', '最低售价']
+2025-07-02 21:54:45,430 - WARNING - file_description - get_table_info - 673 - 数值列 '描述' 完全为空，统计值将为 NaN 或引发错误。
+2025-07-02 21:54:45,430 - WARNING - file_description - get_table_info - 673 - 数值列 '产品图片' 完全为空，统计值将为 NaN 或引发错误。
+2025-07-02 21:54:45,430 - WARNING - file_description - get_table_info - 673 - 数值列 '购买链接' 完全为空，统计值将为 NaN 或引发错误。
+2025-07-02 21:54:45,433 - INFO - file_description - get_table_info - 687 - 表格信息提取完成。
+2025-07-02 21:54:45,439 - INFO - file_description - summarize_table - 714 - 表格信息字符串长度: 1362
+2025-07-02 21:54:45,439 - INFO - file_description - summarize_table - 715 - 数据示例字符串长度: 383
+2025-07-02 21:54:45,440 - INFO - file_description - summarize_table - 748 - 向 LLM 发送请求进行表格总结...
+2025-07-02 21:54:45,615 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 401 Unauthorized"
+2025-07-02 21:54:45,617 - ERROR - file_description - summarize_table - 762 - 调用 LLM 分析表格时出错: Error code: 401 - {'error': {'code': 'invalid_iam_token', 'message': 'invalid_iam_token', 'type': 'invalid_request_error'}, 'id': 'as-cj1bc1j1z0'}
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/file_description.py", line 749, in summarize_table
+    response = self.client.chat.completions.create(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 925, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1239, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1034, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.AuthenticationError: Error code: 401 - {'error': {'code': 'invalid_iam_token', 'message': 'invalid_iam_token', 'type': 'invalid_request_error'}, 'id': 'as-cj1bc1j1z0'}
+2025-07-02 21:57:03,289 - INFO - file_description - __init__ - 59 - TextSummarizer 初始化完成。Chunk size: 4000, Overlap size: 200
+2025-07-02 21:57:03,330 - INFO - file_description - __init__ - 322 - ImageSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2/, Model: ernie-4.5-turbo-vl-preview
+2025-07-02 21:57:03,370 - INFO - file_description - __init__ - 550 - TableSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2
+2025-07-02 21:57:03,411 - INFO - file_description - __init__ - 914 - PPTSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2/, Model: ernie-4.5-8k-preview
+2025-07-02 21:57:03,411 - INFO - file_description - __init__ - 915 - 确保 LibreOffice (soffice) 已安装并在系统 PATH 中，以便支持 .ppt 文件转换。
+2025-07-02 21:57:03,459 - INFO - file_description - __init__ - 1341 - DocumentSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2/, Model: ernie-4.5-turbo-128k, Chunk Size: 4000, Overlap Size: 200
+2025-07-02 21:57:03,459 - WARNING - file_description - __init__ - 1345 - 注意: 当前 summarize_document 方法会将整个提取的文档内容作为单个JSON字符串发送给LLM。即使 ernie-4.5-turbo-128k 支持长上下文，对于超大文档，将结构化JSON直接传入仍需注意实际token消耗和成本。类中定义的 chunk_size, overlap_size 和 split_text 方法目前未用于对提取的文档原始文本内容进行分块总结。如需更精细或成本优化的超长文档处理，请考虑修改 summarize_document 以实现基于原始文本的分块和可能的分层总结策略。
+2025-07-02 21:57:03,501 - INFO - file_description - __init__ - 1831 - VideoSummarizer 初始化完成。API base_url: https://dashscope.aliyuncs.com/compatible-mode/v1, Model: qwen-vl-max-latest
+2025-07-02 21:57:03,501 - WARNING - file_description - __init__ - 1832 - 当前版本主要支持通过 URL 处理视频。本地视频文件处理功能尚未完全实现。
+2025-07-02 21:57:25,236 - INFO - file_description - __init__ - 59 - TextSummarizer 初始化完成。Chunk size: 4000, Overlap size: 200
+2025-07-02 21:57:25,278 - INFO - file_description - __init__ - 322 - ImageSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2/, Model: ernie-4.5-turbo-vl-preview
+2025-07-02 21:57:25,320 - INFO - file_description - __init__ - 550 - TableSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2
+2025-07-02 21:57:25,361 - INFO - file_description - __init__ - 914 - PPTSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2/, Model: ernie-4.5-8k-preview
+2025-07-02 21:57:25,361 - INFO - file_description - __init__ - 915 - 确保 LibreOffice (soffice) 已安装并在系统 PATH 中，以便支持 .ppt 文件转换。
+2025-07-02 21:57:25,403 - INFO - file_description - __init__ - 1341 - DocumentSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2/, Model: ernie-4.5-turbo-128k, Chunk Size: 4000, Overlap Size: 200
+2025-07-02 21:57:25,403 - WARNING - file_description - __init__ - 1345 - 注意: 当前 summarize_document 方法会将整个提取的文档内容作为单个JSON字符串发送给LLM。即使 ernie-4.5-turbo-128k 支持长上下文，对于超大文档，将结构化JSON直接传入仍需注意实际token消耗和成本。类中定义的 chunk_size, overlap_size 和 split_text 方法目前未用于对提取的文档原始文本内容进行分块总结。如需更精细或成本优化的超长文档处理，请考虑修改 summarize_document 以实现基于原始文本的分块和可能的分层总结策略。
+2025-07-02 21:57:25,444 - INFO - file_description - __init__ - 1831 - VideoSummarizer 初始化完成。API base_url: https://dashscope.aliyuncs.com/compatible-mode/v1, Model: qwen-vl-max-latest
+2025-07-02 21:57:25,444 - WARNING - file_description - __init__ - 1832 - 当前版本主要支持通过 URL 处理视频。本地视频文件处理功能尚未完全实现。
+2025-07-02 21:59:37,450 - INFO - file_description - __init__ - 59 - TextSummarizer 初始化完成。Chunk size: 4000, Overlap size: 200
+2025-07-02 21:59:37,489 - INFO - file_description - __init__ - 322 - ImageSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2/, Model: ernie-4.5-turbo-vl-preview
+2025-07-02 21:59:37,528 - INFO - file_description - __init__ - 550 - TableSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2
+2025-07-02 21:59:37,567 - INFO - file_description - __init__ - 914 - PPTSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2/, Model: ernie-4.5-turbo-128k
+2025-07-02 21:59:37,567 - INFO - file_description - __init__ - 915 - 确保 LibreOffice (soffice) 已安装并在系统 PATH 中，以便支持 .ppt 文件转换。
+2025-07-02 21:59:37,607 - INFO - file_description - __init__ - 1341 - DocumentSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2/, Model: ernie-4.5-turbo-128k, Chunk Size: 4000, Overlap Size: 200
+2025-07-02 21:59:37,607 - WARNING - file_description - __init__ - 1345 - 注意: 当前 summarize_document 方法会将整个提取的文档内容作为单个JSON字符串发送给LLM。即使 ernie-4.5-turbo-128k 支持长上下文，对于超大文档，将结构化JSON直接传入仍需注意实际token消耗和成本。类中定义的 chunk_size, overlap_size 和 split_text 方法目前未用于对提取的文档原始文本内容进行分块总结。如需更精细或成本优化的超长文档处理，请考虑修改 summarize_document 以实现基于原始文本的分块和可能的分层总结策略。
+2025-07-02 21:59:37,648 - INFO - file_description - __init__ - 1831 - VideoSummarizer 初始化完成。API base_url: https://dashscope.aliyuncs.com/compatible-mode/v1, Model: qwen-vl-max-latest
+2025-07-02 21:59:37,649 - WARNING - file_description - __init__ - 1832 - 当前版本主要支持通过 URL 处理视频。本地视频文件处理功能尚未完全实现。
+2025-07-02 22:00:51,983 - INFO - file_description - __init__ - 59 - TextSummarizer 初始化完成。Chunk size: 4000, Overlap size: 200
+2025-07-02 22:00:52,023 - INFO - file_description - __init__ - 322 - ImageSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2/, Model: ernie-4.5-turbo-vl-preview
+2025-07-02 22:00:52,063 - INFO - file_description - __init__ - 550 - TableSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2
+2025-07-02 22:00:52,102 - INFO - file_description - __init__ - 914 - PPTSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2/, Model: ernie-4.5-turbo-128k
+2025-07-02 22:00:52,102 - INFO - file_description - __init__ - 915 - 确保 LibreOffice (soffice) 已安装并在系统 PATH 中，以便支持 .ppt 文件转换。
+2025-07-02 22:00:52,141 - INFO - file_description - __init__ - 1341 - DocumentSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2/, Model: ernie-4.5-turbo-128k, Chunk Size: 4000, Overlap Size: 200
+2025-07-02 22:00:52,142 - WARNING - file_description - __init__ - 1345 - 注意: 当前 summarize_document 方法会将整个提取的文档内容作为单个JSON字符串发送给LLM。即使 ernie-4.5-turbo-128k 支持长上下文，对于超大文档，将结构化JSON直接传入仍需注意实际token消耗和成本。类中定义的 chunk_size, overlap_size 和 split_text 方法目前未用于对提取的文档原始文本内容进行分块总结。如需更精细或成本优化的超长文档处理，请考虑修改 summarize_document 以实现基于原始文本的分块和可能的分层总结策略。
+2025-07-02 22:00:52,181 - INFO - file_description - __init__ - 1831 - VideoSummarizer 初始化完成。API base_url: https://dashscope.aliyuncs.com/compatible-mode/v1, Model: qwen-vl-max-latest
+2025-07-02 22:00:52,181 - WARNING - file_description - __init__ - 1832 - 当前版本主要支持通过 URL 处理视频。本地视频文件处理功能尚未完全实现。
+2025-07-02 22:01:10,770 - INFO - file_description - summarize_ppt - 1117 - 开始总结PPT: /tmp/tmp1j5zj12k.pptx
+2025-07-02 22:01:10,771 - INFO - file_description - extract_ppt_content - 985 - 开始提取文件内容: /tmp/tmp1j5zj12k.pptx
+2025-07-02 22:01:10,771 - INFO - file_description - extract_ppt_content - 1041 - 输入为本地文件路径: /tmp/tmp1j5zj12k.pptx
+2025-07-02 22:01:10,771 - INFO - file_description - extract_ppt_content - 1061 - 正在使用 python-pptx 解析: /tmp/tmp1j5zj12k.pptx
+2025-07-02 22:01:10,816 - INFO - file_description - extract_ppt_content - 1064 - 文件共有 20 张幻灯片。
+2025-07-02 22:01:10,821 - INFO - file_description - extract_ppt_content - 1086 - 内容提取完成: /tmp/tmp1j5zj12k.pptx
+2025-07-02 22:01:10,822 - INFO - file_description - summarize_ppt - 1127 - 提取的PPT内容字符串长度: 1626
+2025-07-02 22:01:10,822 - INFO - file_description - summarize_ppt - 1158 - 向 LLM (ernie-4.5-turbo-128k) 发送请求进行PPT总结...
+2025-07-02 22:01:10,976 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 401 Unauthorized"
+2025-07-02 22:01:10,978 - ERROR - file_description - summarize_ppt - 1172 - 调用 LLM 分析PPT时出错: Error code: 401 - {'error': {'code': 'invalid_iam_token', 'message': 'invalid_iam_token', 'type': 'invalid_request_error'}, 'id': 'as-7xz7nrsfg3'}
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/file_description.py", line 1159, in summarize_ppt
+    response = self.client.chat.completions.create(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 925, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1239, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1034, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.AuthenticationError: Error code: 401 - {'error': {'code': 'invalid_iam_token', 'message': 'invalid_iam_token', 'type': 'invalid_request_error'}, 'id': 'as-7xz7nrsfg3'}
+2025-07-02 22:02:10,017 - INFO - file_description - summarize_ppt - 1117 - 开始总结PPT: /tmp/tmp5d1acmug.ppt
+2025-07-02 22:02:10,017 - INFO - file_description - extract_ppt_content - 985 - 开始提取文件内容: /tmp/tmp5d1acmug.ppt
+2025-07-02 22:02:10,018 - INFO - file_description - extract_ppt_content - 1041 - 输入为本地文件路径: /tmp/tmp5d1acmug.ppt
+2025-07-02 22:02:10,018 - INFO - file_description - extract_ppt_content - 1044 - 检测到本地 .ppt 文件，尝试转换为 .pptx: /tmp/tmp5d1acmug.ppt
+2025-07-02 22:02:10,018 - INFO - file_description - convert_ppt_to_pptx - 930 - 开始将PPT文件 '/tmp/tmp5d1acmug.ppt' 转换为PPTX格式。
+2025-07-02 22:02:10,018 - INFO - file_description - convert_ppt_to_pptx - 945 - 执行转换命令: soffice --headless --invisible --convert-to pptx --outdir /tmp/tmpk23jhl6v /tmp/tmp5d1acmug.ppt
+2025-07-02 22:02:14,308 - INFO - file_description - convert_ppt_to_pptx - 947 - LibreOffice转换成功。Stdout: convert /tmp/tmp5d1acmug.ppt -> /tmp/tmpk23jhl6v/tmp5d1acmug.pptx using filter : Impress MS PowerPoint 2007 XML
+
+2025-07-02 22:02:14,309 - INFO - file_description - convert_ppt_to_pptx - 956 - PPTX文件已成功转换并保存到: /tmp/tmpk23jhl6v/tmp5d1acmug.pptx
+2025-07-02 22:02:14,309 - INFO - file_description - extract_ppt_content - 1052 - 本地 .ppt 文件已成功转换为 .pptx: /tmp/tmpk23jhl6v/tmp5d1acmug.pptx
+2025-07-02 22:02:14,309 - INFO - file_description - extract_ppt_content - 1061 - 正在使用 python-pptx 解析: /tmp/tmpk23jhl6v/tmp5d1acmug.pptx
+2025-07-02 22:02:14,321 - INFO - file_description - extract_ppt_content - 1064 - 文件共有 1 张幻灯片。
+2025-07-02 22:02:14,323 - INFO - file_description - extract_ppt_content - 1086 - 内容提取完成: /tmp/tmp5d1acmug.ppt
+2025-07-02 22:02:14,323 - INFO - file_description - extract_ppt_content - 1102 - 已清理 soffice 转换输出的临时目录: /tmp/tmpk23jhl6v
+2025-07-02 22:02:14,323 - INFO - file_description - summarize_ppt - 1127 - 提取的PPT内容字符串长度: 150
+2025-07-02 22:02:14,323 - INFO - file_description - summarize_ppt - 1158 - 向 LLM (ernie-4.5-turbo-128k) 发送请求进行PPT总结...
+2025-07-02 22:02:14,457 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 401 Unauthorized"
+2025-07-02 22:02:14,459 - ERROR - file_description - summarize_ppt - 1172 - 调用 LLM 分析PPT时出错: Error code: 401 - {'error': {'code': 'invalid_iam_token', 'message': 'invalid_iam_token', 'type': 'invalid_request_error'}, 'id': 'as-jf358ddmuc'}
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/file_description.py", line 1159, in summarize_ppt
+    response = self.client.chat.completions.create(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 925, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1239, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1034, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.AuthenticationError: Error code: 401 - {'error': {'code': 'invalid_iam_token', 'message': 'invalid_iam_token', 'type': 'invalid_request_error'}, 'id': 'as-jf358ddmuc'}
+2025-07-02 22:06:54,778 - INFO - file_description - summarize_ppt - 1117 - 开始总结PPT: /tmp/tmp2x4ibkuy.pptx
+2025-07-02 22:06:54,778 - INFO - file_description - extract_ppt_content - 985 - 开始提取文件内容: /tmp/tmp2x4ibkuy.pptx
+2025-07-02 22:06:54,778 - INFO - file_description - extract_ppt_content - 1041 - 输入为本地文件路径: /tmp/tmp2x4ibkuy.pptx
+2025-07-02 22:06:54,778 - INFO - file_description - extract_ppt_content - 1061 - 正在使用 python-pptx 解析: /tmp/tmp2x4ibkuy.pptx
+2025-07-02 22:06:54,823 - INFO - file_description - extract_ppt_content - 1064 - 文件共有 20 张幻灯片。
+2025-07-02 22:06:54,829 - INFO - file_description - extract_ppt_content - 1086 - 内容提取完成: /tmp/tmp2x4ibkuy.pptx
+2025-07-02 22:06:54,830 - INFO - file_description - summarize_ppt - 1127 - 提取的PPT内容字符串长度: 1626
+2025-07-02 22:06:54,830 - INFO - file_description - summarize_ppt - 1158 - 向 LLM (ernie-4.5-turbo-128k) 发送请求进行PPT总结...
+2025-07-02 22:06:54,944 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 401 Unauthorized"
+2025-07-02 22:06:54,945 - ERROR - file_description - summarize_ppt - 1172 - 调用 LLM 分析PPT时出错: Error code: 401 - {'error': {'code': 'invalid_iam_token', 'message': 'invalid_iam_token', 'type': 'invalid_request_error'}, 'id': 'as-wkgyf1kcm9'}
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/file_description.py", line 1159, in summarize_ppt
+    response = self.client.chat.completions.create(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 925, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1239, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1034, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.AuthenticationError: Error code: 401 - {'error': {'code': 'invalid_iam_token', 'message': 'invalid_iam_token', 'type': 'invalid_request_error'}, 'id': 'as-wkgyf1kcm9'}
+2025-07-02 22:08:32,233 - INFO - file_description - __init__ - 59 - TextSummarizer 初始化完成。Chunk size: 4000, Overlap size: 200
+2025-07-02 22:08:32,273 - INFO - file_description - __init__ - 322 - ImageSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2/, Model: ernie-4.5-turbo-vl-preview
+2025-07-02 22:08:32,313 - INFO - file_description - __init__ - 550 - TableSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2
+2025-07-02 22:08:32,354 - INFO - file_description - __init__ - 914 - PPTSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2/, Model: ernie-4.5-turbo-128k
+2025-07-02 22:08:32,354 - INFO - file_description - __init__ - 915 - 确保 LibreOffice (soffice) 已安装并在系统 PATH 中，以便支持 .ppt 文件转换。
+2025-07-02 22:08:32,396 - INFO - file_description - __init__ - 1341 - DocumentSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2/, Model: ernie-4.5-turbo-128k, Chunk Size: 4000, Overlap Size: 200
+2025-07-02 22:08:32,396 - WARNING - file_description - __init__ - 1345 - 注意: 当前 summarize_document 方法会将整个提取的文档内容作为单个JSON字符串发送给LLM。即使 ernie-4.5-turbo-128k 支持长上下文，对于超大文档，将结构化JSON直接传入仍需注意实际token消耗和成本。类中定义的 chunk_size, overlap_size 和 split_text 方法目前未用于对提取的文档原始文本内容进行分块总结。如需更精细或成本优化的超长文档处理，请考虑修改 summarize_document 以实现基于原始文本的分块和可能的分层总结策略。
+2025-07-02 22:08:32,437 - INFO - file_description - __init__ - 1831 - VideoSummarizer 初始化完成。API base_url: https://dashscope.aliyuncs.com/compatible-mode/v1, Model: qwen-vl-max-latest
+2025-07-02 22:08:32,437 - WARNING - file_description - __init__ - 1832 - 当前版本主要支持通过 URL 处理视频。本地视频文件处理功能尚未完全实现。
+2025-07-02 22:08:57,481 - INFO - file_description - summarize_ppt - 1117 - 开始总结PPT: /tmp/tmpc5_2x1or.pptx
+2025-07-02 22:08:57,481 - INFO - file_description - extract_ppt_content - 985 - 开始提取文件内容: /tmp/tmpc5_2x1or.pptx
+2025-07-02 22:08:57,481 - INFO - file_description - extract_ppt_content - 1041 - 输入为本地文件路径: /tmp/tmpc5_2x1or.pptx
+2025-07-02 22:08:57,481 - INFO - file_description - extract_ppt_content - 1061 - 正在使用 python-pptx 解析: /tmp/tmpc5_2x1or.pptx
+2025-07-02 22:08:57,519 - INFO - file_description - extract_ppt_content - 1064 - 文件共有 20 张幻灯片。
+2025-07-02 22:08:57,523 - INFO - file_description - extract_ppt_content - 1086 - 内容提取完成: /tmp/tmpc5_2x1or.pptx
+2025-07-02 22:08:57,524 - INFO - file_description - summarize_ppt - 1127 - 提取的PPT内容字符串长度: 1626
+2025-07-02 22:08:57,524 - INFO - file_description - summarize_ppt - 1158 - 向 LLM (ernie-4.5-turbo-128k) 发送请求进行PPT总结...
+2025-07-02 22:08:57,641 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 401 Unauthorized"
+2025-07-02 22:08:57,643 - ERROR - file_description - summarize_ppt - 1172 - 调用 LLM 分析PPT时出错: Error code: 401 - {'error': {'code': 'invalid_iam_token', 'message': 'invalid_iam_token', 'type': 'invalid_request_error'}, 'id': 'as-3b1zyzhbkp'}
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/file_description.py", line 1159, in summarize_ppt
+    response = self.client.chat.completions.create(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 925, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1239, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1034, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.AuthenticationError: Error code: 401 - {'error': {'code': 'invalid_iam_token', 'message': 'invalid_iam_token', 'type': 'invalid_request_error'}, 'id': 'as-3b1zyzhbkp'}
+2025-07-02 22:10:47,467 - INFO - file_description - __init__ - 59 - TextSummarizer 初始化完成。Chunk size: 4000, Overlap size: 200
+2025-07-02 22:10:47,506 - INFO - file_description - __init__ - 322 - ImageSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2/, Model: ernie-4.5-turbo-vl-preview
+2025-07-02 22:10:47,546 - INFO - file_description - __init__ - 550 - TableSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2
+2025-07-02 22:10:47,586 - INFO - file_description - __init__ - 914 - PPTSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2/, Model: ernie-4.5-turbo-128k
+2025-07-02 22:10:47,586 - INFO - file_description - __init__ - 915 - 确保 LibreOffice (soffice) 已安装并在系统 PATH 中，以便支持 .ppt 文件转换。
+2025-07-02 22:10:47,625 - INFO - file_description - __init__ - 1341 - DocumentSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2/, Model: ernie-4.5-turbo-128k, Chunk Size: 4000, Overlap Size: 200
+2025-07-02 22:10:47,625 - WARNING - file_description - __init__ - 1345 - 注意: 当前 summarize_document 方法会将整个提取的文档内容作为单个JSON字符串发送给LLM。即使 ernie-4.5-turbo-128k 支持长上下文，对于超大文档，将结构化JSON直接传入仍需注意实际token消耗和成本。类中定义的 chunk_size, overlap_size 和 split_text 方法目前未用于对提取的文档原始文本内容进行分块总结。如需更精细或成本优化的超长文档处理，请考虑修改 summarize_document 以实现基于原始文本的分块和可能的分层总结策略。
+2025-07-02 22:10:47,664 - INFO - file_description - __init__ - 1831 - VideoSummarizer 初始化完成。API base_url: https://dashscope.aliyuncs.com/compatible-mode/v1, Model: qwen-vl-max-latest
+2025-07-02 22:10:47,664 - WARNING - file_description - __init__ - 1832 - 当前版本主要支持通过 URL 处理视频。本地视频文件处理功能尚未完全实现。
+2025-07-02 22:11:08,100 - INFO - file_description - summarize_ppt - 1117 - 开始总结PPT: /tmp/tmpmffjphur.pptx
+2025-07-02 22:11:08,101 - INFO - file_description - extract_ppt_content - 985 - 开始提取文件内容: /tmp/tmpmffjphur.pptx
+2025-07-02 22:11:08,101 - INFO - file_description - extract_ppt_content - 1041 - 输入为本地文件路径: /tmp/tmpmffjphur.pptx
+2025-07-02 22:11:08,101 - INFO - file_description - extract_ppt_content - 1061 - 正在使用 python-pptx 解析: /tmp/tmpmffjphur.pptx
+2025-07-02 22:11:08,139 - INFO - file_description - extract_ppt_content - 1064 - 文件共有 20 张幻灯片。
+2025-07-02 22:11:08,144 - INFO - file_description - extract_ppt_content - 1086 - 内容提取完成: /tmp/tmpmffjphur.pptx
+2025-07-02 22:11:08,144 - INFO - file_description - summarize_ppt - 1127 - 提取的PPT内容字符串长度: 1626
+2025-07-02 22:11:08,144 - INFO - file_description - summarize_ppt - 1158 - 向 LLM (ernie-4.5-turbo-128k) 发送请求进行PPT总结...
+2025-07-02 22:11:08,248 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 401 Unauthorized"
+2025-07-02 22:11:08,249 - ERROR - file_description - summarize_ppt - 1172 - 调用 LLM 分析PPT时出错: Error code: 401 - {'error': {'code': 'invalid_iam_token', 'message': 'invalid_iam_token', 'type': 'invalid_request_error'}, 'id': 'as-kjbch7zqe6'}
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/file_description.py", line 1159, in summarize_ppt
+    response = self.client.chat.completions.create(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 925, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1239, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1034, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.AuthenticationError: Error code: 401 - {'error': {'code': 'invalid_iam_token', 'message': 'invalid_iam_token', 'type': 'invalid_request_error'}, 'id': 'as-kjbch7zqe6'}
+2025-07-02 22:13:57,445 - INFO - file_description - __init__ - 59 - TextSummarizer 初始化完成。Chunk size: 4000, Overlap size: 200
+2025-07-02 22:13:57,487 - INFO - file_description - __init__ - 322 - ImageSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2/, Model: ernie-4.5-turbo-vl-preview
+2025-07-02 22:13:57,529 - INFO - file_description - __init__ - 550 - TableSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2
+2025-07-02 22:13:57,570 - INFO - file_description - __init__ - 914 - PPTSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2/, Model: ernie-4.5-turbo-128k
+2025-07-02 22:13:57,571 - INFO - file_description - __init__ - 915 - 确保 LibreOffice (soffice) 已安装并在系统 PATH 中，以便支持 .ppt 文件转换。
+2025-07-02 22:13:57,612 - INFO - file_description - __init__ - 1341 - DocumentSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2/, Model: ernie-4.5-turbo-128k, Chunk Size: 4000, Overlap Size: 200
+2025-07-02 22:13:57,612 - WARNING - file_description - __init__ - 1345 - 注意: 当前 summarize_document 方法会将整个提取的文档内容作为单个JSON字符串发送给LLM。即使 ernie-4.5-turbo-128k 支持长上下文，对于超大文档，将结构化JSON直接传入仍需注意实际token消耗和成本。类中定义的 chunk_size, overlap_size 和 split_text 方法目前未用于对提取的文档原始文本内容进行分块总结。如需更精细或成本优化的超长文档处理，请考虑修改 summarize_document 以实现基于原始文本的分块和可能的分层总结策略。
+2025-07-02 22:13:57,654 - INFO - file_description - __init__ - 1831 - VideoSummarizer 初始化完成。API base_url: https://dashscope.aliyuncs.com/compatible-mode/v1, Model: qwen-vl-max-latest
+2025-07-02 22:13:57,654 - WARNING - file_description - __init__ - 1832 - 当前版本主要支持通过 URL 处理视频。本地视频文件处理功能尚未完全实现。
+2025-07-02 22:14:40,189 - INFO - file_description - __init__ - 59 - TextSummarizer 初始化完成。Chunk size: 4000, Overlap size: 200
+2025-07-02 22:14:40,228 - INFO - file_description - __init__ - 322 - ImageSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2/, Model: ernie-4.5-turbo-vl-preview
+2025-07-02 22:14:40,266 - INFO - file_description - __init__ - 550 - TableSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2
+2025-07-02 22:14:40,305 - INFO - file_description - __init__ - 914 - PPTSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2/, Model: ernie-4.5-turbo-128k
+2025-07-02 22:14:40,306 - INFO - file_description - __init__ - 915 - 确保 LibreOffice (soffice) 已安装并在系统 PATH 中，以便支持 .ppt 文件转换。
+2025-07-02 22:14:40,344 - INFO - file_description - __init__ - 1341 - DocumentSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2/, Model: ernie-4.5-turbo-128k, Chunk Size: 4000, Overlap Size: 200
+2025-07-02 22:14:40,344 - WARNING - file_description - __init__ - 1345 - 注意: 当前 summarize_document 方法会将整个提取的文档内容作为单个JSON字符串发送给LLM。即使 ernie-4.5-turbo-128k 支持长上下文，对于超大文档，将结构化JSON直接传入仍需注意实际token消耗和成本。类中定义的 chunk_size, overlap_size 和 split_text 方法目前未用于对提取的文档原始文本内容进行分块总结。如需更精细或成本优化的超长文档处理，请考虑修改 summarize_document 以实现基于原始文本的分块和可能的分层总结策略。
+2025-07-02 22:14:40,383 - INFO - file_description - __init__ - 1831 - VideoSummarizer 初始化完成。API base_url: https://dashscope.aliyuncs.com/compatible-mode/v1, Model: qwen-vl-max-latest
+2025-07-02 22:14:40,384 - WARNING - file_description - __init__ - 1832 - 当前版本主要支持通过 URL 处理视频。本地视频文件处理功能尚未完全实现。
+2025-07-02 22:15:07,714 - INFO - file_description - summarize_ppt - 1117 - 开始总结PPT: /tmp/tmp5n6wmeqm.pptx
+2025-07-02 22:15:07,715 - INFO - file_description - extract_ppt_content - 985 - 开始提取文件内容: /tmp/tmp5n6wmeqm.pptx
+2025-07-02 22:15:07,715 - INFO - file_description - extract_ppt_content - 1041 - 输入为本地文件路径: /tmp/tmp5n6wmeqm.pptx
+2025-07-02 22:15:07,715 - INFO - file_description - extract_ppt_content - 1061 - 正在使用 python-pptx 解析: /tmp/tmp5n6wmeqm.pptx
+2025-07-02 22:15:07,754 - INFO - file_description - extract_ppt_content - 1064 - 文件共有 20 张幻灯片。
+2025-07-02 22:15:07,759 - INFO - file_description - extract_ppt_content - 1086 - 内容提取完成: /tmp/tmp5n6wmeqm.pptx
+2025-07-02 22:15:07,759 - INFO - file_description - summarize_ppt - 1127 - 提取的PPT内容字符串长度: 1626
+2025-07-02 22:15:07,760 - INFO - file_description - summarize_ppt - 1158 - 向 LLM (ernie-4.5-turbo-128k) 发送请求进行PPT总结...
+2025-07-02 22:15:19,774 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 22:15:19,779 - INFO - file_description - summarize_ppt - 1169 - LLM PPT总结接收成功，长度: 733
+2025-07-04 09:53:38,157 - INFO - file_description - __init__ - 59 - TextSummarizer 初始化完成。Chunk size: 4000, Overlap size: 200
+2025-07-04 09:53:38,197 - INFO - file_description - __init__ - 322 - ImageSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2/, Model: ernie-4.5-turbo-vl-preview
+2025-07-04 09:53:38,238 - INFO - file_description - __init__ - 550 - TableSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2
+2025-07-04 09:53:38,278 - INFO - file_description - __init__ - 914 - PPTSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2/, Model: ernie-4.5-turbo-128k
+2025-07-04 09:53:38,278 - INFO - file_description - __init__ - 915 - 确保 LibreOffice (soffice) 已安装并在系统 PATH 中，以便支持 .ppt 文件转换。
+2025-07-04 09:53:38,321 - INFO - file_description - __init__ - 1341 - DocumentSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2/, Model: ernie-4.5-turbo-128k, Chunk Size: 4000, Overlap Size: 200
+2025-07-04 09:53:38,321 - WARNING - file_description - __init__ - 1345 - 注意: 当前 summarize_document 方法会将整个提取的文档内容作为单个JSON字符串发送给LLM。即使 ernie-4.5-turbo-128k 支持长上下文，对于超大文档，将结构化JSON直接传入仍需注意实际token消耗和成本。类中定义的 chunk_size, overlap_size 和 split_text 方法目前未用于对提取的文档原始文本内容进行分块总结。如需更精细或成本优化的超长文档处理，请考虑修改 summarize_document 以实现基于原始文本的分块和可能的分层总结策略。
+2025-07-04 09:53:38,361 - INFO - file_description - __init__ - 1831 - VideoSummarizer 初始化完成。API base_url: https://dashscope.aliyuncs.com/compatible-mode/v1, Model: qwen-vl-max-latest
+2025-07-04 09:53:38,361 - WARNING - file_description - __init__ - 1832 - 当前版本主要支持通过 URL 处理视频。本地视频文件处理功能尚未完全实现。
+2025-07-04 21:09:05,975 - INFO - file_description - __init__ - 59 - TextSummarizer 初始化完成。Chunk size: 4000, Overlap size: 200
+2025-07-04 21:09:06,016 - INFO - file_description - __init__ - 322 - ImageSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2/, Model: ernie-4.5-turbo-vl-preview
+2025-07-04 21:09:06,055 - INFO - file_description - __init__ - 550 - TableSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2
+2025-07-04 21:09:06,099 - INFO - file_description - __init__ - 914 - PPTSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2/, Model: ernie-4.5-turbo-128k
+2025-07-04 21:09:06,099 - INFO - file_description - __init__ - 915 - 确保 LibreOffice (soffice) 已安装并在系统 PATH 中，以便支持 .ppt 文件转换。
+2025-07-04 21:09:06,139 - INFO - file_description - __init__ - 1341 - DocumentSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2/, Model: ernie-4.5-turbo-128k, Chunk Size: 4000, Overlap Size: 200
+2025-07-04 21:09:06,139 - WARNING - file_description - __init__ - 1345 - 注意: 当前 summarize_document 方法会将整个提取的文档内容作为单个JSON字符串发送给LLM。即使 ernie-4.5-turbo-128k 支持长上下文，对于超大文档，将结构化JSON直接传入仍需注意实际token消耗和成本。类中定义的 chunk_size, overlap_size 和 split_text 方法目前未用于对提取的文档原始文本内容进行分块总结。如需更精细或成本优化的超长文档处理，请考虑修改 summarize_document 以实现基于原始文本的分块和可能的分层总结策略。
+2025-07-04 21:09:06,179 - INFO - file_description - __init__ - 1831 - VideoSummarizer 初始化完成。API base_url: https://dashscope.aliyuncs.com/compatible-mode/v1, Model: qwen-vl-max-latest
+2025-07-04 21:09:06,179 - WARNING - file_description - __init__ - 1832 - 当前版本主要支持通过 URL 处理视频。本地视频文件处理功能尚未完全实现。
+2025-07-04 21:09:34,589 - INFO - file_description - __init__ - 59 - TextSummarizer 初始化完成。Chunk size: 4000, Overlap size: 200
+2025-07-04 21:09:34,628 - INFO - file_description - __init__ - 322 - ImageSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2/, Model: ernie-4.5-turbo-vl-preview
+2025-07-04 21:09:34,667 - INFO - file_description - __init__ - 550 - TableSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2
+2025-07-04 21:09:34,707 - INFO - file_description - __init__ - 914 - PPTSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2/, Model: ernie-4.5-turbo-128k
+2025-07-04 21:09:34,707 - INFO - file_description - __init__ - 915 - 确保 LibreOffice (soffice) 已安装并在系统 PATH 中，以便支持 .ppt 文件转换。
+2025-07-04 21:09:34,746 - INFO - file_description - __init__ - 1341 - DocumentSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2/, Model: ernie-4.5-turbo-128k, Chunk Size: 4000, Overlap Size: 200
+2025-07-04 21:09:34,746 - WARNING - file_description - __init__ - 1345 - 注意: 当前 summarize_document 方法会将整个提取的文档内容作为单个JSON字符串发送给LLM。即使 ernie-4.5-turbo-128k 支持长上下文，对于超大文档，将结构化JSON直接传入仍需注意实际token消耗和成本。类中定义的 chunk_size, overlap_size 和 split_text 方法目前未用于对提取的文档原始文本内容进行分块总结。如需更精细或成本优化的超长文档处理，请考虑修改 summarize_document 以实现基于原始文本的分块和可能的分层总结策略。
+2025-07-04 21:09:34,785 - INFO - file_description - __init__ - 1831 - VideoSummarizer 初始化完成。API base_url: https://dashscope.aliyuncs.com/compatible-mode/v1, Model: qwen-vl-max-latest
+2025-07-04 21:09:34,786 - WARNING - file_description - __init__ - 1832 - 当前版本主要支持通过 URL 处理视频。本地视频文件处理功能尚未完全实现。
+2025-07-04 21:36:09,088 - INFO - file_description - process_file - 224 - 开始处理文件: /tmp/tmpuleecpmu.txt
+2025-07-04 21:36:09,088 - INFO - file_description - process_file - 228 - 文件读取成功，原始文本长度: 0 字符
+2025-07-04 21:36:09,089 - WARNING - file_description - process_file - 234 - 文件 '/tmp/tmpuleecpmu.txt' 内容为空或只包含空白字符。
+2025-07-04 21:37:19,143 - INFO - file_description - process_file - 224 - 开始处理文件: /tmp/tmp_v_sa0pp.txt
+2025-07-04 21:37:19,144 - INFO - file_description - process_file - 228 - 文件读取成功，原始文本长度: 7 字符
+2025-07-04 21:37:19,144 - INFO - file_description - split_text - 77 - 开始分割文本，总长度: 7 字符。
+2025-07-04 21:37:19,144 - INFO - file_description - split_text - 102 - 已到达文本末尾，分割结束。
+2025-07-04 21:37:19,144 - INFO - file_description - split_text - 121 - 文本分割完成，共 1 个块。
+2025-07-04 21:37:19,145 - INFO - file_description - process_file - 262 - 原始文本已分割为 1 个块。
+2025-07-04 21:37:19,149 - INFO - file_description - process_file - 268 - 正在处理初始块 1/1，长度 7
+2025-07-04 21:37:19,149 - INFO - file_description - summarize_chunk - 145 - 请求API总结，块长度: 7，上下文长度: 0
+2025-07-04 21:37:20,537 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-04 21:37:20,543 - INFO - file_description - summarize_chunk - 157 - API调用成功，返回总结长度: 44
+2025-07-04 21:37:20,544 - INFO - file_description - process_file - 273 - 初始块 1 总结完成。摘要长度: 44。上下文已更新。
+2025-07-04 21:37:21,545 - INFO - file_description - process_file - 291 - 所有初始块总结完成，正在合并初步总结内容...
+2025-07-04 21:37:21,545 - INFO - file_description - process_file - 293 - 合并后的初步总结文本长度: 44 字符
+2025-07-04 21:37:21,546 - INFO - file_description - process_file - 296 - 开始最终的分层总结流程...
+2025-07-04 21:37:21,546 - INFO - file_description - _hierarchical_summarize - 174 - 进入分层总结 (层级 0)，待总结文本长度: 44
+2025-07-04 21:37:21,546 - INFO - file_description - _hierarchical_summarize - 181 - 文本长度适中 (层级 0)，直接进行单次总结。
+2025-07-04 21:37:21,546 - INFO - file_description - summarize_chunk - 145 - 请求API总结，块长度: 44，上下文长度: 60
+2025-07-04 21:37:22,594 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-04 21:37:22,595 - INFO - file_description - summarize_chunk - 157 - API调用成功，返回总结长度: 43
+2025-07-04 21:38:44,423 - INFO - file_description - summarize_document - 1593 - 开始总结文档: /tmp/tmp8pgx8w1c.pdf
+2025-07-04 21:38:44,423 - INFO - file_description - extract_pdf_content - 1383 - 开始提取PDF内容: /tmp/tmp8pgx8w1c.pdf
+2025-07-04 21:38:44,444 - INFO - file_description - extract_pdf_content - 1411 - PDF共有 104 页。
+2025-07-04 21:38:49,321 - INFO - file_description - extract_pdf_content - 1439 - PDF内容提取完成: /tmp/tmp8pgx8w1c.pdf
+2025-07-04 21:38:49,322 - INFO - file_description - summarize_document - 1619 - 提取的文档内容序列化后字符串长度: 54417
+2025-07-04 21:38:49,322 - INFO - file_description - summarize_document - 1656 - 向 LLM (ernie-4.5-turbo-128k) 发送请求进行文档总结...
+2025-07-04 21:39:14,347 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-04 21:39:14,358 - INFO - file_description - summarize_document - 1677 - LLM 文档总结接收成功，长度: 1523
+2025-07-04 21:40:41,638 - INFO - file_description - summarize_video - 1872 - 开始处理单个视频总结: https://ai-yuying.oss-cn-shenzhen.aliyuncs.com/knowledge-base/255c662cbd444f5496b19ff2df1ee6d4.mp4
+2025-07-04 21:40:41,639 - INFO - file_description - summarize_video - 1877 - 输入源为有效URL: https://ai-yuying.oss-cn-shenzhen.aliyuncs.com/knowledge-base/255c662cbd444f5496b19ff2df1ee6d4.mp4
+2025-07-04 21:40:41,639 - INFO - file_description - summarize_video - 1909 - 向模型 'qwen-vl-max-latest' 发送视频总结请求，视频URL: https://ai-yuying.oss-cn-shenzhen.aliyuncs.com/knowledge-base/255c662cbd444f5496b19ff2df1ee6d4.mp4
+2025-07-04 21:40:42,735 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2025-07-04 21:40:42,736 - ERROR - file_description - summarize_video - 1934 - 使用模型分析视频 'https://ai-yuying.oss-cn-shenzhen.aliyuncs.com/knowledge-base/255c662cbd444f5496b19ff2df1ee6d4.mp4' 时出错: Error code: 400 - {'error': {'code': 'invalid_parameter_error', 'param': None, 'message': '<400> InternalError.Algo.InvalidParameter: The video modality input does not meet the requirements because: The video file is too long.', 'type': 'invalid_request_error'}, 'id': 'chatcmpl-8c5f54f5-31d3-938b-af99-d7de3aa88bb7', 'request_id': '8c5f54f5-31d3-938b-af99-d7de3aa88bb7'}
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/file_description.py", line 1924, in summarize_video
+    response = self.client.chat.completions.create(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 925, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1239, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1034, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'error': {'code': 'invalid_parameter_error', 'param': None, 'message': '<400> InternalError.Algo.InvalidParameter: The video modality input does not meet the requirements because: The video file is too long.', 'type': 'invalid_request_error'}, 'id': 'chatcmpl-8c5f54f5-31d3-938b-af99-d7de3aa88bb7', 'request_id': '8c5f54f5-31d3-938b-af99-d7de3aa88bb7'}
+2025-07-04 22:31:55,545 - INFO - file_description - __init__ - 59 - TextSummarizer 初始化完成。Chunk size: 4000, Overlap size: 200
+2025-07-04 22:31:55,586 - INFO - file_description - __init__ - 322 - ImageSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2/, Model: ernie-4.5-turbo-vl-preview
+2025-07-04 22:31:55,628 - INFO - file_description - __init__ - 550 - TableSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2
+2025-07-04 22:31:55,669 - INFO - file_description - __init__ - 914 - PPTSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2/, Model: ernie-4.5-turbo-128k
+2025-07-04 22:31:55,669 - INFO - file_description - __init__ - 915 - 确保 LibreOffice (soffice) 已安装并在系统 PATH 中，以便支持 .ppt 文件转换。
+2025-07-04 22:31:55,710 - INFO - file_description - __init__ - 1341 - DocumentSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2/, Model: ernie-4.5-turbo-128k, Chunk Size: 4000, Overlap Size: 200
+2025-07-04 22:31:55,710 - WARNING - file_description - __init__ - 1345 - 注意: 当前 summarize_document 方法会将整个提取的文档内容作为单个JSON字符串发送给LLM。即使 ernie-4.5-turbo-128k 支持长上下文，对于超大文档，将结构化JSON直接传入仍需注意实际token消耗和成本。类中定义的 chunk_size, overlap_size 和 split_text 方法目前未用于对提取的文档原始文本内容进行分块总结。如需更精细或成本优化的超长文档处理，请考虑修改 summarize_document 以实现基于原始文本的分块和可能的分层总结策略。
+2025-07-04 22:31:55,751 - INFO - file_description - __init__ - 1831 - VideoSummarizer 初始化完成。API base_url: https://dashscope.aliyuncs.com/compatible-mode/v1, Model: qwen-vl-max-latest
+2025-07-04 22:31:55,751 - WARNING - file_description - __init__ - 1832 - 当前版本主要支持通过 URL 处理视频。本地视频文件处理功能尚未完全实现。
+2025-07-04 23:40:11,303 - INFO - file_description - summarize_single_image - 383 - 开始处理单张图片总结: /tmp/tmp7z6g8ryk.png
+2025-07-04 23:40:11,303 - INFO - file_description - get_image_url_dict - 356 - 输入为本地文件路径，将进行Base64编码: /tmp/tmp7z6g8ryk.png
+2025-07-04 23:40:11,303 - INFO - file_description - encode_image - 334 - 图片 '/tmp/tmp7z6g8ryk.png' Base64编码成功。编码后数据长度(部分): 100...
+2025-07-04 23:40:11,306 - INFO - file_description - get_image_url_dict - 371 - 推断出图片 '/tmp/tmp7z6g8ryk.png' 的MIME类型为: image/png
+2025-07-04 23:40:11,306 - INFO - file_description - summarize_single_image - 398 - 向模型 'ernie-4.5-turbo-vl-preview' 发送单图总结请求。图片来源: /tmp/tmp7z6g8ryk.png
+2025-07-04 23:40:14,153 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-04 23:40:14,158 - INFO - file_description - summarize_single_image - 421 - 成功从模型获取单图总结。总结长度: 57 字符。
+2025-07-04 23:40:21,653 - INFO - file_description - summarize_single_image - 383 - 开始处理单张图片总结: /tmp/tmpychwto2a.png
+2025-07-04 23:40:21,653 - INFO - file_description - get_image_url_dict - 356 - 输入为本地文件路径，将进行Base64编码: /tmp/tmpychwto2a.png
+2025-07-04 23:40:21,654 - INFO - file_description - encode_image - 334 - 图片 '/tmp/tmpychwto2a.png' Base64编码成功。编码后数据长度(部分): 100...
+2025-07-04 23:40:21,654 - INFO - file_description - get_image_url_dict - 371 - 推断出图片 '/tmp/tmpychwto2a.png' 的MIME类型为: image/png
+2025-07-04 23:40:21,654 - INFO - file_description - summarize_single_image - 398 - 向模型 'ernie-4.5-turbo-vl-preview' 发送单图总结请求。图片来源: /tmp/tmpychwto2a.png
+2025-07-04 23:40:24,113 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-04 23:40:24,115 - INFO - file_description - summarize_single_image - 421 - 成功从模型获取单图总结。总结长度: 65 字符。
+2025-07-05 00:38:18,042 - INFO - file_description - __init__ - 59 - TextSummarizer 初始化完成。Chunk size: 4000, Overlap size: 200
+2025-07-05 00:38:18,084 - INFO - file_description - __init__ - 322 - ImageSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2/, Model: ernie-4.5-turbo-vl-preview
+2025-07-05 00:38:18,125 - INFO - file_description - __init__ - 550 - TableSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2
+2025-07-05 00:38:18,167 - INFO - file_description - __init__ - 914 - PPTSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2/, Model: ernie-4.5-turbo-128k
+2025-07-05 00:38:18,167 - INFO - file_description - __init__ - 915 - 确保 LibreOffice (soffice) 已安装并在系统 PATH 中，以便支持 .ppt 文件转换。
+2025-07-05 00:38:18,208 - INFO - file_description - __init__ - 1341 - DocumentSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2/, Model: ernie-4.5-turbo-128k, Chunk Size: 4000, Overlap Size: 200
+2025-07-05 00:38:18,209 - WARNING - file_description - __init__ - 1345 - 注意: 当前 summarize_document 方法会将整个提取的文档内容作为单个JSON字符串发送给LLM。即使 ernie-4.5-turbo-128k 支持长上下文，对于超大文档，将结构化JSON直接传入仍需注意实际token消耗和成本。类中定义的 chunk_size, overlap_size 和 split_text 方法目前未用于对提取的文档原始文本内容进行分块总结。如需更精细或成本优化的超长文档处理，请考虑修改 summarize_document 以实现基于原始文本的分块和可能的分层总结策略。
+2025-07-05 00:38:18,250 - INFO - file_description - __init__ - 1831 - VideoSummarizer 初始化完成。API base_url: https://dashscope.aliyuncs.com/compatible-mode/v1, Model: qwen-vl-max-latest
+2025-07-05 00:38:18,250 - WARNING - file_description - __init__ - 1832 - 当前版本主要支持通过 URL 处理视频。本地视频文件处理功能尚未完全实现。
+2025-07-05 00:42:02,458 - INFO - file_description - __init__ - 59 - TextSummarizer 初始化完成。Chunk size: 4000, Overlap size: 200
+2025-07-05 00:42:02,497 - INFO - file_description - __init__ - 322 - ImageSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2/, Model: ernie-4.5-turbo-vl-preview
+2025-07-05 00:42:02,536 - INFO - file_description - __init__ - 550 - TableSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2
+2025-07-05 00:42:02,575 - INFO - file_description - __init__ - 914 - PPTSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2/, Model: ernie-4.5-turbo-128k
+2025-07-05 00:42:02,575 - INFO - file_description - __init__ - 915 - 确保 LibreOffice (soffice) 已安装并在系统 PATH 中，以便支持 .ppt 文件转换。
+2025-07-05 00:42:02,614 - INFO - file_description - __init__ - 1341 - DocumentSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2/, Model: ernie-4.5-turbo-128k, Chunk Size: 4000, Overlap Size: 200
+2025-07-05 00:42:02,614 - WARNING - file_description - __init__ - 1345 - 注意: 当前 summarize_document 方法会将整个提取的文档内容作为单个JSON字符串发送给LLM。即使 ernie-4.5-turbo-128k 支持长上下文，对于超大文档，将结构化JSON直接传入仍需注意实际token消耗和成本。类中定义的 chunk_size, overlap_size 和 split_text 方法目前未用于对提取的文档原始文本内容进行分块总结。如需更精细或成本优化的超长文档处理，请考虑修改 summarize_document 以实现基于原始文本的分块和可能的分层总结策略。
+2025-07-05 00:42:02,653 - INFO - file_description - __init__ - 1831 - VideoSummarizer 初始化完成。API base_url: https://dashscope.aliyuncs.com/compatible-mode/v1, Model: qwen-vl-max-latest
+2025-07-05 00:42:02,653 - WARNING - file_description - __init__ - 1832 - 当前版本主要支持通过 URL 处理视频。本地视频文件处理功能尚未完全实现。
+2025-07-05 10:19:49,188 - INFO - file_description - summarize_single_image - 383 - 开始处理单张图片总结: /tmp/tmpdkiha0re.jpeg
+2025-07-05 10:19:49,188 - INFO - file_description - get_image_url_dict - 356 - 输入为本地文件路径，将进行Base64编码: /tmp/tmpdkiha0re.jpeg
+2025-07-05 10:19:49,190 - INFO - file_description - encode_image - 334 - 图片 '/tmp/tmpdkiha0re.jpeg' Base64编码成功。编码后数据长度(部分): 100...
+2025-07-05 10:19:49,196 - INFO - file_description - get_image_url_dict - 371 - 推断出图片 '/tmp/tmpdkiha0re.jpeg' 的MIME类型为: image/jpeg
+2025-07-05 10:19:49,196 - INFO - file_description - summarize_single_image - 398 - 向模型 'ernie-4.5-turbo-vl-preview' 发送单图总结请求。图片来源: /tmp/tmpdkiha0re.jpeg
+2025-07-05 10:19:49,794 - INFO - file_description - summarize_table - 698 - 开始总结表格: /tmp/tmp2f50x354.xlsx
+2025-07-05 10:19:49,794 - INFO - file_description - read_table - 567 - 尝试读取表格源: /tmp/tmp2f50x354.xlsx
+2025-07-05 10:19:49,794 - INFO - file_description - read_table - 626 - 输入为本地文件路径: /tmp/tmp2f50x354.xlsx
+2025-07-05 10:19:49,794 - INFO - file_description - read_table - 628 - 本地文件格式: .xlsx
+2025-07-05 10:19:49,988 - INFO - file_description - read_table - 632 - 成功读取本地 Excel 文件: /tmp/tmp2f50x354.xlsx
+2025-07-05 10:19:49,988 - INFO - file_description - get_table_info - 658 - 开始提取表格信息，行数: 5, 列数: 10
+2025-07-05 10:19:49,993 - INFO - file_description - get_table_info - 670 - 找到数值列: ['描述', '产品图片', '购买链接', '最低起售量', '标准售价', '最低售价']
+2025-07-05 10:19:49,994 - WARNING - file_description - get_table_info - 673 - 数值列 '描述' 完全为空，统计值将为 NaN 或引发错误。
+2025-07-05 10:19:49,994 - WARNING - file_description - get_table_info - 673 - 数值列 '产品图片' 完全为空，统计值将为 NaN 或引发错误。
+2025-07-05 10:19:49,994 - WARNING - file_description - get_table_info - 673 - 数值列 '购买链接' 完全为空，统计值将为 NaN 或引发错误。
+2025-07-05 10:19:49,997 - INFO - file_description - get_table_info - 687 - 表格信息提取完成。
+2025-07-05 10:19:50,002 - INFO - file_description - summarize_table - 714 - 表格信息字符串长度: 1362
+2025-07-05 10:19:50,003 - INFO - file_description - summarize_table - 715 - 数据示例字符串长度: 383
+2025-07-05 10:19:50,003 - INFO - file_description - summarize_table - 748 - 向 LLM 发送请求进行表格总结...
+2025-07-05 10:19:52,354 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 10:19:52,361 - INFO - file_description - summarize_single_image - 421 - 成功从模型获取单图总结。总结长度: 73 字符。
+2025-07-05 10:19:52,397 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 10:19:52,399 - INFO - file_description - summarize_table - 759 - LLM 表格总结接收成功，长度: 108
+2025-07-05 10:35:04,798 - INFO - file_description - summarize_single_image - 383 - 开始处理单张图片总结: /tmp/tmpwx_hmfke.jpeg
+2025-07-05 10:35:04,798 - INFO - file_description - get_image_url_dict - 356 - 输入为本地文件路径，将进行Base64编码: /tmp/tmpwx_hmfke.jpeg
+2025-07-05 10:35:04,799 - INFO - file_description - encode_image - 334 - 图片 '/tmp/tmpwx_hmfke.jpeg' Base64编码成功。编码后数据长度(部分): 100...
+2025-07-05 10:35:04,799 - INFO - file_description - get_image_url_dict - 371 - 推断出图片 '/tmp/tmpwx_hmfke.jpeg' 的MIME类型为: image/jpeg
+2025-07-05 10:35:04,799 - INFO - file_description - summarize_single_image - 398 - 向模型 'ernie-4.5-turbo-vl-preview' 发送单图总结请求。图片来源: /tmp/tmpwx_hmfke.jpeg
+2025-07-05 10:35:06,721 - INFO - file_description - summarize_single_image - 383 - 开始处理单张图片总结: /tmp/tmpzocbbos4.jpeg
+2025-07-05 10:35:06,721 - INFO - file_description - get_image_url_dict - 356 - 输入为本地文件路径，将进行Base64编码: /tmp/tmpzocbbos4.jpeg
+2025-07-05 10:35:06,722 - INFO - file_description - encode_image - 334 - 图片 '/tmp/tmpzocbbos4.jpeg' Base64编码成功。编码后数据长度(部分): 100...
+2025-07-05 10:35:06,722 - INFO - file_description - get_image_url_dict - 371 - 推断出图片 '/tmp/tmpzocbbos4.jpeg' 的MIME类型为: image/jpeg
+2025-07-05 10:35:06,722 - INFO - file_description - summarize_single_image - 398 - 向模型 'ernie-4.5-turbo-vl-preview' 发送单图总结请求。图片来源: /tmp/tmpzocbbos4.jpeg
+2025-07-05 10:35:07,671 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 10:35:07,672 - INFO - file_description - summarize_single_image - 421 - 成功从模型获取单图总结。总结长度: 80 字符。
+2025-07-05 10:35:09,875 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 10:35:09,876 - INFO - file_description - summarize_single_image - 421 - 成功从模型获取单图总结。总结长度: 77 字符。
+2025-07-05 10:35:30,091 - INFO - file_description - summarize_document - 1593 - 开始总结文档: /tmp/tmphg9h1vjd.docx
+2025-07-05 10:35:30,092 - INFO - file_description - extract_docx_content - 1461 - 开始提取DOCX内容: /tmp/tmphg9h1vjd.docx
+2025-07-05 10:35:30,098 - INFO - file_description - extract_docx_content - 1488 - DOCX共有 3 个原始段落。
+2025-07-05 10:35:30,100 - INFO - file_description - extract_docx_content - 1521 - DOCX内容提取完成: /tmp/tmphg9h1vjd.docx
+2025-07-05 10:35:30,100 - INFO - file_description - summarize_document - 1619 - 提取的文档内容序列化后字符串长度: 201
+2025-07-05 10:35:30,100 - INFO - file_description - summarize_document - 1656 - 向 LLM (ernie-4.5-turbo-128k) 发送请求进行文档总结...
+2025-07-05 10:35:38,588 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 10:35:38,591 - INFO - file_description - summarize_document - 1677 - LLM 文档总结接收成功，长度: 573
+2025-07-05 10:36:05,221 - INFO - file_description - summarize_document - 1593 - 开始总结文档: /tmp/tmprlm7oz68.docx
+2025-07-05 10:36:05,222 - INFO - file_description - extract_docx_content - 1461 - 开始提取DOCX内容: /tmp/tmprlm7oz68.docx
+2025-07-05 10:36:05,227 - INFO - file_description - extract_docx_content - 1488 - DOCX共有 3 个原始段落。
+2025-07-05 10:36:05,228 - INFO - file_description - extract_docx_content - 1521 - DOCX内容提取完成: /tmp/tmprlm7oz68.docx
+2025-07-05 10:36:05,229 - INFO - file_description - summarize_document - 1619 - 提取的文档内容序列化后字符串长度: 201
+2025-07-05 10:36:05,229 - INFO - file_description - summarize_document - 1656 - 向 LLM (ernie-4.5-turbo-128k) 发送请求进行文档总结...
+2025-07-05 10:36:06,855 - INFO - file_description - summarize_document - 1593 - 开始总结文档: /tmp/tmpvh8bv5cn.docx
+2025-07-05 10:36:06,855 - INFO - file_description - extract_docx_content - 1461 - 开始提取DOCX内容: /tmp/tmpvh8bv5cn.docx
+2025-07-05 10:36:06,860 - INFO - file_description - extract_docx_content - 1488 - DOCX共有 3 个原始段落。
+2025-07-05 10:36:06,862 - INFO - file_description - extract_docx_content - 1521 - DOCX内容提取完成: /tmp/tmpvh8bv5cn.docx
+2025-07-05 10:36:06,862 - INFO - file_description - summarize_document - 1619 - 提取的文档内容序列化后字符串长度: 201
+2025-07-05 10:36:06,862 - INFO - file_description - summarize_document - 1656 - 向 LLM (ernie-4.5-turbo-128k) 发送请求进行文档总结...
+2025-07-05 10:36:12,616 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 10:36:12,618 - INFO - file_description - summarize_document - 1677 - LLM 文档总结接收成功，长度: 532
+2025-07-05 10:36:13,900 - INFO - file_description - summarize_document - 1593 - 开始总结文档: /tmp/tmpowy8ipx0.docx
+2025-07-05 10:36:13,900 - INFO - file_description - extract_docx_content - 1461 - 开始提取DOCX内容: /tmp/tmpowy8ipx0.docx
+2025-07-05 10:36:13,905 - INFO - file_description - extract_docx_content - 1488 - DOCX共有 3 个原始段落。
+2025-07-05 10:36:13,907 - INFO - file_description - extract_docx_content - 1521 - DOCX内容提取完成: /tmp/tmpowy8ipx0.docx
+2025-07-05 10:36:13,907 - INFO - file_description - summarize_document - 1619 - 提取的文档内容序列化后字符串长度: 201
+2025-07-05 10:36:13,907 - INFO - file_description - summarize_document - 1656 - 向 LLM (ernie-4.5-turbo-128k) 发送请求进行文档总结...
+2025-07-05 10:36:16,260 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 10:36:16,262 - INFO - file_description - summarize_document - 1677 - LLM 文档总结接收成功，长度: 568
+2025-07-05 10:36:23,512 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 10:36:23,514 - INFO - file_description - summarize_document - 1677 - LLM 文档总结接收成功，长度: 628
+2025-07-05 10:37:57,573 - INFO - file_description - summarize_document - 1593 - 开始总结文档: /tmp/tmpritkr563.docx
+2025-07-05 10:37:57,574 - INFO - file_description - extract_docx_content - 1461 - 开始提取DOCX内容: /tmp/tmpritkr563.docx
+2025-07-05 10:37:57,579 - INFO - file_description - extract_docx_content - 1488 - DOCX共有 3 个原始段落。
+2025-07-05 10:37:57,580 - INFO - file_description - extract_docx_content - 1521 - DOCX内容提取完成: /tmp/tmpritkr563.docx
+2025-07-05 10:37:57,580 - INFO - file_description - summarize_document - 1619 - 提取的文档内容序列化后字符串长度: 201
+2025-07-05 10:37:57,580 - INFO - file_description - summarize_document - 1656 - 向 LLM (ernie-4.5-turbo-128k) 发送请求进行文档总结...
+2025-07-05 10:38:07,518 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 10:38:07,520 - INFO - file_description - summarize_document - 1677 - LLM 文档总结接收成功，长度: 596
+2025-07-05 10:39:15,546 - INFO - file_description - summarize_document - 1593 - 开始总结文档: /tmp/tmp9j5l9qqz.docx
+2025-07-05 10:39:15,546 - INFO - file_description - extract_docx_content - 1461 - 开始提取DOCX内容: /tmp/tmp9j5l9qqz.docx
+2025-07-05 10:39:15,552 - INFO - file_description - extract_docx_content - 1488 - DOCX共有 3 个原始段落。
+2025-07-05 10:39:15,554 - INFO - file_description - extract_docx_content - 1521 - DOCX内容提取完成: /tmp/tmp9j5l9qqz.docx
+2025-07-05 10:39:15,554 - INFO - file_description - summarize_document - 1619 - 提取的文档内容序列化后字符串长度: 201
+2025-07-05 10:39:15,554 - INFO - file_description - summarize_document - 1656 - 向 LLM (ernie-4.5-turbo-128k) 发送请求进行文档总结...
+2025-07-05 10:39:23,695 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 10:39:23,696 - INFO - file_description - summarize_document - 1677 - LLM 文档总结接收成功，长度: 553
+2025-07-05 10:43:48,278 - INFO - file_description - summarize_single_image - 383 - 开始处理单张图片总结: /tmp/tmpo8n6s1gr.png
+2025-07-05 10:43:48,278 - INFO - file_description - get_image_url_dict - 356 - 输入为本地文件路径，将进行Base64编码: /tmp/tmpo8n6s1gr.png
+2025-07-05 10:43:48,283 - INFO - file_description - encode_image - 334 - 图片 '/tmp/tmpo8n6s1gr.png' Base64编码成功。编码后数据长度(部分): 100...
+2025-07-05 10:43:48,283 - INFO - file_description - get_image_url_dict - 371 - 推断出图片 '/tmp/tmpo8n6s1gr.png' 的MIME类型为: image/png
+2025-07-05 10:43:48,284 - INFO - file_description - summarize_single_image - 398 - 向模型 'ernie-4.5-turbo-vl-preview' 发送单图总结请求。图片来源: /tmp/tmpo8n6s1gr.png
+2025-07-05 10:43:53,446 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 10:43:53,448 - INFO - file_description - summarize_single_image - 421 - 成功从模型获取单图总结。总结长度: 82 字符。
+2025-07-05 10:44:40,474 - INFO - file_description - summarize_document - 1593 - 开始总结文档: /tmp/tmptbxet2f8.docx
+2025-07-05 10:44:40,474 - INFO - file_description - extract_docx_content - 1461 - 开始提取DOCX内容: /tmp/tmptbxet2f8.docx
+2025-07-05 10:44:40,484 - INFO - file_description - extract_docx_content - 1488 - DOCX共有 85 个原始段落。
+2025-07-05 10:44:40,504 - INFO - file_description - extract_docx_content - 1521 - DOCX内容提取完成: /tmp/tmptbxet2f8.docx
+2025-07-05 10:44:40,504 - INFO - file_description - summarize_document - 1619 - 提取的文档内容序列化后字符串长度: 3714
+2025-07-05 10:44:40,505 - INFO - file_description - summarize_document - 1656 - 向 LLM (ernie-4.5-turbo-128k) 发送请求进行文档总结...
+2025-07-05 10:45:01,570 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 10:45:01,593 - INFO - file_description - summarize_document - 1677 - LLM 文档总结接收成功，长度: 1571
+2025-07-05 10:51:01,182 - INFO - file_description - summarize_single_image - 383 - 开始处理单张图片总结: /tmp/tmpjl559onv.jpeg
+2025-07-05 10:51:01,182 - INFO - file_description - get_image_url_dict - 356 - 输入为本地文件路径，将进行Base64编码: /tmp/tmpjl559onv.jpeg
+2025-07-05 10:51:01,183 - INFO - file_description - encode_image - 334 - 图片 '/tmp/tmpjl559onv.jpeg' Base64编码成功。编码后数据长度(部分): 100...
+2025-07-05 10:51:01,183 - INFO - file_description - get_image_url_dict - 371 - 推断出图片 '/tmp/tmpjl559onv.jpeg' 的MIME类型为: image/jpeg
+2025-07-05 10:51:01,184 - INFO - file_description - summarize_single_image - 398 - 向模型 'ernie-4.5-turbo-vl-preview' 发送单图总结请求。图片来源: /tmp/tmpjl559onv.jpeg
+2025-07-05 10:51:04,105 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 10:51:04,106 - INFO - file_description - summarize_single_image - 421 - 成功从模型获取单图总结。总结长度: 83 字符。
+2025-07-05 11:03:17,737 - INFO - file_description - summarize_video - 1872 - 开始处理单个视频总结: https://ai-yuying.oss-cn-shenzhen.aliyuncs.com/knowledge-base/0e1a98dccb414df7a3f67c8b4a952c36.mp4
+2025-07-05 11:03:17,737 - INFO - file_description - summarize_video - 1877 - 输入源为有效URL: https://ai-yuying.oss-cn-shenzhen.aliyuncs.com/knowledge-base/0e1a98dccb414df7a3f67c8b4a952c36.mp4
+2025-07-05 11:03:17,738 - INFO - file_description - summarize_video - 1909 - 向模型 'qwen-vl-max-latest' 发送视频总结请求，视频URL: https://ai-yuying.oss-cn-shenzhen.aliyuncs.com/knowledge-base/0e1a98dccb414df7a3f67c8b4a952c36.mp4
+2025-07-05 11:03:18,804 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2025-07-05 11:03:18,806 - ERROR - file_description - summarize_video - 1934 - 使用模型分析视频 'https://ai-yuying.oss-cn-shenzhen.aliyuncs.com/knowledge-base/0e1a98dccb414df7a3f67c8b4a952c36.mp4' 时出错: Error code: 400 - {'error': {'code': 'invalid_parameter_error', 'param': None, 'message': '<400> InternalError.Algo.InvalidParameter: The video modality input does not meet the requirements because: The video file is too long.', 'type': 'invalid_request_error'}, 'id': 'chatcmpl-e3733c00-5c75-9c35-9da3-ef56810e6c2d', 'request_id': 'e3733c00-5c75-9c35-9da3-ef56810e6c2d'}
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/file_description.py", line 1924, in summarize_video
+    response = self.client.chat.completions.create(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 925, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1239, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1034, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'error': {'code': 'invalid_parameter_error', 'param': None, 'message': '<400> InternalError.Algo.InvalidParameter: The video modality input does not meet the requirements because: The video file is too long.', 'type': 'invalid_request_error'}, 'id': 'chatcmpl-e3733c00-5c75-9c35-9da3-ef56810e6c2d', 'request_id': 'e3733c00-5c75-9c35-9da3-ef56810e6c2d'}
+2025-07-05 11:37:22,164 - INFO - file_description - __init__ - 59 - TextSummarizer 初始化完成。Chunk size: 4000, Overlap size: 200
+2025-07-05 11:37:22,207 - INFO - file_description - __init__ - 322 - ImageSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2/, Model: ernie-4.5-turbo-vl-preview
+2025-07-05 11:37:22,248 - INFO - file_description - __init__ - 550 - TableSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2
+2025-07-05 11:37:22,289 - INFO - file_description - __init__ - 914 - PPTSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2/, Model: ernie-4.5-turbo-128k
+2025-07-05 11:37:22,289 - INFO - file_description - __init__ - 915 - 确保 LibreOffice (soffice) 已安装并在系统 PATH 中，以便支持 .ppt 文件转换。
+2025-07-05 11:37:22,331 - INFO - file_description - __init__ - 1341 - DocumentSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2/, Model: ernie-4.5-turbo-128k, Chunk Size: 4000, Overlap Size: 200
+2025-07-05 11:37:22,331 - WARNING - file_description - __init__ - 1345 - 注意: 当前 summarize_document 方法会将整个提取的文档内容作为单个JSON字符串发送给LLM。即使 ernie-4.5-turbo-128k 支持长上下文，对于超大文档，将结构化JSON直接传入仍需注意实际token消耗和成本。类中定义的 chunk_size, overlap_size 和 split_text 方法目前未用于对提取的文档原始文本内容进行分块总结。如需更精细或成本优化的超长文档处理，请考虑修改 summarize_document 以实现基于原始文本的分块和可能的分层总结策略。
+2025-07-05 11:37:22,373 - INFO - file_description - __init__ - 1831 - VideoSummarizer 初始化完成。API base_url: https://dashscope.aliyuncs.com/compatible-mode/v1, Model: qwen-vl-max-latest
+2025-07-05 11:37:22,373 - WARNING - file_description - __init__ - 1832 - 当前版本主要支持通过 URL 处理视频。本地视频文件处理功能尚未完全实现。
+2025-07-05 11:37:31,672 - INFO - file_description - __init__ - 59 - TextSummarizer 初始化完成。Chunk size: 4000, Overlap size: 200
+2025-07-05 11:37:31,711 - INFO - file_description - __init__ - 322 - ImageSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2/, Model: ernie-4.5-turbo-vl-preview
+2025-07-05 11:37:31,751 - INFO - file_description - __init__ - 550 - TableSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2
+2025-07-05 11:37:31,790 - INFO - file_description - __init__ - 914 - PPTSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2/, Model: ernie-4.5-turbo-128k
+2025-07-05 11:37:31,790 - INFO - file_description - __init__ - 915 - 确保 LibreOffice (soffice) 已安装并在系统 PATH 中，以便支持 .ppt 文件转换。
+2025-07-05 11:37:31,830 - INFO - file_description - __init__ - 1341 - DocumentSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2/, Model: ernie-4.5-turbo-128k, Chunk Size: 4000, Overlap Size: 200
+2025-07-05 11:37:31,830 - WARNING - file_description - __init__ - 1345 - 注意: 当前 summarize_document 方法会将整个提取的文档内容作为单个JSON字符串发送给LLM。即使 ernie-4.5-turbo-128k 支持长上下文，对于超大文档，将结构化JSON直接传入仍需注意实际token消耗和成本。类中定义的 chunk_size, overlap_size 和 split_text 方法目前未用于对提取的文档原始文本内容进行分块总结。如需更精细或成本优化的超长文档处理，请考虑修改 summarize_document 以实现基于原始文本的分块和可能的分层总结策略。
+2025-07-05 11:37:31,869 - INFO - file_description - __init__ - 1831 - VideoSummarizer 初始化完成。API base_url: https://dashscope.aliyuncs.com/compatible-mode/v1, Model: qwen-vl-max-latest
+2025-07-05 11:37:31,869 - WARNING - file_description - __init__ - 1832 - 当前版本主要支持通过 URL 处理视频。本地视频文件处理功能尚未完全实现。
+2025-07-05 11:37:52,926 - INFO - file_description - summarize_single_image - 383 - 开始处理单张图片总结: /tmp/tmpbbc_rmzg.jpg
+2025-07-05 11:37:52,926 - INFO - file_description - get_image_url_dict - 356 - 输入为本地文件路径，将进行Base64编码: /tmp/tmpbbc_rmzg.jpg
+2025-07-05 11:37:52,937 - INFO - file_description - encode_image - 334 - 图片 '/tmp/tmpbbc_rmzg.jpg' Base64编码成功。编码后数据长度(部分): 100...
+2025-07-05 11:37:52,940 - INFO - file_description - get_image_url_dict - 371 - 推断出图片 '/tmp/tmpbbc_rmzg.jpg' 的MIME类型为: image/jpeg
+2025-07-05 11:37:52,943 - INFO - file_description - summarize_single_image - 398 - 向模型 'ernie-4.5-turbo-vl-preview' 发送单图总结请求。图片来源: /tmp/tmpbbc_rmzg.jpg
+2025-07-05 11:37:59,503 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 11:37:59,508 - INFO - file_description - summarize_single_image - 421 - 成功从模型获取单图总结。总结长度: 91 字符。
+2025-07-05 11:39:38,172 - INFO - file_description - summarize_single_image - 383 - 开始处理单张图片总结: /tmp/tmpd039rngv.jpeg
+2025-07-05 11:39:38,172 - INFO - file_description - get_image_url_dict - 356 - 输入为本地文件路径，将进行Base64编码: /tmp/tmpd039rngv.jpeg
+2025-07-05 11:39:38,173 - INFO - file_description - encode_image - 334 - 图片 '/tmp/tmpd039rngv.jpeg' Base64编码成功。编码后数据长度(部分): 100...
+2025-07-05 11:39:38,174 - INFO - file_description - get_image_url_dict - 371 - 推断出图片 '/tmp/tmpd039rngv.jpeg' 的MIME类型为: image/jpeg
+2025-07-05 11:39:38,174 - INFO - file_description - summarize_single_image - 398 - 向模型 'ernie-4.5-turbo-vl-preview' 发送单图总结请求。图片来源: /tmp/tmpd039rngv.jpeg
+2025-07-05 11:39:41,376 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 11:39:41,378 - INFO - file_description - summarize_single_image - 421 - 成功从模型获取单图总结。总结长度: 72 字符。
+2025-07-05 11:50:47,360 - INFO - file_description - summarize_single_image - 383 - 开始处理单张图片总结: /tmp/tmpxdl75fah.jpeg
+2025-07-05 11:50:47,361 - INFO - file_description - get_image_url_dict - 356 - 输入为本地文件路径，将进行Base64编码: /tmp/tmpxdl75fah.jpeg
+2025-07-05 11:50:47,362 - INFO - file_description - encode_image - 334 - 图片 '/tmp/tmpxdl75fah.jpeg' Base64编码成功。编码后数据长度(部分): 100...
+2025-07-05 11:50:47,362 - INFO - file_description - get_image_url_dict - 371 - 推断出图片 '/tmp/tmpxdl75fah.jpeg' 的MIME类型为: image/jpeg
+2025-07-05 11:50:47,363 - INFO - file_description - summarize_single_image - 398 - 向模型 'ernie-4.5-turbo-vl-preview' 发送单图总结请求。图片来源: /tmp/tmpxdl75fah.jpeg
+2025-07-05 11:50:50,549 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 11:50:50,551 - INFO - file_description - summarize_single_image - 421 - 成功从模型获取单图总结。总结长度: 75 字符。
+2025-07-05 12:09:07,645 - INFO - file_description - summarize_single_image - 383 - 开始处理单张图片总结: /tmp/tmp8zmj2ny3.png
+2025-07-05 12:09:07,645 - INFO - file_description - get_image_url_dict - 356 - 输入为本地文件路径，将进行Base64编码: /tmp/tmp8zmj2ny3.png
+2025-07-05 12:09:07,648 - INFO - file_description - encode_image - 334 - 图片 '/tmp/tmp8zmj2ny3.png' Base64编码成功。编码后数据长度(部分): 100...
+2025-07-05 12:09:07,649 - INFO - file_description - get_image_url_dict - 371 - 推断出图片 '/tmp/tmp8zmj2ny3.png' 的MIME类型为: image/png
+2025-07-05 12:09:07,649 - INFO - file_description - summarize_single_image - 398 - 向模型 'ernie-4.5-turbo-vl-preview' 发送单图总结请求。图片来源: /tmp/tmp8zmj2ny3.png
+2025-07-05 12:09:11,093 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 12:09:11,094 - INFO - file_description - summarize_single_image - 421 - 成功从模型获取单图总结。总结长度: 74 字符。
+2025-07-05 12:49:40,643 - INFO - file_description - summarize_single_image - 383 - 开始处理单张图片总结: /tmp/tmpz0vpqf4i.jpeg
+2025-07-05 12:49:40,643 - INFO - file_description - get_image_url_dict - 356 - 输入为本地文件路径，将进行Base64编码: /tmp/tmpz0vpqf4i.jpeg
+2025-07-05 12:49:40,645 - INFO - file_description - encode_image - 334 - 图片 '/tmp/tmpz0vpqf4i.jpeg' Base64编码成功。编码后数据长度(部分): 100...
+2025-07-05 12:49:40,645 - INFO - file_description - get_image_url_dict - 371 - 推断出图片 '/tmp/tmpz0vpqf4i.jpeg' 的MIME类型为: image/jpeg
+2025-07-05 12:49:40,645 - INFO - file_description - summarize_single_image - 398 - 向模型 'ernie-4.5-turbo-vl-preview' 发送单图总结请求。图片来源: /tmp/tmpz0vpqf4i.jpeg
+2025-07-05 12:49:44,301 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 12:49:44,304 - INFO - file_description - summarize_single_image - 421 - 成功从模型获取单图总结。总结长度: 91 字符。
+2025-07-05 15:20:30,498 - INFO - file_description - summarize_single_image - 383 - 开始处理单张图片总结: /tmp/tmptqfx7g5e.jpeg
+2025-07-05 15:20:30,499 - INFO - file_description - get_image_url_dict - 356 - 输入为本地文件路径，将进行Base64编码: /tmp/tmptqfx7g5e.jpeg
+2025-07-05 15:20:30,500 - INFO - file_description - encode_image - 334 - 图片 '/tmp/tmptqfx7g5e.jpeg' Base64编码成功。编码后数据长度(部分): 100...
+2025-07-05 15:20:30,500 - INFO - file_description - get_image_url_dict - 371 - 推断出图片 '/tmp/tmptqfx7g5e.jpeg' 的MIME类型为: image/jpeg
+2025-07-05 15:20:30,500 - INFO - file_description - summarize_single_image - 398 - 向模型 'ernie-4.5-turbo-vl-preview' 发送单图总结请求。图片来源: /tmp/tmptqfx7g5e.jpeg
+2025-07-05 15:20:33,541 - INFO - _client - _send_single_request - 1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 15:20:33,543 - INFO - file_description - summarize_single_image - 421 - 成功从模型获取单图总结。总结长度: 72 字符。

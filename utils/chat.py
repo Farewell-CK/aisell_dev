@@ -1,7 +1,7 @@
 import time
 import json
 from prompts.prompts import split_sentence_prompt
-from openai import AsyncOpenAI
+from openai import OpenAI
 import logging
 from google.genai import types # For creating message Content/Parts
 from google.adk.runners import Runner # 导入 Runner 用于类型提示
@@ -141,7 +141,7 @@ async def call_agent_async(query: str, runner: Runner, user_id: str, session_id:
         await runner.session_service.append_event(session, state_update_event)
 
     # 3. 准备用户消息
-    content = types.Content(role='user', parts=[types.Part(text=query)])
+    content = types.Content(role='user', parts=[types.Part(text=str(query))])
 
     final_response_text = "智能体没有产生最终响应。" # 默认值
 
@@ -176,7 +176,7 @@ async def chat_qwen(prompt : str) -> str:
         response: 响应
     """
     api_key = config.get_api_key('qwen', 'api_key')
-    client = AsyncOpenAI(
+    client = OpenAI(
         api_key=api_key,
         base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",
     )
@@ -198,7 +198,7 @@ async def chat_test(api_key : str, system_prompt : str, query : str) -> str:
         response: 响应
     """
     
-    client = AsyncOpenAI(
+    client = OpenAI(
         api_key=api_key,
         base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",
     ) 
@@ -220,7 +220,7 @@ async def split_sentence(api_key : str, sentence : str) -> list[str]:
     Returns:
         response: 响应
     """
-    client = AsyncOpenAI(
+    client = OpenAI(
         api_key=api_key,
         base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",
     )

@@ -5,6 +5,10 @@ import aiohttp
 import asyncio
 from datetime import datetime
 from tools.database import DatabaseManager
+from utils.logger_config import get_utils_logger
+
+logger = get_utils_logger()
+
 db = DatabaseManager()
 
 async def send_order_notification(tenant_id,task_id,session_id,order_notification):
@@ -95,14 +99,16 @@ async def send_customer_behavior(tenant_id,task_id,session_id,customer_behavior)
     response = requests.post(url, headers=headers, data=json.dumps(data))
     return response.json()
 
-async def send_prohibit_notify(tenant_id,strategy_id,prohibit_list, sale_flow):
+async def send_prohibit_notify(tenant_id,task_id,strategy_id,prohibit_list, sale_flow, status=2):
     """
     发送禁止做的事情 && 销售流程通知
     Args:
         tenant_id: 租户ID
         task_id: 任务ID
+        strategy_id: 策略ID
         prohibit_list: 禁止做的事情列表
         sale_flow: 销售流程
+        status: 状态 2 成功 1 失败
     Returns:
         response: 响应
     """
@@ -139,7 +145,7 @@ async def send_prohibit_notify(tenant_id,strategy_id,prohibit_list, sale_flow):
         ) VALUES (
             '{strategy_id}',
             '{flow['title']}',
-            '{flow['description']}',
+            "{flow['description']}",
             '{i}',
             '{tenant_id}',
             'admin',
@@ -148,7 +154,12 @@ async def send_prohibit_notify(tenant_id,strategy_id,prohibit_list, sale_flow):
         );
 
         """
+        logger.info(f"插入销售流程: {insert_query}")
         db.execute_insert(insert_query)
+    update_query = f"""
+    UPDATE sale_strategy SET status = {status} WHERE id = {strategy_id} AND tenant_id = {tenant_id} AND task_id = {task_id};
+    """
+    db.execute_update(update_query)
     return True
 
 async def send_chat_test(tenant_id,task_id,chat_test):
@@ -173,13 +184,14 @@ async def send_chat_test(tenant_id,task_id,chat_test):
     response = requests.post(url, headers=headers, data=json.dumps(data))
     return response.json()
 
-async def send_chat(tenant_id,task_id,session_id,chat_content):
+async def send_chat(tenant_id,task_id,session_id,belong_chat_id,chat_content):
     """
     发送聊天内容通知
     Args:
         tenant_id: 租户ID
         task_id: 任务ID
         session_id: 会话ID
+        belong_chat_id: 工作机登录的微信id
         chat_content: 聊天内容 是一个列表
     Returns:
         response: 响应
@@ -196,7 +208,7 @@ async def send_chat(tenant_id,task_id,session_id,chat_content):
             "url": "需要给客户发送的文件URL"
          }
          ],
-         "collaborate_list": [协作事项id1, 协作事项id2, 协作事项id3],
+         "collaborate_list": [协作事项内容1, 协作事项内容2, 协作事项内容3],
          "follow_up": {
             "is_follow_up": 1, 
             "follow_up_content": ["跟单内容1", "跟单内容2", "跟单内容3"]
@@ -204,7 +216,29 @@ async def send_chat(tenant_id,task_id,session_id,chat_content):
          "need_assistance": 1,
       }
     """
-    url = f"{os.getenv('NOTIFY_URL')}/api/v1/notify/chat"
+    print(f"chat_content: {chat_content}")
+    collaborate_list = chat_content.get("collaborate_list", [])
+    for collaborate in collaborate_list:
+        insert_query = f"""
+        INSERT INTO sale_wechat_matter (
+            content,
+            tenant_id,
+            task_id,
+            create_by,
+            create_time,
+            is_del
+        ) VALUES (
+            '{collaborate}',
+            '{tenant_id}',
+            '{task_id}',
+            'admin',
+            NOW(),
+            0
+        );
+        """
+        logger.info(f"插入协作事项: {insert_query}")
+        db.execute_insert(insert_query)
+    url = "http://120.77.8.73/sale/wechat/message/send"
     headers = {
         "Content-Type": "application/json"
     }
@@ -212,6 +246,7 @@ async def send_chat(tenant_id,task_id,session_id,chat_content):
         "tenant_id": tenant_id,
         "task_id": task_id,
         "session_id": session_id,
+        "belong_chat_id": belong_chat_id,
         "chat_content": chat_content # 聊天内容 是一个列表
     }
     

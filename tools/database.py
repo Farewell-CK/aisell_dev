@@ -123,7 +123,7 @@ class DatabaseManager:
         except Exception as e:
             return 0
 
-    def execute_update(self, query: str, params: dict = None) -> int:
+    def execute_update(self, query: str) -> int:
         """
         执行更新操作。
 
@@ -136,8 +136,9 @@ class DatabaseManager:
         """
         try:
             with self.engine.connect() as connection:
-                result = connection.execute(text(query), params or {})
+                result = connection.execute(text(query))
                 connection.commit()
+                # logger.info(f"更新数据成功: {query}")
                 return result.rowcount
         except Exception as e:
             raise Exception(f"更新数据失败: {str(e)}")

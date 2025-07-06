@@ -12,7 +12,7 @@ app = FastAPI(
 )
 
 # 从环境变量获取API密钥
-API_KEY = os.getenv("BAIDU_API_KEY")
+API_KEY = os.getenv("BAIDU_API_KEY", "bce-v3/ALTAK-wKuFEIj8EXZqIDOquAnsT/678c3407baba1a9b64ab889a7f7becd7dc3a4591")
 if not API_KEY:
     raise ValueError("请设置环境变量 BAIDU_API_KEY")
 

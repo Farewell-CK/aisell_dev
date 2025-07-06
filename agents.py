@@ -33,13 +33,13 @@ ernie_base_url = config.get_api_key('ernie', 'base_url')
 ernie_api_key = config.get_api_key('ernie', 'api_key')
 
 qwen_model = LiteLlm(
-    model_name="openai/qwen-max-latest",
+    model="openai/qwen-max-latest",
     base_url=qwen_base_url,
     api_key=qwen_api_key
 )
 
 ernie_model = LiteLlm(
-    model_name="openai/ernie-4.5-turbo-32k",
+    model="openai/ernie-4.5-turbo-32k",
     base_url=ernie_base_url,
     api_key=ernie_api_key
 )
@@ -112,13 +112,13 @@ scheduler_agent = LlmAgent(
 
 ## 团队并行执行
 team_work_agent = ParallelAgent(
-    agents=[collaborate_agent, follow_up_agent, customer_portrait_agent, customer_behavior_agent],
+    sub_agents=[collaborate_agent, follow_up_agent, customer_portrait_agent, customer_behavior_agent],
     name="team_work_agent",
     description="运行多个可以同时执行的agent，并行执行的目的是为了提高效率，减少等待时间。",
 )
 
 root_agent = SequentialAgent(
-    agents=[input_process_agent, team_work_agent, chat_agent],
+    sub_agents=[input_process_agent, team_work_agent, chat_agent],
     name="root_agent",
     description="根节点，负责调度其他agent，并行执行。",
 )

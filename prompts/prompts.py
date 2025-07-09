@@ -1,5 +1,5 @@
 from utils.db_queries import select_ai_data, select_sale_prompt, select_sale_system_prompt
-
+from utils.create_role import restore_content_from_database
 strategy_prompt = """
 你是一位专业的销售策略顾问。基于以下公司信息和产品信息，请生成详细的销售策略指南：
 
@@ -74,6 +74,7 @@ def get_role_prompt(base_info: str, company_info: str, product_info: str, commun
 * 建立专业可信的形象
 * 有效引导客户线下见面
 * 始终保持真实销售人员的身份定位
+* 不要输出除销售角色设定之外的其他内容
 
 ---
 
@@ -177,38 +178,44 @@ def get_collaborate_prompt(collaborate_matters: list[dict]) -> str:
 
     """
 
-def get_chat_prompt(tenant_id: int, task_id: int) -> str:
+async def get_chat_prompt(tenant_id: int, task_id: int) -> str:
     """
     生成聊天提示词。
     """
-   #  system_prompt = select_sale_system_prompt(tenant_id, task_id)
+    system_prompt = select_sale_system_prompt(tenant_id, task_id)
+    test_prompt = await restore_content_from_database(tenant_id, task_id)
     return f"""
-    {select_sale_system_prompt(tenant_id, task_id)}
+    {system_prompt}
+    {test_prompt}
     {get_chat_prompt_supplement(tenant_id, task_id)}
     """
 
 def get_chat_prompt_supplement(tenant_id: int, task_id: int) -> str:
-    """
+   """
     生成聊天补充提示词。
-    """
-    ai_data = select_ai_data(tenant_id, task_id)
-    ai_data_str = ""
-    for data in ai_data:
-        ai_text = str(data['ai_text']).replace("'", "''")
-        url = str(data['url']).replace("'", "''")
-        ai_data_str += f"文件内容：{ai_text}\n文件URL：{url}\n"
-    return f"""
-      ### 9. 需要发送的文件
-      同时你需要根据以下文件信息，判断这次沟通是否需要发送文件。
-      信息如下：
-      {ai_data_str}
+   """
+   ai_data = select_ai_data(tenant_id, task_id)
+   print(f"task_id: {task_id}, tenant_id: {tenant_id}, ai_data数据是: {ai_data}")
+   ai_data_str = '没有相关文件'
+   if ai_data is [] :
+      pass
+   # elif len(ai_data) == 1 and isinstance(ai_data[0], str):
+   #    ai_data_str = "没有相关文件"
+   else:
+      for data in ai_data:
+         ai_text = str(data['ai_text']).replace("'", "''")
+         url = str(data['url']).replace("'", "''")
+         ai_data_str += f"文件内容：{ai_text[:500]}\n文件URL：{url}\n"
+   return f"""
 
-      ### 10. 输出格式
+      ### 9. 输出格式
       输出内容包括（需要结合follow_up_agent和collaborate_agent的输出结果）：
-      1、回复内容
-      2、协作事项内容，需要结合collaborate_agent的输出结果，如果需要协作，则需要输出协作事项内容，否则不需要输出。
-      3、跟单事项
-      4、是否需要协助, 1表示需要，0表示不需要(你能解决问题则就不需要)
+      1、回复内容,每一个content不要超过15个字，如果send_file_agent判断需要发送文件，则type为file，url为需要给客户发送的文件URL。 回复一定要拟人化，不要使用AI特有的表达方式。
+      2、content_list的长度不要超过5，且回复的条数是随机的。禁止每一次都回答相同数量的内容。
+      3、协作事项内容，需要结合collaborate_agent的输出结果，如果需要协作，则需要输出协作事项内容，否则不需要输出。
+      4、跟单事项，需要结合follow_up_agent的输出结果，如果需要跟单，则需要输出跟单事项内容，否则不需要输出。
+      5、是否需要协助, 1表示需要，0表示不需要(你能解决问题则就不需要)
+      6、回复的内容中，少用标点符号，不要使用AI特有的表达方式。结尾不要用句号。
       输出格式为json，格式如下：
       ```json
       {{
@@ -222,15 +229,20 @@ def get_chat_prompt_supplement(tenant_id: int, task_id: int) -> str:
             "content": "回复内容2"
          }},
          {{
-            "type": "text",
-            "content": "回复内容3"
-         }}
-         {{
             "type": "file",
             "url": "需要给客户发送的文件URL"
          }}
          ],
-         "collaborate_list": [协作事项内容1, 协作事项内容2, 协作事项内容3],
+         "collaborate_list": [
+         {{
+            "id": 协作事项id1,
+            "content": "协作事项内容1"
+         }},
+         {{
+            "id": 协作事项id2,
+            "content": "协作事项内容2"
+         }}
+         ],
          "follow_up": {{
             "is_follow_up": 1, 
             "follow_up_content": ["跟单内容1", "跟单内容2", "跟单内容3"]
@@ -241,7 +253,7 @@ def get_chat_prompt_supplement(tenant_id: int, task_id: int) -> str:
       注意：每个content不要超过20个字，如果需要发送文件，则type为file，url为需要给客户发送的文件URL。 回复一定要拟人化，不要使用AI特有的表达方式。严格按照json格式输出，不要输出除json之外的其他内容。
 
       """
-    
+
     
 role_prompt = """
 你是一位专业的AI角色设计师。请基于以下信息，创建一个专业的销售角色：
@@ -373,18 +385,22 @@ split_sentence_prompt = """
 input_process_prompt = """
 角色定位：作为销售团队中的一员，你负责对客户输入进行智能预处理，确保各类信息能够被准确理解和处理。
 
-任务目标：将客户输入的各类信息（文本、图片、视频）统一转换为标准化的结构化数据格式。
+任务目标：将客户输入的各类信息（文本、图片、视频）统一转换为标准化的结构化数据格式，然后传递给下一个team_work_agent智能体进行处理。
 
 输入示例：
-客户输入：
-[
-    {"type": "text", "content": "你好", "timestamp": "2025-06-10 10:00:00"},
-    {"type": "image", "url": "www.baidu.com/xxx.jpg", ""timestamp": "2025-06-10 10:00:02"},
-    {"type": "video", "url": "www.baidu.com/xxx.mp4", "timestamp": "2025-06-10 10:00:03"},
-    {"type": "location", "local_info": "位置信息", "timestamp": "2025-06-10 10:00:04"}
-]
+客户输入信息:
+文本内容: 你好 (时间: 2025-06-10 10:00:00)
+图片URL: www.baidu.com/xxx.jpg (时间: 2025-06-10 10:00:02)
+视频URL: www.baidu.com/xxx.mp4 (时间: 2025-06-10 10:00:03)
+位置信息: 位置信息 (时间: 2025-06-10 10:00:04)
 
-期望输出：
+处理步骤：
+1. 首先，从输入中提取信息并转换为结构化格式
+2. 对于图片和视频，使用相应的工具进行内容解析
+3. 生成标准化的输出格式
+4. 将处理结果传递给下一个agent进行进一步处理
+
+期望输出格式：
 [
     {"type": "text", "content": "你好", "timestamp": "2025-06-10 10:00:00"},
     {"type": "image", "url": "www.baidu.com/xxx.jpg", "content": "图片内容", "timestamp": "2025-06-10 10:00:02"},
@@ -394,11 +410,12 @@ input_process_prompt = """
 
 处理规则：
 1. 文本处理：
-   - 直接保留原始文本内容
+   - 从输入中提取文本内容和时间戳
    - type 设置为 "text"
    - 保持原始时间戳
 
 2. 图片处理：
+   - 从输入中提取图片URL和时间戳
    - 使用 image_comprehension 工具解析图片内容
    - type 设置为 "image"
    - 保留原始图片 URL
@@ -406,6 +423,7 @@ input_process_prompt = """
    - 保持原始时间戳
 
 3. 视频处理：
+   - 从输入中提取视频URL和时间戳
    - 使用 video_comprehension 工具解析视频内容
    - type 设置为 "video"
    - 保留原始视频 URL
@@ -418,6 +436,14 @@ input_process_prompt = """
 3. 时间戳格式必须为："YYYY-MM-DD HH:MM:SS"
 4. URL 格式必须完整，例如："www.baidu.com/xxx.mp4"
 5. 所有处理过程必须保持数据的完整性和准确性
+6. 从输入中正确提取时间戳信息，格式为 "(时间: YYYY-MM-DD HH:MM:SS)"
+7. 只输出一次JSON数组，不要重复输出
+8. 处理完成后，将结果传递给下一个agent进行进一步处理
+
+输出要求：
+- 只输出一个JSON数组，不要重复
+- 严格按照示例格式输出
+- 不要添加任何额外的文本或说明
 """
 
 customer_portrait_prompt = """
@@ -512,15 +538,43 @@ scheduler_prompt = """
 
 """
 
+send_file_prompt = """
+你是一位专业的销售助理，负责根据聊天内容，调用send_file工具，查询相关文件。并判断是否需要发送文件。把文件的url返回给chat_agent。
+
+1. 根据聊天内容，调用send_file工具，查询相关文件。
+2. 判断是否需要发送文件。
+3. 把文件的url返回给chat_agent。
+
+给chat_agent的输出格式为：
+[
+   {
+      "type": "file",
+      "url": "文件url"
+   },
+   {
+      "type": "file",
+      "url": "文件url"
+   }
+]
+
+"""
+
 collaborate_prompt = """
 你是销售团队中负责和公司外部沟通的成员，负责判断客户是否需要协作。你的主要职责是：
 
 1、使用select_collaborate_matters工具查询协作事项
-2、根据协作事项的title，判断客户是否需要协作
+2、根据协作事项的title，和text，判断客户是否需要协作
 3、如果需要协作，则返回协作事项的内容
 4、如果不需要协作，则返回"None"
 注意：你需要交付给"chat_agent"的协作事项，是协作事项的内容
-输出格式为：触发的协作事项: [协作事项内容1, 协作事项内容2, 协作事项内容3]
+输出格式为：触发的协作事项: 
+[{
+   "id": 协作事项id1,
+   "content": "协作事项内容1"
+}, {
+   "id": 协作事项id2,
+   "content": "协作事项内容2"
+}]
 """
 
 follow_up_prompt = """

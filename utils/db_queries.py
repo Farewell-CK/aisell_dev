@@ -1,5 +1,4 @@
 from tools.database import DatabaseManager
-from tools.tools import format_forbidden_content, format_sale_process
 db_manager = DatabaseManager()
 
 
@@ -19,7 +18,7 @@ def select_ai_data(tenant_id: int, task_id: int) -> list[dict]:
                 JOIN
                     sale_task st ON std.task_id = st.id
                 WHERE
-                    st.task_id = {task_id}
+                    st.id = {task_id}
                     AND st.tenant_id = {tenant_id}
                     AND sad.is_del = 0
                     AND std.is_del = 0
@@ -217,6 +216,7 @@ def select_sale_system_prompt(tenant_id : int, task_id : int) -> str:
                 AND sp.is_del = 0;
         """
         result = db_manager.execute_query(query)
+        print(f"销售提示词是: {result}")
         return result[0]['system_prompt']
     except Exception as e:
         return f"查询销售系统提示词失败: {str(e)}"
@@ -226,6 +226,7 @@ def select_forbidden_content(tenant_id : int, task_id : int) -> str:
     查询禁止内容
     """
     try:
+        from tools.tools import format_forbidden_content
         query = f"""
             SELECT
                 sf.text AS forbidden_content
@@ -234,8 +235,8 @@ def select_forbidden_content(tenant_id : int, task_id : int) -> str:
             JOIN
                 sale_strategy ss ON sf.strategy_id = ss.id
             WHERE
-                ss.tenant_id = {tenant_id}
-                AND ss.task_id = {task_id}
+                ss.tenant_id = "{tenant_id}"
+                AND ss.task_id = "{task_id}"
                 AND sf.is_del = 0  -- 确保禁止事项未被逻辑删除
                 AND ss.is_del = 0; -- 确保销售策略未被逻辑删除
         """
@@ -253,6 +254,7 @@ def select_sale_process(tenant_id : int, task_id : int) -> str:
     查询销售流程
     """
     try:
+        from tools.tools import format_sale_process
         query = f"""
             SELECT
                 sp.title AS process_title,
@@ -288,7 +290,6 @@ def select_collaborate_matters(tenant_id : int, task_id : int) -> list[dict]:
     根据租户ID和任务ID，查询对应的协作事项的ID、标题和内容。
 
     Args:
-        db_manager (DatabaseManager): DatabaseManager 类的实例。
         tenant_id (int): 租户ID。
         task_id (int): 任务ID。
 

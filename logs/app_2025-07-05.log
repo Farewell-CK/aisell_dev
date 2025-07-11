@@ -6245,3 +6245,1886 @@ Exception: 更新数据失败: (pymysql.err.OperationalError) (2006, "MySQL serv
 2025-07-06 10:18:43 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
 2025-07-06 10:18:43 - summarizer - INFO - summarize_document:1667 - LLM 文档总结接收成功，长度: 527
 2025-07-06 10:18:43 - database - INFO - update_sale_ai_data_status:83 - 成功更新 AI 数据记录 ID=175 的状态为 2
+2025-07-06 13:41:41 - database - ERROR - update_sale_ai_data_status:86 - 更新 AI 数据记录 ID=175 状态失败：更新数据失败: (pymysql.err.OperationalError) (2006, "MySQL server has gone away (TimeoutError(110, 'Connection timed out'))")
+[SQL: 
+    UPDATE sale_ai_data
+    SET
+        ai_status = 1,
+        ai_text = '处理中...',
+        update_time = CURRENT_TIMESTAMP
+    WHERE
+        id = 175
+        AND tenant_id = 1
+        AND is_del = 0; -- 仅更新未被逻辑删除的记录
+    ]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 806, in _write_bytes
+    self._sock.sendall(data)
+TimeoutError: [Errno 110] Connection timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 864, in _execute_command
+    self._write_bytes(packet)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 809, in _write_bytes
+    raise err.OperationalError(
+pymysql.err.OperationalError: (2006, "MySQL server has gone away (TimeoutError(110, 'Connection timed out'))")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/tools/database.py", line 139, in execute_update
+    result = connection.execute(text(query))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1416, in execute
+    return meth(
+           ^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 523, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1638, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1843, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1983, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2352, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 864, in _execute_command
+    self._write_bytes(packet)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 809, in _write_bytes
+    raise err.OperationalError(
+sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (2006, "MySQL server has gone away (TimeoutError(110, 'Connection timed out'))")
+[SQL: 
+    UPDATE sale_ai_data
+    SET
+        ai_status = 1,
+        ai_text = '处理中...',
+        update_time = CURRENT_TIMESTAMP
+    WHERE
+        id = 175
+        AND tenant_id = 1
+        AND is_del = 0; -- 仅更新未被逻辑删除的记录
+    ]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/db_insert.py", line 82, in update_sale_ai_data_status
+    db_manager.execute_update(query)
+  File "/home/funhpc/workspace/aisell_dev/tools/database.py", line 143, in execute_update
+    except Exception as e:
+        ^^^^^^^^^^^^^^^^^^^
+Exception: 更新数据失败: (pymysql.err.OperationalError) (2006, "MySQL server has gone away (TimeoutError(110, 'Connection timed out'))")
+[SQL: 
+    UPDATE sale_ai_data
+    SET
+        ai_status = 1,
+        ai_text = '处理中...',
+        update_time = CURRENT_TIMESTAMP
+    WHERE
+        id = 175
+        AND tenant_id = 1
+        AND is_del = 0; -- 仅更新未被逻辑删除的记录
+    ]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-07-06 13:41:42 - summarizer - INFO - summarize_document:1583 - 开始总结文档: /tmp/tmp6rwc2yvb.docx
+2025-07-06 13:41:42 - summarizer - INFO - extract_docx_content:1451 - 开始提取DOCX内容: /tmp/tmp6rwc2yvb.docx
+2025-07-06 13:41:42 - summarizer - INFO - extract_docx_content:1478 - DOCX共有 3 个原始段落。
+2025-07-06 13:41:42 - summarizer - INFO - extract_docx_content:1511 - DOCX内容提取完成: /tmp/tmp6rwc2yvb.docx
+2025-07-06 13:41:42 - summarizer - INFO - summarize_document:1609 - 提取的文档内容序列化后字符串长度: 201
+2025-07-06 13:41:42 - summarizer - INFO - summarize_document:1646 - 向 LLM (ernie-4.5-turbo-128k) 发送请求进行文档总结...
+2025-07-06 13:41:46 - database - INFO - update_sale_ai_data_status:83 - 成功更新 AI 数据记录 ID=175 的状态为 1
+2025-07-06 13:41:46 - summarizer - INFO - summarize_document:1583 - 开始总结文档: /tmp/tmpgyfmxows.docx
+2025-07-06 13:41:46 - summarizer - INFO - extract_docx_content:1451 - 开始提取DOCX内容: /tmp/tmpgyfmxows.docx
+2025-07-06 13:41:46 - summarizer - INFO - extract_docx_content:1478 - DOCX共有 3 个原始段落。
+2025-07-06 13:41:46 - summarizer - INFO - extract_docx_content:1511 - DOCX内容提取完成: /tmp/tmpgyfmxows.docx
+2025-07-06 13:41:46 - summarizer - INFO - summarize_document:1609 - 提取的文档内容序列化后字符串长度: 201
+2025-07-06 13:41:46 - summarizer - INFO - summarize_document:1646 - 向 LLM (ernie-4.5-turbo-128k) 发送请求进行文档总结...
+2025-07-06 13:41:52 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-06 13:41:52 - summarizer - INFO - summarize_document:1667 - LLM 文档总结接收成功，长度: 668
+2025-07-06 13:41:53 - database - INFO - update_sale_ai_data_status:83 - 成功更新 AI 数据记录 ID=175 的状态为 2
+2025-07-06 13:41:53 - database - INFO - update_sale_ai_data_status:83 - 成功更新 AI 数据记录 ID=172 的状态为 1
+2025-07-06 13:41:53 - summarizer - INFO - summarize_single_image:370 - 开始处理单张图片总结: /tmp/tmpiipg92e_.jpeg
+2025-07-06 13:41:53 - summarizer - INFO - get_image_url_dict:343 - 输入为本地文件路径，将进行Base64编码: /tmp/tmpiipg92e_.jpeg
+2025-07-06 13:41:53 - summarizer - INFO - encode_image:321 - 图片 '/tmp/tmpiipg92e_.jpeg' Base64编码成功。编码后数据长度(部分): 100...
+2025-07-06 13:41:53 - summarizer - INFO - get_image_url_dict:358 - 推断出图片 '/tmp/tmpiipg92e_.jpeg' 的MIME类型为: image/jpeg
+2025-07-06 13:41:53 - summarizer - INFO - summarize_single_image:385 - 向模型 'ernie-4.5-turbo-vl-preview' 发送单图总结请求。图片来源: /tmp/tmpiipg92e_.jpeg
+2025-07-06 13:41:55 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-06 13:41:55 - summarizer - INFO - summarize_document:1667 - LLM 文档总结接收成功，长度: 557
+2025-07-06 13:41:55 - database - INFO - update_sale_ai_data_status:83 - 成功更新 AI 数据记录 ID=175 的状态为 2
+2025-07-06 13:41:57 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-06 13:41:57 - summarizer - INFO - summarize_single_image:408 - 成功从模型获取单图总结。总结长度: 83 字符。
+2025-07-06 13:41:57 - database - INFO - update_sale_ai_data_status:83 - 成功更新 AI 数据记录 ID=172 的状态为 2
+2025-07-06 13:45:49 - database - INFO - update_sale_ai_data_status:83 - 成功更新 AI 数据记录 ID=175 的状态为 1
+2025-07-06 13:45:49 - summarizer - INFO - summarize_document:1583 - 开始总结文档: /tmp/tmpe_fmcwxs.docx
+2025-07-06 13:45:49 - summarizer - INFO - extract_docx_content:1451 - 开始提取DOCX内容: /tmp/tmpe_fmcwxs.docx
+2025-07-06 13:45:49 - summarizer - INFO - extract_docx_content:1478 - DOCX共有 3 个原始段落。
+2025-07-06 13:45:49 - summarizer - INFO - extract_docx_content:1511 - DOCX内容提取完成: /tmp/tmpe_fmcwxs.docx
+2025-07-06 13:45:49 - summarizer - INFO - summarize_document:1609 - 提取的文档内容序列化后字符串长度: 201
+2025-07-06 13:45:49 - summarizer - INFO - summarize_document:1646 - 向 LLM (ernie-4.5-turbo-128k) 发送请求进行文档总结...
+2025-07-06 13:45:59 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-06 13:45:59 - summarizer - INFO - summarize_document:1667 - LLM 文档总结接收成功，长度: 603
+2025-07-06 13:45:59 - database - INFO - update_sale_ai_data_status:83 - 成功更新 AI 数据记录 ID=175 的状态为 2
+2025-07-06 14:01:36 - database - INFO - update_sale_ai_data_status:83 - 成功更新 AI 数据记录 ID=163 的状态为 1
+2025-07-06 14:01:36 - summarizer - INFO - summarize_single_image:370 - 开始处理单张图片总结: /tmp/tmpueu2d060.jpeg
+2025-07-06 14:01:36 - summarizer - INFO - get_image_url_dict:343 - 输入为本地文件路径，将进行Base64编码: /tmp/tmpueu2d060.jpeg
+2025-07-06 14:01:36 - summarizer - INFO - encode_image:321 - 图片 '/tmp/tmpueu2d060.jpeg' Base64编码成功。编码后数据长度(部分): 100...
+2025-07-06 14:01:36 - summarizer - INFO - get_image_url_dict:358 - 推断出图片 '/tmp/tmpueu2d060.jpeg' 的MIME类型为: image/jpeg
+2025-07-06 14:01:36 - summarizer - INFO - summarize_single_image:385 - 向模型 'ernie-4.5-turbo-vl-preview' 发送单图总结请求。图片来源: /tmp/tmpueu2d060.jpeg
+2025-07-06 14:01:39 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-06 14:01:39 - summarizer - INFO - summarize_single_image:408 - 成功从模型获取单图总结。总结长度: 85 字符。
+2025-07-06 14:01:39 - database - INFO - update_sale_ai_data_status:83 - 成功更新 AI 数据记录 ID=163 的状态为 2
+2025-07-06 15:51:49 - database - ERROR - update_sale_ai_data_status:86 - 更新 AI 数据记录 ID=177 状态失败：更新数据失败: (pymysql.err.OperationalError) (2013, 'Lost connection to MySQL server during query ([Errno 110] Connection timed out)')
+[SQL: 
+    UPDATE sale_ai_data
+    SET
+        ai_status = 1,
+        ai_text = '处理中...',
+        update_time = CURRENT_TIMESTAMP
+    WHERE
+        id = 177
+        AND tenant_id = 30
+        AND is_del = 0; -- 仅更新未被逻辑删除的记录
+    ]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 782, in _read_bytes
+    data = self._rfile.read(num_bytes)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: [Errno 110] Connection timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+                    ^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 788, in _read_bytes
+    raise err.OperationalError(
+pymysql.err.OperationalError: (2013, 'Lost connection to MySQL server during query ([Errno 110] Connection timed out)')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/tools/database.py", line 139, in execute_update
+    result = connection.execute(text(query))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1416, in execute
+    return meth(
+           ^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 523, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1638, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1843, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1983, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2352, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+                    ^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 788, in _read_bytes
+    raise err.OperationalError(
+sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (2013, 'Lost connection to MySQL server during query ([Errno 110] Connection timed out)')
+[SQL: 
+    UPDATE sale_ai_data
+    SET
+        ai_status = 1,
+        ai_text = '处理中...',
+        update_time = CURRENT_TIMESTAMP
+    WHERE
+        id = 177
+        AND tenant_id = 30
+        AND is_del = 0; -- 仅更新未被逻辑删除的记录
+    ]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/db_insert.py", line 82, in update_sale_ai_data_status
+    db_manager.execute_update(query)
+  File "/home/funhpc/workspace/aisell_dev/tools/database.py", line 143, in execute_update
+    except Exception as e:
+        ^^^^^^^^^^^^^^^^^^^
+Exception: 更新数据失败: (pymysql.err.OperationalError) (2013, 'Lost connection to MySQL server during query ([Errno 110] Connection timed out)')
+[SQL: 
+    UPDATE sale_ai_data
+    SET
+        ai_status = 1,
+        ai_text = '处理中...',
+        update_time = CURRENT_TIMESTAMP
+    WHERE
+        id = 177
+        AND tenant_id = 30
+        AND is_del = 0; -- 仅更新未被逻辑删除的记录
+    ]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-07-06 15:51:49 - summarizer - INFO - summarize_document:1583 - 开始总结文档: /tmp/tmpl5baplv9.docx
+2025-07-06 15:51:49 - summarizer - INFO - extract_docx_content:1451 - 开始提取DOCX内容: /tmp/tmpl5baplv9.docx
+2025-07-06 15:51:49 - summarizer - INFO - extract_docx_content:1478 - DOCX共有 85 个原始段落。
+2025-07-06 15:51:49 - summarizer - INFO - extract_docx_content:1511 - DOCX内容提取完成: /tmp/tmpl5baplv9.docx
+2025-07-06 15:51:49 - summarizer - INFO - summarize_document:1609 - 提取的文档内容序列化后字符串长度: 3714
+2025-07-06 15:51:49 - summarizer - INFO - summarize_document:1646 - 向 LLM (ernie-4.5-turbo-128k) 发送请求进行文档总结...
+2025-07-06 15:52:15 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-06 15:52:15 - summarizer - INFO - summarize_document:1667 - LLM 文档总结接收成功，长度: 1657
+2025-07-06 15:52:15 - database - INFO - update_sale_ai_data_status:83 - 成功更新 AI 数据记录 ID=177 的状态为 2
+2025-07-06 18:58:16 - database - INFO - update_sale_ai_data_status:83 - 成功更新 AI 数据记录 ID=162 的状态为 1
+2025-07-06 18:58:16 - summarizer - INFO - summarize_document:1583 - 开始总结文档: /tmp/tmpw71hrqb6.docx
+2025-07-06 18:58:16 - summarizer - INFO - extract_docx_content:1451 - 开始提取DOCX内容: /tmp/tmpw71hrqb6.docx
+2025-07-06 18:58:16 - summarizer - INFO - extract_docx_content:1478 - DOCX共有 85 个原始段落。
+2025-07-06 18:58:16 - summarizer - INFO - extract_docx_content:1511 - DOCX内容提取完成: /tmp/tmpw71hrqb6.docx
+2025-07-06 18:58:16 - summarizer - INFO - summarize_document:1609 - 提取的文档内容序列化后字符串长度: 3714
+2025-07-06 18:58:16 - summarizer - INFO - summarize_document:1646 - 向 LLM (ernie-4.5-turbo-128k) 发送请求进行文档总结...
+2025-07-06 18:58:20 - database - ERROR - update_sale_ai_data_status:86 - 更新 AI 数据记录 ID=172 状态失败：更新数据失败: (pymysql.err.OperationalError) (2006, "MySQL server has gone away (TimeoutError(110, 'Connection timed out'))")
+[SQL: 
+    UPDATE sale_ai_data
+    SET
+        ai_status = 1,
+        ai_text = '处理中...',
+        update_time = CURRENT_TIMESTAMP
+    WHERE
+        id = 172
+        AND tenant_id = 1
+        AND is_del = 0; -- 仅更新未被逻辑删除的记录
+    ]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 806, in _write_bytes
+    self._sock.sendall(data)
+TimeoutError: [Errno 110] Connection timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 864, in _execute_command
+    self._write_bytes(packet)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 809, in _write_bytes
+    raise err.OperationalError(
+pymysql.err.OperationalError: (2006, "MySQL server has gone away (TimeoutError(110, 'Connection timed out'))")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/tools/database.py", line 139, in execute_update
+    result = connection.execute(text(query))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1416, in execute
+    return meth(
+           ^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 523, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1638, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1843, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1983, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2352, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 864, in _execute_command
+    self._write_bytes(packet)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 809, in _write_bytes
+    raise err.OperationalError(
+sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (2006, "MySQL server has gone away (TimeoutError(110, 'Connection timed out'))")
+[SQL: 
+    UPDATE sale_ai_data
+    SET
+        ai_status = 1,
+        ai_text = '处理中...',
+        update_time = CURRENT_TIMESTAMP
+    WHERE
+        id = 172
+        AND tenant_id = 1
+        AND is_del = 0; -- 仅更新未被逻辑删除的记录
+    ]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/db_insert.py", line 82, in update_sale_ai_data_status
+    db_manager.execute_update(query)
+  File "/home/funhpc/workspace/aisell_dev/tools/database.py", line 143, in execute_update
+    except Exception as e:
+        ^^^^^^^^^^^^^^^^^^^
+Exception: 更新数据失败: (pymysql.err.OperationalError) (2006, "MySQL server has gone away (TimeoutError(110, 'Connection timed out'))")
+[SQL: 
+    UPDATE sale_ai_data
+    SET
+        ai_status = 1,
+        ai_text = '处理中...',
+        update_time = CURRENT_TIMESTAMP
+    WHERE
+        id = 172
+        AND tenant_id = 1
+        AND is_del = 0; -- 仅更新未被逻辑删除的记录
+    ]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-07-06 18:58:20 - summarizer - INFO - summarize_single_image:370 - 开始处理单张图片总结: /tmp/tmp8ikxsffe.jpeg
+2025-07-06 18:58:20 - summarizer - INFO - get_image_url_dict:343 - 输入为本地文件路径，将进行Base64编码: /tmp/tmp8ikxsffe.jpeg
+2025-07-06 18:58:20 - summarizer - INFO - encode_image:321 - 图片 '/tmp/tmp8ikxsffe.jpeg' Base64编码成功。编码后数据长度(部分): 100...
+2025-07-06 18:58:20 - summarizer - INFO - get_image_url_dict:358 - 推断出图片 '/tmp/tmp8ikxsffe.jpeg' 的MIME类型为: image/jpeg
+2025-07-06 18:58:20 - summarizer - INFO - summarize_single_image:385 - 向模型 'ernie-4.5-turbo-vl-preview' 发送单图总结请求。图片来源: /tmp/tmp8ikxsffe.jpeg
+2025-07-06 18:58:23 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-06 18:58:23 - summarizer - INFO - summarize_single_image:408 - 成功从模型获取单图总结。总结长度: 61 字符。
+2025-07-06 18:58:24 - database - INFO - update_sale_ai_data_status:83 - 成功更新 AI 数据记录 ID=172 的状态为 2
+2025-07-06 18:58:40 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-06 18:58:40 - summarizer - INFO - summarize_document:1667 - LLM 文档总结接收成功，长度: 1763
+2025-07-06 18:58:41 - database - INFO - update_sale_ai_data_status:83 - 成功更新 AI 数据记录 ID=162 的状态为 2
+2025-07-06 18:58:41 - database - INFO - update_sale_ai_data_status:83 - 成功更新 AI 数据记录 ID=172 的状态为 1
+2025-07-06 18:58:41 - summarizer - INFO - summarize_single_image:370 - 开始处理单张图片总结: /tmp/tmperookn1y.jpeg
+2025-07-06 18:58:41 - summarizer - INFO - get_image_url_dict:343 - 输入为本地文件路径，将进行Base64编码: /tmp/tmperookn1y.jpeg
+2025-07-06 18:58:41 - summarizer - INFO - encode_image:321 - 图片 '/tmp/tmperookn1y.jpeg' Base64编码成功。编码后数据长度(部分): 100...
+2025-07-06 18:58:41 - summarizer - INFO - get_image_url_dict:358 - 推断出图片 '/tmp/tmperookn1y.jpeg' 的MIME类型为: image/jpeg
+2025-07-06 18:58:41 - summarizer - INFO - summarize_single_image:385 - 向模型 'ernie-4.5-turbo-vl-preview' 发送单图总结请求。图片来源: /tmp/tmperookn1y.jpeg
+2025-07-06 18:58:44 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-06 18:58:44 - summarizer - INFO - summarize_single_image:408 - 成功从模型获取单图总结。总结长度: 81 字符。
+2025-07-06 18:58:44 - database - INFO - update_sale_ai_data_status:83 - 成功更新 AI 数据记录 ID=172 的状态为 2
+2025-07-06 19:41:38 - database - INFO - update_sale_ai_data_status:83 - 成功更新 AI 数据记录 ID=171 的状态为 1
+2025-07-06 19:41:38 - summarizer - INFO - summarize_single_image:370 - 开始处理单张图片总结: /tmp/tmp56gk0ky7.jpeg
+2025-07-06 19:41:38 - summarizer - INFO - get_image_url_dict:343 - 输入为本地文件路径，将进行Base64编码: /tmp/tmp56gk0ky7.jpeg
+2025-07-06 19:41:38 - summarizer - INFO - encode_image:321 - 图片 '/tmp/tmp56gk0ky7.jpeg' Base64编码成功。编码后数据长度(部分): 100...
+2025-07-06 19:41:38 - summarizer - INFO - get_image_url_dict:358 - 推断出图片 '/tmp/tmp56gk0ky7.jpeg' 的MIME类型为: image/jpeg
+2025-07-06 19:41:38 - summarizer - INFO - summarize_single_image:385 - 向模型 'ernie-4.5-turbo-vl-preview' 发送单图总结请求。图片来源: /tmp/tmp56gk0ky7.jpeg
+2025-07-06 19:41:42 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-06 19:41:42 - summarizer - INFO - summarize_single_image:408 - 成功从模型获取单图总结。总结长度: 76 字符。
+2025-07-06 19:41:42 - database - INFO - update_sale_ai_data_status:83 - 成功更新 AI 数据记录 ID=171 的状态为 2
+2025-07-06 19:50:12 - database - ERROR - update_sale_ai_data_status:86 - 更新 AI 数据记录 ID=162 状态失败：更新数据失败: (pymysql.err.OperationalError) (2013, 'Lost connection to MySQL server during query ([Errno 110] Connection timed out)')
+[SQL: 
+    UPDATE sale_ai_data
+    SET
+        ai_status = 1,
+        ai_text = '处理中...',
+        update_time = CURRENT_TIMESTAMP
+    WHERE
+        id = 162
+        AND tenant_id = 1
+        AND is_del = 0; -- 仅更新未被逻辑删除的记录
+    ]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 782, in _read_bytes
+    data = self._rfile.read(num_bytes)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: [Errno 110] Connection timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+                    ^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 788, in _read_bytes
+    raise err.OperationalError(
+pymysql.err.OperationalError: (2013, 'Lost connection to MySQL server during query ([Errno 110] Connection timed out)')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/tools/database.py", line 139, in execute_update
+    result = connection.execute(text(query))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1416, in execute
+    return meth(
+           ^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 523, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1638, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1843, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1983, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2352, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+                    ^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 788, in _read_bytes
+    raise err.OperationalError(
+sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (2013, 'Lost connection to MySQL server during query ([Errno 110] Connection timed out)')
+[SQL: 
+    UPDATE sale_ai_data
+    SET
+        ai_status = 1,
+        ai_text = '处理中...',
+        update_time = CURRENT_TIMESTAMP
+    WHERE
+        id = 162
+        AND tenant_id = 1
+        AND is_del = 0; -- 仅更新未被逻辑删除的记录
+    ]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/db_insert.py", line 82, in update_sale_ai_data_status
+    db_manager.execute_update(query)
+  File "/home/funhpc/workspace/aisell_dev/tools/database.py", line 143, in execute_update
+    except Exception as e:
+        ^^^^^^^^^^^^^^^^^^^
+Exception: 更新数据失败: (pymysql.err.OperationalError) (2013, 'Lost connection to MySQL server during query ([Errno 110] Connection timed out)')
+[SQL: 
+    UPDATE sale_ai_data
+    SET
+        ai_status = 1,
+        ai_text = '处理中...',
+        update_time = CURRENT_TIMESTAMP
+    WHERE
+        id = 162
+        AND tenant_id = 1
+        AND is_del = 0; -- 仅更新未被逻辑删除的记录
+    ]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-07-06 19:50:12 - summarizer - INFO - summarize_document:1583 - 开始总结文档: /tmp/tmpqgeg1yh8.docx
+2025-07-06 19:50:12 - summarizer - INFO - extract_docx_content:1451 - 开始提取DOCX内容: /tmp/tmpqgeg1yh8.docx
+2025-07-06 19:50:12 - summarizer - INFO - extract_docx_content:1478 - DOCX共有 85 个原始段落。
+2025-07-06 19:50:12 - summarizer - INFO - extract_docx_content:1511 - DOCX内容提取完成: /tmp/tmpqgeg1yh8.docx
+2025-07-06 19:50:12 - summarizer - INFO - summarize_document:1609 - 提取的文档内容序列化后字符串长度: 3714
+2025-07-06 19:50:12 - summarizer - INFO - summarize_document:1646 - 向 LLM (ernie-4.5-turbo-128k) 发送请求进行文档总结...
+2025-07-06 19:50:22 - database - ERROR - update_sale_ai_data_status:86 - 更新 AI 数据记录 ID=162 状态失败：更新数据失败: (pymysql.err.OperationalError) (2013, 'Lost connection to MySQL server during query ([Errno 110] Connection timed out)')
+[SQL: 
+    UPDATE sale_ai_data
+    SET
+        ai_status = 1,
+        ai_text = '处理中...',
+        update_time = CURRENT_TIMESTAMP
+    WHERE
+        id = 162
+        AND tenant_id = 1
+        AND is_del = 0; -- 仅更新未被逻辑删除的记录
+    ]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 782, in _read_bytes
+    data = self._rfile.read(num_bytes)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: [Errno 110] Connection timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+                    ^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 788, in _read_bytes
+    raise err.OperationalError(
+pymysql.err.OperationalError: (2013, 'Lost connection to MySQL server during query ([Errno 110] Connection timed out)')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/tools/database.py", line 139, in execute_update
+    result = connection.execute(text(query))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1416, in execute
+    return meth(
+           ^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 523, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1638, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1843, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1983, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2352, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+                    ^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 788, in _read_bytes
+    raise err.OperationalError(
+sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (2013, 'Lost connection to MySQL server during query ([Errno 110] Connection timed out)')
+[SQL: 
+    UPDATE sale_ai_data
+    SET
+        ai_status = 1,
+        ai_text = '处理中...',
+        update_time = CURRENT_TIMESTAMP
+    WHERE
+        id = 162
+        AND tenant_id = 1
+        AND is_del = 0; -- 仅更新未被逻辑删除的记录
+    ]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/db_insert.py", line 82, in update_sale_ai_data_status
+    db_manager.execute_update(query)
+  File "/home/funhpc/workspace/aisell_dev/tools/database.py", line 143, in execute_update
+    except Exception as e:
+        ^^^^^^^^^^^^^^^^^^^
+Exception: 更新数据失败: (pymysql.err.OperationalError) (2013, 'Lost connection to MySQL server during query ([Errno 110] Connection timed out)')
+[SQL: 
+    UPDATE sale_ai_data
+    SET
+        ai_status = 1,
+        ai_text = '处理中...',
+        update_time = CURRENT_TIMESTAMP
+    WHERE
+        id = 162
+        AND tenant_id = 1
+        AND is_del = 0; -- 仅更新未被逻辑删除的记录
+    ]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-07-06 19:50:23 - summarizer - INFO - summarize_document:1583 - 开始总结文档: /tmp/tmp0rjnteb_.docx
+2025-07-06 19:50:23 - summarizer - INFO - extract_docx_content:1451 - 开始提取DOCX内容: /tmp/tmp0rjnteb_.docx
+2025-07-06 19:50:23 - summarizer - INFO - extract_docx_content:1478 - DOCX共有 85 个原始段落。
+2025-07-06 19:50:23 - summarizer - INFO - extract_docx_content:1511 - DOCX内容提取完成: /tmp/tmp0rjnteb_.docx
+2025-07-06 19:50:23 - summarizer - INFO - summarize_document:1609 - 提取的文档内容序列化后字符串长度: 3714
+2025-07-06 19:50:23 - summarizer - INFO - summarize_document:1646 - 向 LLM (ernie-4.5-turbo-128k) 发送请求进行文档总结...
+2025-07-06 19:50:30 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-06 19:50:30 - summarizer - INFO - summarize_document:1667 - LLM 文档总结接收成功，长度: 1380
+2025-07-06 19:50:31 - database - INFO - update_sale_ai_data_status:83 - 成功更新 AI 数据记录 ID=162 的状态为 2
+2025-07-06 19:50:37 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-06 19:50:37 - summarizer - INFO - summarize_document:1667 - LLM 文档总结接收成功，长度: 970
+2025-07-06 19:50:38 - database - INFO - update_sale_ai_data_status:83 - 成功更新 AI 数据记录 ID=162 的状态为 2
+2025-07-07 09:17:54 - database - INFO - update_sale_ai_data_status:83 - 成功更新 AI 数据记录 ID=177 的状态为 1
+2025-07-07 09:17:54 - summarizer - INFO - summarize_document:1583 - 开始总结文档: /tmp/tmphfghtxwu.docx
+2025-07-07 09:17:54 - summarizer - INFO - extract_docx_content:1451 - 开始提取DOCX内容: /tmp/tmphfghtxwu.docx
+2025-07-07 09:17:54 - summarizer - INFO - extract_docx_content:1478 - DOCX共有 85 个原始段落。
+2025-07-07 09:17:54 - summarizer - INFO - extract_docx_content:1511 - DOCX内容提取完成: /tmp/tmphfghtxwu.docx
+2025-07-07 09:17:54 - summarizer - INFO - summarize_document:1609 - 提取的文档内容序列化后字符串长度: 3714
+2025-07-07 09:17:54 - summarizer - INFO - summarize_document:1646 - 向 LLM (ernie-4.5-turbo-128k) 发送请求进行文档总结...
+2025-07-07 09:17:55 - database - ERROR - update_sale_ai_data_status:86 - 更新 AI 数据记录 ID=177 状态失败：更新数据失败: (pymysql.err.OperationalError) (2006, "MySQL server has gone away (TimeoutError(110, 'Connection timed out'))")
+[SQL: 
+    UPDATE sale_ai_data
+    SET
+        ai_status = 1,
+        ai_text = '处理中...',
+        update_time = CURRENT_TIMESTAMP
+    WHERE
+        id = 177
+        AND tenant_id = 30
+        AND is_del = 0; -- 仅更新未被逻辑删除的记录
+    ]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 806, in _write_bytes
+    self._sock.sendall(data)
+TimeoutError: [Errno 110] Connection timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 864, in _execute_command
+    self._write_bytes(packet)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 809, in _write_bytes
+    raise err.OperationalError(
+pymysql.err.OperationalError: (2006, "MySQL server has gone away (TimeoutError(110, 'Connection timed out'))")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/tools/database.py", line 139, in execute_update
+    result = connection.execute(text(query))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1416, in execute
+    return meth(
+           ^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 523, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1638, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1843, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1983, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2352, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 864, in _execute_command
+    self._write_bytes(packet)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 809, in _write_bytes
+    raise err.OperationalError(
+sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (2006, "MySQL server has gone away (TimeoutError(110, 'Connection timed out'))")
+[SQL: 
+    UPDATE sale_ai_data
+    SET
+        ai_status = 1,
+        ai_text = '处理中...',
+        update_time = CURRENT_TIMESTAMP
+    WHERE
+        id = 177
+        AND tenant_id = 30
+        AND is_del = 0; -- 仅更新未被逻辑删除的记录
+    ]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/db_insert.py", line 82, in update_sale_ai_data_status
+    logger.info(f"成功插入 AI 数据记录：tenant_id={tenant_id}, type={ai_type}, status={ai_status}")
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/tools/database.py", line 143, in execute_update
+    except Exception as e:
+        ^^^^^^^^^^^^^^^^^^^
+Exception: 更新数据失败: (pymysql.err.OperationalError) (2006, "MySQL server has gone away (TimeoutError(110, 'Connection timed out'))")
+[SQL: 
+    UPDATE sale_ai_data
+    SET
+        ai_status = 1,
+        ai_text = '处理中...',
+        update_time = CURRENT_TIMESTAMP
+    WHERE
+        id = 177
+        AND tenant_id = 30
+        AND is_del = 0; -- 仅更新未被逻辑删除的记录
+    ]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-07-07 09:17:55 - summarizer - INFO - summarize_document:1583 - 开始总结文档: /tmp/tmpwqthfazh.docx
+2025-07-07 09:17:55 - summarizer - INFO - extract_docx_content:1451 - 开始提取DOCX内容: /tmp/tmpwqthfazh.docx
+2025-07-07 09:17:55 - summarizer - INFO - extract_docx_content:1478 - DOCX共有 85 个原始段落。
+2025-07-07 09:17:55 - summarizer - INFO - extract_docx_content:1511 - DOCX内容提取完成: /tmp/tmpwqthfazh.docx
+2025-07-07 09:17:55 - summarizer - INFO - summarize_document:1609 - 提取的文档内容序列化后字符串长度: 3714
+2025-07-07 09:17:55 - summarizer - INFO - summarize_document:1646 - 向 LLM (ernie-4.5-turbo-128k) 发送请求进行文档总结...
+2025-07-07 09:17:58 - database - INFO - update_sale_ai_data_status:83 - 成功更新 AI 数据记录 ID=177 的状态为 1
+2025-07-07 09:17:58 - summarizer - INFO - summarize_document:1583 - 开始总结文档: /tmp/tmp20bgl452.docx
+2025-07-07 09:17:58 - summarizer - INFO - extract_docx_content:1451 - 开始提取DOCX内容: /tmp/tmp20bgl452.docx
+2025-07-07 09:17:58 - summarizer - INFO - extract_docx_content:1478 - DOCX共有 85 个原始段落。
+2025-07-07 09:17:58 - summarizer - INFO - extract_docx_content:1511 - DOCX内容提取完成: /tmp/tmp20bgl452.docx
+2025-07-07 09:17:58 - summarizer - INFO - summarize_document:1609 - 提取的文档内容序列化后字符串长度: 3714
+2025-07-07 09:17:58 - summarizer - INFO - summarize_document:1646 - 向 LLM (ernie-4.5-turbo-128k) 发送请求进行文档总结...
+2025-07-07 09:18:11 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-07 09:18:11 - summarizer - INFO - summarize_document:1667 - LLM 文档总结接收成功，长度: 1089
+2025-07-07 09:18:12 - database - INFO - update_sale_ai_data_status:83 - 成功更新 AI 数据记录 ID=177 的状态为 2
+2025-07-07 09:18:16 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-07 09:18:16 - summarizer - INFO - summarize_document:1667 - LLM 文档总结接收成功，长度: 1282
+2025-07-07 09:18:16 - database - INFO - update_sale_ai_data_status:83 - 成功更新 AI 数据记录 ID=177 的状态为 2
+2025-07-07 09:18:21 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-07 09:18:21 - summarizer - INFO - summarize_document:1667 - LLM 文档总结接收成功，长度: 1796
+2025-07-07 09:18:21 - database - INFO - update_sale_ai_data_status:83 - 成功更新 AI 数据记录 ID=177 的状态为 2
+2025-07-07 10:11:15 - database - ERROR - update_sale_ai_data_status:86 - 更新 AI 数据记录 ID=178 状态失败：更新数据失败: (pymysql.err.OperationalError) (2013, 'Lost connection to MySQL server during query ([Errno 110] Connection timed out)')
+[SQL: 
+    UPDATE sale_ai_data
+    SET
+        ai_status = 1,
+        ai_text = '处理中...',
+        update_time = CURRENT_TIMESTAMP
+    WHERE
+        id = 178
+        AND tenant_id = 1
+        AND is_del = 0; -- 仅更新未被逻辑删除的记录
+    ]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 782, in _read_bytes
+    data = self._rfile.read(num_bytes)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: [Errno 110] Connection timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+                    ^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 788, in _read_bytes
+    raise err.OperationalError(
+pymysql.err.OperationalError: (2013, 'Lost connection to MySQL server during query ([Errno 110] Connection timed out)')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/tools/database.py", line 139, in execute_update
+    result = connection.execute(text(query))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1416, in execute
+    return meth(
+           ^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 523, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1638, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1843, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1983, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2352, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+                    ^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 788, in _read_bytes
+    raise err.OperationalError(
+sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (2013, 'Lost connection to MySQL server during query ([Errno 110] Connection timed out)')
+[SQL: 
+    UPDATE sale_ai_data
+    SET
+        ai_status = 1,
+        ai_text = '处理中...',
+        update_time = CURRENT_TIMESTAMP
+    WHERE
+        id = 178
+        AND tenant_id = 1
+        AND is_del = 0; -- 仅更新未被逻辑删除的记录
+    ]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/db_insert.py", line 82, in update_sale_ai_data_status
+    logger.info(f"成功插入 AI 数据记录：tenant_id={tenant_id}, type={ai_type}, status={ai_status}")
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/tools/database.py", line 143, in execute_update
+    except Exception as e:
+        ^^^^^^^^^^^^^^^^^^^
+Exception: 更新数据失败: (pymysql.err.OperationalError) (2013, 'Lost connection to MySQL server during query ([Errno 110] Connection timed out)')
+[SQL: 
+    UPDATE sale_ai_data
+    SET
+        ai_status = 1,
+        ai_text = '处理中...',
+        update_time = CURRENT_TIMESTAMP
+    WHERE
+        id = 178
+        AND tenant_id = 1
+        AND is_del = 0; -- 仅更新未被逻辑删除的记录
+    ]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-07-07 10:11:15 - summarizer - INFO - summarize_single_image:370 - 开始处理单张图片总结: /tmp/tmpxg8k0dzl.jpeg
+2025-07-07 10:11:15 - summarizer - INFO - get_image_url_dict:343 - 输入为本地文件路径，将进行Base64编码: /tmp/tmpxg8k0dzl.jpeg
+2025-07-07 10:11:15 - summarizer - INFO - encode_image:321 - 图片 '/tmp/tmpxg8k0dzl.jpeg' Base64编码成功。编码后数据长度(部分): 100...
+2025-07-07 10:11:15 - summarizer - INFO - get_image_url_dict:358 - 推断出图片 '/tmp/tmpxg8k0dzl.jpeg' 的MIME类型为: image/jpeg
+2025-07-07 10:11:15 - summarizer - INFO - summarize_single_image:385 - 向模型 'ernie-4.5-turbo-vl-preview' 发送单图总结请求。图片来源: /tmp/tmpxg8k0dzl.jpeg
+2025-07-07 10:11:19 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-07 10:11:19 - summarizer - INFO - summarize_single_image:408 - 成功从模型获取单图总结。总结长度: 68 字符。
+2025-07-07 10:11:22 - database - INFO - update_sale_ai_data_status:83 - 成功更新 AI 数据记录 ID=178 的状态为 2
+2025-07-07 10:11:31 - database - ERROR - update_sale_ai_data_status:86 - 更新 AI 数据记录 ID=179 状态失败：更新数据失败: (pymysql.err.OperationalError) (2013, 'Lost connection to MySQL server during query ([Errno 110] Connection timed out)')
+[SQL: 
+    UPDATE sale_ai_data
+    SET
+        ai_status = 1,
+        ai_text = '处理中...',
+        update_time = CURRENT_TIMESTAMP
+    WHERE
+        id = 179
+        AND tenant_id = 1
+        AND is_del = 0; -- 仅更新未被逻辑删除的记录
+    ]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 782, in _read_bytes
+    data = self._rfile.read(num_bytes)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: [Errno 110] Connection timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+                    ^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 788, in _read_bytes
+    raise err.OperationalError(
+pymysql.err.OperationalError: (2013, 'Lost connection to MySQL server during query ([Errno 110] Connection timed out)')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/tools/database.py", line 139, in execute_update
+    result = connection.execute(text(query))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1416, in execute
+    return meth(
+           ^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 523, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1638, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1843, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1983, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2352, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+                    ^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 788, in _read_bytes
+    raise err.OperationalError(
+sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (2013, 'Lost connection to MySQL server during query ([Errno 110] Connection timed out)')
+[SQL: 
+    UPDATE sale_ai_data
+    SET
+        ai_status = 1,
+        ai_text = '处理中...',
+        update_time = CURRENT_TIMESTAMP
+    WHERE
+        id = 179
+        AND tenant_id = 1
+        AND is_del = 0; -- 仅更新未被逻辑删除的记录
+    ]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/db_insert.py", line 82, in update_sale_ai_data_status
+    logger.info(f"成功插入 AI 数据记录：tenant_id={tenant_id}, type={ai_type}, status={ai_status}")
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/tools/database.py", line 143, in execute_update
+    except Exception as e:
+        ^^^^^^^^^^^^^^^^^^^
+Exception: 更新数据失败: (pymysql.err.OperationalError) (2013, 'Lost connection to MySQL server during query ([Errno 110] Connection timed out)')
+[SQL: 
+    UPDATE sale_ai_data
+    SET
+        ai_status = 1,
+        ai_text = '处理中...',
+        update_time = CURRENT_TIMESTAMP
+    WHERE
+        id = 179
+        AND tenant_id = 1
+        AND is_del = 0; -- 仅更新未被逻辑删除的记录
+    ]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-07-07 10:11:32 - summarizer - INFO - summarize_single_image:370 - 开始处理单张图片总结: /tmp/tmpjeovyve1.jpeg
+2025-07-07 10:11:32 - summarizer - INFO - get_image_url_dict:343 - 输入为本地文件路径，将进行Base64编码: /tmp/tmpjeovyve1.jpeg
+2025-07-07 10:11:32 - summarizer - INFO - encode_image:321 - 图片 '/tmp/tmpjeovyve1.jpeg' Base64编码成功。编码后数据长度(部分): 100...
+2025-07-07 10:11:32 - summarizer - INFO - get_image_url_dict:358 - 推断出图片 '/tmp/tmpjeovyve1.jpeg' 的MIME类型为: image/jpeg
+2025-07-07 10:11:32 - summarizer - INFO - summarize_single_image:385 - 向模型 'ernie-4.5-turbo-vl-preview' 发送单图总结请求。图片来源: /tmp/tmpjeovyve1.jpeg
+2025-07-07 10:11:35 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-07 10:11:35 - summarizer - INFO - summarize_single_image:408 - 成功从模型获取单图总结。总结长度: 68 字符。
+2025-07-07 10:11:35 - database - INFO - update_sale_ai_data_status:83 - 成功更新 AI 数据记录 ID=179 的状态为 2
+2025-07-07 10:20:40 - database - INFO - update_sale_ai_data_status:83 - 成功更新 AI 数据记录 ID=161 的状态为 1
+2025-07-07 10:20:40 - summarizer - INFO - summarize_single_image:370 - 开始处理单张图片总结: /tmp/tmpqliw2alp.jpeg
+2025-07-07 10:20:40 - summarizer - INFO - get_image_url_dict:343 - 输入为本地文件路径，将进行Base64编码: /tmp/tmpqliw2alp.jpeg
+2025-07-07 10:20:40 - summarizer - INFO - encode_image:321 - 图片 '/tmp/tmpqliw2alp.jpeg' Base64编码成功。编码后数据长度(部分): 100...
+2025-07-07 10:20:40 - summarizer - INFO - get_image_url_dict:358 - 推断出图片 '/tmp/tmpqliw2alp.jpeg' 的MIME类型为: image/jpeg
+2025-07-07 10:20:40 - summarizer - INFO - summarize_single_image:385 - 向模型 'ernie-4.5-turbo-vl-preview' 发送单图总结请求。图片来源: /tmp/tmpqliw2alp.jpeg
+2025-07-07 10:20:43 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-07 10:20:43 - summarizer - INFO - summarize_single_image:408 - 成功从模型获取单图总结。总结长度: 77 字符。
+2025-07-07 10:20:43 - database - INFO - update_sale_ai_data_status:83 - 成功更新 AI 数据记录 ID=161 的状态为 1
+2025-07-07 10:20:43 - database - INFO - update_sale_ai_data_status:83 - 成功更新 AI 数据记录 ID=161 的状态为 2
+2025-07-07 10:20:44 - summarizer - INFO - summarize_single_image:370 - 开始处理单张图片总结: /tmp/tmpq875lp48.jpeg
+2025-07-07 10:20:44 - summarizer - INFO - get_image_url_dict:343 - 输入为本地文件路径，将进行Base64编码: /tmp/tmpq875lp48.jpeg
+2025-07-07 10:20:44 - summarizer - INFO - encode_image:321 - 图片 '/tmp/tmpq875lp48.jpeg' Base64编码成功。编码后数据长度(部分): 100...
+2025-07-07 10:20:44 - summarizer - INFO - get_image_url_dict:358 - 推断出图片 '/tmp/tmpq875lp48.jpeg' 的MIME类型为: image/jpeg
+2025-07-07 10:20:44 - summarizer - INFO - summarize_single_image:385 - 向模型 'ernie-4.5-turbo-vl-preview' 发送单图总结请求。图片来源: /tmp/tmpq875lp48.jpeg
+2025-07-07 10:20:46 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-07 10:20:46 - summarizer - INFO - summarize_single_image:408 - 成功从模型获取单图总结。总结长度: 72 字符。
+2025-07-07 10:20:46 - database - INFO - update_sale_ai_data_status:83 - 成功更新 AI 数据记录 ID=161 的状态为 2
+2025-07-07 10:20:55 - database - INFO - update_sale_ai_data_status:83 - 成功更新 AI 数据记录 ID=175 的状态为 1
+2025-07-07 10:20:55 - summarizer - INFO - summarize_document:1583 - 开始总结文档: /tmp/tmpk18h5el5.docx
+2025-07-07 10:20:55 - summarizer - INFO - extract_docx_content:1451 - 开始提取DOCX内容: /tmp/tmpk18h5el5.docx
+2025-07-07 10:20:55 - summarizer - INFO - extract_docx_content:1478 - DOCX共有 3 个原始段落。
+2025-07-07 10:20:55 - summarizer - INFO - extract_docx_content:1511 - DOCX内容提取完成: /tmp/tmpk18h5el5.docx
+2025-07-07 10:20:55 - summarizer - INFO - summarize_document:1609 - 提取的文档内容序列化后字符串长度: 201
+2025-07-07 10:20:55 - summarizer - INFO - summarize_document:1646 - 向 LLM (ernie-4.5-turbo-128k) 发送请求进行文档总结...
+2025-07-07 10:20:58 - database - INFO - update_sale_ai_data_status:83 - 成功更新 AI 数据记录 ID=175 的状态为 1
+2025-07-07 10:20:58 - summarizer - INFO - summarize_document:1583 - 开始总结文档: /tmp/tmpp7h5g_1p.docx
+2025-07-07 10:20:58 - summarizer - INFO - extract_docx_content:1451 - 开始提取DOCX内容: /tmp/tmpp7h5g_1p.docx
+2025-07-07 10:20:58 - summarizer - INFO - extract_docx_content:1478 - DOCX共有 3 个原始段落。
+2025-07-07 10:20:58 - summarizer - INFO - extract_docx_content:1511 - DOCX内容提取完成: /tmp/tmpp7h5g_1p.docx
+2025-07-07 10:20:58 - summarizer - INFO - summarize_document:1609 - 提取的文档内容序列化后字符串长度: 201
+2025-07-07 10:20:58 - summarizer - INFO - summarize_document:1646 - 向 LLM (ernie-4.5-turbo-128k) 发送请求进行文档总结...
+2025-07-07 10:21:07 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-07 10:21:07 - summarizer - INFO - summarize_document:1667 - LLM 文档总结接收成功，长度: 572
+2025-07-07 10:21:08 - database - INFO - update_sale_ai_data_status:83 - 成功更新 AI 数据记录 ID=175 的状态为 2
+2025-07-07 10:21:09 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-07 10:21:09 - summarizer - INFO - summarize_document:1667 - LLM 文档总结接收成功，长度: 620
+2025-07-07 10:21:09 - database - INFO - update_sale_ai_data_status:83 - 成功更新 AI 数据记录 ID=175 的状态为 2
+2025-07-07 11:09:29 - database - INFO - update_sale_ai_data_status:83 - 成功更新 AI 数据记录 ID=161 的状态为 1
+2025-07-07 11:09:30 - summarizer - INFO - summarize_single_image:370 - 开始处理单张图片总结: /tmp/tmpzdba76q3.jpeg
+2025-07-07 11:09:30 - summarizer - INFO - get_image_url_dict:343 - 输入为本地文件路径，将进行Base64编码: /tmp/tmpzdba76q3.jpeg
+2025-07-07 11:09:30 - summarizer - INFO - encode_image:321 - 图片 '/tmp/tmpzdba76q3.jpeg' Base64编码成功。编码后数据长度(部分): 100...
+2025-07-07 11:09:30 - summarizer - INFO - get_image_url_dict:358 - 推断出图片 '/tmp/tmpzdba76q3.jpeg' 的MIME类型为: image/jpeg
+2025-07-07 11:09:30 - summarizer - INFO - summarize_single_image:385 - 向模型 'ernie-4.5-turbo-vl-preview' 发送单图总结请求。图片来源: /tmp/tmpzdba76q3.jpeg
+2025-07-07 11:09:47 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-07 11:09:47 - summarizer - INFO - summarize_single_image:408 - 成功从模型获取单图总结。总结长度: 74 字符。
+2025-07-07 11:09:47 - database - INFO - update_sale_ai_data_status:83 - 成功更新 AI 数据记录 ID=161 的状态为 2
+2025-07-07 11:10:08 - database - INFO - update_sale_ai_data_status:83 - 成功更新 AI 数据记录 ID=161 的状态为 1
+2025-07-07 11:10:08 - database - INFO - update_sale_ai_data_status:83 - 成功更新 AI 数据记录 ID=161 的状态为 1
+2025-07-07 11:10:08 - summarizer - INFO - summarize_single_image:370 - 开始处理单张图片总结: /tmp/tmpewftiwca.jpeg
+2025-07-07 11:10:08 - summarizer - INFO - get_image_url_dict:343 - 输入为本地文件路径，将进行Base64编码: /tmp/tmpewftiwca.jpeg
+2025-07-07 11:10:08 - summarizer - INFO - encode_image:321 - 图片 '/tmp/tmpewftiwca.jpeg' Base64编码成功。编码后数据长度(部分): 100...
+2025-07-07 11:10:08 - summarizer - INFO - get_image_url_dict:358 - 推断出图片 '/tmp/tmpewftiwca.jpeg' 的MIME类型为: image/jpeg
+2025-07-07 11:10:08 - summarizer - INFO - summarize_single_image:385 - 向模型 'ernie-4.5-turbo-vl-preview' 发送单图总结请求。图片来源: /tmp/tmpewftiwca.jpeg
+2025-07-07 11:10:08 - summarizer - INFO - summarize_single_image:370 - 开始处理单张图片总结: /tmp/tmpuaolxbo9.jpeg
+2025-07-07 11:10:08 - summarizer - INFO - get_image_url_dict:343 - 输入为本地文件路径，将进行Base64编码: /tmp/tmpuaolxbo9.jpeg
+2025-07-07 11:10:08 - summarizer - INFO - encode_image:321 - 图片 '/tmp/tmpuaolxbo9.jpeg' Base64编码成功。编码后数据长度(部分): 100...
+2025-07-07 11:10:08 - summarizer - INFO - get_image_url_dict:358 - 推断出图片 '/tmp/tmpuaolxbo9.jpeg' 的MIME类型为: image/jpeg
+2025-07-07 11:10:08 - summarizer - INFO - summarize_single_image:385 - 向模型 'ernie-4.5-turbo-vl-preview' 发送单图总结请求。图片来源: /tmp/tmpuaolxbo9.jpeg
+2025-07-07 11:10:16 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-07 11:10:16 - summarizer - INFO - summarize_single_image:408 - 成功从模型获取单图总结。总结长度: 71 字符。
+2025-07-07 11:10:16 - database - INFO - update_sale_ai_data_status:83 - 成功更新 AI 数据记录 ID=161 的状态为 2
+2025-07-07 11:10:16 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-07 11:10:16 - summarizer - INFO - summarize_single_image:408 - 成功从模型获取单图总结。总结长度: 70 字符。
+2025-07-07 11:10:16 - database - INFO - update_sale_ai_data_status:83 - 成功更新 AI 数据记录 ID=161 的状态为 2
+2025-07-07 11:14:28 - database - ERROR - update_sale_ai_data_status:86 - 更新 AI 数据记录 ID=160 状态失败：更新数据失败: (pymysql.err.OperationalError) (2013, 'Lost connection to MySQL server during query ([Errno 110] Connection timed out)')
+[SQL: 
+    UPDATE sale_ai_data
+    SET
+        ai_status = 1,
+        ai_text = '处理中...',
+        update_time = CURRENT_TIMESTAMP
+    WHERE
+        id = 160
+        AND tenant_id = 1
+        AND is_del = 0; -- 仅更新未被逻辑删除的记录
+    ]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 782, in _read_bytes
+    data = self._rfile.read(num_bytes)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: [Errno 110] Connection timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+                    ^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 788, in _read_bytes
+    raise err.OperationalError(
+pymysql.err.OperationalError: (2013, 'Lost connection to MySQL server during query ([Errno 110] Connection timed out)')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/tools/database.py", line 139, in execute_update
+    result = connection.execute(text(query))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1416, in execute
+    return meth(
+           ^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 523, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1638, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1843, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1983, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2352, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+                    ^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 788, in _read_bytes
+    raise err.OperationalError(
+sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (2013, 'Lost connection to MySQL server during query ([Errno 110] Connection timed out)')
+[SQL: 
+    UPDATE sale_ai_data
+    SET
+        ai_status = 1,
+        ai_text = '处理中...',
+        update_time = CURRENT_TIMESTAMP
+    WHERE
+        id = 160
+        AND tenant_id = 1
+        AND is_del = 0; -- 仅更新未被逻辑删除的记录
+    ]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/db_insert.py", line 82, in update_sale_ai_data_status
+    logger.info(f"成功插入 AI 数据记录：tenant_id={tenant_id}, type={ai_type}, status={ai_status}")
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/tools/database.py", line 143, in execute_update
+    except Exception as e:
+        ^^^^^^^^^^^^^^^^^^^
+Exception: 更新数据失败: (pymysql.err.OperationalError) (2013, 'Lost connection to MySQL server during query ([Errno 110] Connection timed out)')
+[SQL: 
+    UPDATE sale_ai_data
+    SET
+        ai_status = 1,
+        ai_text = '处理中...',
+        update_time = CURRENT_TIMESTAMP
+    WHERE
+        id = 160
+        AND tenant_id = 1
+        AND is_del = 0; -- 仅更新未被逻辑删除的记录
+    ]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-07-07 11:14:28 - database - ERROR - update_sale_ai_data_status:86 - 更新 AI 数据记录 ID=160 状态失败：更新数据失败: (pymysql.err.OperationalError) (2013, 'Lost connection to MySQL server during query ([Errno 110] Connection timed out)')
+[SQL: 
+    UPDATE sale_ai_data
+    SET
+        ai_status = 1,
+        ai_text = '处理中...',
+        update_time = CURRENT_TIMESTAMP
+    WHERE
+        id = 160
+        AND tenant_id = 1
+        AND is_del = 0; -- 仅更新未被逻辑删除的记录
+    ]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 782, in _read_bytes
+    data = self._rfile.read(num_bytes)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: [Errno 110] Connection timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+                    ^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 788, in _read_bytes
+    raise err.OperationalError(
+pymysql.err.OperationalError: (2013, 'Lost connection to MySQL server during query ([Errno 110] Connection timed out)')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/tools/database.py", line 139, in execute_update
+    result = connection.execute(text(query))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1416, in execute
+    return meth(
+           ^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 523, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1638, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1843, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1983, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2352, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+                    ^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 788, in _read_bytes
+    raise err.OperationalError(
+sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (2013, 'Lost connection to MySQL server during query ([Errno 110] Connection timed out)')
+[SQL: 
+    UPDATE sale_ai_data
+    SET
+        ai_status = 1,
+        ai_text = '处理中...',
+        update_time = CURRENT_TIMESTAMP
+    WHERE
+        id = 160
+        AND tenant_id = 1
+        AND is_del = 0; -- 仅更新未被逻辑删除的记录
+    ]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/db_insert.py", line 82, in update_sale_ai_data_status
+    logger.info(f"成功插入 AI 数据记录：tenant_id={tenant_id}, type={ai_type}, status={ai_status}")
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/tools/database.py", line 143, in execute_update
+    except Exception as e:
+        ^^^^^^^^^^^^^^^^^^^
+Exception: 更新数据失败: (pymysql.err.OperationalError) (2013, 'Lost connection to MySQL server during query ([Errno 110] Connection timed out)')
+[SQL: 
+    UPDATE sale_ai_data
+    SET
+        ai_status = 1,
+        ai_text = '处理中...',
+        update_time = CURRENT_TIMESTAMP
+    WHERE
+        id = 160
+        AND tenant_id = 1
+        AND is_del = 0; -- 仅更新未被逻辑删除的记录
+    ]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-07-07 11:14:28 - summarizer - INFO - summarize_table:688 - 开始总结表格: /tmp/tmp33sh_csp.xlsx
+2025-07-07 11:14:28 - summarizer - INFO - read_table:557 - 尝试读取表格源: /tmp/tmp33sh_csp.xlsx
+2025-07-07 11:14:28 - summarizer - INFO - read_table:616 - 输入为本地文件路径: /tmp/tmp33sh_csp.xlsx
+2025-07-07 11:14:28 - summarizer - INFO - summarize_table:688 - 开始总结表格: /tmp/tmpwt_dii7b.xlsx
+2025-07-07 11:14:28 - summarizer - INFO - read_table:618 - 本地文件格式: .xlsx
+2025-07-07 11:14:28 - summarizer - INFO - read_table:557 - 尝试读取表格源: /tmp/tmpwt_dii7b.xlsx
+2025-07-07 11:14:28 - summarizer - INFO - read_table:616 - 输入为本地文件路径: /tmp/tmpwt_dii7b.xlsx
+2025-07-07 11:14:28 - summarizer - INFO - read_table:618 - 本地文件格式: .xlsx
+2025-07-07 11:14:28 - summarizer - INFO - read_table:622 - 成功读取本地 Excel 文件: /tmp/tmpwt_dii7b.xlsx
+2025-07-07 11:14:28 - summarizer - INFO - read_table:622 - 成功读取本地 Excel 文件: /tmp/tmp33sh_csp.xlsx
+2025-07-07 11:14:28 - summarizer - INFO - get_table_info:648 - 开始提取表格信息，行数: 3, 列数: 2
+2025-07-07 11:14:28 - summarizer - INFO - get_table_info:648 - 开始提取表格信息，行数: 3, 列数: 2
+2025-07-07 11:14:28 - summarizer - INFO - get_table_info:660 - 找到数值列: []
+2025-07-07 11:14:28 - summarizer - INFO - get_table_info:660 - 找到数值列: []
+2025-07-07 11:14:28 - summarizer - INFO - get_table_info:677 - 表格信息提取完成。
+2025-07-07 11:14:28 - summarizer - INFO - get_table_info:677 - 表格信息提取完成。
+2025-07-07 11:14:28 - summarizer - INFO - summarize_table:704 - 表格信息字符串长度: 185
+2025-07-07 11:14:28 - summarizer - INFO - summarize_table:704 - 表格信息字符串长度: 185
+2025-07-07 11:14:28 - summarizer - INFO - summarize_table:705 - 数据示例字符串长度: 147
+2025-07-07 11:14:28 - summarizer - INFO - summarize_table:705 - 数据示例字符串长度: 147
+2025-07-07 11:14:28 - summarizer - INFO - summarize_table:738 - 向 LLM 发送请求进行表格总结...
+2025-07-07 11:14:28 - summarizer - INFO - summarize_table:738 - 向 LLM 发送请求进行表格总结...
+2025-07-07 11:14:32 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-07 11:14:32 - summarizer - INFO - summarize_table:749 - LLM 表格总结接收成功，长度: 95
+2025-07-07 11:14:32 - database - INFO - update_sale_ai_data_status:83 - 成功更新 AI 数据记录 ID=160 的状态为 2
+2025-07-07 11:14:32 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-07 11:14:32 - summarizer - INFO - summarize_table:749 - LLM 表格总结接收成功，长度: 113
+2025-07-07 11:14:32 - database - INFO - update_sale_ai_data_status:83 - 成功更新 AI 数据记录 ID=160 的状态为 2
+2025-07-07 11:25:33 - database - ERROR - update_sale_ai_data_status:86 - 更新 AI 数据记录 ID=161 状态失败：更新数据失败: (pymysql.err.OperationalError) (2013, 'Lost connection to MySQL server during query ([Errno 110] Connection timed out)')
+[SQL: 
+    UPDATE sale_ai_data
+    SET
+        ai_status = 1,
+        ai_text = '处理中...',
+        update_time = CURRENT_TIMESTAMP
+    WHERE
+        id = 161
+        AND tenant_id = 1
+        AND is_del = 0; -- 仅更新未被逻辑删除的记录
+    ]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 782, in _read_bytes
+    data = self._rfile.read(num_bytes)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: [Errno 110] Connection timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+                    ^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 788, in _read_bytes
+    raise err.OperationalError(
+pymysql.err.OperationalError: (2013, 'Lost connection to MySQL server during query ([Errno 110] Connection timed out)')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/tools/database.py", line 139, in execute_update
+    result = connection.execute(text(query))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1416, in execute
+    return meth(
+           ^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 523, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1638, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1843, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1983, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2352, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+                    ^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 788, in _read_bytes
+    raise err.OperationalError(
+sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (2013, 'Lost connection to MySQL server during query ([Errno 110] Connection timed out)')
+[SQL: 
+    UPDATE sale_ai_data
+    SET
+        ai_status = 1,
+        ai_text = '处理中...',
+        update_time = CURRENT_TIMESTAMP
+    WHERE
+        id = 161
+        AND tenant_id = 1
+        AND is_del = 0; -- 仅更新未被逻辑删除的记录
+    ]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/db_insert.py", line 82, in update_sale_ai_data_status
+    logger.info(f"成功插入 AI 数据记录：tenant_id={tenant_id}, type={ai_type}, status={ai_status}")
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/tools/database.py", line 143, in execute_update
+    except Exception as e:
+        ^^^^^^^^^^^^^^^^^^^
+Exception: 更新数据失败: (pymysql.err.OperationalError) (2013, 'Lost connection to MySQL server during query ([Errno 110] Connection timed out)')
+[SQL: 
+    UPDATE sale_ai_data
+    SET
+        ai_status = 1,
+        ai_text = '处理中...',
+        update_time = CURRENT_TIMESTAMP
+    WHERE
+        id = 161
+        AND tenant_id = 1
+        AND is_del = 0; -- 仅更新未被逻辑删除的记录
+    ]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-07-07 11:25:34 - summarizer - INFO - summarize_single_image:370 - 开始处理单张图片总结: /tmp/tmp9lka842g.jpeg
+2025-07-07 11:25:34 - summarizer - INFO - get_image_url_dict:343 - 输入为本地文件路径，将进行Base64编码: /tmp/tmp9lka842g.jpeg
+2025-07-07 11:25:34 - summarizer - INFO - encode_image:321 - 图片 '/tmp/tmp9lka842g.jpeg' Base64编码成功。编码后数据长度(部分): 100...
+2025-07-07 11:25:34 - summarizer - INFO - get_image_url_dict:358 - 推断出图片 '/tmp/tmp9lka842g.jpeg' 的MIME类型为: image/jpeg
+2025-07-07 11:25:34 - summarizer - INFO - summarize_single_image:385 - 向模型 'ernie-4.5-turbo-vl-preview' 发送单图总结请求。图片来源: /tmp/tmp9lka842g.jpeg
+2025-07-07 11:25:37 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-07 11:25:37 - summarizer - INFO - summarize_single_image:408 - 成功从模型获取单图总结。总结长度: 72 字符。
+2025-07-07 11:25:37 - database - INFO - update_sale_ai_data_status:83 - 成功更新 AI 数据记录 ID=161 的状态为 2
+2025-07-07 15:52:02 - database - ERROR - update_sale_ai_data_status:86 - 更新 AI 数据记录 ID=177 状态失败：更新数据失败: (pymysql.err.OperationalError) (2006, "MySQL server has gone away (TimeoutError(110, 'Connection timed out'))")
+[SQL: 
+    UPDATE sale_ai_data
+    SET
+        ai_status = 1,
+        ai_text = '处理中...',
+        update_time = CURRENT_TIMESTAMP
+    WHERE
+        id = 177
+        AND tenant_id = 30
+        AND is_del = 0; -- 仅更新未被逻辑删除的记录
+    ]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 806, in _write_bytes
+    self._sock.sendall(data)
+TimeoutError: [Errno 110] Connection timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 864, in _execute_command
+    self._write_bytes(packet)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 809, in _write_bytes
+    raise err.OperationalError(
+pymysql.err.OperationalError: (2006, "MySQL server has gone away (TimeoutError(110, 'Connection timed out'))")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/tools/database.py", line 139, in execute_update
+    result = connection.execute(text(query))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1416, in execute
+    return meth(
+           ^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 523, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1638, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1843, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1983, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2352, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 864, in _execute_command
+    self._write_bytes(packet)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 809, in _write_bytes
+    raise err.OperationalError(
+sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (2006, "MySQL server has gone away (TimeoutError(110, 'Connection timed out'))")
+[SQL: 
+    UPDATE sale_ai_data
+    SET
+        ai_status = 1,
+        ai_text = '处理中...',
+        update_time = CURRENT_TIMESTAMP
+    WHERE
+        id = 177
+        AND tenant_id = 30
+        AND is_del = 0; -- 仅更新未被逻辑删除的记录
+    ]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/db_insert.py", line 82, in update_sale_ai_data_status
+    logger.info(f"成功插入 AI 数据记录：tenant_id={tenant_id}, type={ai_type}, status={ai_status}")
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/tools/database.py", line 143, in execute_update
+    except Exception as e:
+        ^^^^^^^^^^^^^^^^^^^
+Exception: 更新数据失败: (pymysql.err.OperationalError) (2006, "MySQL server has gone away (TimeoutError(110, 'Connection timed out'))")
+[SQL: 
+    UPDATE sale_ai_data
+    SET
+        ai_status = 1,
+        ai_text = '处理中...',
+        update_time = CURRENT_TIMESTAMP
+    WHERE
+        id = 177
+        AND tenant_id = 30
+        AND is_del = 0; -- 仅更新未被逻辑删除的记录
+    ]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-07-07 15:52:02 - summarizer - INFO - summarize_document:1583 - 开始总结文档: /tmp/tmpkmrlj35x.docx
+2025-07-07 15:52:02 - summarizer - INFO - extract_docx_content:1451 - 开始提取DOCX内容: /tmp/tmpkmrlj35x.docx
+2025-07-07 15:52:02 - summarizer - INFO - extract_docx_content:1478 - DOCX共有 85 个原始段落。
+2025-07-07 15:52:02 - summarizer - INFO - extract_docx_content:1511 - DOCX内容提取完成: /tmp/tmpkmrlj35x.docx
+2025-07-07 15:52:02 - summarizer - INFO - summarize_document:1609 - 提取的文档内容序列化后字符串长度: 3714
+2025-07-07 15:52:02 - summarizer - INFO - summarize_document:1646 - 向 LLM (ernie-4.5-turbo-128k) 发送请求进行文档总结...
+2025-07-07 15:52:26 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-07 15:52:26 - summarizer - INFO - summarize_document:1667 - LLM 文档总结接收成功，长度: 1203
+2025-07-07 15:52:26 - database - INFO - update_sale_ai_data_status:83 - 成功更新 AI 数据记录 ID=177 的状态为 2
+2025-07-07 21:01:16 - database - INFO - update_sale_ai_data_status:83 - 成功更新 AI 数据记录 ID=180 的状态为 1
+2025-07-07 21:01:17 - summarizer - INFO - summarize_single_image:370 - 开始处理单张图片总结: /tmp/tmpe26nnqp7.jpeg
+2025-07-07 21:01:17 - summarizer - INFO - get_image_url_dict:343 - 输入为本地文件路径，将进行Base64编码: /tmp/tmpe26nnqp7.jpeg
+2025-07-07 21:01:17 - summarizer - INFO - encode_image:321 - 图片 '/tmp/tmpe26nnqp7.jpeg' Base64编码成功。编码后数据长度(部分): 100...
+2025-07-07 21:01:17 - summarizer - INFO - get_image_url_dict:358 - 推断出图片 '/tmp/tmpe26nnqp7.jpeg' 的MIME类型为: image/jpeg
+2025-07-07 21:01:17 - summarizer - INFO - summarize_single_image:385 - 向模型 'ernie-4.5-turbo-vl-preview' 发送单图总结请求。图片来源: /tmp/tmpe26nnqp7.jpeg
+2025-07-07 21:01:20 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-07 21:01:20 - summarizer - INFO - summarize_single_image:408 - 成功从模型获取单图总结。总结长度: 69 字符。
+2025-07-07 21:01:20 - database - INFO - update_sale_ai_data_status:83 - 成功更新 AI 数据记录 ID=180 的状态为 2
+2025-07-07 22:01:02 - database - INFO - update_sale_ai_data_status:83 - 成功更新 AI 数据记录 ID=181 的状态为 1
+2025-07-07 22:01:02 - summarizer - INFO - summarize_single_image:370 - 开始处理单张图片总结: /tmp/tmp0aj9gwed.jpeg
+2025-07-07 22:01:02 - summarizer - INFO - get_image_url_dict:343 - 输入为本地文件路径，将进行Base64编码: /tmp/tmp0aj9gwed.jpeg
+2025-07-07 22:01:02 - summarizer - INFO - encode_image:321 - 图片 '/tmp/tmp0aj9gwed.jpeg' Base64编码成功。编码后数据长度(部分): 100...
+2025-07-07 22:01:02 - summarizer - INFO - get_image_url_dict:358 - 推断出图片 '/tmp/tmp0aj9gwed.jpeg' 的MIME类型为: image/jpeg
+2025-07-07 22:01:02 - summarizer - INFO - summarize_single_image:385 - 向模型 'ernie-4.5-turbo-vl-preview' 发送单图总结请求。图片来源: /tmp/tmp0aj9gwed.jpeg
+2025-07-07 22:01:07 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-07 22:01:07 - summarizer - INFO - summarize_single_image:408 - 成功从模型获取单图总结。总结长度: 67 字符。
+2025-07-07 22:01:07 - database - ERROR - update_sale_ai_data_status:86 - 更新 AI 数据记录 ID=181 状态失败：更新数据失败: (pymysql.err.OperationalError) (2006, "MySQL server has gone away (TimeoutError(110, 'Connection timed out'))")
+[SQL: 
+    UPDATE sale_ai_data
+    SET
+        ai_status = 2,
+        ai_text = '这张图片展示了一片现代化城市景观。画面中，几栋高耸的玻璃幕墙写字楼矗立，反射着蓝天。楼下绿植环绕，道路整洁，整体给人以清新、繁荣之感。',
+        update_time = CURRENT_TIMESTAMP
+    WHERE
+        id = 181
+        AND tenant_id = 1
+        AND is_del = 0; -- 仅更新未被逻辑删除的记录
+    ]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 806, in _write_bytes
+    self._sock.sendall(data)
+TimeoutError: [Errno 110] Connection timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 864, in _execute_command
+    self._write_bytes(packet)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 809, in _write_bytes
+    raise err.OperationalError(
+pymysql.err.OperationalError: (2006, "MySQL server has gone away (TimeoutError(110, 'Connection timed out'))")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/tools/database.py", line 139, in execute_update
+    result = connection.execute(text(query))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1416, in execute
+    return meth(
+           ^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 523, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1638, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1843, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1983, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2352, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 864, in _execute_command
+    self._write_bytes(packet)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 809, in _write_bytes
+    raise err.OperationalError(
+sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (2006, "MySQL server has gone away (TimeoutError(110, 'Connection timed out'))")
+[SQL: 
+    UPDATE sale_ai_data
+    SET
+        ai_status = 2,
+        ai_text = '这张图片展示了一片现代化城市景观。画面中，几栋高耸的玻璃幕墙写字楼矗立，反射着蓝天。楼下绿植环绕，道路整洁，整体给人以清新、繁荣之感。',
+        update_time = CURRENT_TIMESTAMP
+    WHERE
+        id = 181
+        AND tenant_id = 1
+        AND is_del = 0; -- 仅更新未被逻辑删除的记录
+    ]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/db_insert.py", line 82, in update_sale_ai_data_status
+    logger.info(f"成功插入 AI 数据记录：tenant_id={tenant_id}, type={ai_type}, status={ai_status}")
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/tools/database.py", line 143, in execute_update
+    except Exception as e:
+        ^^^^^^^^^^^^^^^^^^^
+Exception: 更新数据失败: (pymysql.err.OperationalError) (2006, "MySQL server has gone away (TimeoutError(110, 'Connection timed out'))")
+[SQL: 
+    UPDATE sale_ai_data
+    SET
+        ai_status = 2,
+        ai_text = '这张图片展示了一片现代化城市景观。画面中，几栋高耸的玻璃幕墙写字楼矗立，反射着蓝天。楼下绿植环绕，道路整洁，整体给人以清新、繁荣之感。',
+        update_time = CURRENT_TIMESTAMP
+    WHERE
+        id = 181
+        AND tenant_id = 1
+        AND is_del = 0; -- 仅更新未被逻辑删除的记录
+    ]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-07-07 22:01:27 - database - INFO - update_sale_ai_data_status:83 - 成功更新 AI 数据记录 ID=182 的状态为 1
+2025-07-07 22:01:27 - summarizer - INFO - summarize_document:1583 - 开始总结文档: /tmp/tmpdgvoee_5.docx
+2025-07-07 22:01:27 - summarizer - INFO - extract_docx_content:1451 - 开始提取DOCX内容: /tmp/tmpdgvoee_5.docx
+2025-07-07 22:01:27 - summarizer - INFO - extract_docx_content:1478 - DOCX共有 85 个原始段落。
+2025-07-07 22:01:27 - summarizer - INFO - extract_docx_content:1511 - DOCX内容提取完成: /tmp/tmpdgvoee_5.docx
+2025-07-07 22:01:27 - summarizer - INFO - summarize_document:1609 - 提取的文档内容序列化后字符串长度: 3714
+2025-07-07 22:01:27 - summarizer - INFO - summarize_document:1646 - 向 LLM (ernie-4.5-turbo-128k) 发送请求进行文档总结...
+2025-07-07 22:01:49 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-07 22:01:49 - summarizer - INFO - summarize_document:1667 - LLM 文档总结接收成功，长度: 1555
+2025-07-07 22:01:49 - database - INFO - update_sale_ai_data_status:83 - 成功更新 AI 数据记录 ID=182 的状态为 2
+2025-07-07 22:11:30 - database - INFO - update_sale_ai_data_status:83 - 成功更新 AI 数据记录 ID=183 的状态为 1
+2025-07-07 22:11:30 - summarizer - INFO - summarize_single_image:370 - 开始处理单张图片总结: /tmp/tmpcokkyj_d.jpeg
+2025-07-07 22:11:30 - summarizer - INFO - get_image_url_dict:343 - 输入为本地文件路径，将进行Base64编码: /tmp/tmpcokkyj_d.jpeg
+2025-07-07 22:11:30 - summarizer - INFO - encode_image:321 - 图片 '/tmp/tmpcokkyj_d.jpeg' Base64编码成功。编码后数据长度(部分): 100...
+2025-07-07 22:11:30 - summarizer - INFO - get_image_url_dict:358 - 推断出图片 '/tmp/tmpcokkyj_d.jpeg' 的MIME类型为: image/jpeg
+2025-07-07 22:11:30 - summarizer - INFO - summarize_single_image:385 - 向模型 'ernie-4.5-turbo-vl-preview' 发送单图总结请求。图片来源: /tmp/tmpcokkyj_d.jpeg
+2025-07-07 22:11:34 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-07 22:11:34 - summarizer - INFO - summarize_single_image:408 - 成功从模型获取单图总结。总结长度: 73 字符。
+2025-07-07 22:11:35 - database - INFO - update_sale_ai_data_status:83 - 成功更新 AI 数据记录 ID=183 的状态为 2

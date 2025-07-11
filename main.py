@@ -30,7 +30,8 @@ DB_PASSWORD = "sale159753"
 db_url = 'mysql+pymysql://root:sale159753@120.77.8.73:9010/sale'
 
 session_service = DatabaseSessionService(
-    db_url=db_url
+    db_url=db_url,
+    pool_recycle=3600
 )
 
 # 初始化 Runner，将 root_agent 与配置好的数据库会话服务关联
@@ -90,16 +91,59 @@ def process_agent_background(request: AgentRequest):
         asyncio.set_event_loop(loop)
         
         try:
+            # 构建查询字符串，将用户输入转换为更友好的格式
+            query_parts = []
+            for item in request.user_input:
+                timestamp = item.get('timestamp', '')
+                if item.get("type") == "text":
+                    query_parts.append(f"文本内容: {item.get('content', '')} (时间: {timestamp})")
+                elif item.get("type") == "image":
+                    query_parts.append(f"图片URL: {item.get('url', '')} (时间: {timestamp})")
+                elif item.get("type") == "video":
+                    query_parts.append(f"视频URL: {item.get('url', '')} (时间: {timestamp})")
+                elif item.get("type") == "location":
+                    query_parts.append(f"位置信息: {item.get('local_info', '')} (时间: {timestamp})")
+            
+            # 将所有输入组合成一个查询字符串
+            query = "客户输入信息:\n" + "\n".join(query_parts)
+            
             # 调用智能体处理
             agent_response_text = loop.run_until_complete(call_agent_async(
-                query=str(request.user_input),
+                query=query,
                 runner=runner,
                 user_id=user_id,
                 session_id=current_session_id,
                 request_body=request.model_dump()
             ))
             print(f"agent_response_text: {agent_response_text}")
-            agent_response = json.loads(agent_response_text.strip("```json").strip("```"))
+            
+            # 尝试解析JSON响应
+            try:
+                # 移除可能的markdown代码块标记
+                cleaned_response = agent_response_text.strip()
+                if cleaned_response.startswith("```json"):
+                    cleaned_response = cleaned_response[7:]
+                if cleaned_response.endswith("```"):
+                    cleaned_response = cleaned_response[:-3]
+                cleaned_response = cleaned_response.strip()
+                
+                agent_response = json.loads(cleaned_response)
+            except json.JSONDecodeError as e:
+                logger.error(f"JSON解析失败: {e}, 原始响应: {agent_response_text}")
+                # 如果解析失败，创建一个默认的文本响应
+                agent_response = {
+                    "content_list": [
+                        {
+                            "type": "text",
+                            "content": agent_response_text
+                        }
+                    ],
+                    "collaborate_list": [],
+                    "follow_up": {
+                        "is_follow_up": 0,
+                        "follow_up_content": []
+                    }
+                }
             
             logger.info(f"智能体处理完成 - user_id: {user_id}, session_id: {current_session_id}")
             
@@ -133,11 +177,8 @@ def process_agent_background(request: AgentRequest):
                     task_id=request.task_id,
                     session_id=request.session_id,
                     belong_chat_id=request.belong_chat_id,
-                    chat_content=[{
-                        "type": "error",
-                        "content": f"处理失败: {str(e)}",
-                        "timestamp": current_time
-                    }]
+                    chat_content=f"处理失败: {str(e)}"
+
                 ))
             finally:
                 loop.close()

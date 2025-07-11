@@ -1,0 +1,203 @@
+2025-07-10 16:08:27 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for gemini-.* from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:08:27 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/endpoints\/.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:08:27 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/publishers\/google\/models\/gemini.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:08:27 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for gemini-.* from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:08:27 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/endpoints\/.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:08:27 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/publishers\/google\/models\/gemini.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:08:28 - api - INFO - startup_event:135 - 角色创建服务启动完成
+2025-07-10 16:08:34 - google_adk.google.adk.sessions.database_session_service - INFO - __init__:330 - Local timezone: Asia/Shanghai
+2025-07-10 16:08:51 - api - INFO - shutdown_event:140 - 角色创建服务正在关闭
+2025-07-10 16:08:56 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for gemini-.* from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:08:56 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/endpoints\/.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:08:56 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/publishers\/google\/models\/gemini.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:08:56 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for gemini-.* from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:08:56 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/endpoints\/.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:08:56 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/publishers\/google\/models\/gemini.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:08:57 - api - INFO - startup_event:135 - 角色创建服务启动完成
+2025-07-10 16:08:59 - google_adk.google.adk.sessions.database_session_service - INFO - __init__:330 - Local timezone: Asia/Shanghai
+2025-07-10 16:09:12 - api - INFO - shutdown_event:140 - 角色创建服务正在关闭
+2025-07-10 16:09:17 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for gemini-.* from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:09:17 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/endpoints\/.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:09:17 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/publishers\/google\/models\/gemini.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:09:17 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for gemini-.* from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:09:17 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/endpoints\/.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:09:17 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/publishers\/google\/models\/gemini.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:09:18 - api - INFO - startup_event:135 - 角色创建服务启动完成
+2025-07-10 16:09:25 - google_adk.google.adk.sessions.database_session_service - INFO - __init__:330 - Local timezone: Asia/Shanghai
+2025-07-10 16:27:07 - api - INFO - shutdown_event:140 - 角色创建服务正在关闭
+2025-07-10 16:27:12 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for gemini-.* from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:27:12 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/endpoints\/.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:27:12 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/publishers\/google\/models\/gemini.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:27:12 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for gemini-.* from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:27:12 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/endpoints\/.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:27:12 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/publishers\/google\/models\/gemini.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:27:13 - api - INFO - startup_event:135 - 角色创建服务启动完成
+2025-07-10 16:27:16 - google_adk.google.adk.sessions.database_session_service - INFO - __init__:330 - Local timezone: Asia/Shanghai
+2025-07-10 16:27:25 - api - INFO - shutdown_event:140 - 角色创建服务正在关闭
+2025-07-10 16:27:30 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for gemini-.* from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:27:30 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/endpoints\/.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:27:30 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/publishers\/google\/models\/gemini.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:27:30 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for gemini-.* from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:27:30 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/endpoints\/.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:27:30 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/publishers\/google\/models\/gemini.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:27:31 - api - INFO - startup_event:135 - 角色创建服务启动完成
+2025-07-10 16:27:32 - google_adk.google.adk.sessions.database_session_service - INFO - __init__:330 - Local timezone: Asia/Shanghai
+2025-07-10 16:27:50 - api - INFO - shutdown_event:140 - 角色创建服务正在关闭
+2025-07-10 16:27:55 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for gemini-.* from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:27:55 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/endpoints\/.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:27:55 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/publishers\/google\/models\/gemini.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:27:55 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for gemini-.* from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:27:55 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/endpoints\/.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:27:55 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/publishers\/google\/models\/gemini.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:27:56 - api - INFO - startup_event:135 - 角色创建服务启动完成
+2025-07-10 16:27:57 - google_adk.google.adk.sessions.database_session_service - INFO - __init__:330 - Local timezone: Asia/Shanghai
+2025-07-10 16:30:16 - api - INFO - shutdown_event:140 - 角色创建服务正在关闭
+2025-07-10 16:30:22 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for gemini-.* from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:30:22 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/endpoints\/.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:30:22 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/publishers\/google\/models\/gemini.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:30:22 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for gemini-.* from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:30:22 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/endpoints\/.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:30:22 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/publishers\/google\/models\/gemini.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:30:22 - api - INFO - startup_event:135 - 角色创建服务启动完成
+2025-07-10 16:30:29 - google_adk.google.adk.sessions.database_session_service - INFO - __init__:330 - Local timezone: Asia/Shanghai
+2025-07-10 16:31:11 - api - INFO - shutdown_event:140 - 角色创建服务正在关闭
+2025-07-10 16:31:16 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for gemini-.* from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:31:16 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/endpoints\/.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:31:16 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/publishers\/google\/models\/gemini.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:31:16 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for gemini-.* from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:31:16 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/endpoints\/.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:31:16 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/publishers\/google\/models\/gemini.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:31:17 - api - INFO - startup_event:135 - 角色创建服务启动完成
+2025-07-10 16:31:24 - google_adk.google.adk.sessions.database_session_service - INFO - __init__:330 - Local timezone: Asia/Shanghai
+2025-07-10 16:31:57 - api - INFO - shutdown_event:140 - 角色创建服务正在关闭
+2025-07-10 16:32:02 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for gemini-.* from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:32:02 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/endpoints\/.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:32:02 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/publishers\/google\/models\/gemini.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:32:02 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for gemini-.* from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:32:02 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/endpoints\/.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:32:02 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/publishers\/google\/models\/gemini.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:32:02 - api - INFO - startup_event:135 - 角色创建服务启动完成
+2025-07-10 16:32:09 - google_adk.google.adk.sessions.database_session_service - INFO - __init__:330 - Local timezone: Asia/Shanghai
+2025-07-10 16:32:27 - api - INFO - shutdown_event:140 - 角色创建服务正在关闭
+2025-07-10 16:32:32 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for gemini-.* from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:32:32 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/endpoints\/.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:32:32 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/publishers\/google\/models\/gemini.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:32:32 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for gemini-.* from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:32:32 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/endpoints\/.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:32:32 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/publishers\/google\/models\/gemini.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:32:33 - api - INFO - startup_event:135 - 角色创建服务启动完成
+2025-07-10 16:32:40 - google_adk.google.adk.sessions.database_session_service - INFO - __init__:330 - Local timezone: Asia/Shanghai
+2025-07-10 16:32:51 - api - INFO - shutdown_event:140 - 角色创建服务正在关闭
+2025-07-10 16:32:57 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for gemini-.* from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:32:57 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/endpoints\/.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:32:57 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/publishers\/google\/models\/gemini.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:32:57 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for gemini-.* from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:32:57 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/endpoints\/.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:32:57 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/publishers\/google\/models\/gemini.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:32:57 - api - INFO - startup_event:135 - 角色创建服务启动完成
+2025-07-10 16:33:04 - google_adk.google.adk.sessions.database_session_service - INFO - __init__:330 - Local timezone: Asia/Shanghai
+2025-07-10 16:33:09 - utils - INFO - restore_content_from_database:42 - 正在从数据库读取租户ID=a32b99c2-885e-48fd-a077-7971e47dc173, 任务ID=137的内容...
+2025-07-10 16:33:09 - utils - INFO - restore_content_from_database:43 - 正在从数据库读取租户ID=a32b99c2-885e-48fd-a077-7971e47dc173, 任务ID=137的内容...
+2025-07-10 16:33:09 - utils - INFO - restore_content_from_database:46 - 1. 读取禁止事项...
+2025-07-10 16:33:09 - utils - INFO - restore_content_from_database:49 - ✓ 禁止事项读取成功: ### 8. 禁止做的事情：
+暂无禁止事项。
+2025-07-10 16:33:09 - utils - INFO - restore_content_from_database:52 - 2. 读取销售流程...
+2025-07-10 16:33:09 - utils - INFO - restore_content_from_database:55 - ✓ 销售流程读取成功: ['查询销售流程失败: (pymysql.err.ProgrammingError) (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'fd-a077-7971e47dc173\\n                AND ss.task_id = 137\\n                AND sp\' at line 10")\n[SQL: \n            SELECT\n                sp.title AS process_title,\n                sp.text AS process_text,\n                sp.sort\n            FROM\n                sale_process sp\n            JOIN\n                sale_strategy ss ON sp.strategy_id = ss.id\n            WHERE\n                ss.tenant_id = a32b99c2-885e-48fd-a077-7971e47dc173\n                AND ss.task_id = 137\n                AND sp.is_del = 0\n                AND ss.is_del = 0\n            ORDER BY\n                sp.sort;\n        ]\n(Background on this error at: https://sqlalche.me/e/20/f405)']
+2025-07-10 16:33:09 - utils - INFO - restore_content_from_database:58 - 3. 组合完整内容...
+2025-07-10 16:33:09 - utils - INFO - restore_content_from_database:61 - ✓ 内容组合成功
+2025-07-10 16:33:09 - utils - INFO - restore_content_from_database:71 - ✓ 所有操作完成
+2025-07-10 16:33:10 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-10 16:33:12 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-10 16:33:50 - utils - INFO - restore_content_from_database:42 - 正在从数据库读取租户ID=a32b99c2-885e-48fd-a077-7971e47dc173, 任务ID=137的内容...
+2025-07-10 16:33:50 - utils - INFO - restore_content_from_database:43 - 正在从数据库读取租户ID=a32b99c2-885e-48fd-a077-7971e47dc173, 任务ID=137的内容...
+2025-07-10 16:33:50 - utils - INFO - restore_content_from_database:46 - 1. 读取禁止事项...
+2025-07-10 16:33:50 - utils - INFO - restore_content_from_database:49 - ✓ 禁止事项读取成功: ### 8. 禁止做的事情：
+暂无禁止事项。
+2025-07-10 16:33:50 - utils - INFO - restore_content_from_database:52 - 2. 读取销售流程...
+2025-07-10 16:33:50 - utils - INFO - restore_content_from_database:55 - ✓ 销售流程读取成功: ['查询销售流程失败: (pymysql.err.ProgrammingError) (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'fd-a077-7971e47dc173\\n                AND ss.task_id = 137\\n                AND sp\' at line 10")\n[SQL: \n            SELECT\n                sp.title AS process_title,\n                sp.text AS process_text,\n                sp.sort\n            FROM\n                sale_process sp\n            JOIN\n                sale_strategy ss ON sp.strategy_id = ss.id\n            WHERE\n                ss.tenant_id = a32b99c2-885e-48fd-a077-7971e47dc173\n                AND ss.task_id = 137\n                AND sp.is_del = 0\n                AND ss.is_del = 0\n            ORDER BY\n                sp.sort;\n        ]\n(Background on this error at: https://sqlalche.me/e/20/f405)']
+2025-07-10 16:33:50 - utils - INFO - restore_content_from_database:58 - 3. 组合完整内容...
+2025-07-10 16:33:50 - utils - INFO - restore_content_from_database:61 - ✓ 内容组合成功
+2025-07-10 16:33:50 - utils - INFO - restore_content_from_database:71 - ✓ 所有操作完成
+2025-07-10 16:33:53 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-10 16:33:57 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-10 16:33:59 - api - INFO - shutdown_event:140 - 角色创建服务正在关闭
+2025-07-10 16:34:04 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for gemini-.* from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:34:04 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/endpoints\/.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:34:04 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/publishers\/google\/models\/gemini.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:34:04 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for gemini-.* from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:34:04 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/endpoints\/.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:34:04 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/publishers\/google\/models\/gemini.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 16:34:05 - api - INFO - startup_event:135 - 角色创建服务启动完成
+2025-07-10 16:34:22 - google_adk.google.adk.sessions.database_session_service - INFO - __init__:330 - Local timezone: Asia/Shanghai
+2025-07-10 18:20:03 - api - INFO - shutdown_event:140 - 角色创建服务正在关闭
+2025-07-10 18:20:09 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for gemini-.* from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 18:20:09 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/endpoints\/.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 18:20:09 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/publishers\/google\/models\/gemini.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 18:20:09 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for gemini-.* from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 18:20:09 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/endpoints\/.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 18:20:09 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/publishers\/google\/models\/gemini.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 18:20:09 - api - INFO - startup_event:135 - 角色创建服务启动完成
+2025-07-10 18:20:16 - google_adk.google.adk.sessions.database_session_service - INFO - __init__:330 - Local timezone: Asia/Shanghai
+2025-07-10 18:20:47 - api - INFO - shutdown_event:140 - 角色创建服务正在关闭
+2025-07-10 18:20:53 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for gemini-.* from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 18:20:53 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/endpoints\/.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 18:20:53 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/publishers\/google\/models\/gemini.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 18:20:53 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for gemini-.* from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 18:20:53 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/endpoints\/.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 18:20:53 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/publishers\/google\/models\/gemini.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 18:20:53 - api - INFO - startup_event:135 - 角色创建服务启动完成
+2025-07-10 18:21:05 - google_adk.google.adk.sessions.database_session_service - INFO - __init__:330 - Local timezone: Asia/Shanghai
+2025-07-10 18:21:27 - api - INFO - shutdown_event:140 - 角色创建服务正在关闭
+2025-07-10 18:21:32 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for gemini-.* from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 18:21:32 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/endpoints\/.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 18:21:32 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/publishers\/google\/models\/gemini.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 18:21:32 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for gemini-.* from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 18:21:32 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/endpoints\/.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 18:21:32 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/publishers\/google\/models\/gemini.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 18:21:33 - api - INFO - startup_event:135 - 角色创建服务启动完成
+2025-07-10 18:21:35 - google_adk.google.adk.sessions.database_session_service - INFO - __init__:330 - Local timezone: Asia/Shanghai
+2025-07-10 18:23:39 - api - INFO - shutdown_event:140 - 角色创建服务正在关闭
+2025-07-10 18:23:45 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for gemini-.* from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 18:23:45 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/endpoints\/.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 18:23:45 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/publishers\/google\/models\/gemini.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 18:23:45 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for gemini-.* from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 18:23:45 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/endpoints\/.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 18:23:45 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/publishers\/google\/models\/gemini.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 18:23:45 - api - INFO - startup_event:135 - 角色创建服务启动完成
+2025-07-10 18:23:47 - google_adk.google.adk.sessions.database_session_service - INFO - __init__:330 - Local timezone: Asia/Shanghai
+2025-07-10 18:23:50 - api - INFO - shutdown_event:140 - 角色创建服务正在关闭
+2025-07-10 18:23:55 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for gemini-.* from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 18:23:55 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/endpoints\/.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 18:23:55 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/publishers\/google\/models\/gemini.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 18:23:55 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for gemini-.* from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 18:23:55 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/endpoints\/.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 18:23:55 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/publishers\/google\/models\/gemini.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 18:23:56 - api - INFO - startup_event:135 - 角色创建服务启动完成
+2025-07-10 18:23:58 - google_adk.google.adk.sessions.database_session_service - INFO - __init__:330 - Local timezone: Asia/Shanghai
+2025-07-10 18:23:59 - api - INFO - shutdown_event:140 - 角色创建服务正在关闭
+2025-07-10 18:24:05 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for gemini-.* from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 18:24:05 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/endpoints\/.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 18:24:05 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/publishers\/google\/models\/gemini.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 18:24:05 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for gemini-.* from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 18:24:05 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/endpoints\/.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 18:24:05 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/publishers\/google\/models\/gemini.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 18:24:05 - api - INFO - startup_event:135 - 角色创建服务启动完成
+2025-07-10 18:24:08 - google_adk.google.adk.sessions.database_session_service - INFO - __init__:330 - Local timezone: Asia/Shanghai
+2025-07-10 18:36:17 - api - INFO - shutdown_event:140 - 角色创建服务正在关闭
+2025-07-10 18:36:23 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for gemini-.* from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 18:36:23 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/endpoints\/.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 18:36:23 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/publishers\/google\/models\/gemini.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 18:36:23 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for gemini-.* from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 18:36:23 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/endpoints\/.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 18:36:23 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/publishers\/google\/models\/gemini.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 18:36:23 - api - INFO - startup_event:135 - 角色创建服务启动完成
+2025-07-10 18:36:26 - google_adk.google.adk.sessions.database_session_service - INFO - __init__:330 - Local timezone: Asia/Shanghai
+2025-07-10 21:24:29 - api - INFO - shutdown_event:140 - 角色创建服务正在关闭
+2025-07-10 21:24:36 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for gemini-.* from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 21:24:36 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/endpoints\/.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 21:24:36 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/publishers\/google\/models\/gemini.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 21:24:36 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for gemini-.* from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 21:24:36 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/endpoints\/.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 21:24:36 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/publishers\/google\/models\/gemini.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-10 21:24:36 - api - INFO - startup_event:135 - 角色创建服务启动完成
+2025-07-10 21:24:43 - google_adk.google.adk.sessions.database_session_service - INFO - __init__:330 - Local timezone: Asia/Shanghai

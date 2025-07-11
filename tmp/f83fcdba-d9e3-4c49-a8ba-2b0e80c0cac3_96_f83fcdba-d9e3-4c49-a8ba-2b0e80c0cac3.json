@@ -1,0 +1,7 @@
+[
+  {
+    "timestamp": "2025-07-06T21:25:20.809122",
+    "query": "你好",
+    "response": "你好！\n看起来你在执行一个 SQL 查询时遇到了错误。\n错误信息表明在 `WHERE` 子句中有一个未知的列名 `f83fcdba`。\n这通常意味着你尝试将一个 UUID 或字符串值直接用于查询，而没有用引号将其括起来。\n你的 SQL 语句是：\nSELECT sp.test_prompt FROM sale_prompt sp WHERE sp.task_id = 96 AND sp.tenant_id = f83fcdba-d9e3-4c49-a8ba-2b0e80c0cac3 AND sp.is_del = 0;\n问题出在这一行：\nsp.tenant_id = f83fcdba-d9e3-4c49-a8ba-2b0e80c0cac3\n数据库以为 `f83fcdba` 是一个列名，而不是一个字符串或 UUID 值，因此报错说这个列不存在。\n你需要把 UUID 值用 **单引号** 括起来，表示这是一个字符串。\n修改后的 SQL 应该是：\nSELECT sp.test_prompt FROM sale_prompt sp WHERE sp.task_id = 96 AND sp.tenant_id = 'f83fcdba-d9e3-4c49-a8ba-2b0e80c0cac3' AND sp.is_del = 0;\n这样数据库就知道你是在比较一个字符串值，而不是列名。\n如果你是使用 Python 和 SQLAlchemy：\n确保你在传递参数时使用的是参数化查询，例如：\nquery = \"\"\"\nSELECT sp.test_prompt FROM sale_prompt sp WHERE sp.task_id = :task_id AND sp.tenant_id = :tenant_id AND sp.is_del = 0;\n\"\"\"\nresult = db.session.execute(query, {\n'task_id': 96,\n'tenant_id': 'f83fcdba-d9e3-4c49-a8ba-2b0e80c0cac3'\n})\n这样可以避免语法错误和 SQL 注入风险。\n如果你还有其他关于这个查询的问题，或者需要进一步帮助，请告诉我！"
+  }
+]

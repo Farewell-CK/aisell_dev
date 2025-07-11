@@ -1,0 +1,151 @@
+2025-07-07 10:56:12,204 - INFO - 开始生成个性化开场白: 123, your_session_id_here, 456
+2025-07-07 10:56:12,760 - INFO - 个性化开场白生成成功: {'status': 'error', 'message': '生成个性化开场白失败: chat_qwen() takes 1 positional argument but 2 were given', 'type': 'personalized'}
+2025-07-07 10:57:21,530 - INFO - 开始生成个性化开场白: 123, your_session_id_here, 456
+2025-07-07 10:57:23,975 - INFO - HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-07 10:57:23,996 - INFO - 个性化开场白生成成功: {'status': 'success', 'opening': ['您好，很高兴为您服务', '有什么可以帮您的吗', '专注服务，为您解忧', '期待与您深入交流', '很高兴遇见您'], 'type': 'personalized'}
+2025-07-07 10:58:23,008 - INFO - 开始生成个性化开场白: 123, your_session_id_here, 456
+2025-07-07 10:58:26,150 - INFO - HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-07 10:58:26,153 - INFO - 个性化开场白生成成功: {'status': 'success', 'opening': ['您好，最近有新的合作机会吗？', '看到您关注行业动态，想请教一些问题。', '您好，最近项目进展顺利吗？', '对行业趋势很感兴趣，可以交流下吗？', '您好，期待与您探讨新需求。'], 'type': 'personalized'}
+2025-07-07 10:59:39,579 - INFO - 开始生成个性化开场白: 123, your_session_id_here, 456
+2025-07-07 10:59:42,330 - INFO - HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-07 10:59:42,335 - INFO - 个性化开场白生成成功: {'status': 'success', 'opening': ['您好，有需要帮忙的吗？', '很高兴为您解答疑问！', '专注服务，期待您的交流！', '有什么可以帮到您？', '欢迎随时咨询和交流！'], 'type': 'personalized'}
+2025-07-07 11:12:26,044 - INFO - 开始生成个性化开场白: 123, your_session_id_here, 456
+2025-07-07 11:12:29,913 - INFO - HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-07 11:12:29,916 - INFO - 个性化开场白生成成功: {'status': 'success', 'opening': ['您好，我是中科小苏，专注于企业数字化解决方案', '张三您好，专注IT服务领域，助力企业高效发展', '李四很高兴认识您，我们在智能办公方面有丰富经验', '落日余晖，很高兴与您交流数字化转型的更多可能', '星辰大海，期待与您探讨企业智能化发展的新方向'], 'type': 'personalized'}
+2025-07-07 11:15:23,884 - INFO - 开始生成个性化开场白: 123, your_session_id_here, 456
+2025-07-07 11:15:27,369 - INFO - HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-07 11:15:27,372 - INFO - 个性化开场白生成成功: {'status': 'success', 'opening': ['您好，有需要帮您介绍适合的方案吗？', '很高兴认识您，我们可以聊聊合作？', '您好，最近在找新的解决方案吗？', '您好，我这边有一些新信息分享', '很高兴联系到您，方便沟通下需求吗？'], 'type': 'personalized'}
+2025-07-07 11:31:49,426 - INFO - 开始生成个性化开场白: 1, 17, e97abaf8-aaf4-4724-bed7-faec1d08d786
+2025-07-07 11:31:51,566 - INFO - HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-07 11:31:51,574 - INFO - 个性化开场白生成成功: {'status': 'success', 'opening': ['您好，很高兴认识您！', '专注企业服务，期待交流！', '专业支持，助力业务发展！', '沟通新机会，共创双赢！', '优质服务，与您共成长！'], 'type': 'personalized'}
+2025-07-07 11:32:00,737 - INFO - 开始生成个性化开场白: 1, 17, c9f860a2-3279-4f91-a16e-c898327b8a7b
+2025-07-07 11:32:02,651 - INFO - HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-07 11:32:02,653 - INFO - 个性化开场白生成成功: {'status': 'success', 'opening': ['您好，很高兴认识您！', '专注企业服务，期待交流！', '专业财税支持，助力企业发展！', '高效解决方案，值得您了解！', '合作共赢，期待您的见解！'], 'type': 'personalized'}
+2025-07-07 11:40:13,893 - INFO - 开始生成个性化开场白: 1, 17, 47fbbb9b-f3ff-4618-9e23-9b54785a7ca3
+2025-07-07 11:40:15,913 - INFO - HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-07 11:40:15,916 - INFO - 个性化开场白生成成功: {'status': 'success', 'opening': ['您好，很高兴认识您！', '您好，期待与您深入交流！', '您好，希望能为您提供帮助！', '您好，有机会合作很期待！', '您好，一起探讨行业新趋势？'], 'type': 'personalized'}
+2025-07-07 15:59:06,150 - INFO - 开始生成个性化开场白: 1, 17, 4ed2c24e-59c6-4aee-a593-cb991b909234
+2025-07-07 15:59:08,582 - INFO - HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-07 15:59:08,588 - INFO - 个性化开场白生成成功: {'status': 'success', 'opening': ['您好，很高兴认识您！', '专注企业服务，期待交流！', '专业支持，助力业务增长！', '优质方案，为您创造价值！', '高效合作，从沟通开始！'], 'type': 'personalized'}
+2025-07-07 16:02:13,847 - INFO - 开始生成个性化开场白: 1, 18, 99dd63b2-e934-4ff4-bc0d-5e455509ef2c
+2025-07-07 16:02:16,366 - INFO - HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-07 16:02:16,368 - INFO - 个性化开场白生成成功: {'status': 'success', 'opening': ['您好，我是AI软件方案顾问小林', '专注AI赋能企业智能化转型', '深耕AI领域，助力产业升级', '智能软件解决方案专业服务', '用前沿技术推动行业变革'], 'type': 'personalized'}
+2025-07-07 16:26:33,676 - INFO - 开始生成个性化开场白: 1, 99, 307d31a7-264c-4417-89ad-cba9c28970d2
+2025-07-07 16:26:36,404 - INFO - HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-07 16:26:36,408 - INFO - 个性化开场白生成成功: {'status': 'success', 'opening': ['您好，很高兴认识您！', '专注企业服务，期待交流！', '专业支持，助力业务增长！', '沟通创造价值，合作共双赢！', '用心服务，成就彼此！'], 'type': 'personalized'}
+2025-07-07 16:26:36,852 - INFO - 开始生成个性化开场白: 1, 99, 182d75a0-37b0-4b9f-a29a-225de708ed63
+2025-07-07 16:26:39,656 - INFO - HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-07 16:26:39,658 - INFO - 个性化开场白生成成功: {'status': 'success', 'opening': ['您好，最近在忙什么项目呢？', '很高兴认识您，期待交流合作！', '最近行业动态关注了吗？', '您好，需要了解哪些支持呢？', '很高兴加到您，祝工作顺利！'], 'type': 'personalized'}
+2025-07-07 16:31:22,493 - INFO - 开始生成个性化开场白: 1, 99, 02b3e0b8-1117-4d5b-bb26-d0eb483fc69e
+2025-07-07 16:31:26,086 - INFO - HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-07 16:31:26,091 - INFO - 个性化开场白生成成功: {'status': 'success', 'opening': ['您好，最近有客户咨询类似需求，想和您聊聊？', '看到您关注行业动态，能否交流下您的看法？', '最近行业变化挺快，想请教下您的见解？', '您好，这边有些新方案，或许对您有帮助。', '最近有同行在升级服务，想了解下您的需求？'], 'type': 'personalized'}
+2025-07-07 16:37:07,740 - INFO - 开始生成个性化开场白: 30, 23, 77d59d9e-8bdd-4c89-bd6f-c868838f9914
+2025-07-07 16:37:11,430 - INFO - HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-07 16:37:11,437 - INFO - 个性化开场白生成成功: {'status': 'success', 'opening': ['李女士好，专业知识产权服务', '张总您好，专注知识产权20年', '王经理好，身边的知识产权专家', '陈先生你好，一站式知识产权顾问', '林工您好，为创新保驾护航'], 'type': 'personalized'}
+2025-07-07 16:38:32,066 - INFO - 开始生成个性化开场白: 30, 23, 76fe165a-3620-4756-85f7-1c8391d025a9
+2025-07-07 16:38:35,472 - INFO - HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-07 16:38:35,474 - INFO - 个性化开场白生成成功: {'status': 'success', 'opening': ['李女士好，知识产权保护有新进展', '张先生您好，专业知产服务助您护航', '王经理好，了解下企业商标新方案', '陈总您好，助力品牌发展我们更专业', '林工好，一站式知识产权解决方案'], 'type': 'personalized'}
+2025-07-07 16:38:35,636 - INFO - 开始生成个性化开场白: 30, 23, 1c6cf2bf-8058-4c6d-b085-c012f0db75cd
+2025-07-07 16:38:39,064 - INFO - HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-07 16:38:39,066 - INFO - 个性化开场白生成成功: {'status': 'success', 'opening': ['李女士好，知识产权问题有需要帮忙的吗？', '李女士好，看到您关注知识产权领域，有机会交流学习！', '李女士您好，专业知识产权服务，可以随时为您效劳。', '李女士好，咱们是同行，多多交流经验吧！', '李女士好，期待为您提供专业的知识产权支持！'], 'type': 'personalized'}
+2025-07-07 16:38:50,447 - INFO - 开始生成个性化开场白: 30, 23, 913d5901-46a1-42eb-b118-dc14aa811adf
+2025-07-07 16:38:53,786 - INFO - HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-07 16:38:53,787 - INFO - 个性化开场白生成成功: {'status': 'success', 'opening': ['李女士好，知识产权保护有新进展', '张先生好，您的同行都在关注专利布局', '王总好，捷成27年经验助力品牌护航', '陈经理好，专业团队为您定制知产方案', '赵先生好，我们提供一站式知识产权服务'], 'type': 'personalized'}
+2025-07-07 16:38:58,385 - INFO - 开始生成个性化开场白: 30, 23, 4f5cdb11-c43d-4923-a04e-c2134dc8598d
+2025-07-07 16:39:01,018 - INFO - HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-07 16:39:01,020 - INFO - 个性化开场白生成成功: {'status': 'success', 'opening': ['李四好，知识产权问题有需要帮忙的吗？', '张三您好，专业知识产权服务助您无忧！', '中科小苏，关于知识产权保护有什么想了解的吗？', '星辰大海，保护创新我们一直在路上！', '落日余晖，您的品牌值得更专业的守护！'], 'type': 'personalized'}
+2025-07-07 16:46:32,883 - INFO - 开始生成个性化开场白: 30, 23, c1b2be44-e609-4af3-831d-a517f7a2fa0a
+2025-07-07 16:46:36,110 - INFO - HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-07 16:46:36,112 - INFO - 个性化开场白生成成功: {'status': 'success', 'opening': ['您好，我是捷成知识产权顾问小林', '很高兴认识您，我是知识产权顾问小林', '专注知识产权服务，期待与您交流', '为您提供专业知识产权解决方案', '捷成知识产权顾问，助力企业护航'], 'type': 'personalized'}
+2025-07-07 16:46:39,650 - INFO - 开始生成个性化开场白: 30, 23, c2a34b16-25b5-4249-bdb8-46104904e12b
+2025-07-07 16:46:43,075 - INFO - HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-07 16:46:43,077 - INFO - 个性化开场白生成成功: {'status': 'success', 'opening': ['李四，知识产权保护有新进展吗？', '张三，最近行业知识产权挑战多吗？', '星辰大海，捷成助您守护创新成果！', '落日余晖，专业护航您的品牌之路~', '蒙自源伙伴，一起为品牌添保障！'], 'type': 'personalized'}
+2025-07-07 16:49:38,480 - INFO - 开始生成个性化开场白: 30, 23, 20f757ca-f474-498c-8cf4-5dadc3576e12
+2025-07-07 16:49:45,463 - INFO - HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-07 16:49:45,471 - INFO - 个性化开场白生成成功: {'status': 'success', 'opening': ['李四，知识产权保护有新动态', '张三，您的品牌有在关注吗？', '星辰大海，专业知识产权服务', '中科小苏，商标问题帮您解', '落日余晖，让专业为您护航'], 'type': 'personalized'}
+2025-07-07 16:49:48,164 - INFO - 开始生成个性化开场白: 30, 23, d3a965da-aac0-4273-8df1-43907a052e98
+2025-07-07 16:49:50,773 - INFO - HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-07 16:49:50,774 - INFO - 个性化开场白生成成功: {'status': 'success', 'opening': ['李女士好，专业知识产权服务为您护航', '张总好，专注知识产权20年值得信赖', '王经理好，身边的知识产权专家来了', '陈先生好，一站式知识产权解决方案', '刘主任好，助力企业知识产权保护'], 'type': 'personalized'}
+2025-07-07 16:51:33,669 - INFO - 开始生成个性化开场白: 30, 23, 2443cbcd-2ca5-4354-8fb9-1b052f298867
+2025-07-07 16:51:36,407 - INFO - HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-07 16:51:36,409 - INFO - 个性化开场白生成成功: {'status': 'success', 'opening': ['李四，最近在忙什么？', '李四，最近在忙什么？', '李四，最近在忙什么？', '李四，最近在忙什么？', '李四，最近在忙什么？'], 'type': 'personalized'}
+2025-07-07 16:52:12,420 - INFO - 开始生成个性化开场白: 30, 23, 886ccf01-2ac9-487d-b598-f7f159d6f48e
+2025-07-07 16:52:16,063 - INFO - HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-07 16:52:16,064 - INFO - 个性化开场白生成成功: {'status': 'success', 'opening': ['李女士好，知识产权问题有需要帮忙的吗？', '张总好，最近在知识产权方面有什么新需求吗？', '陈经理好，想和您聊聊知识产权保护的事', '王工好，关于专利申请方便沟通下吗？', '刘女士好，捷成知识产权为您提供专业支持'], 'type': 'personalized'}
+2025-07-07 17:07:31,649 - INFO - 开始生成个性化开场白: 1, 18, 941c4e71-1b4f-428a-bfab-97120798343d
+2025-07-07 17:07:35,016 - INFO - HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-07 17:07:35,023 - INFO - 个性化开场白生成成功: {'status': 'success', 'opening': ['李总您好，AI方案助力行业升级', '张工好，智能软件赋能企业未来', '王姐好，专注AI开发，共拓新可能', '陈先生您好，让技术创造实际价值', '赵总好，深耕AI领域，共赢新生态'], 'type': 'personalized'}
+2025-07-07 17:18:53,881 - INFO - 开始生成个性化开场白: 1, 18, 6acf3816-da3a-4773-892a-8cb0576f5474
+2025-07-07 17:18:57,016 - INFO - HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-07 17:18:57,018 - INFO - 个性化开场白生成成功: {'status': 'success', 'opening': ['张总您好，AI方案助力行业升级', '李经理好，智能软件提升效率', '王女士好，专注AI赋能企业转型', '赵先生好，深耕智能软件领域', '陈总您好，技术驱动行业变革'], 'type': 'personalized'}
+2025-07-07 17:30:31,467 - INFO - 开始生成个性化开场白: 1, 41, b7b595b4-4174-453e-aa73-97af994b45f0
+2025-07-07 17:30:33,273 - INFO - HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-07 17:30:33,276 - INFO - 个性化开场白生成成功: {'status': 'success', 'opening': ['您好，我是AI软件专家小苏', '专注AI赋能行业升级', '智能解决方案为您加速', '用AI助力企业数字化转型', '高效智能方案欢迎交流'], 'type': 'personalized'}
+2025-07-07 17:54:07,870 - INFO - 开始生成个性化开场白: 1, 41, 98440edf-f432-46b2-9ac3-2a1a7046e9bc
+2025-07-07 18:10:19,786 - INFO - HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-07 18:10:19,789 - INFO - 个性化开场白生成成功: {'status': 'success', 'opening': ['张总好，AI方案助力企业智能化升级', '李经理好，智能软件赋能行业转型', '王主管好，高效AI解决方案了解一下', '陈工好，专注AI技术落地与创新', '刘女士好，让智能软件驱动您的业务增长'], 'type': 'personalized'}
+2025-07-07 20:46:22,611 - INFO - 开始生成个性化开场白: 1, 18, ec658b88-dd1a-48ed-b8a5-05b4a7298f4e
+2025-07-07 20:46:26,775 - INFO - HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-07 20:46:26,781 - INFO - 个性化开场白生成成功: {'status': 'success', 'opening': ['张三你好，AI方案助您提效', '李四好，智能软件新玩法', '中科小苏，聊聊AI升级之路', '星辰大海，探索智能未来', '落日余晖，一起发现AI价值'], 'type': 'personalized'}
+2025-07-07 20:46:47,801 - INFO - 开始生成个性化开场白: 1, 18, 6b73c374-a909-42cf-98b0-24b55ea7b253
+2025-07-07 20:46:50,148 - INFO - HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-07 20:46:50,151 - INFO - 个性化开场白生成成功: {'status': 'success', 'opening': ['您好，看到AI应用感兴趣吗？', '专注AI赋能行业升级，欢迎咨询', '智能软件解决方案，助力企业升级', '高效智能可信赖，值得关注', '深耕AI领域，期待交流合作'], 'type': 'personalized'}
+2025-07-07 20:48:06,704 - INFO - 开始生成个性化开场白: 30, 23, 02a3b93e-2d57-4e00-8533-b5ae3ffc3fbf
+2025-07-07 20:48:09,589 - INFO - HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-07 20:48:09,591 - INFO - 个性化开场白生成成功: {'status': 'success', 'opening': ['李四，关于知识产权保护想和您聊聊', '张三，专业知识产权服务，值得信赖', '捷成知识产权，为创新保驾护航', '诚信尽责，为您提供优质知识产权服务', '一对一顾问制，为您量身定制解决方案'], 'type': 'personalized'}
+2025-07-07 20:48:14,388 - INFO - 开始生成个性化开场白: 30, 23, af6be3da-94f0-437f-984a-e40ca6ba777a
+2025-07-07 20:48:16,866 - INFO - HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-07 20:48:16,868 - INFO - 个性化开场白生成成功: {'status': 'success', 'opening': ['李女士好，专业知识产权服务', '张总好，您的知识产权顾问', '王经理好，专注企业品牌保护', '陈工好，知识产权一站式服务', '黄先生好，身边的专利专家'], 'type': 'personalized'}
+2025-07-07 20:48:17,044 - INFO - 开始生成个性化开场白: 30, 23, 2f6dbd51-e4c3-4c61-8ba2-dafba5b4bc6f
+2025-07-07 20:48:19,959 - INFO - HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-07 20:48:19,960 - INFO - 个性化开场白生成成功: {'status': 'success', 'opening': ['李女士好，知识产权保护有新进展', '张总好，您的专利申请有新方案', '王经理好，商标注册可更高效', '陈工好，知识产权难题一起探讨', '周主管好，专业顾问为您解忧'], 'type': 'personalized'}
+2025-07-07 20:48:54,149 - INFO - 开始生成个性化开场白: 30, 23, fdf13efc-9205-4c93-b4da-cfd091c0762b
+2025-07-07 20:48:58,412 - INFO - HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-07 20:48:58,413 - INFO - 个性化开场白生成成功: {'status': 'success', 'opening': ['李四，您好！看到您在知识产权方面有关注，想分享一些专业见解。', '张三，最近在忙专利申请吗？我们这边有成熟的经验可以交流。', '星辰大海，知识产权保护是企业发展的关键，有兴趣聊聊吗？', '中科小苏，您的行业洞察力真强，我们捷成能为您提供全方位的知识产权支持。', '落日余晖，专注知识产权20+年，希望能为您的事业保驾护航。'], 'type': 'personalized'}
+2025-07-07 20:49:37,937 - INFO - 开始生成个性化开场白: 1, 18, be354bf9-dc35-4f26-840d-812dcbb23318
+2025-07-07 20:49:41,019 - INFO - HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-07 20:49:41,021 - INFO - 个性化开场白生成成功: {'status': 'success', 'opening': ['您好，AI解决方案请教？', '专注AI赋能行业升级，欢迎咨询！', '智能软件助力企业转型，了解一下？', '深耕AI领域，助您提质增效！', '用智能技术推动行业发展，合作共赢'], 'type': 'personalized'}
+2025-07-07 20:49:53,391 - INFO - 开始生成个性化开场白: 1, 18, 569d951e-a249-4003-9766-ae62406740ad
+2025-07-07 20:49:55,847 - INFO - HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-07 20:49:55,849 - INFO - 个性化开场白生成成功: {'status': 'success', 'opening': ['张总好，AI方案助力企业升级', '李经理好，智能软件提升效率', '王主管好，AI赋能智能制造', '赵老师好，智慧医疗新可能', '陈总监好，智能决策更高效'], 'type': 'personalized'}
+2025-07-07 20:49:58,093 - INFO - 开始生成个性化开场白: 1, 18, 98b0a9ff-f89d-4456-abd4-6e230eeea402
+2025-07-07 20:50:00,360 - INFO - HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-07 20:50:00,362 - INFO - 个性化开场白生成成功: {'status': 'success', 'opening': ['张三你好，AI方案助力行业升级', '李四好，专注AI赋能企业转型', '中科小苏，在AI应用领域深耕', '星辰大海，聊聊智能软件未来', '落日余晖，一起探索AI新可能'], 'type': 'personalized'}
+2025-07-07 21:25:53,406 - INFO - 开始生成个性化开场白: 123, your_session_id_here, 456
+2025-07-07 21:42:08,149 - INFO - HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-07 21:42:08,152 - INFO - 个性化开场白生成成功: {'status': 'success', 'opening': ['张三你好，最近有新的合作机会想和你探讨下？', '李四在吗？有个适合你的方案想跟你聊聊。', '中科小苏好，关于行业解决方案想听听您的想法。', '星辰大海你好，最近业务拓展有什么新计划吗？', '落日余晖你好，希望能为你带来一些新的思路！'], 'type': 'personalized'}
+2025-07-07 21:51:31,758 - INFO - 开始生成个性化开场白: 123, your_session_id_here, 456
+2025-07-07 21:51:34,210 - INFO - HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-07 21:51:34,212 - INFO - 个性化开场白生成成功: {'status': 'success', 'opening': ['张三，最近有新的合作机会吗？', '李四，好久不见，近况如何？', '中科小苏，感谢一直以来的支持！', '星辰大海，行业动态有关注吗？', '落日余晖，今天心情不错吧？'], 'type': 'personalized'}
+2025-07-08 11:03:33,761 - INFO - 开始生成个性化开场白: 123, your_session_id_here, 456
+2025-07-08 11:04:27,301 - INFO - 开始生成个性化开场白: 123, your_session_id_here, 456
+2025-07-08 11:06:03,908 - INFO - 开始生成个性化开场白: 123, your_session_id_here, 456
+2025-07-08 11:06:10,932 - INFO - HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-08 11:06:10,938 - INFO - 个性化开场白生成成功: {'status': 'success', 'opening': [{'url': 'www.baidu.com', 'content': '您好，看到您对AI数据感兴趣'}, {'url': 'www.baidu.com', 'content': '您好，很高兴为您推荐相关内容'}, {'url': 'www.baidu.com', 'content': '您好，这里有适合您的AI方案'}, {'url': 'www.baidu.com', 'content': '您好，希望能为您提供专业支持'}, {'url': 'www.baidu.com', 'content': '您好，想和您聊聊AI应用方向'}], 'type': 'personalized'}
+2025-07-08 11:13:59,757 - INFO - 开始生成个性化开场白: 123, your_session_id_here, 456
+2025-07-08 11:14:03,315 - INFO - HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-08 11:14:03,319 - INFO - 个性化开场白生成成功: {'status': 'success', 'opening': [{'type': 'text', 'content': '您好，最近有关注到一些适合您的行业方案'}, {'type': 'text', 'content': '想和您聊聊业务增长中的关键痛点'}, {'type': 'text', 'content': '最近在忙哪些重点业务方向？'}], 'type': 'personalized'}
+2025-07-08 11:18:02,347 - INFO - 开始生成个性化开场白: 123, your_session_id_here, 456
+2025-07-08 11:18:07,489 - INFO - HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-08 11:18:07,494 - INFO - 个性化开场白生成成功: {'status': 'success', 'opening': [{'type': 'text', 'content': '您好，最近有关注到您对AI应用的兴趣'}, {'type': 'text', 'content': '很高兴认识您，有机会可以交流行业动态'}, {'type': 'text', 'content': '看到一些不错的资料，是否需要我分享给您？'}, {'type': 'text', 'content': '一直专注于为客户提供专业解决方案'}, {'type': 'text', 'content': '期待与您深入沟通，看看有哪些合作机会'}], 'type': 'personalized'}
+2025-07-08 17:16:13,021 - INFO - 开始生成个性化开场白: 123, your_session_id_here, 456
+2025-07-08 17:16:17,963 - INFO - HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-08 17:16:17,969 - INFO - 个性化开场白生成成功: {'status': 'success', 'opening': [{'type': 'text', 'content': '您好，最近有关注到您对AI数据感兴趣？'}, {'type': 'text', 'content': '我是中科小苏，可以为您提供相关资料。'}, {'type': 'text', 'content': '如果需要了解更多信息，随时告诉我！'}], 'type': 'personalized'}
+2025-07-08 17:22:29,600 - INFO - 开始生成个性化开场白: 1, 41, wxid_fe72fwku5f5322
+2025-07-08 17:22:33,719 - INFO - HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-08 17:22:33,724 - INFO - 个性化开场白生成成功: {'status': 'success', 'opening': [{'type': 'text', 'content': '您好，AI软件能为您带来什么？'}, {'type': 'text', 'content': '看到您关注智能化解决方案'}, {'type': 'text', 'content': '想和您聊聊AI落地的那些事'}, {'type': 'text', 'content': '听说您也在找高效智能工具？'}, {'type': 'text', 'content': '很高兴认识对AI感兴趣的朋友'}], 'type': 'personalized'}
+2025-07-08 19:33:46,610 - INFO - 开始生成个性化开场白: 1, 41, wxid_fe72fwku5f5322
+2025-07-08 19:33:50,681 - INFO - HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-08 19:33:50,688 - INFO - 个性化开场白生成成功: {'status': 'success', 'opening': [{'type': 'text', 'content': '您好，AI软件方案专家~'}, {'type': 'text', 'content': '专注行业智能化升级'}, {'type': 'text', 'content': '助力企业高效运营'}, {'type': 'text', 'content': '我们提供定制AI解决方案'}, {'type': 'text', 'content': '期待与您深入交流'}], 'type': 'personalized'}
+2025-07-08 22:12:57,267 - INFO - 开始生成个性化开场白: 1, 41, 72585bc9-f9fb-4c24-9d67-11aee66494e5
+2025-07-08 22:13:05,220 - INFO - HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-08 22:13:05,223 - INFO - 个性化开场白生成成功: {'status': 'success', 'opening': [{'type': 'text', 'content': '您好，我是苏语盈，专注于AI销售服务'}, {'type': 'url', 'url': 'https://ai-yuying.oss-cn-shenzhen.aliyuncs.com/knowledge-base/23cb2768dc38476bac417f5f752a46db.docx'}, {'type': 'text', 'content': '我们提供高效智能的AI解决方案'}, {'type': 'text', 'content': '专注智能制造与智慧金融领域'}, {'type': 'text', 'content': '助力企业实现智能化升级'}], 'type': 'personalized'}
+2025-07-09 09:18:29,441 - INFO - 开始生成个性化开场白: 1, 41, wxid_fe72fwku5f5322
+2025-07-09 09:18:39,236 - INFO - HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-09 09:18:39,242 - INFO - 个性化开场白生成成功: {'status': 'success', 'opening': [{'type': 'text', 'content': '您好，我是mousiss，专注AI智能化方案落地'}, {'type': 'url', 'url': 'https://ai-yuying.oss-cn-shenzhen.aliyuncs.com/knowledge-base/23cb2768dc38476bac417f5f752a46db.docx'}, {'type': 'text', 'content': '看到您关注AI应用，想分享一些行业落地案例'}, {'type': 'text', 'content': '我们在智能制造和智慧金融有成熟解决方案'}, {'type': 'text', 'content': '方便聊聊您目前在AI方面有具体需求吗？'}], 'type': 'personalized'}
+2025-07-10 16:35:43,946 - INFO - 开始生成个性化开场白: 31, 137, d88b139a-2dbf-4c30-abba-244cd654ef6c
+2025-07-10 16:35:54,068 - INFO - HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-10 16:35:54,072 - INFO - 个性化开场白生成成功: {'status': 'success', 'opening': [{'type': 'text', 'content': '您好，看到您关注企业获客效率问题'}, {'type': 'url', 'url': 'https://ai-yuying.oss-cn-shenzhen.aliyuncs.com/knowledge-base/c2e86723b757440092749a5f54dea741.pdf'}, {'type': 'text', 'content': '我们用AI帮销售团队精准定位目标客户'}, {'type': 'url', 'url': 'https://ai-yuying.oss-cn-shenzhen.aliyuncs.com/knowledge-base/c2e86723b757440092749a5f54dea741.pdf'}, {'type': 'text', 'content': '数据驱动的智能获客方案，提升成单率'}], 'type': 'personalized'}
+2025-07-10 16:37:04,693 - INFO - 开始生成个性化开场白: 31, 137, 7b8bf93d-f521-438a-bf90-ba532834c1db
+2025-07-10 16:37:15,002 - INFO - HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-10 16:37:15,004 - INFO - 个性化开场白生成成功: {'status': 'success', 'opening': [{'type': 'text', 'content': '您好，看到您关注企业增长'}, {'type': 'url', 'url': 'https://ai-yuying.oss-cn-shenzhen.aliyuncs.com/knowledge-base/c2e86723b757440092749a5f54dea741.pdf'}, {'type': 'text', 'content': '最近有企业在获客方面遇到挑战吗？'}, {'type': 'url', 'url': 'https://ai-yuying.oss-cn-shenzhen.aliyuncs.com/knowledge-base/c2e86723b757440092749a5f54dea741.pdf'}, {'type': 'text', 'content': '我们为To B企业提供智能获客方案'}], 'type': 'personalized'}

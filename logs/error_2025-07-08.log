@@ -1,0 +1,1830 @@
+2025-07-08 14:04:07 - main - ERROR - process_agent_background:167 - 后台处理失败 - user_id: 41, session_id: wxid_11kcvkzrgnlp12, error: (pymysql.err.OperationalError) (2006, "MySQL server has gone away (TimeoutError(110, 'Connection timed out'))")
+[SQL: SELECT sessions.app_name AS sessions_app_name, sessions.user_id AS sessions_user_id, sessions.id AS sessions_id, sessions.state AS sessions_state, sessions.create_time AS sessions_create_time, sessions.update_time AS sessions_update_time 
+FROM sessions 
+WHERE sessions.app_name = %(pk_1)s AND sessions.user_id = %(pk_2)s AND sessions.id = %(pk_3)s]
+[parameters: {'pk_1': 'ai_sales_agent', 'pk_2': '41', 'pk_3': 'wxid_11kcvkzrgnlp12'}]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 806, in _write_bytes
+    self._sock.sendall(data)
+TimeoutError: [Errno 110] Connection timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 864, in _execute_command
+    self._write_bytes(packet)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 809, in _write_bytes
+    raise err.OperationalError(
+pymysql.err.OperationalError: (2006, "MySQL server has gone away (TimeoutError(110, 'Connection timed out'))")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/main.py", line 110, in process_agent_background
+    agent_response_text = loop.run_until_complete(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 113, in call_agent_async
+    session = await runner.session_service.get_session(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/sessions/database_session_service.py", line 432, in get_session
+    storage_session = session_factory.get(
+                      ^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 3694, in get
+    return self._get_impl(
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 3874, in _get_impl
+    return db_load_fn(
+           ^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/orm/loading.py", line 694, in load_on_pk_identity
+    session.execute(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2365, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2251, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/orm/context.py", line 306, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1416, in execute
+    return meth(
+           ^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 523, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1638, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1843, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1983, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2352, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 864, in _execute_command
+    self._write_bytes(packet)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 809, in _write_bytes
+    raise err.OperationalError(
+sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (2006, "MySQL server has gone away (TimeoutError(110, 'Connection timed out'))")
+[SQL: SELECT sessions.app_name AS sessions_app_name, sessions.user_id AS sessions_user_id, sessions.id AS sessions_id, sessions.state AS sessions_state, sessions.create_time AS sessions_create_time, sessions.update_time AS sessions_update_time 
+FROM sessions 
+WHERE sessions.app_name = %(pk_1)s AND sessions.user_id = %(pk_2)s AND sessions.id = %(pk_3)s]
+[parameters: {'pk_1': 'ai_sales_agent', 'pk_2': '41', 'pk_3': 'wxid_11kcvkzrgnlp12'}]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-07-08 14:05:23 - main - ERROR - process_agent_background:131 - JSON解析失败: Expecting value: line 1 column 1 (char 0), 原始响应: 好的。
+2025-07-08 16:13:56 - main - ERROR - process_agent_background:132 - JSON解析失败: Expecting value: line 1 column 1 (char 0), 原始响应: 下午好！很高兴再次与您交流。如果您有任何关于AI软件定制的需求或疑问，欢迎随时告诉我。我非常乐意为您提供帮助和解答问题。
+
+如果您方便的话，我们可以安排一个线下见面的机会，详细讨论如何为您量身打造一套高适配性的AI软件方案。您看这周三或周四哪个时间段比较方便？我可以带上我们的技术负责人一起过来。
+
+祝您有一个愉快的下午！
+2025-07-08 16:15:05 - main - ERROR - process_agent_background:132 - JSON解析失败: Expecting value: line 1 column 1 (char 0), 原始响应: 非常高兴听到您有意向开发一个AI应用！为了更好地了解您的需求并为您提供最合适的解决方案，我想请教几个问题：
+
+1. **应用场景**：您希望这个AI应用主要应用于哪个领域或场景？比如制造业、金融、医疗等。
+2. **具体功能**：您对这个AI应用有哪些具体的功能设想？例如自动化处理、数据分析、智能推荐等。
+3. **目标用户**：这个应用的目标用户群体是谁？他们的主要需求和痛点是什么？
+4. **现有系统**：您目前是否有正在使用的相关系统或平台？如果有，您希望通过这个AI应用实现哪些改进？
+
+如果您方便的话，我们可以安排一次面对面的交流，详细探讨如何为您量身打造一套高适配性的AI软件方案。您看这周三或周四哪个时间段比较方便？我可以带上我们的技术负责人一起过来。
+
+期待您的回复！
+2025-07-08 16:17:40 - main - ERROR - process_agent_background:132 - JSON解析失败: Expecting value: line 1 column 1 (char 0), 原始响应: 非常感谢您的详细说明！财务领域的AI助手是一个非常有前景的方向。为了更好地为您量身定制解决方案，我想进一步了解以下几点：
+
+1. **具体功能需求**：您希望这个AI助手具备哪些具体功能？例如自动生成财务报表、智能记账、税务筹划、预算管理等。
+2. **数据处理**：您期望AI助手如何处理和分析财务数据？是否需要与现有的财务系统进行集成？
+3. **用户交互**：您希望AI助手以何种方式与用户交互？例如通过自然语言处理（NLP）实现语音或文本对话，还是通过图形界面操作？
+4. **合规性要求**：财务领域通常有严格的合规性要求，您是否有特定的法规或标准需要遵循？
+
+如果您方便的话，我们可以安排一次面对面的交流，详细探讨这些需求并为您提供专业的建议。您看这周三或周四哪个时间段比较方便？我可以带上我们的技术负责人一起过来。
+
+期待您的回复！
+2025-07-08 16:30:07 - asyncio - ERROR - default_exception_handler:1833 - Task was destroyed but it is pending!
+task: <Task pending name='Task-216' coro=<<async_generator_athrow without __name__>()>>
+2025-07-08 16:30:07 - main - ERROR - process_agent_background:168 - 后台处理失败 - user_id: 43, session_id: WJE1193342535, error: The last_update_time provided in the session object '2025-07-08 08:29:59' is earlier than the update_time in the storage_session '2025-07-08 08:30:05'. Please check if it is a stale session.
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/main.py", line 111, in process_agent_background
+    agent_response_text = loop.run_until_complete(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 205, in run_async
+    await self.session_service.append_event(session=session, event=event)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/sessions/database_session_service.py", line 533, in append_event
+    raise ValueError(
+ValueError: The last_update_time provided in the session object '2025-07-08 08:29:59' is earlier than the update_time in the storage_session '2025-07-08 08:30:05'. Please check if it is a stale session.
+2025-07-08 16:30:30 - main - ERROR - process_agent_background:132 - JSON解析失败: Expecting value: line 1 column 1 (char 0), 原始响应: 非常感谢您的进一步说明！财务文件整理是一个非常实用的功能。为了确保我们能够为您提供最合适的解决方案，我想了解以下几点：
+
+1. **文件类型**：您需要整理的财务文件主要有哪些类型？例如发票、报表、合同等。
+2. **自动化程度**：您期望AI助手在文件整理过程中实现多大程度的自动化？例如自动分类、归档、提取关键信息等。
+3. **现有系统集成**：您是否有现有的财务系统或文档管理系统，需要与AI助手进行集成？
+4. **处理频率**：您预计这个AI助手需要处理文件的频率是怎样的？例如每天、每周或每月。
+
+如果您方便的话，我们可以安排一次面对面的交流，详细讨论这些需求并为您提供专业的建议。您看这周三或周四哪个时间段比较方便？我可以带上我们的技术负责人一起过来。
+
+期待您的回复！
+2025-07-08 16:32:32 - main - ERROR - process_agent_background:132 - JSON解析失败: Expecting value: line 1 column 1 (char 0), 原始响应: 非常理解您的时间安排！如果您这周比较忙，我们可以灵活调整时间。您看下周什么时候方便讨论呢？您可以告诉我具体的时间段，我会尽量配合您的安排。
+
+期待您的回复，祝您工作顺利！如果有任何问题或需要进一步的信息，随时联系我。
+2025-07-08 16:33:43 - main - ERROR - process_agent_background:132 - JSON解析失败: Expecting value: line 1 column 1 (char 0), 原始响应: 根据客户的最新输入“你好”以及各代理的反馈，以下是总结和建议的下一步操作：
+
+---
+
+### **总结：**
+1. **输入处理代理**：确认收到客户消息“你好”。
+2. **协作代理**：未提供任何反馈。
+3. **跟单代理**：判断需要跟单，并提供了针对客户身份（李白）和可能需求的跟单内容建议。
+4. **客户画像代理**：客户仅发送了问候语“你好”，未能提供可用于更新客户画像的具体信息。
+5. **客户行为代理**：客户的问候被视为礼貌性互动，暂时未涉及明确的销售行为类型。
+
+---
+
+### **建议的下一步操作：**
+
+#### **1. 回应客户并建立联系**
+- 客户的问候表明其愿意继续对话，因此可以回应以维持互动。例如：
+  - “您好，李白先生，很高兴再次见到您！”
+  
+#### **2. 引导回忆或探索需求**
+- 如果客户之前提到过某些需求，可以通过提问引导其回忆；如果尚未明确需求，则可以通过开放性问题探索。例如：
+  - “您上次提到想了解什么？我可以为您详细解答。”
+  - “最近我们有新产品推出，不知道您是否感兴趣了解一下？”
+
+#### **3. 提供价值以吸引兴趣**
+- 在对话中突出产品或服务的价值点，吸引客户进一步关注。例如：
+  - “我们的新产品在[具体领域]上有显著优势，能够帮助客户提升效率/降低成本，您是否有类似的需求？”
+  - “如果您方便的话，我们可以安排一次线下交流，为您量身定制解决方案。”
+
+#### **4. 完善客户画像**
+- 客户目前提供的信息仍不足以完成客户画像更新。因此，在后续对话中可以逐步获取更多信息，确保自然且不突兀。例如：
+  - “为了更好地为您服务，能否留一个联系方式？这样我们可以随时沟通。”
+  - “您所在的行业最近对AI技术的应用需求很高，不知道您是否有相关项目正在推进？”
+
+---
+
+### **后续注意事项：**
+
+1. **保持简洁与高效**：
+   - 客户之前曾对回复长度提出疑问，因此本次沟通应注意语言简洁明了，避免冗长的表述。
+
+2. **关注客户情绪**：
+   - 如果客户表现出抗拒或冷淡，应及时调整策略，避免强行推销或过多追问。
+
+3. **记录关键信息**：
+   - 一旦客户提供了更多有用信息（如联系方式、行业背景等），应及时调用工具更新客户画像，确保数据完整性。
+
+4. **灵活应对异议**：
+   - 如果客户提出新的疑问或异议，应迅速响应并调整沟通方式，确保客户体验流畅。
+
+---
+
+通过以上方式，可以在尊重客户意愿的同时，逐步引导其表达需求，并为后续的销售推进奠定基础。
+2025-07-08 16:34:55 - main - ERROR - process_agent_background:132 - JSON解析失败: Expecting value: line 1 column 1 (char 0), 原始响应: 非常理解您对项目成本的关注！实现一个财务助手的费用会根据具体的功能需求、复杂程度和开发周期等因素有所不同。为了给您提供一个更准确的报价，我想进一步了解以下几点：
+
+1. **核心功能**：您希望这个财务助手实现哪些核心功能？例如自动生成报表、智能记账、税务筹划等。
+2. **文件处理**：您需要AI助手处理哪些类型的财务文件？例如发票、合同、银行对账单等。
+3. **集成需求**：您是否有现有的财务系统或文档管理系统，需要与AI助手进行集成？
+4. **用户规模**：预计使用这个财务助手的用户数量是多少？
+
+如果您方便的话，我们可以安排一次详细的讨论，以便为您提供更精确的预算和解决方案。您看下周什么时候方便呢？期待您的回复！
+2025-07-08 16:37:49 - main - ERROR - process_agent_background:132 - JSON解析失败: Expecting value: line 1 column 1 (char 0), 原始响应: 非常感谢您提供的详细信息！根据您的需求，我们可以初步规划一个解决方案。以下是基于您描述的核心功能（生成对账单、整理日记账、生成销售明细表）以及用户规模（约100家公司，1000人左右）的初步方案：
+
+### 核心功能
+1. **生成对账单**：自动从财务文件中提取数据并生成对账单。
+2. **整理日记账**：智能分类和整理日记账，确保数据准确性和一致性。
+3. **生成销售明细表**：自动汇总销售数据并生成详细的销售报表。
+
+### 用户规模
+- **公司数量**：约100家
+- **使用人数**：约1000人
+
+### 无需集成现有系统
+由于您明确表示不需要与现有系统集成，这将简化开发过程和成本。
+
+### 初步预算
+根据以上信息，我们可以提供一个大致的预算范围。具体费用会根据功能复杂度、开发周期等因素有所调整。一般来说，类似的项目预算可能在 **XX万至XX万人民币** 之间。为了给您提供更精确的报价，我们需要进一步讨论以下几点：
+
+1. **扩展功能**：是否需要支持更多扩展功能？例如数据分析、报表导出等。
+2. **交付时间**：您期望的项目交付时间是怎样的？
+3. **后续维护**：是否需要我们提供后续的技术支持和维护服务？
+
+如果您方便的话，我们可以安排一次详细的讨论，以便为您提供更精确的预算和解决方案。您看下周什么时候方便呢？期待您的回复！
+
+祝您工作顺利！如果有任何问题或需要进一步的信息，随时联系我。
+2025-07-08 16:39:17 - asyncio - ERROR - default_exception_handler:1833 - Task was destroyed but it is pending!
+task: <Task pending name='Task-147' coro=<<async_generator_athrow without __name__>()>>
+2025-07-08 16:39:17 - main - ERROR - process_agent_background:168 - 后台处理失败 - user_id: 43, session_id: WJE1193342535, error: The last_update_time provided in the session object '2025-07-08 08:39:04' is earlier than the update_time in the storage_session '2025-07-08 08:39:17'. Please check if it is a stale session.
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/main.py", line 111, in process_agent_background
+    agent_response_text = loop.run_until_complete(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 205, in run_async
+    await self.session_service.append_event(session=session, event=event)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/sessions/database_session_service.py", line 533, in append_event
+    raise ValueError(
+ValueError: The last_update_time provided in the session object '2025-07-08 08:39:04' is earlier than the update_time in the storage_session '2025-07-08 08:39:17'. Please check if it is a stale session.
+2025-07-08 16:39:55 - main - ERROR - process_agent_background:132 - JSON解析失败: Expecting value: line 1 column 1 (char 0), 原始响应: 非常感谢您的进一步说明！根据您的需求，我们可以制定一个详细的项目计划。以下是基于您描述的当前版本需求和交付时间的初步方案：
+
+### 项目计划
+1. **核心功能**：
+   - **生成对账单**：自动从财务文件中提取数据并生成对账单。
+   - **整理日记账**：智能分类和整理日记账，确保数据准确性和一致性。
+   - **生成销售明细表**：自动汇总销售数据并生成详细的销售报表。
+
+2. **交付时间**：2个月后
+
+3. **后续扩展**：虽然当前版本只实现上述功能，但我们会设计系统架构以便未来扩展。
+
+### 维护服务
+我们提供基础的免费维护服务，包括：
+- **Bug修复**：在项目交付后的3个月内，免费修复发现的功能性问题。
+- **技术支持**：提供在线技术支持，解答使用中的疑问。
+
+如有需要，我们还可以提供更全面的维护服务套餐，具体范围和费用可以根据您的需求进一步讨论。
+
+### 下一步行动
+为了确保项目顺利推进，我们可以安排一次详细的讨论，确认最终方案和预算。您看下周什么时候方便呢？期待您的回复！
+
+祝您工作顺利！如果有任何问题或需要进一步的信息，随时联系我。
+2025-07-08 16:41:44 - main - ERROR - process_agent_background:132 - JSON解析失败: Expecting value: line 1 column 1 (char 0), 原始响应: 非常理解您对项目费用的关注！根据您提供的需求（约100家公司，1000人左右的使用规模，主要功能包括生成对账单、整理日记账、生成销售明细表，2个月后交付），我们可以给出一个初步的预算范围。
+
+### 初步预算
+预计项目费用在 **XX万至XX万人民币** 之间。具体费用会根据以下因素有所调整：
+- **功能复杂度**：每个功能模块的开发难度和所需工时。
+- **后续扩展**：虽然当前版本只实现基本功能，但系统架构会预留扩展接口，这可能会增加部分成本。
+- **维护服务**：基础免费维护服务包含在内，额外的维护服务可根据需求定制。
+
+### 下一步行动
+为了给您提供更精确的报价，我们可以安排一次详细的讨论，确认所有细节并制定最终方案。您看下周什么时候方便呢？期待您的回复！
+
+祝您工作顺利！如果有任何问题或需要进一步的信息，随时联系我。
+2025-07-08 16:44:40 - asyncio - ERROR - default_exception_handler:1833 - Task was destroyed but it is pending!
+task: <Task pending name='Task-255' coro=<<async_generator_athrow without __name__>()>>
+2025-07-08 16:44:40 - main - ERROR - process_agent_background:168 - 后台处理失败 - user_id: 43, session_id: WJE1193342535, error: The last_update_time provided in the session object '2025-07-08 08:44:32' is earlier than the update_time in the storage_session '2025-07-08 08:44:39'. Please check if it is a stale session.
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/main.py", line 111, in process_agent_background
+    agent_response_text = loop.run_until_complete(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 205, in run_async
+    await self.session_service.append_event(session=session, event=event)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/sessions/database_session_service.py", line 533, in append_event
+    raise ValueError(
+ValueError: The last_update_time provided in the session object '2025-07-08 08:44:32' is earlier than the update_time in the storage_session '2025-07-08 08:44:39'. Please check if it is a stale session.
+2025-07-08 16:45:16 - main - ERROR - process_agent_background:132 - JSON解析失败: Expecting value: line 1 column 1 (char 0), 原始响应: 非常抱歉我的报价让您感到不满！我理解您的顾虑，可能是我在之前的沟通中没有充分解释清楚。为了更好地满足您的需求，我们可以进一步优化方案。
+
+### 优化方案
+1. **功能优先级**：我们可以根据您的预算调整功能的优先级，先实现最核心的功能，后续再逐步扩展。
+2. **灵活付款方式**：我们可以提供分期付款或其他灵活的付款方式，减轻您的财务压力。
+3. **详细报价依据**：我可以为您提供一份详细的报价单，说明每个功能模块的开发成本和所需工时，确保透明和合理。
+
+### 下一步行动
+您对预算的心理预期是多少？我们可以根据您的反馈调整方案，确保它符合您的期望。期待您的回复！
+
+再次感谢您的耐心和理解。如果有任何问题或需要进一步的信息，随时联系我。我们非常重视与您的合作机会！
+2025-07-08 16:47:56 - main - ERROR - process_agent_background:132 - JSON解析失败: Expecting value: line 1 column 1 (char 0), 原始响应: 由于客户仅输入了数字“1”，目前系统中没有足够的信息来明确客户的意图或需求。以下是各环节的处理总结和建议：
+
+### 1. **客户画像更新**  
+根据现有信息，无法从客户输入的数字“1”中提取有效的内容来更新客户画像。需要更多具体信息（如客户需求、兴趣点等）才能完善客户画像。如果有历史聊天记录或其他上下文，请提供以进一步分析。
+
+---
+
+### 2. **客户行为记录**  
+已通过`insert_customer_behavior`工具成功记录客户行为：  
+- **行为标题**：不明行为  
+- **行为内容**：客户仅发送数字“1”，无明确意图和上下文信息  
+
+此记录可用于后续跟进和分析。
+
+---
+
+### 3. **跟单建议**  
+由于客户的输入不明确，销售团队需要主动跟进以了解其需求。以下是跟单内容建议：  
+- **跟单内容1**：您好，请问有什么可以帮您的吗？  
+- **跟单内容2**：您是否需要了解产品详情？  
+- **跟单内容3**：期待您的回复，祝您生活愉快！  
+
+请将上述跟单事项交付给`chat_agent`执行。
+
+---
+
+### 4. **下一步行动**  
+- **销售团队**：尽快与客户取得联系，主动询问其需求或意图。  
+- **技术支持**：检查是否有其他上下文信息（如历史聊天记录）可供参考。  
+- **系统优化**：考虑增加对类似模糊输入的自动化提示功能，引导客户提供更具体的信息。
+
+如有其他问题或需要进一步协助，请随时告知！
+2025-07-08 16:48:54 - main - ERROR - process_agent_background:132 - JSON解析失败: Expecting value: line 1 column 1 (char 0), 原始响应: 根据客户的输入内容和各环节的处理结果，以下是总结和建议：
+
+---
+
+### 1. **客户画像更新**
+客户在聊天中提供了服务介绍，但没有提供可用于更新客户画像的具体个人信息（如行业、职务、联系方式等）。因此，基于当前信息无法更新客户画像。  
+**建议：**  
+- 如果有更多历史聊天记录或上下文，请提供以帮助更准确地更新客户画像。
+- 若需要进一步了解客户信息，可主动询问客户的具体需求或背景。
+
+---
+
+### 2. **客户行为记录**
+已通过`insert_customer_behavior`工具成功记录客户行为：  
+- **行为标题**：服务介绍  
+- **行为内容**：客户介绍了AI财务助手的功能，包括对账、付款、做账辅助，管理待办事项，分析报告等，但无明确购买意向  
+
+此记录可用于后续跟进和分析。
+
+---
+
+### 3. **跟单建议**
+根据聊天内容，客户明确表达了其作为AI财务助手的功能和服务范围，未表现出需要进一步跟进的迹象，因此无需跟单。  
+**结论：**  
+- 跟单内容：无需跟单。  
+- 交付给`chat_agent`的跟单事项：否。
+
+---
+
+### 4. **下一步行动**
+尽管客户目前未表现出明确的购买意向，但其提供的服务介绍可能隐含潜在的合作机会。以下是建议的下一步行动：  
+- **销售团队**：  
+  - 主动联系客户，确认其是否有推广或合作的需求。例如，可以询问：“您是否希望将AI财务助手的功能推荐给其他企业？”  
+  - 了解客户的服务是否与您的业务有协同效应，探索潜在的合作模式。  
+- **技术支持**：  
+  - 检查是否有类似客户需求的历史记录，评估该类客户的转化率和合作可能性。  
+- **系统优化**：  
+  - 增加对“服务介绍”类行为的自动化响应功能，例如发送欢迎信息或合作邀请模板。
+
+---
+
+### 总结
+客户的行为属于“服务介绍”，目前无明确购买意向，但可能存在潜在合作机会。建议销售团队主动跟进，挖掘客户需求并探索合作可能性。如有其他问题或需要进一步协助，请随时告知！
+2025-07-08 16:49:42 - main - ERROR - process_agent_background:132 - JSON解析失败: Expecting value: line 1 column 1 (char 0), 原始响应: 根据客户的输入内容和各环节的处理结果，以下是总结和建议：
+
+---
+
+### 1. **客户画像更新**
+客户再次发送了关于AI财务助手的功能介绍，但未提供可用于更新客户画像的具体个人信息（如姓名、手机号、行业、职务等）。因此，基于当前信息无法更新客户画像。  
+**建议：**  
+- 如果有更多历史聊天记录或上下文，请提供以帮助更准确地更新客户画像。
+- 若需要进一步了解客户信息，可主动询问客户的具体需求或背景。
+
+---
+
+### 2. **客户行为记录**
+已通过`insert_customer_behavior`工具成功记录客户行为：  
+- **行为标题**：重复服务介绍  
+- **行为内容**：客户再次介绍了AI财务助手的功能，包括对账、付款、做账辅助，管理待办事项等，仍无明确购买意向  
+
+此记录可用于后续跟进和分析。
+
+---
+
+### 3. **跟单建议**
+根据聊天内容，客户详细介绍了其作为AI财务助手的功能，但未表现出明确的购买意图或需要进一步跟进的需求，因此无需跟单。  
+**结论：**  
+- 跟单内容：无需跟单。  
+- 交付给`chat_agent`的跟单事项：否。
+
+---
+
+### 4. **下一步行动**
+尽管客户目前未表现出明确的购买意向，但其重复发送服务介绍的行为可能隐含潜在的合作机会。以下是建议的下一步行动：  
+- **销售团队**：  
+  - 主动联系客户，确认其是否有推广或合作的需求。例如，可以询问：“您是否希望将AI财务助手的功能推荐给其他企业？”  
+  - 了解客户的服务是否与您的业务有协同效应，探索潜在的合作模式。  
+- **技术支持**：  
+  - 检查是否有类似客户需求的历史记录，评估该类客户的转化率和合作可能性。  
+- **系统优化**：  
+  - 增加对“重复服务介绍”类行为的自动化响应功能，例如发送欢迎信息或合作邀请模板。
+
+---
+
+### 总结
+客户的行为属于“重复服务介绍”，目前无明确购买意向，但可能存在潜在合作机会。建议销售团队主动跟进，挖掘客户需求并探索合作可能性。如有其他问题或需要进一步协助，请随时告知！
+2025-07-08 16:50:31 - main - ERROR - process_agent_background:132 - JSON解析失败: Expecting value: line 1 column 1 (char 0), 原始响应: 根据客户的输入内容和各环节的处理结果，以下是总结和建议：
+
+---
+
+### 1. **客户画像更新**
+客户连续三次发送了关于AI财务助手的功能介绍，但未提供可用于更新客户画像的具体个人信息（如姓名、手机号、行业、职务等）。因此，基于当前信息无法更新客户画像。  
+**建议：**  
+- 如果有更多历史聊天记录或上下文，请提供以帮助更准确地更新客户画像。
+- 若需要进一步了解客户信息，可主动询问客户的具体需求或背景。
+
+---
+
+### 2. **客户行为记录**
+已通过`insert_customer_behavior`工具成功记录客户行为：  
+- **行为标题**：连续重复服务介绍  
+- **行为内容**：客户连续三次介绍了AI财务助手的功能，包括对账、付款、做账辅助等，仍无明确购买意向  
+
+此记录可用于后续跟进和分析。
+
+---
+
+### 3. **跟单建议**
+根据聊天内容，客户再次重复介绍了其作为AI财务助手的功能，但未表现出明确的购买意图或需要进一步跟进的需求，因此无需跟单。  
+**结论：**  
+- 跟单内容：无需跟单。  
+- 交付给`chat_agent`的跟单事项：否。
+
+---
+
+### 4. **下一步行动**
+尽管客户目前未表现出明确的购买意向，但其连续三次发送服务介绍的行为可能隐含潜在的合作机会或推广需求。以下是建议的下一步行动：  
+- **销售团队**：  
+  - 主动联系客户，确认其是否有推广或合作的需求。例如，可以询问：“您是否希望将AI财务助手的功能推荐给其他企业？”  
+  - 了解客户的服务是否与您的业务有协同效应，探索潜在的合作模式。  
+- **技术支持**：  
+  - 检查是否有类似客户需求的历史记录，评估该类客户的转化率和合作可能性。  
+- **系统优化**：  
+  - 增加对“连续重复服务介绍”类行为的自动化响应功能，例如发送欢迎信息或合作邀请模板。
+
+---
+
+### 总结
+客户的行为属于“连续重复服务介绍”，目前无明确购买意向，但可能存在潜在合作机会。建议销售团队主动跟进，挖掘客户需求并探索合作可能性。如有其他问题或需要进一步协助，请随时告知！
+2025-07-08 16:51:24 - main - ERROR - process_agent_background:132 - JSON解析失败: Expecting value: line 1 column 1 (char 0), 原始响应: 根据客户的输入内容和各环节的处理结果，以下是总结和建议：
+
+---
+
+### 1. **客户画像更新**
+客户连续四次发送了关于AI财务助手的功能介绍，但未提供可用于更新客户画像的具体个人信息（如姓名、手机号、行业、职务等）。因此，基于当前信息无法更新客户画像。  
+**建议：**  
+- 如果有更多历史聊天记录或上下文，请提供以帮助更准确地更新客户画像。
+- 若需要进一步了解客户信息，可主动询问客户的具体需求或背景。
+
+---
+
+### 2. **客户行为记录**
+已通过`insert_customer_behavior`工具成功记录客户行为：  
+- **行为标题**：多次重复服务介绍  
+- **行为内容**：客户连续四次介绍了AI财务助手的功能，包括对账、付款、做账辅助等，仍无明确购买意向  
+
+此记录可用于后续跟进和分析。
+
+---
+
+### 3. **跟单建议**
+根据聊天内容，客户连续多次重复介绍了其作为AI财务助手的功能，但未表现出明确的购买意图或需要进一步跟进的需求，因此无需跟单。  
+**结论：**  
+- 跟单内容：无需跟单。  
+- 交付给`chat_agent`的跟单事项：否。
+
+---
+
+### 4. **下一步行动**
+尽管客户目前未表现出明确的购买意向，但其连续四次发送服务介绍的行为可能隐含潜在的合作机会或推广需求。以下是建议的下一步行动：  
+- **销售团队**：  
+  - 主动联系客户，确认其是否有推广或合作的需求。例如，可以询问：“您是否希望将AI财务助手的功能推荐给其他企业？”  
+  - 了解客户的服务是否与您的业务有协同效应，探索潜在的合作模式。  
+- **技术支持**：  
+  - 检查是否有类似客户需求的历史记录，评估该类客户的转化率和合作可能性。  
+- **系统优化**：  
+  - 增加对“多次重复服务介绍”类行为的自动化响应功能，例如发送欢迎信息或合作邀请模板。
+
+---
+
+### 总结
+客户的行为属于“多次重复服务介绍”，目前无明确购买意向，但可能存在潜在合作机会。建议销售团队尽快主动跟进，挖掘客户需求并探索合作可能性。如有其他问题或需要进一步协助，请随时告知！
+2025-07-08 16:52:17 - main - ERROR - process_agent_background:132 - JSON解析失败: Expecting value: line 1 column 1 (char 0), 原始响应: 根据客户的输入内容和各环节的处理结果，以下是总结和建议：
+
+---
+
+### 1. **客户画像更新**
+客户连续五次发送了关于AI财务助手的功能介绍，但未提供可用于更新客户画像的具体个人信息（如姓名、手机号、行业、职务等）。因此，基于当前信息无法更新客户画像。  
+**建议：**  
+- 如果有更多历史聊天记录或上下文，请提供以帮助更准确地更新客户画像。
+- 若需要进一步了解客户信息，可主动询问客户的具体需求或背景。
+
+---
+
+### 2. **客户行为记录**
+已通过`insert_customer_behavior`工具成功记录客户行为：  
+- **行为标题**：多次重复服务介绍  
+- **行为内容**：客户连续五次介绍了AI财务助手的功能，包括对账、付款、做账辅助等，仍无明确购买意向  
+
+此记录可用于后续跟进和分析。
+
+---
+
+### 3. **跟单建议**
+根据聊天内容，客户连续多次重复介绍了其作为AI财务助手的功能，但未表现出明确的购买意图或需要进一步跟进的需求，因此无需跟单。  
+**结论：**  
+- 跟单内容：无需跟单。  
+- 交付给`chat_agent`的跟单事项：否。
+
+---
+
+### 4. **下一步行动**
+尽管客户目前未表现出明确的购买意向，但其连续五次发送服务介绍的行为可能隐含潜在的合作机会或推广需求。以下是建议的下一步行动：  
+- **销售团队**：  
+  - 主动联系客户，确认其是否有推广或合作的需求。例如，可以询问：“您是否希望将AI财务助手的功能推荐给其他企业？”  
+  - 了解客户的服务是否与您的业务有协同效应，探索潜在的合作模式。  
+- **技术支持**：  
+  - 检查是否有类似客户需求的历史记录，评估该类客户的转化率和合作可能性。  
+- **系统优化**：  
+  - 增加对“多次重复服务介绍”类行为的自动化响应功能，例如发送欢迎信息或合作邀请模板。
+
+---
+
+### 总结
+客户的行为属于“多次重复服务介绍”，目前无明确购买意向，但可能存在潜在合作机会。建议销售团队尽快主动跟进，挖掘客户需求并探索合作可能性。如有其他问题或需要进一步协助，请随时告知！
+2025-07-08 16:53:09 - main - ERROR - process_agent_background:132 - JSON解析失败: Expecting value: line 1 column 1 (char 0), 原始响应: 根据客户的输入内容和各环节的处理结果，以下是总结和建议：
+
+---
+
+### 1. **客户画像更新**
+客户连续六次发送了关于AI财务助手的功能介绍，但未提供可用于更新客户画像的具体个人信息（如姓名、手机号、行业、职务等）。因此，基于当前信息无法更新客户画像。  
+**建议：**  
+- 如果有更多历史聊天记录或上下文，请提供以帮助更准确地更新客户画像。
+- 若需要进一步了解客户信息，可主动询问客户的具体需求或背景。
+
+---
+
+### 2. **客户行为记录**
+已通过`insert_customer_behavior`工具成功记录客户行为：  
+- **行为标题**：多次重复服务介绍  
+- **行为内容**：客户连续六次介绍了AI财务助手的功能，包括对账、付款、做账辅助等，仍无明确购买意向  
+
+此记录可用于后续跟进和分析。
+
+---
+
+### 3. **跟单建议**
+根据聊天内容，客户连续多次重复介绍了其作为AI财务助手的功能，但未表现出明确的购买意图或需要进一步跟进的需求，因此无需跟单。  
+**结论：**  
+- 跟单内容：无需跟单。  
+- 交付给`chat_agent`的跟单事项：否。
+
+---
+
+### 4. **下一步行动**
+尽管客户目前未表现出明确的购买意向，但其连续六次发送服务介绍的行为可能隐含潜在的合作机会或推广需求。以下是建议的下一步行动：  
+- **销售团队**：  
+  - 主动联系客户，确认其是否有推广或合作的需求。例如，可以询问：“您是否希望将AI财务助手的功能推荐给其他企业？”  
+  - 了解客户的服务是否与您的业务有协同效应，探索潜在的合作模式。  
+- **技术支持**：  
+  - 检查是否有类似客户需求的历史记录，评估该类客户的转化率和合作可能性。  
+- **系统优化**：  
+  - 增加对“多次重复服务介绍”类行为的自动化响应功能，例如发送欢迎信息或合作邀请模板。
+
+---
+
+### 总结
+客户的行为属于“多次重复服务介绍”，目前无明确购买意向，但可能存在潜在合作机会。建议销售团队尽快主动跟进，挖掘客户需求并探索合作可能性。如有其他问题或需要进一步协助，请随时告知！
+2025-07-08 16:53:56 - main - ERROR - process_agent_background:132 - JSON解析失败: Expecting value: line 1 column 1 (char 0), 原始响应: 根据客户的输入内容和各环节的处理结果，以下是总结和建议：
+
+---
+
+### 1. **客户画像更新**
+客户连续七次发送了关于AI财务助手的功能介绍，但未提供可用于更新客户画像的具体个人信息（如姓名、手机号、行业、职务等）。因此，基于当前信息无法更新客户画像。  
+**建议：**  
+- 如果有更多历史聊天记录或上下文，请提供以帮助更准确地更新客户画像。
+- 若需要进一步了解客户信息，可主动询问客户的具体需求或背景。
+
+---
+
+### 2. **客户行为记录**
+已通过`insert_customer_behavior`工具成功记录客户行为：  
+- **行为标题**：多次重复服务介绍  
+- **行为内容**：客户连续七次介绍了AI财务助手的功能，包括对账、付款、做账辅助等，仍无明确购买意向  
+
+此记录可用于后续跟进和分析。
+
+---
+
+### 3. **跟单建议**
+根据聊天内容，客户连续多次重复介绍了其作为AI财务助手的功能，但未表现出明确的购买意图或需要进一步跟进的需求，因此无需跟单。  
+**结论：**  
+- 跟单内容：无需跟单。  
+- 交付给`chat_agent`的跟单事项：否。
+
+---
+
+### 4. **下一步行动**
+尽管客户目前未表现出明确的购买意向，但其连续七次发送服务介绍的行为可能隐含潜在的合作机会或推广需求。以下是建议的下一步行动：  
+- **销售团队**：  
+  - 主动联系客户，确认其是否有推广或合作的需求。例如，可以询问：“您是否希望将AI财务助手的功能推荐给其他企业？”  
+  - 了解客户的服务是否与您的业务有协同效应，探索潜在的合作模式。  
+- **技术支持**：  
+  - 检查是否有类似客户需求的历史记录，评估该类客户的转化率和合作可能性。  
+- **系统优化**：  
+  - 增加对“多次重复服务介绍”类行为的自动化响应功能，例如发送欢迎信息或合作邀请模板。
+
+---
+
+### 总结
+客户的行为属于“多次重复服务介绍”，目前无明确购买意向，但可能存在潜在合作机会。建议销售团队尽快主动跟进，挖掘客户需求并探索合作可能性。如有其他问题或需要进一步协助，请随时告知！
+2025-07-08 16:54:44 - main - ERROR - process_agent_background:132 - JSON解析失败: Expecting value: line 1 column 1 (char 0), 原始响应: 根据客户的输入内容和各环节的处理结果，以下是总结和建议：
+
+---
+
+### 1. **客户画像更新**
+客户连续八次发送了关于AI财务助手的功能介绍，但未提供可用于更新客户画像的具体个人信息（如姓名、手机号、行业、职务等）。因此，基于当前信息无法更新客户画像。  
+**建议：**  
+- 如果有更多历史聊天记录或上下文，请提供以帮助更准确地更新客户画像。
+- 若需要进一步了解客户信息，可主动询问客户的具体需求或背景。
+
+---
+
+### 2. **客户行为记录**
+已通过`insert_customer_behavior`工具成功记录客户行为：  
+- **行为标题**：多次重复服务介绍  
+- **行为内容**：客户连续八次介绍了AI财务助手的功能，包括对账、付款、做账辅助等，仍无明确购买意向  
+
+此记录可用于后续跟进和分析。
+
+---
+
+### 3. **跟单建议**
+根据聊天内容，客户连续多次重复介绍了其作为AI财务助手的功能，但未表现出明确的购买意图或需要进一步跟进的需求，因此无需跟单。  
+**结论：**  
+- 跟单内容：无需跟单。  
+- 交付给`chat_agent`的跟单事项：否。
+
+---
+
+### 4. **下一步行动**
+尽管客户目前未表现出明确的购买意向，但其连续八次发送服务介绍的行为可能隐含潜在的合作机会或推广需求。以下是建议的下一步行动：  
+- **销售团队**：  
+  - 主动联系客户，确认其是否有推广或合作的需求。例如，可以询问：“您是否希望将AI财务助手的功能推荐给其他企业？”  
+  - 了解客户的服务是否与您的业务有协同效应，探索潜在的合作模式。  
+- **技术支持**：  
+  - 检查是否有类似客户需求的历史记录，评估该类客户的转化率和合作可能性。  
+- **系统优化**：  
+  - 增加对“多次重复服务介绍”类行为的自动化响应功能，例如发送欢迎信息或合作邀请模板。
+
+---
+
+### 总结
+客户的行为属于“多次重复服务介绍”，目前无明确购买意向，但可能存在潜在合作机会。建议销售团队尽快主动跟进，挖掘客户需求并探索合作可能性。如有其他问题或需要进一步协助，请随时告知！
+2025-07-08 16:55:34 - main - ERROR - process_agent_background:132 - JSON解析失败: Expecting value: line 1 column 1 (char 0), 原始响应: 根据客户的输入内容和各环节的处理结果，以下是总结和建议：
+
+---
+
+### 1. **客户画像更新**
+客户连续九次发送了关于AI财务助手的功能介绍，但未提供可用于更新客户画像的具体个人信息（如姓名、手机号、行业、职务等）。因此，基于当前信息无法更新客户画像。  
+**建议：**  
+- 如果有更多历史聊天记录或上下文，请提供以帮助更准确地更新客户画像。
+- 若需要进一步了解客户信息，可主动询问客户的具体需求或背景。
+
+---
+
+### 2. **客户行为记录**
+已通过`insert_customer_behavior`工具成功记录客户行为：  
+- **行为标题**：多次重复服务介绍  
+- **行为内容**：客户连续九次介绍了AI财务助手的功能，包括对账、付款、做账辅助等，仍无明确购买意向  
+
+此记录可用于后续跟进和分析。
+
+---
+
+### 3. **跟单建议**
+根据聊天内容，客户连续多次重复介绍了其作为AI财务助手的功能，但未表现出明确的购买意图或需要进一步跟进的需求，因此无需跟单。  
+**结论：**  
+- 跟单内容：无需跟单。  
+- 交付给`chat_agent`的跟单事项：否。
+
+---
+
+### 4. **下一步行动**
+尽管客户目前未表现出明确的购买意向，但其连续九次发送服务介绍的行为可能隐含潜在的合作机会或推广需求。以下是建议的下一步行动：  
+- **销售团队**：  
+  - 主动联系客户，确认其是否有推广或合作的需求。例如，可以询问：“您是否希望将AI财务助手的功能推荐给其他企业？”  
+  - 了解客户的服务是否与您的业务有协同效应，探索潜在的合作模式。  
+- **技术支持**：  
+  - 检查是否有类似客户需求的历史记录，评估该类客户的转化率和合作可能性。  
+- **系统优化**：  
+  - 增加对“多次重复服务介绍”类行为的自动化响应功能，例如发送欢迎信息或合作邀请模板。
+
+---
+
+### 总结
+客户的行为属于“多次重复服务介绍”，目前无明确购买意向，但可能存在潜在合作机会。建议销售团队尽快主动跟进，挖掘客户需求并探索合作可能性。如有其他问题或需要进一步协助，请随时告知！
+2025-07-08 16:56:27 - main - ERROR - process_agent_background:132 - JSON解析失败: Expecting value: line 1 column 1 (char 0), 原始响应: 根据客户的输入内容和各环节的处理结果，以下是总结和建议：
+
+---
+
+### 1. **客户画像更新**
+客户连续十次发送了关于AI财务助手的功能介绍，但未提供可用于更新客户画像的具体个人信息（如姓名、手机号、行业、职务等）。因此，基于当前信息无法更新客户画像。  
+**建议：**  
+- 如果有更多历史聊天记录或上下文，请提供以帮助更准确地更新客户画像。
+- 若需要进一步了解客户信息，可主动询问客户的具体需求或背景。
+
+---
+
+### 2. **客户行为记录**
+已通过`insert_customer_behavior`工具成功记录客户行为：  
+- **行为标题**：多次重复服务介绍  
+- **行为内容**：客户连续十次介绍了AI财务助手的功能，包括对账、付款、做账辅助等，仍无明确购买意向  
+
+此记录可用于后续跟进和分析。
+
+---
+
+### 3. **跟单建议**
+根据聊天内容，客户连续多次重复介绍了其作为AI财务助手的功能，但未表现出明确的购买意图或需要进一步跟进的需求，因此无需跟单。  
+**结论：**  
+- 跟单内容：无需跟单。  
+- 交付给`chat_agent`的跟单事项：否。
+
+---
+
+### 4. **下一步行动**
+尽管客户目前未表现出明确的购买意向，但其连续十次发送服务介绍的行为可能隐含潜在的合作机会或推广需求。以下是建议的下一步行动：  
+- **销售团队**：  
+  - 主动联系客户，确认其是否有推广或合作的需求。例如，可以询问：“您是否希望将AI财务助手的功能推荐给其他企业？”  
+  - 了解客户的服务是否与您的业务有协同效应，探索潜在的合作模式。  
+- **技术支持**：  
+  - 检查是否有类似客户需求的历史记录，评估该类客户的转化率和合作可能性。  
+- **系统优化**：  
+  - 增加对“多次重复服务介绍”类行为的自动化响应功能，例如发送欢迎信息或合作邀请模板。
+
+---
+
+### 总结
+客户的行为属于“多次重复服务介绍”，目前无明确购买意向，但可能存在潜在合作机会。建议销售团队尽快主动跟进，挖掘客户需求并探索合作可能性。如有其他问题或需要进一步协助，请随时告知！
+2025-07-08 16:57:15 - main - ERROR - process_agent_background:132 - JSON解析失败: Expecting value: line 1 column 1 (char 0), 原始响应: 根据客户的输入内容和各环节的处理结果，以下是总结和建议：
+
+---
+
+### 1. **客户画像更新**
+客户连续十一次发送了关于AI财务助手的功能介绍，但未提供可用于更新客户画像的具体个人信息（如姓名、手机号、行业、职务等）。因此，基于当前信息无法更新客户画像。  
+**建议：**  
+- 如果有更多历史聊天记录或上下文，请提供以帮助更准确地更新客户画像。
+- 若需要进一步了解客户信息，可主动询问客户的具体需求或背景。
+
+---
+
+### 2. **客户行为记录**
+已通过`insert_customer_behavior`工具成功记录客户行为：  
+- **行为标题**：多次重复服务介绍  
+- **行为内容**：客户连续十一次介绍了AI财务助手的功能，包括对账、付款、做账辅助等，仍无明确购买意向  
+
+此记录可用于后续跟进和分析。
+
+---
+
+### 3. **跟单建议**
+根据聊天内容，客户连续多次重复介绍了其作为AI财务助手的功能，但未表现出明确的购买意图或需要进一步跟进的需求，因此无需跟单。  
+**结论：**  
+- 跟单内容：无需跟单。  
+- 交付给`chat_agent`的跟单事项：否。
+
+---
+
+### 4. **下一步行动**
+尽管客户目前未表现出明确的购买意向，但其连续十一次发送服务介绍的行为可能隐含潜在的合作机会或推广需求。以下是建议的下一步行动：  
+- **销售团队**：  
+  - 主动联系客户，确认其是否有推广或合作的需求。例如，可以询问：“您是否希望将AI财务助手的功能推荐给其他企业？”  
+  - 了解客户的服务是否与您的业务有协同效应，探索潜在的合作模式。  
+- **技术支持**：  
+  - 检查是否有类似客户需求的历史记录，评估该类客户的转化率和合作可能性。  
+- **系统优化**：  
+  - 增加对“多次重复服务介绍”类行为的自动化响应功能，例如发送欢迎信息或合作邀请模板。
+
+---
+
+### 总结
+客户的行为属于“多次重复服务介绍”，目前无明确购买意向，但可能存在潜在合作机会。建议销售团队尽快主动跟进，挖掘客户需求并探索合作可能性。如有其他问题或需要进一步协助，请随时告知！
+2025-07-08 16:58:06 - main - ERROR - process_agent_background:132 - JSON解析失败: Expecting value: line 1 column 1 (char 0), 原始响应: 根据客户的输入内容和各环节的处理结果，以下是总结和建议：
+
+---
+
+### 1. **客户画像更新**
+客户连续十二次发送了关于AI财务助手的功能介绍，但未提供可用于更新客户画像的具体个人信息（如姓名、手机号、行业、职务等）。因此，基于当前信息无法更新客户画像。  
+**建议：**  
+- 如果有更多历史聊天记录或上下文，请提供以帮助更准确地更新客户画像。
+- 若需要进一步了解客户信息，可主动询问客户的具体需求或背景。
+
+---
+
+### 2. **客户行为记录**
+已通过`insert_customer_behavior`工具成功记录客户行为：  
+- **行为标题**：多次重复服务介绍  
+- **行为内容**：客户连续十二次介绍了AI财务助手的功能，包括对账、付款、做账辅助等，仍无明确购买意向  
+
+此记录可用于后续跟进和分析。
+
+---
+
+### 3. **跟单建议**
+根据聊天内容，客户连续多次重复介绍了其作为AI财务助手的功能，但未表现出明确的购买意图或需要进一步跟进的需求，因此无需跟单。  
+**结论：**  
+- 跟单内容：无需跟单。  
+- 交付给`chat_agent`的跟单事项：否。
+
+---
+
+### 4. **下一步行动**
+尽管客户目前未表现出明确的购买意向，但其连续十二次发送服务介绍的行为可能隐含潜在的合作机会或推广需求。以下是建议的下一步行动：  
+- **销售团队**：  
+  - 主动联系客户，确认其是否有推广或合作的需求。例如，可以询问：“您是否希望将AI财务助手的功能推荐给其他企业？”  
+  - 了解客户的服务是否与您的业务有协同效应，探索潜在的合作模式。  
+- **技术支持**：  
+  - 检查是否有类似客户需求的历史记录，评估该类客户的转化率和合作可能性。  
+- **系统优化**：  
+  - 增加对“多次重复服务介绍”类行为的自动化响应功能，例如发送欢迎信息或合作邀请模板。
+
+---
+
+### 总结
+客户的行为属于“多次重复服务介绍”，目前无明确购买意向，但可能存在潜在合作机会。建议销售团队尽快主动跟进，挖掘客户需求并探索合作可能性。如有其他问题或需要进一步协助，请随时告知！
+2025-07-08 16:58:52 - main - ERROR - process_agent_background:132 - JSON解析失败: Expecting value: line 1 column 1 (char 0), 原始响应: 根据客户的输入内容和各环节的处理结果，以下是总结和建议：
+
+---
+
+### 1. **客户画像更新**
+客户连续十三次发送了关于AI财务助手的功能介绍，但未提供可用于更新客户画像的具体个人信息（如姓名、手机号、行业、职务等）。因此，基于当前信息无法更新客户画像。  
+**建议：**  
+- 如果有更多历史聊天记录或上下文，请提供以帮助更准确地更新客户画像。
+- 若需要进一步了解客户信息，可主动询问客户的具体需求或背景。
+
+---
+
+### 2. **客户行为记录**
+已通过`insert_customer_behavior`工具成功记录客户行为：  
+- **行为标题**：多次重复服务介绍  
+- **行为内容**：客户连续十三次介绍了AI财务助手的功能，包括对账、付款、做账辅助等，仍无明确购买意向  
+
+此记录可用于后续跟进和分析。
+
+---
+
+### 3. **跟单建议**
+根据聊天内容，客户连续多次重复介绍了其作为AI财务助手的功能，但未表现出明确的购买意图或需要进一步跟进的需求，因此无需跟单。  
+**结论：**  
+- 跟单内容：无需跟单。  
+- 交付给`chat_agent`的跟单事项：否。
+
+---
+
+### 4. **下一步行动**
+尽管客户目前未表现出明确的购买意向，但其连续十三次发送服务介绍的行为可能隐含潜在的合作机会或推广需求。以下是建议的下一步行动：  
+- **销售团队**：  
+  - 主动联系客户，确认其是否有推广或合作的需求。例如，可以询问：“您是否希望将AI财务助手的功能推荐给其他企业？”  
+  - 了解客户的服务是否与您的业务有协同效应，探索潜在的合作模式。  
+- **技术支持**：  
+  - 检查是否有类似客户需求的历史记录，评估该类客户的转化率和合作可能性。  
+- **系统优化**：  
+  - 增加对“多次重复服务介绍”类行为的自动化响应功能，例如发送欢迎信息或合作邀请模板。
+
+---
+
+### 总结
+客户的行为属于“多次重复服务介绍”，目前无明确购买意向，但可能存在潜在合作机会。建议销售团队尽快主动跟进，挖掘客户需求并探索合作可能性。如有其他问题或需要进一步协助，请随时告知！
+2025-07-08 17:06:27 - main - ERROR - process_agent_background:132 - JSON解析失败: Expecting value: line 1 column 1 (char 0), 原始响应: 根据客户的最新输入“你好呀”以及各代理的反馈，以下是总结和建议的下一步操作：
+
+---
+
+### **总结：**
+1. **输入处理代理**：确认收到客户消息“你好呀”。
+2. **协作代理**：未提供任何反馈。
+3. **跟单代理**：判断需要跟单，并提供了针对客户身份（李白）和可能需求的跟单内容建议。
+4. **客户画像代理**：客户仍未提供可用于更新客户画像的具体信息。
+5. **客户行为代理**：客户的问候被视为礼貌性互动，暂时未涉及明确的销售行为类型。
+
+---
+
+### **建议的下一步操作：**
+
+#### **1. 回应客户并维持互动**
+- 客户再次发送问候语，表明其愿意继续沟通。可以回应以维持友好互动。例如：
+  - “您好，李白先生，很高兴再次联系您！”
+
+#### **2. 引导回忆或探索需求**
+- 如果客户之前提到过某些需求，可以通过提问引导其回忆；如果尚未明确需求，则可以通过开放性问题探索。例如：
+  - “您之前提到的需求还在考虑吗？如果有任何疑问，我可以为您详细解答。”
+  - “最近我们有优惠活动正在进行，不知道您是否感兴趣了解一下？”
+
+#### **3. 提供价值以吸引兴趣**
+- 在对话中突出产品或服务的价值点，吸引客户进一步关注。例如：
+  - “我们的AI定制化解决方案可以帮助企业提升效率、降低成本，您是否有类似的需求？”
+  - “如果您方便的话，我们可以安排一次线下交流，为您量身定制解决方案。”
+
+#### **4. 完善客户画像**
+- 客户目前提供的信息仍不足以完成客户画像更新。因此，在后续对话中可以逐步获取更多信息，确保自然且不突兀。例如：
+  - “为了更好地为您服务，能否留一个联系方式？这样我们可以随时沟通。”
+  - “您所在的行业最近对AI技术的应用需求很高，不知道您是否有相关项目正在推进？”
+
+---
+
+### **后续注意事项：**
+
+1. **保持简洁与高效**：
+   - 客户之前曾对回复长度提出疑问，因此本次沟通应注意语言简洁明了，避免冗长的表述。
+
+2. **关注客户情绪**：
+   - 如果客户表现出抗拒或冷淡，应及时调整策略，避免强行推销或过多追问。
+
+3. **记录关键信息**：
+   - 一旦客户提供了更多有用信息（如联系方式、行业背景等），应及时调用工具更新客户画像，确保数据完整性。
+
+4. **灵活应对异议**：
+   - 如果客户提出新的疑问或异议，应迅速响应并调整沟通方式，确保客户体验流畅。
+
+---
+
+通过以上方式，可以在尊重客户意愿的同时，逐步引导其表达需求，并为后续的销售推进奠定基础。
+2025-07-08 17:13:10 - main - ERROR - process_agent_background:168 - 后台处理失败 - user_id: 43, session_id: wxid_8d9ory4pas3422, error: list index out of range
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/main.py", line 111, in process_agent_background
+    agent_response_text = loop.run_until_complete(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 203, in run_async
+    async for event in invocation_context.agent.run_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/sequential_agent.py", line 37, in _run_async_impl
+    async for event in sub_agent.run_async(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/llm_agent.py", line 275, in _run_async_impl
+    async for event in self._llm_flow.run_async(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 282, in run_async
+    async for event in self._run_one_step_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 314, in _run_one_step_async
+    async for llm_response in self._call_llm_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 499, in _call_llm_async
+    if response := await self._handle_before_model_callback(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 582, in _handle_before_model_callback
+    before_model_callback_content = await before_model_callback_content
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/tools/callbacks.py", line 150, in dynamic_chat_agent_instruction_before_model
+    new_instruction = await get_chat_prompt(current_tenant_id, current_task_id)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/prompts/prompts.py", line 190, in get_chat_prompt
+    {get_chat_prompt_supplement(tenant_id, task_id)}
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/prompts/prompts.py", line 198, in get_chat_prompt_supplement
+    if isinstance(ai_data[0], str):
+                  ~~~~~~~^^^
+IndexError: list index out of range
+2025-07-08 17:19:07 - main - ERROR - process_agent_background:168 - 后台处理失败 - user_id: 43, session_id: wxid_8d9ory4pas3422, error: list index out of range
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/main.py", line 111, in process_agent_background
+    agent_response_text = loop.run_until_complete(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 203, in run_async
+    async for event in invocation_context.agent.run_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/sequential_agent.py", line 37, in _run_async_impl
+    async for event in sub_agent.run_async(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/llm_agent.py", line 275, in _run_async_impl
+    async for event in self._llm_flow.run_async(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 282, in run_async
+    async for event in self._run_one_step_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 314, in _run_one_step_async
+    async for llm_response in self._call_llm_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 499, in _call_llm_async
+    if response := await self._handle_before_model_callback(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 582, in _handle_before_model_callback
+    before_model_callback_content = await before_model_callback_content
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/tools/callbacks.py", line 150, in dynamic_chat_agent_instruction_before_model
+    new_instruction = await get_chat_prompt(current_tenant_id, current_task_id)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/prompts/prompts.py", line 190, in get_chat_prompt
+    {get_chat_prompt_supplement(tenant_id, task_id)}
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/prompts/prompts.py", line 199, in get_chat_prompt_supplement
+    if isinstance(ai_data[0], str):
+                  ~~~~~~~^^^
+IndexError: list index out of range
+2025-07-08 17:21:47 - main - ERROR - process_agent_background:168 - 后台处理失败 - user_id: 43, session_id: wxid_8d9ory4pas3422, error: list index out of range
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/main.py", line 111, in process_agent_background
+    agent_response_text = loop.run_until_complete(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 203, in run_async
+    async for event in invocation_context.agent.run_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/sequential_agent.py", line 37, in _run_async_impl
+    async for event in sub_agent.run_async(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/llm_agent.py", line 275, in _run_async_impl
+    async for event in self._llm_flow.run_async(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 282, in run_async
+    async for event in self._run_one_step_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 314, in _run_one_step_async
+    async for llm_response in self._call_llm_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 499, in _call_llm_async
+    if response := await self._handle_before_model_callback(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 582, in _handle_before_model_callback
+    before_model_callback_content = await before_model_callback_content
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/tools/callbacks.py", line 150, in dynamic_chat_agent_instruction_before_model
+    new_instruction = await get_chat_prompt(current_tenant_id, current_task_id)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/prompts/prompts.py", line 190, in get_chat_prompt
+    {get_chat_prompt_supplement(tenant_id, task_id)}
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/prompts/prompts.py", line 201, in get_chat_prompt_supplement
+    elif isinstance(ai_data[0], str):
+                    ~~~~~~~^^^
+IndexError: list index out of range
+2025-07-08 17:26:50 - main - ERROR - process_agent_background:168 - 后台处理失败 - user_id: 43, session_id: wxid_8d9ory4pas3422, error: list index out of range
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/main.py", line 111, in process_agent_background
+    agent_response_text = loop.run_until_complete(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 203, in run_async
+    async for event in invocation_context.agent.run_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/sequential_agent.py", line 37, in _run_async_impl
+    async for event in sub_agent.run_async(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/llm_agent.py", line 275, in _run_async_impl
+    async for event in self._llm_flow.run_async(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 282, in run_async
+    async for event in self._run_one_step_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 314, in _run_one_step_async
+    async for llm_response in self._call_llm_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 499, in _call_llm_async
+    if response := await self._handle_before_model_callback(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 582, in _handle_before_model_callback
+    before_model_callback_content = await before_model_callback_content
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/tools/callbacks.py", line 150, in dynamic_chat_agent_instruction_before_model
+    new_instruction = await get_chat_prompt(current_tenant_id, current_task_id)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/prompts/prompts.py", line 190, in get_chat_prompt
+    {get_chat_prompt_supplement(tenant_id, task_id)}
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/prompts/prompts.py", line 201, in get_chat_prompt_supplement
+    elif isinstance(ai_data[0], str):
+                    ~~~~~~~^^^
+IndexError: list index out of range
+2025-07-08 18:01:37 - main - ERROR - process_agent_background:168 - 后台处理失败 - user_id: 43, session_id: wxid_h5nwnc84f0di22, error: list index out of range
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/main.py", line 111, in process_agent_background
+    agent_response_text = loop.run_until_complete(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 203, in run_async
+    async for event in invocation_context.agent.run_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/sequential_agent.py", line 37, in _run_async_impl
+    async for event in sub_agent.run_async(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/llm_agent.py", line 275, in _run_async_impl
+    async for event in self._llm_flow.run_async(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 282, in run_async
+    async for event in self._run_one_step_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 314, in _run_one_step_async
+    async for llm_response in self._call_llm_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 499, in _call_llm_async
+    if response := await self._handle_before_model_callback(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 582, in _handle_before_model_callback
+    before_model_callback_content = await before_model_callback_content
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/tools/callbacks.py", line 150, in dynamic_chat_agent_instruction_before_model
+    new_instruction = await get_chat_prompt(current_tenant_id, current_task_id)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/prompts/prompts.py", line 190, in get_chat_prompt
+    {get_chat_prompt_supplement(tenant_id, task_id)}
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/prompts/prompts.py", line 201, in get_chat_prompt_supplement
+    elif isinstance(ai_data[0], str):
+                    ~~~~~~~^^^
+IndexError: list index out of range
+2025-07-08 18:04:53 - main - ERROR - process_agent_background:168 - 后台处理失败 - user_id: 43, session_id: wxid_8d9ory4pas3422, error: list index out of range
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/main.py", line 111, in process_agent_background
+    agent_response_text = loop.run_until_complete(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 203, in run_async
+    async for event in invocation_context.agent.run_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/sequential_agent.py", line 37, in _run_async_impl
+    async for event in sub_agent.run_async(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/llm_agent.py", line 275, in _run_async_impl
+    async for event in self._llm_flow.run_async(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 282, in run_async
+    async for event in self._run_one_step_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 314, in _run_one_step_async
+    async for llm_response in self._call_llm_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 499, in _call_llm_async
+    if response := await self._handle_before_model_callback(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 582, in _handle_before_model_callback
+    before_model_callback_content = await before_model_callback_content
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/tools/callbacks.py", line 150, in dynamic_chat_agent_instruction_before_model
+    new_instruction = await get_chat_prompt(current_tenant_id, current_task_id)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/prompts/prompts.py", line 190, in get_chat_prompt
+    {get_chat_prompt_supplement(tenant_id, task_id)}
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/prompts/prompts.py", line 201, in get_chat_prompt_supplement
+    elif isinstance(ai_data[0], str):
+                    ~~~~~~~^^^
+IndexError: list index out of range
+2025-07-08 18:16:00 - main - ERROR - process_agent_background:168 - 后台处理失败 - user_id: 43, session_id: wxid_h5nwnc84f0di22, error: (pymysql.err.OperationalError) (2013, 'Lost connection to MySQL server during query ([Errno 110] Connection timed out)')
+[SQL: SELECT sessions.app_name AS sessions_app_name, sessions.user_id AS sessions_user_id, sessions.id AS sessions_id, sessions.state AS sessions_state, sessions.create_time AS sessions_create_time, sessions.update_time AS sessions_update_time 
+FROM sessions 
+WHERE sessions.app_name = %(pk_1)s AND sessions.user_id = %(pk_2)s AND sessions.id = %(pk_3)s]
+[parameters: {'pk_1': 'ai_sales_agent', 'pk_2': '43', 'pk_3': 'wxid_h5nwnc84f0di22'}]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 782, in _read_bytes
+    data = self._rfile.read(num_bytes)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: [Errno 110] Connection timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+                    ^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 788, in _read_bytes
+    raise err.OperationalError(
+pymysql.err.OperationalError: (2013, 'Lost connection to MySQL server during query ([Errno 110] Connection timed out)')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/main.py", line 111, in process_agent_background
+    agent_response_text = loop.run_until_complete(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 113, in call_agent_async
+    session = await runner.session_service.get_session(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/sessions/database_session_service.py", line 432, in get_session
+    storage_session = session_factory.get(
+                      ^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 3694, in get
+    return self._get_impl(
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 3874, in _get_impl
+    return db_load_fn(
+           ^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/orm/loading.py", line 694, in load_on_pk_identity
+    session.execute(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2365, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2251, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/orm/context.py", line 306, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1416, in execute
+    return meth(
+           ^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 523, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1638, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1843, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1983, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2352, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+                    ^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 788, in _read_bytes
+    raise err.OperationalError(
+sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (2013, 'Lost connection to MySQL server during query ([Errno 110] Connection timed out)')
+[SQL: SELECT sessions.app_name AS sessions_app_name, sessions.user_id AS sessions_user_id, sessions.id AS sessions_id, sessions.state AS sessions_state, sessions.create_time AS sessions_create_time, sessions.update_time AS sessions_update_time 
+FROM sessions 
+WHERE sessions.app_name = %(pk_1)s AND sessions.user_id = %(pk_2)s AND sessions.id = %(pk_3)s]
+[parameters: {'pk_1': 'ai_sales_agent', 'pk_2': '43', 'pk_3': 'wxid_h5nwnc84f0di22'}]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-07-08 18:19:41 - main - ERROR - process_agent_background:168 - 后台处理失败 - user_id: 43, session_id: wxid_8d9ory4pas3422, error: list index out of range
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/main.py", line 111, in process_agent_background
+    agent_response_text = loop.run_until_complete(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 203, in run_async
+    async for event in invocation_context.agent.run_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/sequential_agent.py", line 37, in _run_async_impl
+    async for event in sub_agent.run_async(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/llm_agent.py", line 275, in _run_async_impl
+    async for event in self._llm_flow.run_async(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 282, in run_async
+    async for event in self._run_one_step_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 314, in _run_one_step_async
+    async for llm_response in self._call_llm_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 499, in _call_llm_async
+    if response := await self._handle_before_model_callback(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 582, in _handle_before_model_callback
+    before_model_callback_content = await before_model_callback_content
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/tools/callbacks.py", line 150, in dynamic_chat_agent_instruction_before_model
+    new_instruction = await get_chat_prompt(current_tenant_id, current_task_id)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/prompts/prompts.py", line 190, in get_chat_prompt
+    {get_chat_prompt_supplement(tenant_id, task_id)}
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/prompts/prompts.py", line 201, in get_chat_prompt_supplement
+    elif isinstance(ai_data[0], str):
+                    ~~~~~~~^^^
+IndexError: list index out of range
+2025-07-08 18:25:22 - main - ERROR - process_agent_background:168 - 后台处理失败 - user_id: 43, session_id: wxid_8d9ory4pas3422, error: cannot access local variable 'ai_data_str' where it is not associated with a value
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/main.py", line 111, in process_agent_background
+    agent_response_text = loop.run_until_complete(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 203, in run_async
+    async for event in invocation_context.agent.run_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/sequential_agent.py", line 37, in _run_async_impl
+    async for event in sub_agent.run_async(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/llm_agent.py", line 275, in _run_async_impl
+    async for event in self._llm_flow.run_async(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 282, in run_async
+    async for event in self._run_one_step_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 314, in _run_one_step_async
+    async for llm_response in self._call_llm_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 499, in _call_llm_async
+    if response := await self._handle_before_model_callback(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 582, in _handle_before_model_callback
+    before_model_callback_content = await before_model_callback_content
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/tools/callbacks.py", line 150, in dynamic_chat_agent_instruction_before_model
+    new_instruction = await get_chat_prompt(current_tenant_id, current_task_id)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/prompts/prompts.py", line 190, in get_chat_prompt
+    {get_chat_prompt_supplement(tenant_id, task_id)}
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/prompts/prompts.py", line 212, in get_chat_prompt_supplement
+    {ai_data_str}
+     ^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'ai_data_str' where it is not associated with a value
+2025-07-08 18:26:52 - main - ERROR - process_agent_background:168 - 后台处理失败 - user_id: 43, session_id: wxid_8d9ory4pas3422, error: cannot access local variable 'ai_data_str' where it is not associated with a value
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/main.py", line 111, in process_agent_background
+    agent_response_text = loop.run_until_complete(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 203, in run_async
+    async for event in invocation_context.agent.run_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/sequential_agent.py", line 37, in _run_async_impl
+    async for event in sub_agent.run_async(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/llm_agent.py", line 275, in _run_async_impl
+    async for event in self._llm_flow.run_async(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 282, in run_async
+    async for event in self._run_one_step_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 314, in _run_one_step_async
+    async for llm_response in self._call_llm_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 499, in _call_llm_async
+    if response := await self._handle_before_model_callback(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 582, in _handle_before_model_callback
+    before_model_callback_content = await before_model_callback_content
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/tools/callbacks.py", line 150, in dynamic_chat_agent_instruction_before_model
+    new_instruction = await get_chat_prompt(current_tenant_id, current_task_id)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/prompts/prompts.py", line 190, in get_chat_prompt
+    {get_chat_prompt_supplement(tenant_id, task_id)}
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/prompts/prompts.py", line 212, in get_chat_prompt_supplement
+    {ai_data_str}
+     ^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'ai_data_str' where it is not associated with a value
+2025-07-08 19:17:50 - asyncio - ERROR - default_exception_handler:1833 - Task was destroyed but it is pending!
+task: <Task pending name='Task-14' coro=<Logging.async_success_handler() running at /home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/litellm_logging.py:1732>>
+2025-07-08 19:17:50 - asyncio - ERROR - default_exception_handler:1833 - Task was destroyed but it is pending!
+task: <Task pending name='Task-15' coro=<<async_generator_athrow without __name__>()>>
+2025-07-08 19:17:50 - main - ERROR - process_agent_background:168 - 后台处理失败 - user_id: 43, session_id: wxid_8d9ory4pas3422, error: The last_update_time provided in the session object '2025-07-08 11:17:39' is earlier than the update_time in the storage_session '2025-07-08 11:17:48'. Please check if it is a stale session.
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/main.py", line 111, in process_agent_background
+    agent_response_text = loop.run_until_complete(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 205, in run_async
+    await self.session_service.append_event(session=session, event=event)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/sessions/database_session_service.py", line 533, in append_event
+    raise ValueError(
+ValueError: The last_update_time provided in the session object '2025-07-08 11:17:39' is earlier than the update_time in the storage_session '2025-07-08 11:17:48'. Please check if it is a stale session.
+2025-07-08 19:23:29 - asyncio - ERROR - default_exception_handler:1833 - Task was destroyed but it is pending!
+task: <Task pending name='Task-114' coro=<<async_generator_athrow without __name__>()>>
+2025-07-08 19:23:29 - main - ERROR - process_agent_background:168 - 后台处理失败 - user_id: 43, session_id: wxid_8d9ory4pas3422, error: The last_update_time provided in the session object '2025-07-08 11:23:18' is earlier than the update_time in the storage_session '2025-07-08 11:23:28'. Please check if it is a stale session.
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/main.py", line 111, in process_agent_background
+    agent_response_text = loop.run_until_complete(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 205, in run_async
+    await self.session_service.append_event(session=session, event=event)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/sessions/database_session_service.py", line 533, in append_event
+    raise ValueError(
+ValueError: The last_update_time provided in the session object '2025-07-08 11:23:18' is earlier than the update_time in the storage_session '2025-07-08 11:23:28'. Please check if it is a stale session.
+2025-07-08 19:23:39 - asyncio - ERROR - default_exception_handler:1833 - Task was destroyed but it is pending!
+task: <Task pending name='Task-172' coro=<<async_generator_athrow without __name__>()>>
+2025-07-08 19:23:39 - main - ERROR - process_agent_background:168 - 后台处理失败 - user_id: 43, session_id: wxid_8d9ory4pas3422, error: The last_update_time provided in the session object '2025-07-08 11:23:28' is earlier than the update_time in the storage_session '2025-07-08 11:23:39'. Please check if it is a stale session.
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/main.py", line 111, in process_agent_background
+    agent_response_text = loop.run_until_complete(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 205, in run_async
+    await self.session_service.append_event(session=session, event=event)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/sessions/database_session_service.py", line 533, in append_event
+    raise ValueError(
+ValueError: The last_update_time provided in the session object '2025-07-08 11:23:28' is earlier than the update_time in the storage_session '2025-07-08 11:23:39'. Please check if it is a stale session.
+2025-07-08 19:30:04 - asyncio - ERROR - default_exception_handler:1833 - Task was destroyed but it is pending!
+task: <Task pending name='Task-584' coro=<<async_generator_athrow without __name__>()>>
+2025-07-08 19:30:04 - main - ERROR - process_agent_background:168 - 后台处理失败 - user_id: 43, session_id: WJE1193342535, error: The last_update_time provided in the session object '2025-07-08 11:29:57' is earlier than the update_time in the storage_session '2025-07-08 11:30:04'. Please check if it is a stale session.
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/main.py", line 111, in process_agent_background
+    agent_response_text = loop.run_until_complete(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 205, in run_async
+    await self.session_service.append_event(session=session, event=event)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/sessions/database_session_service.py", line 533, in append_event
+    raise ValueError(
+ValueError: The last_update_time provided in the session object '2025-07-08 11:29:57' is earlier than the update_time in the storage_session '2025-07-08 11:30:04'. Please check if it is a stale session.
+2025-07-08 19:30:12 - asyncio - ERROR - default_exception_handler:1833 - Task was destroyed but it is pending!
+task: <Task pending name='Task-613' coro=<<async_generator_athrow without __name__>()>>
+2025-07-08 19:30:12 - main - ERROR - process_agent_background:168 - 后台处理失败 - user_id: 43, session_id: WJE1193342535, error: The last_update_time provided in the session object '2025-07-08 11:30:04' is earlier than the update_time in the storage_session '2025-07-08 11:30:11'. Please check if it is a stale session.
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/main.py", line 111, in process_agent_background
+    agent_response_text = loop.run_until_complete(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 205, in run_async
+    await self.session_service.append_event(session=session, event=event)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/sessions/database_session_service.py", line 533, in append_event
+    raise ValueError(
+ValueError: The last_update_time provided in the session object '2025-07-08 11:30:04' is earlier than the update_time in the storage_session '2025-07-08 11:30:11'. Please check if it is a stale session.
+2025-07-08 19:48:15 - asyncio - ERROR - default_exception_handler:1833 - Task was destroyed but it is pending!
+task: <Task pending name='Task-925' coro=<<async_generator_athrow without __name__>()>>
+2025-07-08 19:48:15 - main - ERROR - process_agent_background:168 - 后台处理失败 - user_id: 43, session_id: wxid_8d9ory4pas3422, error: The last_update_time provided in the session object '2025-07-08 11:48:09' is earlier than the update_time in the storage_session '2025-07-08 11:48:15'. Please check if it is a stale session.
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/main.py", line 111, in process_agent_background
+    agent_response_text = loop.run_until_complete(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 205, in run_async
+    await self.session_service.append_event(session=session, event=event)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/sessions/database_session_service.py", line 533, in append_event
+    raise ValueError(
+ValueError: The last_update_time provided in the session object '2025-07-08 11:48:09' is earlier than the update_time in the storage_session '2025-07-08 11:48:15'. Please check if it is a stale session.
+2025-07-08 21:19:34 - asyncio - ERROR - default_exception_handler:1833 - Task was destroyed but it is pending!
+task: <Task pending name='Task-1892' coro=<<async_generator_athrow without __name__>()>>
+2025-07-08 21:19:34 - main - ERROR - process_agent_background:168 - 后台处理失败 - user_id: 41, session_id: WJE1193342535, error: The last_update_time provided in the session object '2025-07-08 13:19:25' is earlier than the update_time in the storage_session '2025-07-08 13:19:31'. Please check if it is a stale session.
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/main.py", line 111, in process_agent_background
+    agent_response_text = loop.run_until_complete(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 205, in run_async
+    await self.session_service.append_event(session=session, event=event)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/sessions/database_session_service.py", line 533, in append_event
+    raise ValueError(
+ValueError: The last_update_time provided in the session object '2025-07-08 13:19:25' is earlier than the update_time in the storage_session '2025-07-08 13:19:31'. Please check if it is a stale session.
+2025-07-09 02:42:38 - main - ERROR - process_agent_background:168 - 后台处理失败 - user_id: 43, session_id: wxid_71rpc0hw5pj021, error: litellm.BadRequestError: OpenAIException - <400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[30].role
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 790, in acompletion
+    headers, response = await self.make_openai_chat_completion_request(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/logging_utils.py", line 135, in async_wrapper
+    result = await func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 436, in make_openai_chat_completion_request
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 418, in make_openai_chat_completion_request
+    await openai_aclient.chat.completions.with_raw_response.create(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_legacy_response.py", line 381, in wrapped
+    return cast(LegacyAPIResponse[R], await func(*args, **kwargs))
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 2028, in create
+    return await self._post(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1742, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1549, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'error': {'code': 'invalid_parameter_error', 'param': None, 'message': '<400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[30].role', 'type': 'invalid_request_error'}, 'id': 'chatcmpl-4fb231f6-b2bf-949a-ad2b-397603fdb257', 'request_id': '4fb231f6-b2bf-949a-ad2b-397603fdb257'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/main.py", line 477, in acompletion
+    response = await init_response
+               ^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 837, in acompletion
+    raise OpenAIError(
+litellm.llms.openai.common_utils.OpenAIError: Error code: 400 - {'error': {'code': 'invalid_parameter_error', 'param': None, 'message': '<400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[30].role', 'type': 'invalid_request_error'}, 'id': 'chatcmpl-4fb231f6-b2bf-949a-ad2b-397603fdb257', 'request_id': '4fb231f6-b2bf-949a-ad2b-397603fdb257'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/main.py", line 111, in process_agent_background
+    agent_response_text = loop.run_until_complete(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 203, in run_async
+    async for event in invocation_context.agent.run_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/sequential_agent.py", line 37, in _run_async_impl
+    async for event in sub_agent.run_async(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/llm_agent.py", line 275, in _run_async_impl
+    async for event in self._llm_flow.run_async(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 282, in run_async
+    async for event in self._run_one_step_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 314, in _run_one_step_async
+    async for llm_response in self._call_llm_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 539, in _call_llm_async
+    async for llm_response in llm.generate_content_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/models/lite_llm.py", line 778, in generate_content_async
+    response = await self.llm_client.acompletion(**completion_args)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/models/lite_llm.py", line 101, in acompletion
+    return await acompletion(
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/utils.py", line 1460, in wrapper_async
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/utils.py", line 1321, in wrapper_async
+    result = await original_function(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/main.py", line 496, in acompletion
+    raise exception_type(
+          ^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py", line 2214, in exception_type
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py", line 328, in exception_type
+    raise BadRequestError(
+litellm.exceptions.BadRequestError: litellm.BadRequestError: OpenAIException - <400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[30].role
+2025-07-09 02:42:50 - main - ERROR - process_agent_background:168 - 后台处理失败 - user_id: 43, session_id: wxid_71rpc0hw5pj021, error: litellm.BadRequestError: OpenAIException - <400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[30].role
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 790, in acompletion
+    headers, response = await self.make_openai_chat_completion_request(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/logging_utils.py", line 135, in async_wrapper
+    result = await func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 436, in make_openai_chat_completion_request
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 418, in make_openai_chat_completion_request
+    await openai_aclient.chat.completions.with_raw_response.create(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_legacy_response.py", line 381, in wrapped
+    return cast(LegacyAPIResponse[R], await func(*args, **kwargs))
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 2028, in create
+    return await self._post(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1742, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1549, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'error': {'code': 'invalid_parameter_error', 'param': None, 'message': '<400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[30].role', 'type': 'invalid_request_error'}, 'id': 'chatcmpl-cf6bf720-4b9c-9868-b1b5-1832053b9bae', 'request_id': 'cf6bf720-4b9c-9868-b1b5-1832053b9bae'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/main.py", line 477, in acompletion
+    response = await init_response
+               ^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 837, in acompletion
+    raise OpenAIError(
+litellm.llms.openai.common_utils.OpenAIError: Error code: 400 - {'error': {'code': 'invalid_parameter_error', 'param': None, 'message': '<400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[30].role', 'type': 'invalid_request_error'}, 'id': 'chatcmpl-cf6bf720-4b9c-9868-b1b5-1832053b9bae', 'request_id': 'cf6bf720-4b9c-9868-b1b5-1832053b9bae'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/main.py", line 111, in process_agent_background
+    agent_response_text = loop.run_until_complete(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 203, in run_async
+    async for event in invocation_context.agent.run_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/sequential_agent.py", line 37, in _run_async_impl
+    async for event in sub_agent.run_async(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/llm_agent.py", line 275, in _run_async_impl
+    async for event in self._llm_flow.run_async(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 282, in run_async
+    async for event in self._run_one_step_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 314, in _run_one_step_async
+    async for llm_response in self._call_llm_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 539, in _call_llm_async
+    async for llm_response in llm.generate_content_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/models/lite_llm.py", line 778, in generate_content_async
+    response = await self.llm_client.acompletion(**completion_args)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/models/lite_llm.py", line 101, in acompletion
+    return await acompletion(
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/utils.py", line 1460, in wrapper_async
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/utils.py", line 1321, in wrapper_async
+    result = await original_function(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/main.py", line 496, in acompletion
+    raise exception_type(
+          ^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py", line 2214, in exception_type
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py", line 328, in exception_type
+    raise BadRequestError(
+litellm.exceptions.BadRequestError: litellm.BadRequestError: OpenAIException - <400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[30].role
+2025-07-09 09:18:54 - asyncio - ERROR - default_exception_handler:1833 - Task was destroyed but it is pending!
+task: <Task pending name='Task-56' coro=<<async_generator_athrow without __name__>()>>
+2025-07-09 09:18:54 - main - ERROR - process_agent_background:168 - 后台处理失败 - user_id: 41, session_id: wxid_11kcvkzrgnlp12, error: The last_update_time provided in the session object '2025-07-09 01:18:36' is earlier than the update_time in the storage_session '2025-07-09 01:18:51'. Please check if it is a stale session.
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/main.py", line 111, in process_agent_background
+    agent_response_text = loop.run_until_complete(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 205, in run_async
+    await self.session_service.append_event(session=session, event=event)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/sessions/database_session_service.py", line 533, in append_event
+    raise ValueError(
+ValueError: The last_update_time provided in the session object '2025-07-09 01:18:36' is earlier than the update_time in the storage_session '2025-07-09 01:18:51'. Please check if it is a stale session.
+2025-07-09 09:28:24 - asyncio - ERROR - default_exception_handler:1833 - Task was destroyed but it is pending!
+task: <Task pending name='Task-254' coro=<Logging.async_success_handler() running at /home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/litellm_logging.py:1732>>
+2025-07-09 09:28:24 - asyncio - ERROR - default_exception_handler:1833 - Task was destroyed but it is pending!
+task: <Task pending name='Task-255' coro=<<async_generator_athrow without __name__>()>>
+2025-07-09 09:28:24 - main - ERROR - process_agent_background:168 - 后台处理失败 - user_id: 41, session_id: WJE1193342535, error: The last_update_time provided in the session object '2025-07-09 01:27:49' is earlier than the update_time in the storage_session '2025-07-09 01:28:14'. Please check if it is a stale session.
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/main.py", line 111, in process_agent_background
+    agent_response_text = loop.run_until_complete(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 205, in run_async
+    await self.session_service.append_event(session=session, event=event)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/sessions/database_session_service.py", line 533, in append_event
+    raise ValueError(
+ValueError: The last_update_time provided in the session object '2025-07-09 01:27:49' is earlier than the update_time in the storage_session '2025-07-09 01:28:14'. Please check if it is a stale session.
+2025-07-09 09:29:46 - asyncio - ERROR - default_exception_handler:1833 - Task was destroyed but it is pending!
+task: <Task pending name='Task-318' coro=<<async_generator_athrow without __name__>()>>
+2025-07-09 09:29:46 - main - ERROR - process_agent_background:168 - 后台处理失败 - user_id: 41, session_id: WJE1193342535, error: The last_update_time provided in the session object '2025-07-09 01:29:31' is earlier than the update_time in the storage_session '2025-07-09 01:29:44'. Please check if it is a stale session.
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/main.py", line 111, in process_agent_background
+    agent_response_text = loop.run_until_complete(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 205, in run_async
+    await self.session_service.append_event(session=session, event=event)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/sessions/database_session_service.py", line 533, in append_event
+    raise ValueError(
+ValueError: The last_update_time provided in the session object '2025-07-09 01:29:31' is earlier than the update_time in the storage_session '2025-07-09 01:29:44'. Please check if it is a stale session.
+2025-07-09 13:34:23 - asyncio - ERROR - default_exception_handler:1833 - Task was destroyed but it is pending!
+task: <Task pending name='Task-765' coro=<<async_generator_athrow without __name__>()>>
+2025-07-09 13:34:23 - main - ERROR - process_agent_background:168 - 后台处理失败 - user_id: 41, session_id: wxid_8d9ory4pas3422, error: The last_update_time provided in the session object '2025-07-09 05:34:14' is earlier than the update_time in the storage_session '2025-07-09 05:34:22'. Please check if it is a stale session.
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/main.py", line 111, in process_agent_background
+    agent_response_text = loop.run_until_complete(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 205, in run_async
+    await self.session_service.append_event(session=session, event=event)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/sessions/database_session_service.py", line 533, in append_event
+    raise ValueError(
+ValueError: The last_update_time provided in the session object '2025-07-09 05:34:14' is earlier than the update_time in the storage_session '2025-07-09 05:34:22'. Please check if it is a stale session.
+2025-07-09 13:55:19 - asyncio - ERROR - default_exception_handler:1833 - Task was destroyed but it is pending!
+task: <Task pending name='Task-943' coro=<<async_generator_athrow without __name__>()>>
+2025-07-09 13:55:19 - main - ERROR - process_agent_background:168 - 后台处理失败 - user_id: 43, session_id: wxid_r6q6q53mqkok22, error: The last_update_time provided in the session object '2025-07-09 05:54:27' is earlier than the update_time in the storage_session '2025-07-09 05:55:18'. Please check if it is a stale session.
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/main.py", line 111, in process_agent_background
+    agent_response_text = loop.run_until_complete(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 205, in run_async
+    await self.session_service.append_event(session=session, event=event)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/sessions/database_session_service.py", line 533, in append_event
+    raise ValueError(
+ValueError: The last_update_time provided in the session object '2025-07-09 05:54:27' is earlier than the update_time in the storage_session '2025-07-09 05:55:18'. Please check if it is a stale session.
+2025-07-09 13:57:26 - asyncio - ERROR - default_exception_handler:1833 - Task was destroyed but it is pending!
+task: <Task pending name='Task-1070' coro=<<async_generator_athrow without __name__>()>>
+2025-07-09 13:57:26 - main - ERROR - process_agent_background:168 - 后台处理失败 - user_id: 43, session_id: wxid_r6q6q53mqkok22, error: The last_update_time provided in the session object '2025-07-09 05:57:03' is earlier than the update_time in the storage_session '2025-07-09 05:57:26'. Please check if it is a stale session.
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/main.py", line 111, in process_agent_background
+    agent_response_text = loop.run_until_complete(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 205, in run_async
+    await self.session_service.append_event(session=session, event=event)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/sessions/database_session_service.py", line 533, in append_event
+    raise ValueError(
+ValueError: The last_update_time provided in the session object '2025-07-09 05:57:03' is earlier than the update_time in the storage_session '2025-07-09 05:57:26'. Please check if it is a stale session.

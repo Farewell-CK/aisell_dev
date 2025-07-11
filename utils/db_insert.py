@@ -6,6 +6,39 @@ db_manager = DatabaseManager()
 logger = get_database_logger()
 
 
+def insert_sale_prompt(tenant_id: int, task_id: int, system_prompt: str, test_prompt: str, create_by: str = 'system') -> bool:
+    """
+    插入销售提示词。
+    """
+    insert_sql = f"""
+    INSERT INTO sale_prompt (tenant_id, task_id, test_prompt, system_prompt, create_by, create_time, update_time, is_del)
+    VALUES ({tenant_id}, {task_id}, '{test_prompt}', '{system_prompt}', '{create_by}', NOW(), NOW(), 0);
+    """
+    db_manager.execute_insert(insert_sql)
+    return True
+def update_sale_system_prompt(tenant_id: int, task_id: int, system_prompt: str, create_by: str = 'system') -> bool:
+    """
+    更新销售提示词。
+    """
+    update_sql = f"""
+    UPDATE sale_prompt SET system_prompt = '{system_prompt}', update_time = NOW() WHERE tenant_id = {tenant_id} AND task_id = {task_id} AND is_del = 0;
+    """
+    db_manager.execute_update(update_sql)
+    return True
+
+def select_sale_system_prompt(tenant_id: int, task_id: int) -> str:
+    """
+    查询销售提示词。
+    """
+    select_sql = f"""
+    SELECT system_prompt FROM sale_prompt WHERE tenant_id = {tenant_id} AND task_id = {task_id} AND is_del = 0;
+    """
+    result = db_manager.execute_query(select_sql)
+    if result:
+        return result[0]
+    else:
+        return None
+
 def insert_sale_ai_data_record(ai_type: int, ai_text: str, ai_status: int, tenant_id: int, create_by: str = 'system') -> bool:
     """
     向 sale_ai_data 表中插入一条新的 AI 数据记录。

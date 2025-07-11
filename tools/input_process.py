@@ -226,3 +226,13 @@ def analyze_chat_style(image_path: str) -> dict:
             "error_message": str(e)
         }
 
+def file_to_text(file_url: str) -> dict:
+    """
+    将文件转换为文本, 并返回文本内容。
+
+    Args:
+        file_url (str): 文件的URL
+
+    Returns:
+        dict: 一个包含文本的字典。
+    """

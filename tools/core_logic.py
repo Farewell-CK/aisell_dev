@@ -2,6 +2,7 @@ import os
 import requests
 import json
 from tools.database import DatabaseManager
+from prompts.prompts import select_ai_data
 
 def generate_customer_portrait(user_input: str) -> dict:
     """根据历史聊天记录和用户发送的最新信息 生成或更新 用户画像。
@@ -195,5 +196,41 @@ def follow_up_notification(tenant_id: int, task_id: int, session_id: str, conten
     """
     pass
 
-
-
+def select_file(tenant_id: int, task_id: int, session_id: str, content: str) -> dict:
+    """
+    查询相关文件的内容和url。
+    Args:
+        tenant_id: 租户ID
+        task_id: 任务ID
+        session_id: 会话ID
+        content: 聊天内容
+    Returns:
+        {
+            "status": "success",
+            "message": "查询文件成功",
+            "file_list": [
+                {
+                    "file_name": "文件名",
+                    "file_url": "文件url"
+                }
+            ]
+        }
+    """
+    try:
+        ai_data = select_ai_data(tenant_id, task_id)
+        file_list = []
+        for data in ai_data:
+            file_list.append({
+                "file_name": data["file_name"],
+                "file_url": data["file_url"]
+            })
+        return {
+            "status": "success",
+            "message": "查询文件成功",
+            "file_list": file_list
+            }
+    except Exception as e:
+        return {
+            "status": "error",
+            "message": f"没有相关文件或者查询文件失败: {str(e)}"
+        }

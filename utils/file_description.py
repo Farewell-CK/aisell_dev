@@ -18,7 +18,7 @@ import shutil
 from urllib.parse import urlparse # 用于解析URL
 import requests # 用于下载URL内容
 import io # 用于处理内存中的文件流
-
+from prompts.prompts import file_description_prompt
 # 加载环境变量
 from dotenv import load_dotenv
 load_dotenv()
@@ -386,12 +386,12 @@ class ImageSummarizer:
             messages_payload = [
                 {
                     "role": "system",
-                    "content": "你是一位专业的图像内容分析师，能够洞察图片的每一个细节并用生动的语言描述出来。(100字以内)"
+                    "content": file_description_prompt
                 },
                 {
                     "role": "user",
                     "content": [
-                        {"type": "text", "text": prompt},
+                        # {"type": "text", "text": prompt},
                         {"type": "image_url", "image_url": image_url_data}
                     ]
                 }
@@ -729,6 +729,7 @@ class TableSummarizer:
 1. 输出内容必须控制在50字左右
 2. 只提取最核心的信息
 3. 使用简洁的语言表达
+4. 注意输出纯文本、而非markdown格式
 """
 
         user_content = f"{prompt_to_use}\n\n# 表格元信息:\n```json\n{info_str}\n```\n\n# 数据抽样 (前 {len(sample_data_df)} 行):\n```\n{sample_data_str}\n```"
@@ -739,7 +740,7 @@ class TableSummarizer:
             response = self.client.chat.completions.create(
                 model="ernie-4.5-turbo-128k", 
                 messages=[
-                    {"role": "system", "content": "你是一个专业的数据分析师，擅长从表格的结构信息和数据样本中提炼洞察。"},
+                    {"role": "system", "content": file_description_prompt},
                     {"role": "user", "content": user_content}
                 ],
                 temperature=0.3,
@@ -1139,7 +1140,11 @@ class PPTSummarizer:
 4.  **关键论点/数据/证据**：识别出支撑核心主题的关键论点、重要数据或证据。
 5.  **视觉与表达特点**：（如果能从文本推断）PPT在视觉设计或表达上有何特点？（例如，图表为主，文字密集，案例驱动等）。
 6.  **潜在的演讲亮点与改进建议**：这份PPT的演讲亮点可能在哪里？有无明显的改进空间（从内容结构、清晰度等方面）？
-7.  **总结性概述**：给出一个简短的整体总结。(请确保总结在50字以内)""" # 修改了默认prompt中对字数的要求
+7.  **总结性概述**：给出一个简短的整体总结。(请确保总结在50字以内)
+注意：
+1. 输出纯文本、而非markdown格式
+2. 字数控制在50字以内
+""" # 修改了默认prompt中对字数的要求
 
         user_content = f"{prompt_to_use}\n\n# 演示文稿提取内容 (JSON):\n```json\n{content_str}\n```"
         # logger.debug(f"发送给 LLM 的 User Content (部分): {user_content[:500]}...") # 内容可能很大
@@ -1149,8 +1154,8 @@ class PPTSummarizer:
             response = self.client.chat.completions.create(
                 model=self.model_name,
                 messages=[
-                    {"role": "system", "content": "你是一位经验丰富的演示文稿分析专家和内容策略师。"},
-                    {"role": "user", "content": user_content}
+                    {"role": "system", "content": file_description_prompt},
+                    {"role": "user", "content": content_str}
                 ],
                 temperature=0.3,
                 top_p=0.8
@@ -1632,14 +1637,51 @@ class DocumentSummarizer:
             logger.error(f"序列化提取的文档内容时出错: {e}", exc_info=True)
             return "序列化文档内容时发生内部错误。"
 
-        prompt_to_use = custom_prompt if custom_prompt else """请基于以下提供的文档提取内容（JSON格式），用中文全面分析此文档，包括但不限于：
-1.  **核心议题与目的**：文档主要讨论什么？其核心目标或意图是什么？
-2.  **结构与组织**：文档的整体结构是怎样的？（例如，引言、主体章节、结论；问题-分析-方案等）。
-3.  **主要章节/部分摘要**：针对提取内容中的各主要部分（如PDF的页面、DOCX的章节标题下的文本），分别概括其要点。
-4.  **关键信息、论点与证据**：识别文档中提出的关键信息、核心论点以及支撑这些论点的主要数据或证据。
-5.  **目标读者与潜在影响**：这份文档可能面向哪些读者？它可能产生哪些影响或达到什么效果？
-6.  **总结性概述**：对整个文档给出一个精炼的总体总结。(请确保总结在50字以内)""" # 调整了默认prompt对总结字数的要求
-
+#         prompt_to_use = custom_prompt if custom_prompt else """请基于以下提供的文档提取内容（JSON格式），用中文全面分析此文档，包括但不限于：
+# 1.  **核心议题与目的**：文档主要讨论什么？其核心目标或意图是什么？
+# 2.  **结构与组织**：文档的整体结构是怎样的？（例如，引言、主体章节、结论；问题-分析-方案等）。
+# 3.  **主要章节/部分摘要**：针对提取内容中的各主要部分（如PDF的页面、DOCX的章节标题下的文本），分别概括其要点。
+# 4.  **关键信息、论点与证据**：识别文档中提出的关键信息、核心论点以及支撑这些论点的主要数据或证据。
+# 5.  **目标读者与潜在影响**：这份文档可能面向哪些读者？它可能产生哪些影响或达到什么效果？
+# 6.  **总结性概述**：对整个文档给出一个精炼的总体总结。(请确保总结在50字以内)
+# """ # 调整了默认prompt对总结字数的要求
+        prompt_to_use = """
+        你是一个顶级的“B2B销售策略分析AI”。
+        你的核心任务是分析并总结用户上传的各类To B销售资料（如公司介绍、产品手册、解决方案、客户案例、行业白皮书等），为每一份资料生成一段“战略用途摘要”。
+        这个目的是服务于另一个销售对话AI，帮助它在与客户的实时互动中，能够毫秒级地判断出在何种情况下发送哪份资料最能促进销售进程。
+        因此，你的总结绝对不能是简单的内容概括，而必须是基于销售策略的精准用途描述。
+        工作核心原则
+        1.忠诚度铁律:
+        事实零度渲染: 摘要中的所有描述都必须严格忠于原文。严禁添加任何原文中不存在的、主观的、情绪化的或过度营销的词汇。
+        定性禁止升级: 在提炼事实时，严禁将原文中性的描述升级为更严重的定性。例如，原文是“材料与承诺不一致”，你绝不能总结为“材料作假”。
+        2.长度红线:
+        摘要三个标签内容的总字数（不含标签本身），必须严格控制在120字以内。你必须在保证信息核心完整的前提下，做到极致精炼。
+        摘要的输出规则
+        为了确保摘要的结构清晰、信息密度极高，你的输出必须严格采用以下三段式标签格式。每个标签后的内容都必须是信息完整、表意清晰的短语或句子。
+        核心价值: 精准提炼这份资料能为客户解决的核心问题或建立的核心认知。
+        触发场景: 清晰描述什么样具体的客户问询或异议，是发送这份资料的最佳时机。
+        资料亮点: 提炼原文中最具说服力、最直接的证据。必须是具体的事实、数据或承诺，而不是空泛的总结。
+        输出格式
+        严格按照以下标签和换行格式进行输出：
+        核心价值: [此处为提炼出的价值]
+        触发场景: [此处为提炼出的场景]
+        资料亮点: [此处为提炼出的最具说服力的证据]
+        输出示例
+        示例1：资料为《服务流程及标准》
+        核心价值: 建立专业、规范的品牌形象，打消客户对装修过程混乱、不可控的疑虑。
+        触发场景: 客户对公司专业性存疑或询问具体服务流程时。
+        资料亮点: 内含清晰的服务流程图与多项客户验收节点，是规范化运营的铁证。
+        示例2：资料为《施工工艺与验房标准》
+        错误示范 (信息丢失/过度简化):
+        核心价值: 证明专业。
+        触发场景: 客户问质量。
+        资料亮点: 工艺好，标准高。
+        正确示范 (信息完整/精准):
+        核心价值: 建立对施工工艺细节与质量验收标准的专业信任。
+        触发场景: 当客户质疑“施工质量”、“用料好坏”或认为“价格偏高”时。
+        资料亮点: 提供“看敲试量”四步验房法，并详述PPR健康管使用、瓷砖薄贴技术等工艺标准。
+        现在，请开始接收并分析我将要上传的销售资料，并为每一份资料生成其专属的、结构化的“战略用途摘要”。
+        """
         user_content = f"{prompt_to_use}\n\n# 文档提取内容 (JSON):\n```json\n{content_str}\n```"
 
         try:
@@ -1647,8 +1689,8 @@ class DocumentSummarizer:
             response = self.client.chat.completions.create(
                 model=self.model_name,
                 messages=[
-                    {"role": "system", "content": "你是一位资深的文档分析和信息提炼专家，能够精确把握文档核心并生成高质量摘要。"},
-                    {"role": "user", "content": user_content}
+                    {"role": "system", "content": prompt_to_use},
+                    {"role": "user", "content": f"文档提取内容 (JSON):\n```json\n{content_str}\n```"}
                 ],
                 temperature=0.3,
                 top_p=0.8
@@ -1900,13 +1942,13 @@ class VideoSummarizer:
             messages_payload = [
                 {
                     "role": "system",
-                    "content": [{"type": "text", "text": "你是一位专业的视频内容分析师，能够深入理解视频的视觉和叙事元素，并提供富有洞察力的总结。"}]
+                    "content": file_description_prompt
                 },
                 {
                     "role": "user",
                     "content": [
                         {"type": "video_url", "video_url": {"url": video_url_for_api}},
-                        {"type": "text", "text": prompt}
+                        # {"type": "text", "text": prompt}
                     ]
                 }
             ]

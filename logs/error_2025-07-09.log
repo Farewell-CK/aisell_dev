@@ -1,0 +1,17 @@
+2025-07-09 21:08:20 - asyncio - ERROR - default_exception_handler:1833 - Task was destroyed but it is pending!
+task: <Task pending name='Task-86' coro=<<async_generator_athrow without __name__>()>>
+2025-07-09 21:08:20 - main - ERROR - process_agent_background:168 - 后台处理失败 - user_id: 43, session_id: wxid_71rpc0hw5pj021, error: The last_update_time provided in the session object '2025-07-09 13:08:08' is earlier than the update_time in the storage_session '2025-07-09 13:08:18'. Please check if it is a stale session.
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/main.py", line 111, in process_agent_background
+    agent_response_text = loop.run_until_complete(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 205, in run_async
+    await self.session_service.append_event(session=session, event=event)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/sessions/database_session_service.py", line 533, in append_event
+    raise ValueError(
+ValueError: The last_update_time provided in the session object '2025-07-09 13:08:08' is earlier than the update_time in the storage_session '2025-07-09 13:08:18'. Please check if it is a stale session.

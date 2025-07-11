@@ -36,7 +36,7 @@ class ImageUrlsRequest(BaseModel):
     image_urls: List[str]
 
 @app.post("/api/analyze")
-async def analyze_chat_style(request: ImageUrlsRequest):
+async def analyze_wechat_style(request: ImageUrlsRequest):
     """
     分析微信聊天记录中的说话风格
     

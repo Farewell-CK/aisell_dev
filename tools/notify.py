@@ -156,10 +156,14 @@ async def send_prohibit_notify(tenant_id,task_id,strategy_id,prohibit_list, sale
         """
         logger.info(f"插入销售流程: {insert_query}")
         db.execute_insert(insert_query)
-    update_query = f"""
+    update_status_query = f"""
     UPDATE sale_strategy SET status = {status} WHERE id = {strategy_id} AND tenant_id = {tenant_id} AND task_id = {task_id};
     """
-    db.execute_update(update_query)
+    db.execute_update(update_status_query)
+    update_reply_query = f"""
+    UPDATE sale_strategy SET reply_cycle = 72, reply_times = 2 WHERE id = {strategy_id} AND tenant_id = {tenant_id} AND task_id = {task_id};
+    """
+    db.execute_update(update_reply_query)
     return True
 
 async def send_chat_test(tenant_id,task_id,chat_test):
@@ -192,7 +196,7 @@ async def send_chat(tenant_id,task_id,session_id,belong_chat_id,chat_content):
         task_id: 任务ID
         session_id: 会话ID
         belong_chat_id: 工作机登录的微信id
-        chat_content: 聊天内容 是一个列表
+        chat_content: 聊天内容
     Returns:
         response: 响应
 
@@ -208,7 +212,15 @@ async def send_chat(tenant_id,task_id,session_id,belong_chat_id,chat_content):
             "url": "需要给客户发送的文件URL"
          }
          ],
-         "collaborate_list": [协作事项内容1, 协作事项内容2, 协作事项内容3],
+         "collaborate_list": [
+         {
+         "id": 1,
+         "content": "协作事项内容1"
+         },
+         {
+         "id": 2,
+         "content": "协作事项内容2"
+         }],
          "follow_up": {
             "is_follow_up": 1, 
             "follow_up_content": ["跟单内容1", "跟单内容2", "跟单内容3"]
@@ -216,8 +228,12 @@ async def send_chat(tenant_id,task_id,session_id,belong_chat_id,chat_content):
          "need_assistance": 1,
       }
     """
-    print(f"chat_content: {chat_content}")
-    collaborate_list = chat_content.get("collaborate_list", [])
+    # print(f"chat_content: {chat_content}")
+    if isinstance(chat_content, str):
+        collaborate_list = []
+    else:
+        collaborate_dic = chat_content.get("collaborate_list", [])
+        collaborate_list = [collaborate['content'] for collaborate in collaborate_dic]
     for collaborate in collaborate_list:
         insert_query = f"""
         INSERT INTO sale_wechat_matter (
@@ -243,17 +259,24 @@ async def send_chat(tenant_id,task_id,session_id,belong_chat_id,chat_content):
         "Content-Type": "application/json"
     }
     data = {
+        "status": "success",
         "tenant_id": tenant_id,
         "task_id": task_id,
         "session_id": session_id,
         "belong_chat_id": belong_chat_id,
         "chat_content": chat_content # 聊天内容 是一个列表
     }
-    
+    logger.info(f"发送聊天通知: {data}")
     try:
         async with aiohttp.ClientSession() as session:
             async with session.post(url, headers=headers, json=data) as response:
                 return await response.json()
     except Exception as e:
         print(f"发送聊天通知失败: {e}")
-        return {"error": str(e)}
+        return {"status": "failed",
+                "tenant_id": tenant_id,
+                "task_id": task_id,
+                "session_id": session_id,
+                "belong_chat_id": belong_chat_id,
+                "chat_content": [str(e)]
+                }

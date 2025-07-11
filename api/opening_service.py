@@ -22,36 +22,22 @@ logger = logging.getLogger(__name__)
 
 app = FastAPI(title="开场白生成服务", description="自动生成个性化聊天开场白")
 
-# 请求模型
-class CustomerInfo(BaseModel):
-    name: str
-    company: str
-    position: Optional[str] = ""
-    industry: Optional[str] = ""
-    city: Optional[str] = ""
 
-class SalesInfo(BaseModel):
-    name: str
-    company: str
-    product: str
-    advantage: Optional[str] = ""
-    scenarios: Optional[str] = ""
 
 class ReferrerInfo(BaseModel):
     name: str
     relationship: Optional[str] = "朋友"
 
 class PersonalizedOpeningRequest(BaseModel):
-    tenant_id: int
-    wechat_id: int
+    tenant_id: str
+    wechat_id: str
     task_id: str
 # 响应模型
 class OpeningResponse(BaseModel):
-    tenant_id: int
-    task_id: int
-    session_id: str
+    tenant_id: str
+    task_id: str
     status: str
-    # opening: Optional[str] = None
+    message: Optional[list[str]] = None
 
 
 @app.get("/")
@@ -65,7 +51,7 @@ async def root():
         ]
     }
 
-@app.post("/generate/personalized", response_model=OpeningResponse)
+@app.post("/generate/personalized")
 async def generate_personalized_opening(request: PersonalizedOpeningRequest):
     """生成个性化开场白"""
     try:
@@ -74,19 +60,21 @@ async def generate_personalized_opening(request: PersonalizedOpeningRequest):
         wechat_id = request.wechat_id
         # session_id = request.session_id
         generator = OpeningGenerator()
+        logger.info(f"开始生成个性化开场白: {tenant_id}, {task_id}, {wechat_id}")
         result = await generator.generate_personalized_opening(
             tenant_id,
             task_id,
             wechat_id,
             # session_id
         )
+        logger.info(f"个性化开场白生成成功: {result}")
         # 只返回状态，后续做消息通知
         return {
             "tenant_id": tenant_id,
             "task_id": task_id,
             # "session_id": session_id,
             "status": "success",
-            "opening": result["opening"]
+            "message": result["opening"]
         }
     except Exception as e:
         return {

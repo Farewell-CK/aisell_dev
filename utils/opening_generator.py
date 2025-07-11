@@ -3,7 +3,7 @@ import json
 from typing import Dict, List, Optional
 from utils.config_loader import ConfigLoader
 from utils.chat import chat_qwen
-from utils.db_queries import select_wechat_name, select_knowledge
+from utils.db_queries import select_wechat_name, select_knowledge, select_ai_data
 
 class OpeningGenerator:
     """聊天开场白生成器"""
@@ -14,9 +14,9 @@ class OpeningGenerator:
     
     async def generate_personalized_opening(
         self, 
-        tenant_id: int,
-        task_id: int,
-        wechat_id: int,
+        tenant_id: str,
+        task_id: str,
+        wechat_id: str,
         # session_id: str,
         # customer_info: Dict[str, str],
         # sales_info: Dict[str, str],
@@ -35,10 +35,11 @@ class OpeningGenerator:
         """
         wechat_name = select_wechat_name(tenant_id, wechat_id)
         knowledge = select_knowledge(tenant_id, task_id)
-        prompt = self._build_personalized_prompt(wechat_name, knowledge)
+        send_ai_data = select_ai_data(tenant_id, task_id)
+        prompt = self._build_personalized_prompt(wechat_name, knowledge, send_ai_data)
         
         try:
-            response = await chat_qwen(self.api_key, prompt)
+            response = await chat_qwen(prompt)
             return {
                 "status": "success",
                 "opening": json.loads(response.strip("```").strip("```json")),
@@ -47,7 +48,7 @@ class OpeningGenerator:
         except Exception as e:
             return {
                 "status": "error",
-                "message": f"生成个性化开场白失败: {str(e)}",
+                "opening": [{"type": "text", "content": f"生成个性化开场白失败: {str(e)}"}],
                 "type": "personalized"
             }
     
@@ -207,7 +208,7 @@ class OpeningGenerator:
             "openings": results
         }
     
-    def _build_personalized_prompt(self, wechat_name: str, knowledge: str) -> str:
+    def _build_personalized_prompt(self, wechat_name: str, knowledge: str, send_ai_data: str) -> str:
         """构建个性化开场白提示词"""
         return f"""
 你是一位专业的销售开场白设计师。请基于以下信息，生成自然、专业、个性化的微信开场白。
@@ -215,11 +216,16 @@ class OpeningGenerator:
 ## 角色信息
 - 微信昵称：{wechat_name}
 - 公司信息：{knowledge}
+- 可以发送的数据：
 
+{send_ai_data}
+---
 ## 开场白要求
 1. **昵称处理规则**：
    - 如果昵称是真实姓名（如：中科小苏、张三、李四），在开场白中要使用真实姓名
    - 如果昵称不是真实姓名（如：落日余晖、星辰大海），则不要提及昵称
+   - 要根据可以发送的数据，进行判断。如果觉得哪个文件中内容适合发送给客户，则将该内容对应的URL写入JSON中
+   - 如果没有适合发送给客户的数据，则不要填写URL，只输出文本
 
 2. **开场白特点**：
    - 自然友好，不突兀
@@ -227,11 +233,16 @@ class OpeningGenerator:
    - 避免过度推销
    - 为后续沟通留下话题
    - 每个开场白控制在15字以内
+   - 最多生成五句开场白
 
 3. **输出格式**：
    请直接输出JSON格式的开场白列表：
    ```json
-   ["开场白1", "开场白2", "开场白3", "开场白4", "开场白5"]
+   [{{"type": "text", "content": "开场白1"}},
+   {{"type": "url", "url": "如果有适合发送给客户的数据，此处填写URL"}},
+   {{"type": "text", "content": "开场白3"}},
+   {{"type": "url", "url": "如果有适合发送给客户的数据，此处填写URL"}},
+   {{"type": "text", "content": "开场白5"}}]
    ```
 
 请直接输出JSON格式的开场白列表，不要包含其他说明文字。

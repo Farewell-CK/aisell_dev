@@ -76,6 +76,4 @@ def format_sale_process(process_data: list[dict]) -> str:
         formatted_string += f"- **关键**: {text_lines[3]}\n\n"
         formatted_string += "---\n" # 每个流程步骤后添加分隔符
 
-    return formatted_string.strip() # 移除末尾多余的换行和分隔符
-
-
+    return formatted_string.strip() # 移除末尾多余的换行和分隔符 

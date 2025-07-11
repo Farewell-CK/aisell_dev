@@ -23,7 +23,7 @@ class DatabaseConnector:
         dbname = db_conf.get('name', "sale")
         driver = db_conf.get('driver', 'mysql+pymysql')
         url = f"{driver}://{user}:{password}@{host}:{port}/{dbname}"
-        return sqlalchemy.create_engine(url)
+        return sqlalchemy.create_engine(url, pool_recycle=3600)
 
     def get_engine(self):
         """

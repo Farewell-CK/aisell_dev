@@ -2,6 +2,10 @@ import yaml
 import os
 import sqlalchemy
 from sqlalchemy import text
+import logging
+
+logger = logging.getLogger(__name__)
+
 class DatabaseConnector:
     def __init__(self, config_path='configs/database.yaml'):
         self.config_path = config_path
@@ -22,8 +26,28 @@ class DatabaseConnector:
         port = db_conf.get('port', 3306)
         dbname = db_conf.get('name', "sale")
         driver = db_conf.get('driver', 'mysql+pymysql')
-        url = f"{driver}://{user}:{password}@{host}:{port}/{dbname}"
-        return sqlalchemy.create_engine(url, pool_recycle=3600)
+        charset = db_conf.get('charset', 'utf8mb4')
+
+        url = f"{driver}://{user}:{password}@{host}:{port}/{dbname}?charset={charset}"
+
+        # ✅ 从配置中读取连接池参数
+        pool_size = db_conf.get('pool_size', 5)
+        max_overflow = db_conf.get('max_overflow', 10)
+        pool_recycle = db_conf.get('pool_recycle', 3600)
+        pool_pre_ping = db_conf.get('pool_pre_ping', True) # 默认开启
+        pool_timeout = db_conf.get('pool_timeout', 30)
+        connect_timeout = db_conf.get('connect_timeout', 10)
+
+        # ✅ 将所有参数传入 create_engine
+        return sqlalchemy.create_engine(
+            url,
+            pool_size=pool_size,
+            max_overflow=max_overflow,
+            pool_recycle=pool_recycle,
+            pool_pre_ping=pool_pre_ping,
+            pool_timeout=pool_timeout,
+            connect_args={'connect_timeout': connect_timeout}
+        )
 
     def get_engine(self):
         """
@@ -101,7 +125,7 @@ class DatabaseManager:
                 # row 是一个 Row 对象，它表现得像一个元组，也可以通过属性或索引访问
                 # row._asdict() 是最方便的方式来将其转换为字典
                 formatted_results.append(row._asdict())
-                
+            logging.info(f"查询数据成功: {formatted_results}")
             return formatted_results
 
     def execute_insert(self, query: str) -> int:
@@ -119,9 +143,11 @@ class DatabaseManager:
             with self.engine.connect() as connection:
                 result = connection.execute(text(query))
                 connection.commit()
-                return result.rowcount
+                logging.info(f"插入数据成功: {result}")
+                return "插入成功"
         except Exception as e:
-            return 0
+            logging.error(f"插入数据失败: {str(e)}")
+            return str(e)
 
     def execute_update(self, query: str) -> int:
         """
@@ -129,8 +155,6 @@ class DatabaseManager:
 
         Args:
             query (str): 完整的UPDATE SQL语句
-            params (dict, optional): SQL参数，用于参数化查询
-
         Returns:
             int: 更新操作影响的行数
         """
@@ -138,9 +162,10 @@ class DatabaseManager:
             with self.engine.connect() as connection:
                 result = connection.execute(text(query))
                 connection.commit()
-                # logger.info(f"更新数据成功: {query}")
+                logging.info(f"更新数据成功: {result}")
                 return result.rowcount
         except Exception as e:
+            logging.error(f"更新数据失败: {str(e)}")
             raise Exception(f"更新数据失败: {str(e)}")
 
     def execute_delete(self, query: str, params: dict = None) -> int:
@@ -158,8 +183,10 @@ class DatabaseManager:
             with self.engine.connect() as connection:
                 result = connection.execute(text(query), params or {})
                 connection.commit()
+                logging.info(f"删除数据成功: {result}")
                 return result.rowcount
         except Exception as e:
+            logging.error(f"删除数据失败: {str(e)}")
             raise Exception(f"删除数据失败: {str(e)}")
 
     def fetch_one(self, query: str, params: dict = None):
@@ -178,9 +205,11 @@ class DatabaseManager:
                 result = connection.execute(text(query), params or {})
                 row = result.fetchone()
                 if row:
+                    logging.info(f"查询数据成功: {row}")
                     return tuple(row)  # 返回元组格式
                 return None
         except Exception as e:
+            logging.error(f"查询数据失败: {str(e)}")
             raise Exception(f"查询数据失败: {str(e)}")
 
     def fetch_all(self, query: str, params: dict = None):

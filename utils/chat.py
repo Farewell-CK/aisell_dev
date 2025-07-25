@@ -202,6 +202,46 @@ async def chat_qwen(prompt : str) -> str:
     )
     return completion.choices[0].message.content
 
+async def chat_ernie(prompt : str) -> str:
+    """
+    调用ernie模型
+    """
+    api_key = config.get_api_key('ernie', 'api_key')
+    base_url = config.get_api_key('ernie', 'base_url')
+    client = OpenAI(
+        api_key=api_key,
+        base_url=base_url,
+    )
+    completion = client.chat.completions.create(
+        model="ernie-4.5-turbo-128k",
+        messages=[{"role": "user", "content": prompt}],
+    )
+    return completion.choices[0].message.content
+
+async def chat_ark(prompt : str) -> str:
+    """
+    调用ark模型
+    """
+    api_key = config.get_api_key('ark', 'api_key')
+    base_url = config.get_api_key('ark', 'base_url')
+    client = OpenAI(
+        api_key=api_key,
+        base_url=base_url,
+    )
+    completion = client.chat.completions.create(
+        model="doubao-seed-1-6-250615",
+        messages=[{"role": "user", "content": prompt}],
+        extra_body={
+            "thinking": {
+                "type": "disabled",  # 不使用深度思考能力
+                # "type": "enabled", # 使用深度思考能力
+                # "type": "auto", # 模型自行判断是否使用深度思考能力
+            }
+        },
+    )
+    return completion.choices[0].message.content
+
+
 
 async def chat_test(api_key : str, query : list[dict]) -> tuple[str, dict]:
     """

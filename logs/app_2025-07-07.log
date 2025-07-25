@@ -5075,3 +5075,91 @@ LiteLLM completion() model= qwen-max-latest; provider = openai
 2025-07-10 15:12:58 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
 2025-07-10 15:12:58 - summarizer - INFO - summarize_single_image:408 - 成功从模型获取单图总结。总结长度: 64 字符。
 2025-07-10 15:12:59 - database - INFO - update_sale_ai_data_status:116 - 成功更新 AI 数据记录 ID=196 的状态为 2
+2025-07-13 21:43:28 - database - INFO - update_sale_ai_data_status:116 - 成功更新 AI 数据记录 ID=197 的状态为 1
+2025-07-13 21:43:29 - summarizer - INFO - summarize_single_image:370 - 开始处理单张图片总结: /tmp/tmp_8ogs5bp.png
+2025-07-13 21:43:29 - summarizer - INFO - get_image_url_dict:343 - 输入为本地文件路径，将进行Base64编码: /tmp/tmp_8ogs5bp.png
+2025-07-13 21:43:29 - summarizer - INFO - encode_image:321 - 图片 '/tmp/tmp_8ogs5bp.png' Base64编码成功。编码后数据长度(部分): 100...
+2025-07-13 21:43:29 - summarizer - INFO - get_image_url_dict:358 - 推断出图片 '/tmp/tmp_8ogs5bp.png' 的MIME类型为: image/png
+2025-07-13 21:43:29 - summarizer - INFO - summarize_single_image:385 - 向模型 'ernie-4.5-turbo-vl-preview' 发送单图总结请求。图片来源: /tmp/tmp_8ogs5bp.png
+2025-07-13 21:43:32 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-13 21:43:32 - summarizer - INFO - summarize_single_image:408 - 成功从模型获取单图总结。总结长度: 81 字符。
+2025-07-13 21:43:32 - database - INFO - update_sale_ai_data_status:116 - 成功更新 AI 数据记录 ID=197 的状态为 2
+2025-07-13 21:43:35 - database - INFO - update_sale_ai_data_status:116 - 成功更新 AI 数据记录 ID=198 的状态为 1
+2025-07-13 21:43:35 - summarizer - INFO - summarize_table:688 - 开始总结表格: /tmp/tmp6te3yi3_.xlsx
+2025-07-13 21:43:35 - summarizer - INFO - read_table:557 - 尝试读取表格源: /tmp/tmp6te3yi3_.xlsx
+2025-07-13 21:43:35 - summarizer - INFO - read_table:616 - 输入为本地文件路径: /tmp/tmp6te3yi3_.xlsx
+2025-07-13 21:43:35 - summarizer - INFO - read_table:618 - 本地文件格式: .xlsx
+2025-07-13 21:43:35 - summarizer - INFO - read_table:622 - 成功读取本地 Excel 文件: /tmp/tmp6te3yi3_.xlsx
+2025-07-13 21:43:35 - summarizer - INFO - get_table_info:648 - 开始提取表格信息，行数: 9, 列数: 4
+2025-07-13 21:43:35 - summarizer - INFO - get_table_info:660 - 找到数值列: []
+2025-07-13 21:43:35 - summarizer - INFO - get_table_info:677 - 表格信息提取完成。
+2025-07-13 21:43:35 - summarizer - INFO - summarize_table:704 - 表格信息字符串长度: 302
+2025-07-13 21:43:35 - summarizer - INFO - summarize_table:705 - 数据示例字符串长度: 191
+2025-07-13 21:43:35 - summarizer - INFO - summarize_table:738 - 向 LLM 发送请求进行表格总结...
+2025-07-13 21:43:39 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-13 21:43:39 - summarizer - INFO - summarize_table:749 - LLM 表格总结接收成功，长度: 155
+2025-07-13 21:43:39 - database - INFO - update_sale_ai_data_status:116 - 成功更新 AI 数据记录 ID=198 的状态为 2
+2025-07-18 09:04:07 - database - INFO - update_sale_ai_data_status:116 - 成功更新 AI 数据记录 ID=199 的状态为 1
+2025-07-18 09:04:07 - summarizer - INFO - summarize_ppt:1107 - 开始总结PPT: /tmp/tmpzpg001co.pptx
+2025-07-18 09:04:07 - summarizer - INFO - extract_ppt_content:975 - 开始提取文件内容: /tmp/tmpzpg001co.pptx
+2025-07-18 09:04:07 - summarizer - INFO - extract_ppt_content:1031 - 输入为本地文件路径: /tmp/tmpzpg001co.pptx
+2025-07-18 09:04:07 - summarizer - INFO - extract_ppt_content:1051 - 正在使用 python-pptx 解析: /tmp/tmpzpg001co.pptx
+2025-07-18 09:04:07 - summarizer - INFO - extract_ppt_content:1054 - 文件共有 20 张幻灯片。
+2025-07-18 09:04:07 - summarizer - INFO - extract_ppt_content:1076 - 内容提取完成: /tmp/tmpzpg001co.pptx
+2025-07-18 09:04:07 - summarizer - INFO - summarize_ppt:1117 - 提取的PPT内容字符串长度: 1626
+2025-07-18 09:04:07 - summarizer - INFO - summarize_ppt:1148 - 向 LLM (ernie-4.5-turbo-128k) 发送请求进行PPT总结...
+2025-07-18 09:04:22 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-18 09:04:22 - summarizer - INFO - summarize_ppt:1159 - LLM PPT总结接收成功，长度: 724
+2025-07-18 09:04:22 - database - INFO - update_sale_ai_data_status:116 - 成功更新 AI 数据记录 ID=199 的状态为 2
+2025-07-18 09:06:46 - database - INFO - update_sale_ai_data_status:116 - 成功更新 AI 数据记录 ID=200 的状态为 1
+2025-07-18 09:06:46 - summarizer - INFO - summarize_document:1583 - 开始总结文档: /tmp/tmpjneznc4m.docx
+2025-07-18 09:06:46 - summarizer - INFO - extract_docx_content:1451 - 开始提取DOCX内容: /tmp/tmpjneznc4m.docx
+2025-07-18 09:06:46 - summarizer - INFO - extract_docx_content:1478 - DOCX共有 3 个原始段落。
+2025-07-18 09:06:46 - summarizer - INFO - extract_docx_content:1511 - DOCX内容提取完成: /tmp/tmpjneznc4m.docx
+2025-07-18 09:06:46 - summarizer - INFO - summarize_document:1609 - 提取的文档内容序列化后字符串长度: 201
+2025-07-18 09:06:46 - summarizer - INFO - summarize_document:1683 - 向 LLM (ernie-4.5-turbo-128k) 发送请求进行文档总结...
+2025-07-18 09:06:49 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-18 09:06:49 - summarizer - INFO - summarize_document:1704 - LLM 文档总结接收成功，长度: 103
+2025-07-18 09:06:49 - database - INFO - update_sale_ai_data_status:116 - 成功更新 AI 数据记录 ID=200 的状态为 2
+2025-07-18 10:18:27 - database - INFO - update_sale_ai_data_status:116 - 成功更新 AI 数据记录 ID=201 的状态为 1
+2025-07-18 10:18:28 - summarizer - INFO - summarize_single_image:370 - 开始处理单张图片总结: /tmp/tmpyyn8khzg.png
+2025-07-18 10:18:28 - summarizer - INFO - get_image_url_dict:343 - 输入为本地文件路径，将进行Base64编码: /tmp/tmpyyn8khzg.png
+2025-07-18 10:18:28 - summarizer - INFO - encode_image:321 - 图片 '/tmp/tmpyyn8khzg.png' Base64编码成功。编码后数据长度(部分): 100...
+2025-07-18 10:18:28 - summarizer - INFO - get_image_url_dict:358 - 推断出图片 '/tmp/tmpyyn8khzg.png' 的MIME类型为: image/png
+2025-07-18 10:18:28 - summarizer - INFO - summarize_single_image:385 - 向模型 'ernie-4.5-turbo-vl-preview' 发送单图总结请求。图片来源: /tmp/tmpyyn8khzg.png
+2025-07-18 10:19:10 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-18 10:19:10 - summarizer - INFO - summarize_single_image:408 - 成功从模型获取单图总结。总结长度: 77 字符。
+2025-07-18 10:19:10 - database - INFO - update_sale_ai_data_status:116 - 成功更新 AI 数据记录 ID=201 的状态为 2
+2025-07-18 10:30:44 - database - INFO - update_sale_ai_data_status:116 - 成功更新 AI 数据记录 ID=202 的状态为 1
+2025-07-18 10:30:44 - summarizer - INFO - summarize_single_image:370 - 开始处理单张图片总结: /tmp/tmpdvl2_o6h.png
+2025-07-18 10:30:44 - summarizer - INFO - get_image_url_dict:343 - 输入为本地文件路径，将进行Base64编码: /tmp/tmpdvl2_o6h.png
+2025-07-18 10:30:44 - summarizer - INFO - encode_image:321 - 图片 '/tmp/tmpdvl2_o6h.png' Base64编码成功。编码后数据长度(部分): 100...
+2025-07-18 10:30:44 - summarizer - INFO - get_image_url_dict:358 - 推断出图片 '/tmp/tmpdvl2_o6h.png' 的MIME类型为: image/png
+2025-07-18 10:30:44 - summarizer - INFO - summarize_single_image:385 - 向模型 'ernie-4.5-turbo-vl-preview' 发送单图总结请求。图片来源: /tmp/tmpdvl2_o6h.png
+2025-07-18 10:31:23 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-18 10:31:23 - summarizer - INFO - summarize_single_image:408 - 成功从模型获取单图总结。总结长度: 78 字符。
+2025-07-18 10:31:23 - database - INFO - update_sale_ai_data_status:116 - 成功更新 AI 数据记录 ID=202 的状态为 2
+2025-07-18 13:40:34 - database - INFO - update_sale_ai_data_status:116 - 成功更新 AI 数据记录 ID=203 的状态为 1
+2025-07-18 13:40:34 - summarizer - INFO - summarize_ppt:1107 - 开始总结PPT: /tmp/tmpynjsi9yt.pptx
+2025-07-18 13:40:34 - summarizer - INFO - extract_ppt_content:975 - 开始提取文件内容: /tmp/tmpynjsi9yt.pptx
+2025-07-18 13:40:34 - summarizer - INFO - extract_ppt_content:1031 - 输入为本地文件路径: /tmp/tmpynjsi9yt.pptx
+2025-07-18 13:40:34 - summarizer - INFO - extract_ppt_content:1051 - 正在使用 python-pptx 解析: /tmp/tmpynjsi9yt.pptx
+2025-07-18 13:40:34 - summarizer - INFO - extract_ppt_content:1054 - 文件共有 20 张幻灯片。
+2025-07-18 13:40:34 - summarizer - INFO - extract_ppt_content:1076 - 内容提取完成: /tmp/tmpynjsi9yt.pptx
+2025-07-18 13:40:34 - summarizer - INFO - summarize_ppt:1117 - 提取的PPT内容字符串长度: 1626
+2025-07-18 13:40:34 - summarizer - INFO - summarize_ppt:1148 - 向 LLM (ernie-4.5-turbo-128k) 发送请求进行PPT总结...
+2025-07-18 13:40:45 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-18 13:40:45 - summarizer - INFO - summarize_ppt:1159 - LLM PPT总结接收成功，长度: 713
+2025-07-18 13:40:45 - database - INFO - update_sale_ai_data_status:116 - 成功更新 AI 数据记录 ID=203 的状态为 2
+2025-07-18 13:43:03 - database - INFO - update_sale_ai_data_status:116 - 成功更新 AI 数据记录 ID=204 的状态为 1
+2025-07-18 13:43:04 - summarizer - INFO - summarize_ppt:1107 - 开始总结PPT: /tmp/tmp0t6gf6ns.pptx
+2025-07-18 13:43:04 - summarizer - INFO - extract_ppt_content:975 - 开始提取文件内容: /tmp/tmp0t6gf6ns.pptx
+2025-07-18 13:43:04 - summarizer - INFO - extract_ppt_content:1031 - 输入为本地文件路径: /tmp/tmp0t6gf6ns.pptx
+2025-07-18 13:43:04 - summarizer - INFO - extract_ppt_content:1051 - 正在使用 python-pptx 解析: /tmp/tmp0t6gf6ns.pptx
+2025-07-18 13:43:04 - summarizer - INFO - extract_ppt_content:1054 - 文件共有 20 张幻灯片。
+2025-07-18 13:43:04 - summarizer - INFO - extract_ppt_content:1076 - 内容提取完成: /tmp/tmp0t6gf6ns.pptx
+2025-07-18 13:43:04 - summarizer - INFO - summarize_ppt:1117 - 提取的PPT内容字符串长度: 1626
+2025-07-18 13:43:04 - summarizer - INFO - summarize_ppt:1148 - 向 LLM (ernie-4.5-turbo-128k) 发送请求进行PPT总结...
+2025-07-18 13:43:15 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://qianfan.baidubce.com/v2/chat/completions "HTTP/1.1 200 OK"
+2025-07-18 13:43:15 - summarizer - INFO - summarize_ppt:1159 - LLM PPT总结接收成功，长度: 737
+2025-07-18 13:43:15 - database - INFO - update_sale_ai_data_status:116 - 成功更新 AI 数据记录 ID=204 的状态为 2

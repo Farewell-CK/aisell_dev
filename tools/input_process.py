@@ -187,7 +187,7 @@ def get_detailed_time():
   Returns:
     dict: 包含当前详细时间的字典。
   """
-  now = datetime.datetime.now()
+  now = datetime.now()
   formatted_time = now.strftime("%Y-%m-%d %H:%M:%S.%f")
   return {"status": "success", "report": formatted_time}
 
@@ -226,7 +226,7 @@ def analyze_chat_style(image_path: str) -> dict:
             "error_message": str(e)
         }
 
-def file_to_text(file_url: str) -> dict:
+def read_file(file_url: str) -> dict:
     """
     将文件转换为文本, 并返回文本内容。
 
@@ -236,3 +236,64 @@ def file_to_text(file_url: str) -> dict:
     Returns:
         dict: 一个包含文本的字典。
     """
+    try:
+        from utils.file_reader import read_pdf, read_word, read_excel, read_ppt, read_txt, convert_with_queue
+        def get_file_type_from_url(url: str):
+            url = url.lower()
+            if url.endswith('.pdf'):
+                return 'pdf'
+            elif url.endswith('.docx') or url.endswith('.doc'):
+                return 'word'
+            elif url.endswith('.xlsx') or url.endswith('.xls'):
+                return 'excel'
+            elif url.endswith('.pptx') or url.endswith('.ppt'):
+                return 'ppt'
+            elif url.endswith('.txt'):
+                return 'txt'
+            else:
+                return None
+        file_type = get_file_type_from_url(file_url)
+        if not file_type:
+            return {"status": "error", "error_message": "无法识别的文件类型"}
+        import tempfile
+        import requests
+        import os
+        response = requests.get(file_url)
+        response.raise_for_status()
+        suffix = "." + file_type
+        with tempfile.NamedTemporaryFile(delete=False, suffix=suffix) as tmp:
+            tmp.write(response.content)
+            file_path = tmp.name
+        if file_type == "pdf":
+            content = read_pdf(file_path)
+        elif file_type == "word":
+            if file_url.lower().endswith('.doc'):
+                try:
+                    new_path = convert_with_queue(file_path, "docx")
+                    content = read_word(new_path)
+                    os.remove(new_path)
+                except Exception as e:
+                    return {"status": "error", "error_message": f"doc转docx失败: {str(e)}"}
+            else:
+                content = read_word(file_path)
+        elif file_type == "excel":
+            content = read_excel(file_path)
+        elif file_type == "ppt":
+            if file_url.lower().endswith('.ppt'):
+                try:
+                    new_path = convert_with_queue(file_path, "pptx")
+                    content = read_ppt(new_path)
+                    os.remove(new_path)
+                except Exception as e:
+                    return {"status": "error", "error_message": f"ppt转pptx失败: {str(e)}"}
+            else:
+                content = read_ppt(file_path)
+        elif file_type == "txt":
+            content = read_txt(file_path)
+        else:
+            return {"status": "error", "error_message": "不支持的文件类型"}
+        os.remove(file_path)
+        return {"status": "success", "content": content}
+    except Exception as e:
+        return {"status": "error", "error_message": f"读取失败: {str(e)}"}
+

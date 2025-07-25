@@ -1,0 +1,50 @@
+2025-07-16 13:31:40 - asyncio - ERROR - default_exception_handler:1833 - Task was destroyed but it is pending!
+task: <Task pending name='Task-34' coro=<<async_generator_athrow without __name__>()>>
+2025-07-16 13:31:40 - asyncio - ERROR - default_exception_handler:1833 - Task was destroyed but it is pending!
+task: <Task pending name='Task-35' coro=<Logging.async_success_handler() running at /home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/litellm_logging.py:1732>>
+2025-07-16 13:31:40 - main - ERROR - process_agent_background:168 - 后台处理失败 - user_id: 41, session_id: WJE1193342535, error: select_file() got an unexpected keyword argument 'content'
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/main.py", line 111, in process_agent_background
+    agent_response_text = loop.run_until_complete(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 203, in run_async
+    async for event in invocation_context.agent.run_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/sequential_agent.py", line 37, in _run_async_impl
+    async for event in sub_agent.run_async(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/parallel_agent.py", line 105, in _run_async_impl
+    async for event in _merge_agent_run(agent_runs):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/parallel_agent.py", line 71, in _merge_agent_run
+    yield task.result()
+          ^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/llm_agent.py", line 275, in _run_async_impl
+    async for event in self._llm_flow.run_async(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 282, in run_async
+    async for event in self._run_one_step_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 318, in _run_one_step_async
+    async for event in self._postprocess_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 390, in _postprocess_async
+    async for event in self._postprocess_handle_function_calls_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 465, in _postprocess_handle_function_calls_async
+    if function_response_event := await functions.handle_function_calls_async(
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/functions.py", line 168, in handle_function_calls_async
+    function_response = await __call_tool_async(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/functions.py", line 449, in __call_tool_async
+    return await tool.run_async(args=args, tool_context=tool_context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/tools/function_tool.py", line 112, in run_async
+    return self.func(**args_to_call)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: select_file() got an unexpected keyword argument 'content'

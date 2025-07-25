@@ -1,7 +1,7 @@
 import os
 import requests
 import json
-from tools.database import DatabaseManager
+from core.database_core import db_manager
 from prompts.prompts import select_ai_data
 
 def generate_customer_portrait(user_input: str) -> dict:
@@ -196,21 +196,19 @@ def follow_up_notification(tenant_id: int, task_id: int, session_id: str, conten
     """
     pass
 
-def select_file(tenant_id: int, task_id: int, session_id: str, content: str) -> dict:
+def select_file(tenant_id: int, task_id: int) -> dict:
     """
     查询相关文件的内容和url。
     Args:
         tenant_id: 租户ID
         task_id: 任务ID
-        session_id: 会话ID
-        content: 聊天内容
     Returns:
         {
             "status": "success",
             "message": "查询文件成功",
             "file_list": [
                 {
-                    "file_name": "文件名",
+                    "file_description": "文件描述",
                     "file_url": "文件url"
                 }
             ]
@@ -221,8 +219,8 @@ def select_file(tenant_id: int, task_id: int, session_id: str, content: str) -> 
         file_list = []
         for data in ai_data:
             file_list.append({
-                "file_name": data["file_name"],
-                "file_url": data["file_url"]
+                "file_description": data["ai_text"],
+                "file_url": data["url"]
             })
         return {
             "status": "success",

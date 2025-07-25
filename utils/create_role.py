@@ -2,13 +2,11 @@ import os
 import json
 import asyncio
 from concurrent.futures import ThreadPoolExecutor
-from openai import OpenAI
-from tools.database import DatabaseManager
 from tools.notify import send_prohibit_notify
-from utils.chat import chat_qwen
+from utils.chat import chat_qwen, chat_ernie, chat_ark
 from utils.db_queries import select_base_info, select_talk_style, select_knowledge, select_product
 from utils.db_queries import select_forbidden_content, select_sale_process
-from utils.db_insert import insert_sale_prompt, update_sale_system_prompt
+from utils.db_insert import insert_sale_prompt, insert_opening_remarks
 from utils.logger_config import get_utils_logger
 
 # 获取工具模块的日志记录器
@@ -122,6 +120,7 @@ async def extract_sale_flow(content: str) -> list[str]:
         logger.error(f"提取销售流程失败: {str(e)}", exc_info=True)
         raise
 
+
 async def create_role(tenant_id, task_id, strategy_id):
     """
     创建角色
@@ -224,6 +223,137 @@ async def create_role(tenant_id, task_id, strategy_id):
     except Exception as e:
         logger.error(f"角色创建失败 - 租户ID: {tenant_id}, 任务ID: {task_id}, 策略ID: {strategy_id}, 错误: {str(e)}", exc_info=True)
         raise
+
+
+
+
+
+async def create_one_to_N_role(tenant_id, task_id, strategy_id):
+    """
+    创建one_to_N角色
+    Args:
+        tenant_id: 租户ID
+        task_id: 任务ID
+        strategy_id: 策略ID
+
+    Returns: 
+        content: 角色内容, 初始的提示词
+    """
+    logger.info(f"开始创建one_to_N角色 - 租户ID: {tenant_id}, 任务ID: {task_id}, 策略ID: {strategy_id}")
+    
+    try:
+        # 并发执行所有数据库查询，而不是串行执行
+        logger.info("正在并发获取所有数据...")
+        
+        # 创建所有数据库查询任务
+        tasks = [
+            # asyncio.get_event_loop().run_in_executor(
+            #     thread_pool, select_base_info, tenant_id, task_id
+            # ),
+            asyncio.get_event_loop().run_in_executor(
+                thread_pool, select_talk_style, tenant_id, task_id
+            ),
+            asyncio.get_event_loop().run_in_executor(
+                thread_pool, select_knowledge, tenant_id, task_id
+            ),
+            asyncio.get_event_loop().run_in_executor(
+                thread_pool, select_product, tenant_id, task_id
+            )
+        ]
+        
+        # 等待所有数据库查询完成
+        results = await asyncio.gather(*tasks, return_exceptions=True)
+        
+        # 处理查询结果
+        # base_info, talk_style, knowledge, product = results
+        talk_style, knowledge, product = results
+        
+        # 检查是否有查询异常
+        # if isinstance(base_info, Exception):
+        #     logger.error(f"基础信息查询失败: {base_info}")
+        #     base_info = []
+        if isinstance(talk_style, Exception):
+            logger.error(f"谈话风格查询失败: {talk_style}")
+            talk_style = []
+        if isinstance(knowledge, Exception):
+            logger.error(f"公司信息知识库查询失败: {knowledge}")
+            knowledge = []
+        if isinstance(product, Exception):
+            logger.error(f"产品信息查询失败: {product}")
+            product = []
+        
+        logger.info(f"数据获取完成 - 谈话风格: {len(talk_style) if talk_style else 0} 条, 公司信息知识库: {len(knowledge) if knowledge else 0} 条, 产品信息知识库: {len(product) if product else 0} 条")
+        
+        # 生成角色内容
+        logger.info("正在生成角色内容...")
+        from prompts.prompts import get_one_to_N_prompt_role_prompt, get_one_to_N_sale_flow, get_one_to_N_prohibit, get_one_to_N_opening_remarks
+        role_prompt = await chat_ark(get_one_to_N_prompt_role_prompt(knowledge, product, talk_style))
+        sale_flow = await chat_ark(get_one_to_N_sale_flow(knowledge, product))
+        prohibit = await chat_ernie(get_one_to_N_prohibit(knowledge, product))
+        opening_remarks = await chat_ernie(get_one_to_N_opening_remarks(knowledge, product))
+        role_prompt = role_prompt.strip("```").strip("```json")
+        logger.info(f"role_prompt: {role_prompt}")
+        sale_flow = sale_flow.strip("```").strip("```json")
+        logger.info(f"sale_flow: {sale_flow}")
+        prohibit = prohibit.strip("```").strip("```json")
+        logger.info(f"prohibit: {prohibit}")
+        opening_remarks = opening_remarks.strip("```").strip("```json")
+        content = f"{role_prompt}\n\n{sale_flow}\n\n{prohibit}\n\n{opening_remarks}"
+        logger.info(f"角色内容生成完成，内容长度: {len(content) if content else 0} 字符")
+        #插入销售角色内容
+        insert_sale_prompt(tenant_id, task_id, role_prompt, content, 'system')
+        logger.info(f"插入销售角色内容完成")
+        #插入开场白内容
+        insert_opening_remarks(tenant_id, strategy_id, opening_remarks, 'system')
+        logger.info(f"插入开场白内容完成")
+        # 并发执行禁止事项和销售流程提取
+        from tools.tools import extract_prohibit_items, extract_sale_flow_items
+        logger.info("正在并发提取禁止事项和销售流程...")
+        extract_tasks = [
+            extract_prohibit_items(prohibit),
+            extract_sale_flow_items(sale_flow)
+        ]
+        
+        prohibit, sale_flow = await asyncio.gather(*extract_tasks, return_exceptions=True)
+        
+        # 检查提取结果
+        if isinstance(prohibit, Exception):
+            logger.error(f"禁止事项提取失败: {prohibit}")
+            prohibit = []
+        if isinstance(sale_flow, Exception):
+            logger.error(f"销售流程提取失败: {sale_flow}")
+            sale_flow = []
+        
+        # 发送通知
+        logger.info("正在发送禁止事项和销售流程通知...")
+        try:
+            # prohibit_data = json.loads(prohibit.strip('```').strip('```json')) if isinstance(prohibit, str) else prohibit
+            # sale_flow_data = json.loads(sale_flow.strip('```').strip('```json')) if isinstance(sale_flow, str) else sale_flow
+            logger.info(f"有{len(prohibit)}个禁止事项，禁止事项内容为：{prohibit}")
+            logger.info(f"有{len(sale_flow)}个销售流程，销售流程内容为：{sale_flow}")
+            await send_prohibit_notify(tenant_id, task_id, strategy_id, prohibit, sale_flow, status=2)
+            logger.info("通知发送成功")
+        except Exception as notify_error:
+            logger.error(f"发送通知失败: {str(notify_error)}", exc_info=True)
+            await send_prohibit_notify(tenant_id, task_id, strategy_id, prohibit, sale_flow, status=3)
+            # 通知失败不影响角色创建流程
+        
+        logger.info(f"角色创建完成 - 租户ID: {tenant_id}, 任务ID: {task_id}, 策略ID: {strategy_id}")
+        return content
+        
+    except Exception as e:
+        logger.error(f"角色创建失败 - 租户ID: {tenant_id}, 任务ID: {task_id}, 策略ID: {strategy_id}, 错误: {str(e)}", exc_info=True)
+        raise
+
+async def create_one_to_N_role_background(tenant_id, task_id, strategy_id):
+    """
+    后台执行one_to_N角色创建任务，不返回结果
+    """
+    try:
+        await create_one_to_N_role(tenant_id, task_id, strategy_id)
+        logger.info(f"后台one_to_N角色创建任务完成 - 租户ID: {tenant_id}, 任务ID: {task_id}")
+    except Exception as e:
+        logger.error(f"后台one_to_N角色创建任务失败 - 租户ID: {tenant_id}, 任务ID: {task_id}, 错误: {str(e)}", exc_info=True)
 
 async def create_role_background(tenant_id, task_id, strategy_id):
     """

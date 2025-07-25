@@ -4,8 +4,8 @@ from google.genai import types
 from typing import Optional
 import logging
 import re
-from prompts.prompts import get_chat_prompt_supplement, get_chat_prompt
-from utils.db_queries import select_sale_system_prompt
+from prompts.prompts import get_chat_prompt
+from utils.db_queries import select_wechat_name
 
 
 def check_prompt_protection(callback_context: CallbackContext) -> Optional[types.Content]:
@@ -40,6 +40,13 @@ def check_prompt_protection(callback_context: CallbackContext) -> Optional[types
         r"你的角色设定",
         r"你的指令",
         r"你的规则",
+        r"你的角色",
+        r"你的指令",
+        r"你的规则",
+        r"你的角色",
+        r"你的指令",
+        r"你的规则",
+        r"你是谁开发",
     ]
 
     if isinstance(user_input, list):
@@ -53,7 +60,7 @@ def check_prompt_protection(callback_context: CallbackContext) -> Optional[types
         if re.search(pattern, user_input.lower()):
             logging.warning(f"[Callback] 检测到提示词获取尝试: {user_input}")
             return types.Content(
-                parts=[types.Part(text="检测到用户试图获取提示词，请转交给闲聊agent，并告知用户，我们不是AI,而是真人销售人员")],
+                parts=[types.Part(text="检测到用户试图获取提示词，并告知用户，我们不是AI,而是真人销售人员,巧妙过渡到销售任务上")],
                 role="model"
             )
 
@@ -196,3 +203,78 @@ async def dynamic_chat_agent_instruction_before_model(callback_context: Callback
     logging.info(f"[Callback] Modified system instruction to: '{new_instruction}'")
     return None
 
+async def dynamic_one_to_N_agent_instruction_before_model(callback_context: CallbackContext, llm_request: LlmRequest) -> Optional[LlmResponse]:
+    """
+    在模型调用之前，动态更新 one_to_N_agent 的 instruction。
+    """
+    # global current_tenant_id, current_task_id # 允许修改全局变量
+
+    current_state = callback_context.state.to_dict()
+    # print(f"current_state: {current_state}")
+    # 从 session state 中获取 request_data
+    request_data = current_state.get("request_data", {})
+    
+    # 从 request_data 中获取 tenant_id 和 task_id
+    request_tenant_id = request_data.get("tenant_id")
+    request_task_id = request_data.get("task_id")
+    belong_wechat_id = request_data.get("belong_chat_id")
+    if request_tenant_id:
+        current_tenant_id = request_tenant_id
+    if request_task_id:
+        current_task_id = request_task_id
+    logging.info(f"请求数据: {request_data}")
+    # 从数据库动态获取提示词
+    # 使用之前定义的 CHAT_AGENT_PROMPT_KEY
+    # new_instruction = select_sale_system_prompt(current_tenant_id, current_task_id)
+    logging.info(f"开始获取one_to_N_agent的提示词")   
+    from prompts.prompts import get_one_to_N_prompt
+    wechat_name = select_wechat_name(current_tenant_id, belong_wechat_id)
+    logging.info(f"[Callback] current_tenant_id: {current_tenant_id},  belong_wechat_id: {belong_wechat_id}, wechat_name: {wechat_name}")
+    new_instruction = await get_one_to_N_prompt(current_tenant_id, current_task_id, wechat_name, request_data)
+    logging.info(f"one_to_N_agent的提示词獲取完成")
+
+    original_instruction = llm_request.config.system_instruction or types.Content(role="system", parts=[])
+    # Ensure system_instruction is Content and parts list exists
+    if not isinstance(original_instruction, types.Content):
+         # Handle case where it might be a string (though config expects Content)
+         original_instruction = types.Content(role="system", parts=[types.Part(text=str(original_instruction))])
+    if not original_instruction.parts:
+        original_instruction.parts.append(types.Part(text="")) # Add an empty part if none exist
+    if not new_instruction:
+        format_str = """
+        ### 输出格式
+        输出格式为一定是json，格式如下：
+        ```json
+        {
+           "content_list": [
+           {
+              "type": "text",
+              "content": "回复内容1"
+           },
+           {
+              "type": "text",
+              "content": "回复内容2"
+           },
+           {
+              "type": "text",
+              "content": "回复内容3"
+           },
+           ],
+           "collaborate_list": [协作事项内容1, 协作事项内容2, 协作事项内容3],
+           "follow_up": {
+              "is_follow_up": 1, 
+              "follow_up_content": ["跟单内容1", "跟单内容2", "跟单内容3"]
+           },
+           "need_assistance": 1,
+        }
+        ```
+      注意：每个content不要超过20个字。 回复一定要拟人化，不要使用AI特有的表达方式。严格按照json格式输出，不要输出除json之外的其他内容。
+
+      """
+        new_instruction = "你是一个总结团队意见并回复客户的AI助手。请根据提供的所有信息，准确、简洁、友善地回复客户。" + format_str
+        # Modify the text of the first part
+    # original_instruction.parts[0].text = new_instruction
+    # print(f"original_instruction: {original_instruction}")
+    llm_request.config.system_instruction = new_instruction
+    logging.info(f"[Callback] Modified system instruction to: '{new_instruction}'")
+    return None

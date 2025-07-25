@@ -1,0 +1,1504 @@
+2025-07-11 18:06:03 - asyncio - ERROR - default_exception_handler:1833 - Task was destroyed but it is pending!
+task: <Task pending name='Task-645' coro=<<async_generator_athrow without __name__>()>>
+2025-07-11 18:06:03 - main - ERROR - process_agent_background:168 - 后台处理失败 - user_id: 41, session_id: wxid_h5nwnc84f0di22, error: The last_update_time provided in the session object '2025-07-11 10:05:53' is earlier than the update_time in the storage_session '2025-07-11 10:06:02'. Please check if it is a stale session.
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/main.py", line 111, in process_agent_background
+    agent_response_text = loop.run_until_complete(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 205, in run_async
+    await self.session_service.append_event(session=session, event=event)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/sessions/database_session_service.py", line 533, in append_event
+    raise ValueError(
+ValueError: The last_update_time provided in the session object '2025-07-11 10:05:53' is earlier than the update_time in the storage_session '2025-07-11 10:06:02'. Please check if it is a stale session.
+2025-07-11 19:01:14 - main - ERROR - process_agent_background:168 - 后台处理失败 - user_id: 43, session_id: wxid_h5nwnc84f0di22, error: (pymysql.err.OperationalError) (2013, 'Lost connection to MySQL server during query ([Errno 110] Connection timed out)')
+[SQL: SELECT sessions.app_name AS sessions_app_name, sessions.user_id AS sessions_user_id, sessions.id AS sessions_id, sessions.state AS sessions_state, sessions.create_time AS sessions_create_time, sessions.update_time AS sessions_update_time 
+FROM sessions 
+WHERE sessions.app_name = %(pk_1)s AND sessions.user_id = %(pk_2)s AND sessions.id = %(pk_3)s]
+[parameters: {'pk_1': 'ai_sales_agent', 'pk_2': '43', 'pk_3': 'wxid_h5nwnc84f0di2243'}]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 782, in _read_bytes
+    data = self._rfile.read(num_bytes)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: [Errno 110] Connection timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+                    ^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 788, in _read_bytes
+    raise err.OperationalError(
+pymysql.err.OperationalError: (2013, 'Lost connection to MySQL server during query ([Errno 110] Connection timed out)')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/main.py", line 111, in process_agent_background
+    agent_response_text = loop.run_until_complete(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 113, in call_agent_async
+    session = await runner.session_service.get_session(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/sessions/database_session_service.py", line 432, in get_session
+    storage_session = session_factory.get(
+                      ^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 3694, in get
+    return self._get_impl(
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 3874, in _get_impl
+    return db_load_fn(
+           ^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/orm/loading.py", line 694, in load_on_pk_identity
+    session.execute(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2365, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2251, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/orm/context.py", line 306, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1416, in execute
+    return meth(
+           ^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 523, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1638, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1843, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1983, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2352, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+                    ^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 788, in _read_bytes
+    raise err.OperationalError(
+sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (2013, 'Lost connection to MySQL server during query ([Errno 110] Connection timed out)')
+[SQL: SELECT sessions.app_name AS sessions_app_name, sessions.user_id AS sessions_user_id, sessions.id AS sessions_id, sessions.state AS sessions_state, sessions.create_time AS sessions_create_time, sessions.update_time AS sessions_update_time 
+FROM sessions 
+WHERE sessions.app_name = %(pk_1)s AND sessions.user_id = %(pk_2)s AND sessions.id = %(pk_3)s]
+[parameters: {'pk_1': 'ai_sales_agent', 'pk_2': '43', 'pk_3': 'wxid_h5nwnc84f0di2243'}]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-07-12 16:36:24 - main - ERROR - process_agent_background:168 - 后台处理失败 - user_id: 43, session_id: wxid_h5nwnc84f0di22, error: litellm.BadRequestError: OpenAIException - <400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[100].role
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 790, in acompletion
+    headers, response = await self.make_openai_chat_completion_request(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/logging_utils.py", line 135, in async_wrapper
+    result = await func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 436, in make_openai_chat_completion_request
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 418, in make_openai_chat_completion_request
+    await openai_aclient.chat.completions.with_raw_response.create(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_legacy_response.py", line 381, in wrapped
+    return cast(LegacyAPIResponse[R], await func(*args, **kwargs))
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 2028, in create
+    return await self._post(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1742, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1549, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'error': {'code': 'invalid_parameter_error', 'param': None, 'message': '<400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[100].role', 'type': 'invalid_request_error'}, 'id': 'chatcmpl-e04cd116-a1d3-99c2-b52b-d6fdc3c9578d', 'request_id': 'e04cd116-a1d3-99c2-b52b-d6fdc3c9578d'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/main.py", line 477, in acompletion
+    response = await init_response
+               ^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 837, in acompletion
+    raise OpenAIError(
+litellm.llms.openai.common_utils.OpenAIError: Error code: 400 - {'error': {'code': 'invalid_parameter_error', 'param': None, 'message': '<400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[100].role', 'type': 'invalid_request_error'}, 'id': 'chatcmpl-e04cd116-a1d3-99c2-b52b-d6fdc3c9578d', 'request_id': 'e04cd116-a1d3-99c2-b52b-d6fdc3c9578d'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/main.py", line 111, in process_agent_background
+    agent_response_text = loop.run_until_complete(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 203, in run_async
+    async for event in invocation_context.agent.run_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/sequential_agent.py", line 37, in _run_async_impl
+    async for event in sub_agent.run_async(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/parallel_agent.py", line 105, in _run_async_impl
+    async for event in _merge_agent_run(agent_runs):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/parallel_agent.py", line 71, in _merge_agent_run
+    yield task.result()
+          ^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/llm_agent.py", line 275, in _run_async_impl
+    async for event in self._llm_flow.run_async(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 282, in run_async
+    async for event in self._run_one_step_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 314, in _run_one_step_async
+    async for llm_response in self._call_llm_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 539, in _call_llm_async
+    async for llm_response in llm.generate_content_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/models/lite_llm.py", line 778, in generate_content_async
+    response = await self.llm_client.acompletion(**completion_args)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/models/lite_llm.py", line 101, in acompletion
+    return await acompletion(
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/utils.py", line 1460, in wrapper_async
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/utils.py", line 1321, in wrapper_async
+    result = await original_function(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/main.py", line 496, in acompletion
+    raise exception_type(
+          ^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py", line 2214, in exception_type
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py", line 328, in exception_type
+    raise BadRequestError(
+litellm.exceptions.BadRequestError: litellm.BadRequestError: OpenAIException - <400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[100].role
+2025-07-12 16:38:41 - main - ERROR - process_agent_background:168 - 后台处理失败 - user_id: 43, session_id: wxid_h5nwnc84f0di22, error: litellm.BadRequestError: OpenAIException - <400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[100].role
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 790, in acompletion
+    headers, response = await self.make_openai_chat_completion_request(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/logging_utils.py", line 135, in async_wrapper
+    result = await func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 436, in make_openai_chat_completion_request
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 418, in make_openai_chat_completion_request
+    await openai_aclient.chat.completions.with_raw_response.create(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_legacy_response.py", line 381, in wrapped
+    return cast(LegacyAPIResponse[R], await func(*args, **kwargs))
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 2028, in create
+    return await self._post(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1742, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1549, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'error': {'code': 'invalid_parameter_error', 'param': None, 'message': '<400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[100].role', 'type': 'invalid_request_error'}, 'id': 'chatcmpl-90ecdd74-0bba-90b0-a89b-7d64efd9afe8', 'request_id': '90ecdd74-0bba-90b0-a89b-7d64efd9afe8'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/main.py", line 477, in acompletion
+    response = await init_response
+               ^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 837, in acompletion
+    raise OpenAIError(
+litellm.llms.openai.common_utils.OpenAIError: Error code: 400 - {'error': {'code': 'invalid_parameter_error', 'param': None, 'message': '<400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[100].role', 'type': 'invalid_request_error'}, 'id': 'chatcmpl-90ecdd74-0bba-90b0-a89b-7d64efd9afe8', 'request_id': '90ecdd74-0bba-90b0-a89b-7d64efd9afe8'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/main.py", line 111, in process_agent_background
+    agent_response_text = loop.run_until_complete(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 203, in run_async
+    async for event in invocation_context.agent.run_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/sequential_agent.py", line 37, in _run_async_impl
+    async for event in sub_agent.run_async(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/parallel_agent.py", line 105, in _run_async_impl
+    async for event in _merge_agent_run(agent_runs):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/parallel_agent.py", line 71, in _merge_agent_run
+    yield task.result()
+          ^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/llm_agent.py", line 275, in _run_async_impl
+    async for event in self._llm_flow.run_async(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 282, in run_async
+    async for event in self._run_one_step_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 314, in _run_one_step_async
+    async for llm_response in self._call_llm_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 539, in _call_llm_async
+    async for llm_response in llm.generate_content_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/models/lite_llm.py", line 778, in generate_content_async
+    response = await self.llm_client.acompletion(**completion_args)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/models/lite_llm.py", line 101, in acompletion
+    return await acompletion(
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/utils.py", line 1460, in wrapper_async
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/utils.py", line 1321, in wrapper_async
+    result = await original_function(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/main.py", line 496, in acompletion
+    raise exception_type(
+          ^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py", line 2214, in exception_type
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py", line 328, in exception_type
+    raise BadRequestError(
+litellm.exceptions.BadRequestError: litellm.BadRequestError: OpenAIException - <400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[100].role
+2025-07-12 16:38:50 - main - ERROR - process_agent_background:168 - 后台处理失败 - user_id: 43, session_id: wxid_h5nwnc84f0di22, error: litellm.BadRequestError: OpenAIException - <400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[100].role
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 790, in acompletion
+    headers, response = await self.make_openai_chat_completion_request(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/logging_utils.py", line 135, in async_wrapper
+    result = await func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 436, in make_openai_chat_completion_request
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 418, in make_openai_chat_completion_request
+    await openai_aclient.chat.completions.with_raw_response.create(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_legacy_response.py", line 381, in wrapped
+    return cast(LegacyAPIResponse[R], await func(*args, **kwargs))
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 2028, in create
+    return await self._post(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1742, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1549, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'error': {'code': 'invalid_parameter_error', 'param': None, 'message': '<400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[100].role', 'type': 'invalid_request_error'}, 'id': 'chatcmpl-34204fc2-e8e3-975f-8a12-fdece1e14460', 'request_id': '34204fc2-e8e3-975f-8a12-fdece1e14460'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/main.py", line 477, in acompletion
+    response = await init_response
+               ^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 837, in acompletion
+    raise OpenAIError(
+litellm.llms.openai.common_utils.OpenAIError: Error code: 400 - {'error': {'code': 'invalid_parameter_error', 'param': None, 'message': '<400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[100].role', 'type': 'invalid_request_error'}, 'id': 'chatcmpl-34204fc2-e8e3-975f-8a12-fdece1e14460', 'request_id': '34204fc2-e8e3-975f-8a12-fdece1e14460'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/main.py", line 111, in process_agent_background
+    agent_response_text = loop.run_until_complete(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 203, in run_async
+    async for event in invocation_context.agent.run_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/sequential_agent.py", line 37, in _run_async_impl
+    async for event in sub_agent.run_async(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/parallel_agent.py", line 105, in _run_async_impl
+    async for event in _merge_agent_run(agent_runs):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/parallel_agent.py", line 71, in _merge_agent_run
+    yield task.result()
+          ^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/llm_agent.py", line 275, in _run_async_impl
+    async for event in self._llm_flow.run_async(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 282, in run_async
+    async for event in self._run_one_step_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 314, in _run_one_step_async
+    async for llm_response in self._call_llm_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 539, in _call_llm_async
+    async for llm_response in llm.generate_content_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/models/lite_llm.py", line 778, in generate_content_async
+    response = await self.llm_client.acompletion(**completion_args)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/models/lite_llm.py", line 101, in acompletion
+    return await acompletion(
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/utils.py", line 1460, in wrapper_async
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/utils.py", line 1321, in wrapper_async
+    result = await original_function(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/main.py", line 496, in acompletion
+    raise exception_type(
+          ^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py", line 2214, in exception_type
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py", line 328, in exception_type
+    raise BadRequestError(
+litellm.exceptions.BadRequestError: litellm.BadRequestError: OpenAIException - <400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[100].role
+2025-07-12 16:38:57 - main - ERROR - process_agent_background:168 - 后台处理失败 - user_id: 43, session_id: wxid_h5nwnc84f0di22, error: litellm.BadRequestError: OpenAIException - <400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[100].role
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 790, in acompletion
+    headers, response = await self.make_openai_chat_completion_request(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/logging_utils.py", line 135, in async_wrapper
+    result = await func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 436, in make_openai_chat_completion_request
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 418, in make_openai_chat_completion_request
+    await openai_aclient.chat.completions.with_raw_response.create(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_legacy_response.py", line 381, in wrapped
+    return cast(LegacyAPIResponse[R], await func(*args, **kwargs))
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 2028, in create
+    return await self._post(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1742, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1549, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'error': {'code': 'invalid_parameter_error', 'param': None, 'message': '<400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[100].role', 'type': 'invalid_request_error'}, 'id': 'chatcmpl-3d8fba75-1693-903d-ab97-6658ad22bed3', 'request_id': '3d8fba75-1693-903d-ab97-6658ad22bed3'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/main.py", line 477, in acompletion
+    response = await init_response
+               ^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 837, in acompletion
+    raise OpenAIError(
+litellm.llms.openai.common_utils.OpenAIError: Error code: 400 - {'error': {'code': 'invalid_parameter_error', 'param': None, 'message': '<400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[100].role', 'type': 'invalid_request_error'}, 'id': 'chatcmpl-3d8fba75-1693-903d-ab97-6658ad22bed3', 'request_id': '3d8fba75-1693-903d-ab97-6658ad22bed3'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/main.py", line 111, in process_agent_background
+    agent_response_text = loop.run_until_complete(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 203, in run_async
+    async for event in invocation_context.agent.run_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/sequential_agent.py", line 37, in _run_async_impl
+    async for event in sub_agent.run_async(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/parallel_agent.py", line 105, in _run_async_impl
+    async for event in _merge_agent_run(agent_runs):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/parallel_agent.py", line 71, in _merge_agent_run
+    yield task.result()
+          ^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/llm_agent.py", line 275, in _run_async_impl
+    async for event in self._llm_flow.run_async(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 282, in run_async
+    async for event in self._run_one_step_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 314, in _run_one_step_async
+    async for llm_response in self._call_llm_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 539, in _call_llm_async
+    async for llm_response in llm.generate_content_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/models/lite_llm.py", line 778, in generate_content_async
+    response = await self.llm_client.acompletion(**completion_args)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/models/lite_llm.py", line 101, in acompletion
+    return await acompletion(
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/utils.py", line 1460, in wrapper_async
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/utils.py", line 1321, in wrapper_async
+    result = await original_function(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/main.py", line 496, in acompletion
+    raise exception_type(
+          ^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py", line 2214, in exception_type
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py", line 328, in exception_type
+    raise BadRequestError(
+litellm.exceptions.BadRequestError: litellm.BadRequestError: OpenAIException - <400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[100].role
+2025-07-12 16:42:07 - main - ERROR - process_agent_background:168 - 后台处理失败 - user_id: 43, session_id: wxid_h5nwnc84f0di22, error: litellm.BadRequestError: OpenAIException - <400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[100].role
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 790, in acompletion
+    headers, response = await self.make_openai_chat_completion_request(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/logging_utils.py", line 135, in async_wrapper
+    result = await func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 436, in make_openai_chat_completion_request
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 418, in make_openai_chat_completion_request
+    await openai_aclient.chat.completions.with_raw_response.create(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_legacy_response.py", line 381, in wrapped
+    return cast(LegacyAPIResponse[R], await func(*args, **kwargs))
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 2028, in create
+    return await self._post(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1742, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1549, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'error': {'code': 'invalid_parameter_error', 'param': None, 'message': '<400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[100].role', 'type': 'invalid_request_error'}, 'id': 'chatcmpl-3b037c62-69fe-9b30-97b8-591ab555c576', 'request_id': '3b037c62-69fe-9b30-97b8-591ab555c576'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/main.py", line 477, in acompletion
+    response = await init_response
+               ^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 837, in acompletion
+    raise OpenAIError(
+litellm.llms.openai.common_utils.OpenAIError: Error code: 400 - {'error': {'code': 'invalid_parameter_error', 'param': None, 'message': '<400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[100].role', 'type': 'invalid_request_error'}, 'id': 'chatcmpl-3b037c62-69fe-9b30-97b8-591ab555c576', 'request_id': '3b037c62-69fe-9b30-97b8-591ab555c576'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/main.py", line 111, in process_agent_background
+    agent_response_text = loop.run_until_complete(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 203, in run_async
+    async for event in invocation_context.agent.run_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/sequential_agent.py", line 37, in _run_async_impl
+    async for event in sub_agent.run_async(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/parallel_agent.py", line 105, in _run_async_impl
+    async for event in _merge_agent_run(agent_runs):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/parallel_agent.py", line 71, in _merge_agent_run
+    yield task.result()
+          ^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/llm_agent.py", line 275, in _run_async_impl
+    async for event in self._llm_flow.run_async(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 282, in run_async
+    async for event in self._run_one_step_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 314, in _run_one_step_async
+    async for llm_response in self._call_llm_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 539, in _call_llm_async
+    async for llm_response in llm.generate_content_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/models/lite_llm.py", line 778, in generate_content_async
+    response = await self.llm_client.acompletion(**completion_args)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/models/lite_llm.py", line 101, in acompletion
+    return await acompletion(
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/utils.py", line 1460, in wrapper_async
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/utils.py", line 1321, in wrapper_async
+    result = await original_function(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/main.py", line 496, in acompletion
+    raise exception_type(
+          ^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py", line 2214, in exception_type
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py", line 328, in exception_type
+    raise BadRequestError(
+litellm.exceptions.BadRequestError: litellm.BadRequestError: OpenAIException - <400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[100].role
+2025-07-12 16:42:26 - main - ERROR - process_agent_background:168 - 后台处理失败 - user_id: 43, session_id: wxid_h5nwnc84f0di22, error: litellm.BadRequestError: OpenAIException - <400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[100].role
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 790, in acompletion
+    headers, response = await self.make_openai_chat_completion_request(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/logging_utils.py", line 135, in async_wrapper
+    result = await func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 436, in make_openai_chat_completion_request
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 418, in make_openai_chat_completion_request
+    await openai_aclient.chat.completions.with_raw_response.create(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_legacy_response.py", line 381, in wrapped
+    return cast(LegacyAPIResponse[R], await func(*args, **kwargs))
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 2028, in create
+    return await self._post(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1742, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1549, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'error': {'code': 'invalid_parameter_error', 'param': None, 'message': '<400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[100].role', 'type': 'invalid_request_error'}, 'id': 'chatcmpl-0e7c4d20-f0fb-95c0-a933-0939d387386e', 'request_id': '0e7c4d20-f0fb-95c0-a933-0939d387386e'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/main.py", line 477, in acompletion
+    response = await init_response
+               ^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 837, in acompletion
+    raise OpenAIError(
+litellm.llms.openai.common_utils.OpenAIError: Error code: 400 - {'error': {'code': 'invalid_parameter_error', 'param': None, 'message': '<400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[100].role', 'type': 'invalid_request_error'}, 'id': 'chatcmpl-0e7c4d20-f0fb-95c0-a933-0939d387386e', 'request_id': '0e7c4d20-f0fb-95c0-a933-0939d387386e'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/main.py", line 111, in process_agent_background
+    agent_response_text = loop.run_until_complete(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 203, in run_async
+    async for event in invocation_context.agent.run_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/sequential_agent.py", line 37, in _run_async_impl
+    async for event in sub_agent.run_async(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/parallel_agent.py", line 105, in _run_async_impl
+    async for event in _merge_agent_run(agent_runs):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/parallel_agent.py", line 71, in _merge_agent_run
+    yield task.result()
+          ^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/llm_agent.py", line 275, in _run_async_impl
+    async for event in self._llm_flow.run_async(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 282, in run_async
+    async for event in self._run_one_step_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 314, in _run_one_step_async
+    async for llm_response in self._call_llm_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 539, in _call_llm_async
+    async for llm_response in llm.generate_content_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/models/lite_llm.py", line 778, in generate_content_async
+    response = await self.llm_client.acompletion(**completion_args)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/models/lite_llm.py", line 101, in acompletion
+    return await acompletion(
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/utils.py", line 1460, in wrapper_async
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/utils.py", line 1321, in wrapper_async
+    result = await original_function(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/main.py", line 496, in acompletion
+    raise exception_type(
+          ^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py", line 2214, in exception_type
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py", line 328, in exception_type
+    raise BadRequestError(
+litellm.exceptions.BadRequestError: litellm.BadRequestError: OpenAIException - <400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[100].role
+2025-07-12 16:44:06 - main - ERROR - process_agent_background:168 - 后台处理失败 - user_id: 43, session_id: wxid_h5nwnc84f0di22, error: (pymysql.err.OperationalError) (2013, 'Lost connection to MySQL server during query ([Errno 110] Connection timed out)')
+[SQL: SELECT sessions.app_name AS sessions_app_name, sessions.user_id AS sessions_user_id, sessions.id AS sessions_id, sessions.state AS sessions_state, sessions.create_time AS sessions_create_time, sessions.update_time AS sessions_update_time 
+FROM sessions 
+WHERE sessions.app_name = %(pk_1)s AND sessions.user_id = %(pk_2)s AND sessions.id = %(pk_3)s]
+[parameters: {'pk_1': 'ai_sales_agent', 'pk_2': '43', 'pk_3': 'wxid_h5nwnc84f0di2243'}]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 782, in _read_bytes
+    data = self._rfile.read(num_bytes)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: [Errno 110] Connection timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+                    ^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 788, in _read_bytes
+    raise err.OperationalError(
+pymysql.err.OperationalError: (2013, 'Lost connection to MySQL server during query ([Errno 110] Connection timed out)')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/main.py", line 111, in process_agent_background
+    agent_response_text = loop.run_until_complete(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 113, in call_agent_async
+    session = await runner.session_service.get_session(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/sessions/database_session_service.py", line 432, in get_session
+    storage_session = session_factory.get(
+                      ^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 3694, in get
+    return self._get_impl(
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 3874, in _get_impl
+    return db_load_fn(
+           ^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/orm/loading.py", line 694, in load_on_pk_identity
+    session.execute(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2365, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2251, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/orm/context.py", line 306, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1416, in execute
+    return meth(
+           ^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 523, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1638, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1843, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1983, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2352, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+                    ^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 788, in _read_bytes
+    raise err.OperationalError(
+sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (2013, 'Lost connection to MySQL server during query ([Errno 110] Connection timed out)')
+[SQL: SELECT sessions.app_name AS sessions_app_name, sessions.user_id AS sessions_user_id, sessions.id AS sessions_id, sessions.state AS sessions_state, sessions.create_time AS sessions_create_time, sessions.update_time AS sessions_update_time 
+FROM sessions 
+WHERE sessions.app_name = %(pk_1)s AND sessions.user_id = %(pk_2)s AND sessions.id = %(pk_3)s]
+[parameters: {'pk_1': 'ai_sales_agent', 'pk_2': '43', 'pk_3': 'wxid_h5nwnc84f0di2243'}]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-07-12 16:46:03 - main - ERROR - process_agent_background:168 - 后台处理失败 - user_id: 43, session_id: wxid_h5nwnc84f0di22, error: (pymysql.err.OperationalError) (2013, 'Lost connection to MySQL server during query ([Errno 110] Connection timed out)')
+[SQL: SELECT sessions.app_name AS sessions_app_name, sessions.user_id AS sessions_user_id, sessions.id AS sessions_id, sessions.state AS sessions_state, sessions.create_time AS sessions_create_time, sessions.update_time AS sessions_update_time 
+FROM sessions 
+WHERE sessions.app_name = %(pk_1)s AND sessions.user_id = %(pk_2)s AND sessions.id = %(pk_3)s]
+[parameters: {'pk_1': 'ai_sales_agent', 'pk_2': '43', 'pk_3': 'wxid_h5nwnc84f0di2243'}]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 782, in _read_bytes
+    data = self._rfile.read(num_bytes)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: [Errno 110] Connection timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+                    ^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 788, in _read_bytes
+    raise err.OperationalError(
+pymysql.err.OperationalError: (2013, 'Lost connection to MySQL server during query ([Errno 110] Connection timed out)')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/main.py", line 111, in process_agent_background
+    agent_response_text = loop.run_until_complete(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 113, in call_agent_async
+    session = await runner.session_service.get_session(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/sessions/database_session_service.py", line 432, in get_session
+    storage_session = session_factory.get(
+                      ^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 3694, in get
+    return self._get_impl(
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 3874, in _get_impl
+    return db_load_fn(
+           ^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/orm/loading.py", line 694, in load_on_pk_identity
+    session.execute(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2365, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2251, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/orm/context.py", line 306, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1416, in execute
+    return meth(
+           ^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 523, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1638, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1843, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1983, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2352, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+                    ^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 788, in _read_bytes
+    raise err.OperationalError(
+sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (2013, 'Lost connection to MySQL server during query ([Errno 110] Connection timed out)')
+[SQL: SELECT sessions.app_name AS sessions_app_name, sessions.user_id AS sessions_user_id, sessions.id AS sessions_id, sessions.state AS sessions_state, sessions.create_time AS sessions_create_time, sessions.update_time AS sessions_update_time 
+FROM sessions 
+WHERE sessions.app_name = %(pk_1)s AND sessions.user_id = %(pk_2)s AND sessions.id = %(pk_3)s]
+[parameters: {'pk_1': 'ai_sales_agent', 'pk_2': '43', 'pk_3': 'wxid_h5nwnc84f0di2243'}]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-07-12 16:49:53 - main - ERROR - process_agent_background:168 - 后台处理失败 - user_id: 43, session_id: wxid_h5nwnc84f0di22, error: litellm.BadRequestError: OpenAIException - <400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[100].role
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 790, in acompletion
+    headers, response = await self.make_openai_chat_completion_request(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/logging_utils.py", line 135, in async_wrapper
+    result = await func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 436, in make_openai_chat_completion_request
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 418, in make_openai_chat_completion_request
+    await openai_aclient.chat.completions.with_raw_response.create(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_legacy_response.py", line 381, in wrapped
+    return cast(LegacyAPIResponse[R], await func(*args, **kwargs))
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 2028, in create
+    return await self._post(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1742, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1549, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'error': {'code': 'invalid_parameter_error', 'param': None, 'message': '<400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[100].role', 'type': 'invalid_request_error'}, 'id': 'chatcmpl-8469fe9a-d32f-9893-9c16-e18a91a25f2e', 'request_id': '8469fe9a-d32f-9893-9c16-e18a91a25f2e'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/main.py", line 477, in acompletion
+    response = await init_response
+               ^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 837, in acompletion
+    raise OpenAIError(
+litellm.llms.openai.common_utils.OpenAIError: Error code: 400 - {'error': {'code': 'invalid_parameter_error', 'param': None, 'message': '<400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[100].role', 'type': 'invalid_request_error'}, 'id': 'chatcmpl-8469fe9a-d32f-9893-9c16-e18a91a25f2e', 'request_id': '8469fe9a-d32f-9893-9c16-e18a91a25f2e'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/main.py", line 111, in process_agent_background
+    agent_response_text = loop.run_until_complete(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 203, in run_async
+    async for event in invocation_context.agent.run_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/sequential_agent.py", line 37, in _run_async_impl
+    async for event in sub_agent.run_async(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/parallel_agent.py", line 105, in _run_async_impl
+    async for event in _merge_agent_run(agent_runs):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/parallel_agent.py", line 71, in _merge_agent_run
+    yield task.result()
+          ^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/llm_agent.py", line 275, in _run_async_impl
+    async for event in self._llm_flow.run_async(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 282, in run_async
+    async for event in self._run_one_step_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 314, in _run_one_step_async
+    async for llm_response in self._call_llm_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 539, in _call_llm_async
+    async for llm_response in llm.generate_content_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/models/lite_llm.py", line 778, in generate_content_async
+    response = await self.llm_client.acompletion(**completion_args)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/models/lite_llm.py", line 101, in acompletion
+    return await acompletion(
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/utils.py", line 1460, in wrapper_async
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/utils.py", line 1321, in wrapper_async
+    result = await original_function(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/main.py", line 496, in acompletion
+    raise exception_type(
+          ^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py", line 2214, in exception_type
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py", line 328, in exception_type
+    raise BadRequestError(
+litellm.exceptions.BadRequestError: litellm.BadRequestError: OpenAIException - <400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[100].role
+2025-07-12 16:51:15 - asyncio - ERROR - default_exception_handler:1833 - Task was destroyed but it is pending!
+task: <Task pending name='Task-1755' coro=<<async_generator_athrow without __name__>()>>
+2025-07-12 16:51:15 - main - ERROR - process_agent_background:168 - 后台处理失败 - user_id: 43, session_id: wxid_h5nwnc84f0di22, error: The last_update_time provided in the session object '2025-07-12 08:34:58' is earlier than the update_time in the storage_session '2025-07-12 08:49:47'. Please check if it is a stale session.
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/main.py", line 111, in process_agent_background
+    agent_response_text = loop.run_until_complete(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 205, in run_async
+    await self.session_service.append_event(session=session, event=event)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/sessions/database_session_service.py", line 533, in append_event
+    raise ValueError(
+ValueError: The last_update_time provided in the session object '2025-07-12 08:34:58' is earlier than the update_time in the storage_session '2025-07-12 08:49:47'. Please check if it is a stale session.
+2025-07-12 17:07:17 - main - ERROR - process_agent_background:168 - 后台处理失败 - user_id: 43, session_id: wxid_h5nwnc84f0di22, error: litellm.BadRequestError: OpenAIException - <400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[100].role
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 790, in acompletion
+    headers, response = await self.make_openai_chat_completion_request(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/logging_utils.py", line 135, in async_wrapper
+    result = await func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 436, in make_openai_chat_completion_request
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 418, in make_openai_chat_completion_request
+    await openai_aclient.chat.completions.with_raw_response.create(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_legacy_response.py", line 381, in wrapped
+    return cast(LegacyAPIResponse[R], await func(*args, **kwargs))
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 2028, in create
+    return await self._post(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1742, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1549, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'error': {'code': 'invalid_parameter_error', 'param': None, 'message': '<400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[100].role', 'type': 'invalid_request_error'}, 'id': 'chatcmpl-173cf4ec-544e-9b65-8cb9-10950a72158f', 'request_id': '173cf4ec-544e-9b65-8cb9-10950a72158f'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/main.py", line 477, in acompletion
+    response = await init_response
+               ^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 837, in acompletion
+    raise OpenAIError(
+litellm.llms.openai.common_utils.OpenAIError: Error code: 400 - {'error': {'code': 'invalid_parameter_error', 'param': None, 'message': '<400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[100].role', 'type': 'invalid_request_error'}, 'id': 'chatcmpl-173cf4ec-544e-9b65-8cb9-10950a72158f', 'request_id': '173cf4ec-544e-9b65-8cb9-10950a72158f'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/main.py", line 111, in process_agent_background
+    agent_response_text = loop.run_until_complete(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 203, in run_async
+    async for event in invocation_context.agent.run_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/sequential_agent.py", line 37, in _run_async_impl
+    async for event in sub_agent.run_async(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/parallel_agent.py", line 105, in _run_async_impl
+    async for event in _merge_agent_run(agent_runs):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/parallel_agent.py", line 71, in _merge_agent_run
+    yield task.result()
+          ^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/llm_agent.py", line 275, in _run_async_impl
+    async for event in self._llm_flow.run_async(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 282, in run_async
+    async for event in self._run_one_step_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 314, in _run_one_step_async
+    async for llm_response in self._call_llm_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 539, in _call_llm_async
+    async for llm_response in llm.generate_content_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/models/lite_llm.py", line 778, in generate_content_async
+    response = await self.llm_client.acompletion(**completion_args)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/models/lite_llm.py", line 101, in acompletion
+    return await acompletion(
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/utils.py", line 1460, in wrapper_async
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/utils.py", line 1321, in wrapper_async
+    result = await original_function(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/main.py", line 496, in acompletion
+    raise exception_type(
+          ^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py", line 2214, in exception_type
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py", line 328, in exception_type
+    raise BadRequestError(
+litellm.exceptions.BadRequestError: litellm.BadRequestError: OpenAIException - <400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[100].role
+2025-07-12 17:07:24 - main - ERROR - process_agent_background:168 - 后台处理失败 - user_id: 43, session_id: wxid_h5nwnc84f0di22, error: litellm.BadRequestError: OpenAIException - <400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[100].role
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 790, in acompletion
+    headers, response = await self.make_openai_chat_completion_request(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/logging_utils.py", line 135, in async_wrapper
+    result = await func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 436, in make_openai_chat_completion_request
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 418, in make_openai_chat_completion_request
+    await openai_aclient.chat.completions.with_raw_response.create(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_legacy_response.py", line 381, in wrapped
+    return cast(LegacyAPIResponse[R], await func(*args, **kwargs))
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 2028, in create
+    return await self._post(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1742, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1549, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'error': {'code': 'invalid_parameter_error', 'param': None, 'message': '<400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[100].role', 'type': 'invalid_request_error'}, 'id': 'chatcmpl-58009a69-9b03-9d09-a284-b021d7a9f2e0', 'request_id': '58009a69-9b03-9d09-a284-b021d7a9f2e0'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/main.py", line 477, in acompletion
+    response = await init_response
+               ^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 837, in acompletion
+    raise OpenAIError(
+litellm.llms.openai.common_utils.OpenAIError: Error code: 400 - {'error': {'code': 'invalid_parameter_error', 'param': None, 'message': '<400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[100].role', 'type': 'invalid_request_error'}, 'id': 'chatcmpl-58009a69-9b03-9d09-a284-b021d7a9f2e0', 'request_id': '58009a69-9b03-9d09-a284-b021d7a9f2e0'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/main.py", line 111, in process_agent_background
+    agent_response_text = loop.run_until_complete(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 203, in run_async
+    async for event in invocation_context.agent.run_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/sequential_agent.py", line 37, in _run_async_impl
+    async for event in sub_agent.run_async(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/parallel_agent.py", line 105, in _run_async_impl
+    async for event in _merge_agent_run(agent_runs):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/parallel_agent.py", line 71, in _merge_agent_run
+    yield task.result()
+          ^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/llm_agent.py", line 275, in _run_async_impl
+    async for event in self._llm_flow.run_async(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 282, in run_async
+    async for event in self._run_one_step_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 314, in _run_one_step_async
+    async for llm_response in self._call_llm_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 539, in _call_llm_async
+    async for llm_response in llm.generate_content_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/models/lite_llm.py", line 778, in generate_content_async
+    response = await self.llm_client.acompletion(**completion_args)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/models/lite_llm.py", line 101, in acompletion
+    return await acompletion(
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/utils.py", line 1460, in wrapper_async
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/utils.py", line 1321, in wrapper_async
+    result = await original_function(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/main.py", line 496, in acompletion
+    raise exception_type(
+          ^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py", line 2214, in exception_type
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py", line 328, in exception_type
+    raise BadRequestError(
+litellm.exceptions.BadRequestError: litellm.BadRequestError: OpenAIException - <400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[100].role
+2025-07-12 17:15:06 - main - ERROR - process_agent_background:168 - 后台处理失败 - user_id: 43, session_id: wxid_h5nwnc84f0di22, error: litellm.BadRequestError: OpenAIException - <400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[100].role
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 790, in acompletion
+    headers, response = await self.make_openai_chat_completion_request(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/logging_utils.py", line 135, in async_wrapper
+    result = await func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 436, in make_openai_chat_completion_request
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 418, in make_openai_chat_completion_request
+    await openai_aclient.chat.completions.with_raw_response.create(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_legacy_response.py", line 381, in wrapped
+    return cast(LegacyAPIResponse[R], await func(*args, **kwargs))
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 2028, in create
+    return await self._post(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1742, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1549, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'error': {'code': 'invalid_parameter_error', 'param': None, 'message': '<400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[100].role', 'type': 'invalid_request_error'}, 'id': 'chatcmpl-341f20ba-0f5d-987c-9f2c-323f78b225cd', 'request_id': '341f20ba-0f5d-987c-9f2c-323f78b225cd'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/main.py", line 477, in acompletion
+    response = await init_response
+               ^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 837, in acompletion
+    raise OpenAIError(
+litellm.llms.openai.common_utils.OpenAIError: Error code: 400 - {'error': {'code': 'invalid_parameter_error', 'param': None, 'message': '<400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[100].role', 'type': 'invalid_request_error'}, 'id': 'chatcmpl-341f20ba-0f5d-987c-9f2c-323f78b225cd', 'request_id': '341f20ba-0f5d-987c-9f2c-323f78b225cd'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/main.py", line 111, in process_agent_background
+    agent_response_text = loop.run_until_complete(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 203, in run_async
+    async for event in invocation_context.agent.run_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/sequential_agent.py", line 37, in _run_async_impl
+    async for event in sub_agent.run_async(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/parallel_agent.py", line 105, in _run_async_impl
+    async for event in _merge_agent_run(agent_runs):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/parallel_agent.py", line 71, in _merge_agent_run
+    yield task.result()
+          ^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/llm_agent.py", line 275, in _run_async_impl
+    async for event in self._llm_flow.run_async(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 282, in run_async
+    async for event in self._run_one_step_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 314, in _run_one_step_async
+    async for llm_response in self._call_llm_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 539, in _call_llm_async
+    async for llm_response in llm.generate_content_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/models/lite_llm.py", line 778, in generate_content_async
+    response = await self.llm_client.acompletion(**completion_args)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/models/lite_llm.py", line 101, in acompletion
+    return await acompletion(
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/utils.py", line 1460, in wrapper_async
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/utils.py", line 1321, in wrapper_async
+    result = await original_function(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/main.py", line 496, in acompletion
+    raise exception_type(
+          ^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py", line 2214, in exception_type
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py", line 328, in exception_type
+    raise BadRequestError(
+litellm.exceptions.BadRequestError: litellm.BadRequestError: OpenAIException - <400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[100].role
+2025-07-12 21:08:47 - main - ERROR - process_agent_background:168 - 后台处理失败 - user_id: 43, session_id: wxid_uhh201cz26s422, error: (pymysql.err.OperationalError) (2013, 'Lost connection to MySQL server during query ([Errno 110] Connection timed out)')
+[SQL: SELECT sessions.app_name AS sessions_app_name, sessions.user_id AS sessions_user_id, sessions.id AS sessions_id, sessions.state AS sessions_state, sessions.create_time AS sessions_create_time, sessions.update_time AS sessions_update_time 
+FROM sessions 
+WHERE sessions.app_name = %(pk_1)s AND sessions.user_id = %(pk_2)s AND sessions.id = %(pk_3)s]
+[parameters: {'pk_1': 'ai_sales_agent', 'pk_2': '43', 'pk_3': 'wxid_uhh201cz26s42243'}]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 782, in _read_bytes
+    data = self._rfile.read(num_bytes)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: [Errno 110] Connection timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+                    ^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 788, in _read_bytes
+    raise err.OperationalError(
+pymysql.err.OperationalError: (2013, 'Lost connection to MySQL server during query ([Errno 110] Connection timed out)')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/main.py", line 111, in process_agent_background
+    agent_response_text = loop.run_until_complete(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 113, in call_agent_async
+    session = await runner.session_service.get_session(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/sessions/database_session_service.py", line 432, in get_session
+    storage_session = session_factory.get(
+                      ^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 3694, in get
+    return self._get_impl(
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 3874, in _get_impl
+    return db_load_fn(
+           ^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/orm/loading.py", line 694, in load_on_pk_identity
+    session.execute(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2365, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2251, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/orm/context.py", line 306, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1416, in execute
+    return meth(
+           ^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 523, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1638, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1843, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1983, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2352, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+                    ^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 788, in _read_bytes
+    raise err.OperationalError(
+sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (2013, 'Lost connection to MySQL server during query ([Errno 110] Connection timed out)')
+[SQL: SELECT sessions.app_name AS sessions_app_name, sessions.user_id AS sessions_user_id, sessions.id AS sessions_id, sessions.state AS sessions_state, sessions.create_time AS sessions_create_time, sessions.update_time AS sessions_update_time 
+FROM sessions 
+WHERE sessions.app_name = %(pk_1)s AND sessions.user_id = %(pk_2)s AND sessions.id = %(pk_3)s]
+[parameters: {'pk_1': 'ai_sales_agent', 'pk_2': '43', 'pk_3': 'wxid_uhh201cz26s42243'}]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-07-12 21:09:50 - main - ERROR - process_agent_background:168 - 后台处理失败 - user_id: 43, session_id: wxid_upoci5aw8eya22, error: (pymysql.err.OperationalError) (2013, 'Lost connection to MySQL server during query ([Errno 110] Connection timed out)')
+[SQL: SELECT sessions.app_name AS sessions_app_name, sessions.user_id AS sessions_user_id, sessions.id AS sessions_id, sessions.state AS sessions_state, sessions.create_time AS sessions_create_time, sessions.update_time AS sessions_update_time 
+FROM sessions 
+WHERE sessions.app_name = %(pk_1)s AND sessions.user_id = %(pk_2)s AND sessions.id = %(pk_3)s]
+[parameters: {'pk_1': 'ai_sales_agent', 'pk_2': '43', 'pk_3': 'wxid_upoci5aw8eya2243'}]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 782, in _read_bytes
+    data = self._rfile.read(num_bytes)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: [Errno 110] Connection timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+                    ^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 788, in _read_bytes
+    raise err.OperationalError(
+pymysql.err.OperationalError: (2013, 'Lost connection to MySQL server during query ([Errno 110] Connection timed out)')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/main.py", line 111, in process_agent_background
+    agent_response_text = loop.run_until_complete(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 113, in call_agent_async
+    session = await runner.session_service.get_session(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/sessions/database_session_service.py", line 432, in get_session
+    storage_session = session_factory.get(
+                      ^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 3694, in get
+    return self._get_impl(
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 3874, in _get_impl
+    return db_load_fn(
+           ^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/orm/loading.py", line 694, in load_on_pk_identity
+    session.execute(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2365, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2251, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/orm/context.py", line 306, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1416, in execute
+    return meth(
+           ^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 523, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1638, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1843, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1983, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2352, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+                    ^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/pymysql/connections.py", line 788, in _read_bytes
+    raise err.OperationalError(
+sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (2013, 'Lost connection to MySQL server during query ([Errno 110] Connection timed out)')
+[SQL: SELECT sessions.app_name AS sessions_app_name, sessions.user_id AS sessions_user_id, sessions.id AS sessions_id, sessions.state AS sessions_state, sessions.create_time AS sessions_create_time, sessions.update_time AS sessions_update_time 
+FROM sessions 
+WHERE sessions.app_name = %(pk_1)s AND sessions.user_id = %(pk_2)s AND sessions.id = %(pk_3)s]
+[parameters: {'pk_1': 'ai_sales_agent', 'pk_2': '43', 'pk_3': 'wxid_upoci5aw8eya2243'}]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)

@@ -1,15 +1,12 @@
 from fastapi import FastAPI, HTTPException, Body
 from pydantic import BaseModel
-import asyncio
-from typing import Optional, List, Dict, Literal
+from typing import Optional, List, Dict
 import logging
-from utils.chat import  chat_test, split_sentence
+from utils.chat import  chat_test
 from utils.config_loader import ConfigLoader
-from utils.db_queries import select_sale_prompt
 import os
-from utils.create_role import restore_content_from_database
-
-
+from prompts.prompts import get_one_to_N_chat_test_prompt
+import json
 # 配置日志
 log_dir = "logs"
 os.makedirs(log_dir, exist_ok=True)
@@ -56,17 +53,19 @@ async def chat(request: ChatRequest = Body(...)):
     """
     try: 
         # 使用通义千问模型
-        system_prompt = select_sale_prompt(request.tenant_id, request.task_id)
-        test_prompt = await restore_content_from_database(request.tenant_id, request.task_id)
+        
         system_message = {
                 "role": "system",
-                "content": [{"type": "text", "text": system_prompt + test_prompt}],
+                "content": [{"type": "text", "text": get_one_to_N_chat_test_prompt(request.tenant_id, request.task_id)}],
             }
         messages = [system_message] + [msg.dict() for msg in request.query]
+        print(messages)
         response, assistant_message = await chat_test(qwen_api_key, query=messages)
-        response = await split_sentence(qwen_api_key, response)
+        print(response)
+        json_response = json.loads(response.strip('```json').strip('```'))
+        # response = await split_sentence(qwen_api_key, response)
         return {
-            "response": response,
+            "response": json_response,
             "status": "success"
         }
     except Exception as e:

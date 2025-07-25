@@ -1,0 +1,501 @@
+2025-07-18 09:10:40 - utils - ERROR - create_one_to_N_role:337 - 角色创建失败 - 租户ID: 1, 任务ID: 145, 策略ID: 353, 错误: cannot import name 'get_one_to_N_prompt_sale_flow' from 'prompts.prompts' (/home/funhpc/workspace/aisell_dev/prompts/prompts.py)
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/create_role.py", line 291, in create_one_to_N_role
+    from prompts.prompts import get_one_to_N_prompt_role_prompt, get_one_to_N_prompt_sale_flow, get_one_to_N_prompt_prohibit
+ImportError: cannot import name 'get_one_to_N_prompt_sale_flow' from 'prompts.prompts' (/home/funhpc/workspace/aisell_dev/prompts/prompts.py)
+2025-07-18 09:10:40 - utils - ERROR - create_one_to_N_role_background:348 - 后台one_to_N角色创建任务失败 - 租户ID: 1, 任务ID: 145, 错误: cannot import name 'get_one_to_N_prompt_sale_flow' from 'prompts.prompts' (/home/funhpc/workspace/aisell_dev/prompts/prompts.py)
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/create_role.py", line 345, in create_one_to_N_role_background
+    await create_one_to_N_role(tenant_id, task_id, strategy_id)
+  File "/home/funhpc/workspace/aisell_dev/utils/create_role.py", line 291, in create_one_to_N_role
+    from prompts.prompts import get_one_to_N_prompt_role_prompt, get_one_to_N_prompt_sale_flow, get_one_to_N_prompt_prohibit
+ImportError: cannot import name 'get_one_to_N_prompt_sale_flow' from 'prompts.prompts' (/home/funhpc/workspace/aisell_dev/prompts/prompts.py)
+2025-07-18 09:23:57 - utils - ERROR - create_one_to_N_role:337 - 角色创建失败 - 租户ID: 1, 任务ID: 147, 策略ID: 355, 错误: unhashable type: 'list'
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/create_role.py", line 309, in create_one_to_N_role
+    prohibit, sale_flow = await asyncio.gather(*extract_tasks, return_exceptions=True)
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/tasks.py", line 830, in gather
+    if arg not in arg_to_fut:
+       ^^^^^^^^^^^^^^^^^^^^^
+TypeError: unhashable type: 'list'
+2025-07-18 09:23:57 - utils - ERROR - create_one_to_N_role_background:348 - 后台one_to_N角色创建任务失败 - 租户ID: 1, 任务ID: 147, 错误: unhashable type: 'list'
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/create_role.py", line 345, in create_one_to_N_role_background
+    await create_one_to_N_role(tenant_id, task_id, strategy_id)
+  File "/home/funhpc/workspace/aisell_dev/utils/create_role.py", line 309, in create_one_to_N_role
+    prohibit, sale_flow = await asyncio.gather(*extract_tasks, return_exceptions=True)
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/tasks.py", line 830, in gather
+    if arg not in arg_to_fut:
+       ^^^^^^^^^^^^^^^^^^^^^
+TypeError: unhashable type: 'list'
+2025-07-18 09:59:03 - test - ERROR - process_agent_background:175 - 后台处理失败 - user_id: 148, session_id: wxid_8d9ory4pas3422, error: The last_update_time provided in the session object '2025-07-18 09:58:52' is earlier than the update_time in the storage_session '2025-07-18 09:59:02'. Please check if it is a stale session.
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/test.py", line 146, in process_agent_background
+    agent_response_text = asyncio.run(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 205, in run_async
+    await self.session_service.append_event(session=session, event=event)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/sessions/database_session_service.py", line 533, in append_event
+    raise ValueError(
+ValueError: The last_update_time provided in the session object '2025-07-18 09:58:52' is earlier than the update_time in the storage_session '2025-07-18 09:59:02'. Please check if it is a stale session.
+2025-07-18 10:40:33 - test - ERROR - process_agent_background:175 - 后台处理失败 - user_id: 147, session_id: WJE1193342535, error: argument of type 'NoneType' is not iterable
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/test.py", line 154, in process_agent_background
+    responses = parse_agent_response(agent_response_text)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/test.py", line 92, in parse_agent_response
+    if "``````json" in agent_response_text:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: argument of type 'NoneType' is not iterable
+2025-07-18 12:39:06 - database - ERROR - insert_customer_behavior:182 - 插入客户行为失败：tenant_id=1, belong_wechat_id=wxid_eh838yv64yso22, wechat_id=wxid_8d9ory4pas3422, title=李四, content=李四是一个金融行业的从业者，从事金融行业多年，对金融行业有深入的了解。
+2025-07-18 12:39:37 - database - ERROR - insert_customer_behavior:182 - 插入客户行为失败：tenant_id=1, belong_wechat_id=wxid_eh838yv64yso22, wechat_id=wxid_8d9ory4pas3422, title=李四, content=李四是一个金融行业的从业者，从事金融行业多年，对金融行业有深入的了解。
+2025-07-18 12:39:45 - database - ERROR - insert_customer_behavior:182 - 插入客户行为失败：tenant_id=1, belong_wechat_id=wxid_eh838yv64yso22, wechat_id=wxid_8d9ory4pas3422, title=李四, content=李四是一个金融行业的从业者，从事金融行业多年，对金融行业有深入的了解。
+2025-07-18 14:48:26 - test - ERROR - process_agent_background:175 - 后台处理失败 - user_id: 149, session_id: WJE1193342535, error: litellm.BadRequestError: OpenAIException - <400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[62].role
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 790, in acompletion
+    headers, response = await self.make_openai_chat_completion_request(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/logging_utils.py", line 135, in async_wrapper
+    result = await func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 436, in make_openai_chat_completion_request
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 418, in make_openai_chat_completion_request
+    await openai_aclient.chat.completions.with_raw_response.create(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_legacy_response.py", line 381, in wrapped
+    return cast(LegacyAPIResponse[R], await func(*args, **kwargs))
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 2028, in create
+    return await self._post(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1742, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1549, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'error': {'code': 'invalid_parameter_error', 'param': None, 'message': '<400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[62].role', 'type': 'invalid_request_error'}, 'id': 'chatcmpl-6643527a-9224-97ba-828c-e95937de0172', 'request_id': '6643527a-9224-97ba-828c-e95937de0172'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/main.py", line 477, in acompletion
+    response = await init_response
+               ^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 837, in acompletion
+    raise OpenAIError(
+litellm.llms.openai.common_utils.OpenAIError: Error code: 400 - {'error': {'code': 'invalid_parameter_error', 'param': None, 'message': '<400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[62].role', 'type': 'invalid_request_error'}, 'id': 'chatcmpl-6643527a-9224-97ba-828c-e95937de0172', 'request_id': '6643527a-9224-97ba-828c-e95937de0172'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/test.py", line 146, in process_agent_background
+    agent_response_text = asyncio.run(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 203, in run_async
+    async for event in invocation_context.agent.run_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/llm_agent.py", line 275, in _run_async_impl
+    async for event in self._llm_flow.run_async(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 282, in run_async
+    async for event in self._run_one_step_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 314, in _run_one_step_async
+    async for llm_response in self._call_llm_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 539, in _call_llm_async
+    async for llm_response in llm.generate_content_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/models/lite_llm.py", line 778, in generate_content_async
+    response = await self.llm_client.acompletion(**completion_args)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/models/lite_llm.py", line 101, in acompletion
+    return await acompletion(
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/utils.py", line 1460, in wrapper_async
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/utils.py", line 1321, in wrapper_async
+    result = await original_function(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/main.py", line 496, in acompletion
+    raise exception_type(
+          ^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py", line 2214, in exception_type
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py", line 328, in exception_type
+    raise BadRequestError(
+litellm.exceptions.BadRequestError: litellm.BadRequestError: OpenAIException - <400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[62].role
+2025-07-18 14:49:15 - test - ERROR - process_agent_background:175 - 后台处理失败 - user_id: 149, session_id: WJE1193342535, error: litellm.BadRequestError: OpenAIException - <400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[62].role
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 790, in acompletion
+    headers, response = await self.make_openai_chat_completion_request(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/logging_utils.py", line 135, in async_wrapper
+    result = await func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 436, in make_openai_chat_completion_request
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 418, in make_openai_chat_completion_request
+    await openai_aclient.chat.completions.with_raw_response.create(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_legacy_response.py", line 381, in wrapped
+    return cast(LegacyAPIResponse[R], await func(*args, **kwargs))
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 2028, in create
+    return await self._post(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1742, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1549, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'error': {'code': 'invalid_parameter_error', 'param': None, 'message': '<400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[62].role', 'type': 'invalid_request_error'}, 'id': 'chatcmpl-eef43351-9873-9c43-ba79-e004d9eab083', 'request_id': 'eef43351-9873-9c43-ba79-e004d9eab083'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/main.py", line 477, in acompletion
+    response = await init_response
+               ^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 837, in acompletion
+    raise OpenAIError(
+litellm.llms.openai.common_utils.OpenAIError: Error code: 400 - {'error': {'code': 'invalid_parameter_error', 'param': None, 'message': '<400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[62].role', 'type': 'invalid_request_error'}, 'id': 'chatcmpl-eef43351-9873-9c43-ba79-e004d9eab083', 'request_id': 'eef43351-9873-9c43-ba79-e004d9eab083'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/test.py", line 146, in process_agent_background
+    agent_response_text = asyncio.run(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 203, in run_async
+    async for event in invocation_context.agent.run_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/llm_agent.py", line 275, in _run_async_impl
+    async for event in self._llm_flow.run_async(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 282, in run_async
+    async for event in self._run_one_step_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 314, in _run_one_step_async
+    async for llm_response in self._call_llm_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 539, in _call_llm_async
+    async for llm_response in llm.generate_content_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/models/lite_llm.py", line 778, in generate_content_async
+    response = await self.llm_client.acompletion(**completion_args)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/models/lite_llm.py", line 101, in acompletion
+    return await acompletion(
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/utils.py", line 1460, in wrapper_async
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/utils.py", line 1321, in wrapper_async
+    result = await original_function(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/main.py", line 496, in acompletion
+    raise exception_type(
+          ^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py", line 2214, in exception_type
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py", line 328, in exception_type
+    raise BadRequestError(
+litellm.exceptions.BadRequestError: litellm.BadRequestError: OpenAIException - <400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[62].role
+2025-07-18 14:53:41 - test - ERROR - process_agent_background:175 - 后台处理失败 - user_id: 149, session_id: WJE1193342535, error: litellm.BadRequestError: OpenAIException - <400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[62].role
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 790, in acompletion
+    headers, response = await self.make_openai_chat_completion_request(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/logging_utils.py", line 135, in async_wrapper
+    result = await func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 436, in make_openai_chat_completion_request
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 418, in make_openai_chat_completion_request
+    await openai_aclient.chat.completions.with_raw_response.create(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_legacy_response.py", line 381, in wrapped
+    return cast(LegacyAPIResponse[R], await func(*args, **kwargs))
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 2028, in create
+    return await self._post(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1742, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1549, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'error': {'code': 'invalid_parameter_error', 'param': None, 'message': '<400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[62].role', 'type': 'invalid_request_error'}, 'id': 'chatcmpl-4f21dde7-ec08-994d-b115-01a3f93dd820', 'request_id': '4f21dde7-ec08-994d-b115-01a3f93dd820'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/main.py", line 477, in acompletion
+    response = await init_response
+               ^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 837, in acompletion
+    raise OpenAIError(
+litellm.llms.openai.common_utils.OpenAIError: Error code: 400 - {'error': {'code': 'invalid_parameter_error', 'param': None, 'message': '<400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[62].role', 'type': 'invalid_request_error'}, 'id': 'chatcmpl-4f21dde7-ec08-994d-b115-01a3f93dd820', 'request_id': '4f21dde7-ec08-994d-b115-01a3f93dd820'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/test.py", line 146, in process_agent_background
+    agent_response_text = asyncio.run(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 203, in run_async
+    async for event in invocation_context.agent.run_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/llm_agent.py", line 275, in _run_async_impl
+    async for event in self._llm_flow.run_async(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 282, in run_async
+    async for event in self._run_one_step_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 314, in _run_one_step_async
+    async for llm_response in self._call_llm_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 539, in _call_llm_async
+    async for llm_response in llm.generate_content_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/models/lite_llm.py", line 778, in generate_content_async
+    response = await self.llm_client.acompletion(**completion_args)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/models/lite_llm.py", line 101, in acompletion
+    return await acompletion(
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/utils.py", line 1460, in wrapper_async
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/utils.py", line 1321, in wrapper_async
+    result = await original_function(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/main.py", line 496, in acompletion
+    raise exception_type(
+          ^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py", line 2214, in exception_type
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py", line 328, in exception_type
+    raise BadRequestError(
+litellm.exceptions.BadRequestError: litellm.BadRequestError: OpenAIException - <400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[62].role
+2025-07-18 15:03:25 - test - ERROR - process_agent_background:175 - 后台处理失败 - user_id: 149, session_id: WJE1193342535, error: The last_update_time provided in the session object '2025-07-18 14:47:05' is earlier than the update_time in the storage_session '2025-07-18 14:53:39'. Please check if it is a stale session.
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/test.py", line 146, in process_agent_background
+    agent_response_text = asyncio.run(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 205, in run_async
+    await self.session_service.append_event(session=session, event=event)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/sessions/database_session_service.py", line 533, in append_event
+    raise ValueError(
+ValueError: The last_update_time provided in the session object '2025-07-18 14:47:05' is earlier than the update_time in the storage_session '2025-07-18 14:53:39'. Please check if it is a stale session.
+2025-07-18 17:43:53 - test - ERROR - process_agent_background:175 - 后台处理失败 - user_id: 149, session_id: WJE1193342535, error: litellm.BadRequestError: OpenAIException - <400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[62].role
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 790, in acompletion
+    headers, response = await self.make_openai_chat_completion_request(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/logging_utils.py", line 135, in async_wrapper
+    result = await func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 436, in make_openai_chat_completion_request
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 418, in make_openai_chat_completion_request
+    await openai_aclient.chat.completions.with_raw_response.create(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_legacy_response.py", line 381, in wrapped
+    return cast(LegacyAPIResponse[R], await func(*args, **kwargs))
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 2028, in create
+    return await self._post(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1742, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1549, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'error': {'code': 'invalid_parameter_error', 'param': None, 'message': '<400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[62].role', 'type': 'invalid_request_error'}, 'id': 'chatcmpl-99cd53f1-d5ec-9c76-9a53-1858f0ad01b1', 'request_id': '99cd53f1-d5ec-9c76-9a53-1858f0ad01b1'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/main.py", line 477, in acompletion
+    response = await init_response
+               ^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 837, in acompletion
+    raise OpenAIError(
+litellm.llms.openai.common_utils.OpenAIError: Error code: 400 - {'error': {'code': 'invalid_parameter_error', 'param': None, 'message': '<400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[62].role', 'type': 'invalid_request_error'}, 'id': 'chatcmpl-99cd53f1-d5ec-9c76-9a53-1858f0ad01b1', 'request_id': '99cd53f1-d5ec-9c76-9a53-1858f0ad01b1'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/test.py", line 146, in process_agent_background
+    agent_response_text = asyncio.run(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 203, in run_async
+    async for event in invocation_context.agent.run_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/llm_agent.py", line 275, in _run_async_impl
+    async for event in self._llm_flow.run_async(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 282, in run_async
+    async for event in self._run_one_step_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 314, in _run_one_step_async
+    async for llm_response in self._call_llm_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 539, in _call_llm_async
+    async for llm_response in llm.generate_content_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/models/lite_llm.py", line 778, in generate_content_async
+    response = await self.llm_client.acompletion(**completion_args)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/models/lite_llm.py", line 101, in acompletion
+    return await acompletion(
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/utils.py", line 1460, in wrapper_async
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/utils.py", line 1321, in wrapper_async
+    result = await original_function(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/main.py", line 496, in acompletion
+    raise exception_type(
+          ^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py", line 2214, in exception_type
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py", line 328, in exception_type
+    raise BadRequestError(
+litellm.exceptions.BadRequestError: litellm.BadRequestError: OpenAIException - <400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[62].role
+2025-07-18 17:45:07 - test - ERROR - process_agent_background:175 - 后台处理失败 - user_id: 149, session_id: WJE1193342535, error: litellm.BadRequestError: OpenAIException - <400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[61].role
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 790, in acompletion
+    headers, response = await self.make_openai_chat_completion_request(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/logging_utils.py", line 135, in async_wrapper
+    result = await func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 436, in make_openai_chat_completion_request
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 418, in make_openai_chat_completion_request
+    await openai_aclient.chat.completions.with_raw_response.create(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_legacy_response.py", line 381, in wrapped
+    return cast(LegacyAPIResponse[R], await func(*args, **kwargs))
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 2028, in create
+    return await self._post(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1742, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1549, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'error': {'code': 'invalid_parameter_error', 'param': None, 'message': '<400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[61].role', 'type': 'invalid_request_error'}, 'id': 'chatcmpl-3a36884e-99c0-98e8-a3cb-2ed0b5b10bc4', 'request_id': '3a36884e-99c0-98e8-a3cb-2ed0b5b10bc4'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/main.py", line 477, in acompletion
+    response = await init_response
+               ^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 837, in acompletion
+    raise OpenAIError(
+litellm.llms.openai.common_utils.OpenAIError: Error code: 400 - {'error': {'code': 'invalid_parameter_error', 'param': None, 'message': '<400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[61].role', 'type': 'invalid_request_error'}, 'id': 'chatcmpl-3a36884e-99c0-98e8-a3cb-2ed0b5b10bc4', 'request_id': '3a36884e-99c0-98e8-a3cb-2ed0b5b10bc4'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/test.py", line 146, in process_agent_background
+    agent_response_text = asyncio.run(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 203, in run_async
+    async for event in invocation_context.agent.run_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/llm_agent.py", line 275, in _run_async_impl
+    async for event in self._llm_flow.run_async(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 282, in run_async
+    async for event in self._run_one_step_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 314, in _run_one_step_async
+    async for llm_response in self._call_llm_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 539, in _call_llm_async
+    async for llm_response in llm.generate_content_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/models/lite_llm.py", line 778, in generate_content_async
+    response = await self.llm_client.acompletion(**completion_args)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/models/lite_llm.py", line 101, in acompletion
+    return await acompletion(
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/utils.py", line 1460, in wrapper_async
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/utils.py", line 1321, in wrapper_async
+    result = await original_function(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/main.py", line 496, in acompletion
+    raise exception_type(
+          ^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py", line 2214, in exception_type
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py", line 328, in exception_type
+    raise BadRequestError(
+litellm.exceptions.BadRequestError: litellm.BadRequestError: OpenAIException - <400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[61].role

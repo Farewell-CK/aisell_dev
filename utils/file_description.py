@@ -133,7 +133,7 @@ class TextSummarizer:
             # logger.debug(f"发送给API的完整Prompt:\n{prompt}") # 如果需要详细调试，可以取消注释
             response = self.client.chat.completions.create(
                 messages=[
-                    {'role': 'system', 'content': '你是一个专业的文本总结助手，擅长提取文本的关键信息并生成简洁的概述。'},
+                    {'role': 'system', 'content': file_description_prompt},
                     {'role': 'user', 'content': prompt}
                 ],
                 model="ernie-4.5-turbo-128k", # 使用文心3.5 8k模型
@@ -1133,20 +1133,20 @@ class PPTSummarizer:
             logger.error(f"序列化提取的PPT内容时出错: {str(e)}", exc_info=True)
             return "序列化PPT内容时发生内部错误。"
 
-        prompt_to_use = custom_prompt if custom_prompt else """请基于以下提供的PPT演示文稿的提取内容（JSON格式），用中文分析这个演示文稿，请覆盖以下方面：
-1.  **核心主题与目标受众**：PPT试图传达的核心信息是什么？主要面向哪些听众？
-2.  **结构与逻辑流程**：PPT的组织结构如何？（例如，问题-解决方案，时间顺序，主题分类等）。各部分之间是如何衔接的？
-3.  **关键幻灯片内容摘要**：逐页或分章节概括每张（或每组重要）幻灯片的主要观点和信息。
-4.  **关键论点/数据/证据**：识别出支撑核心主题的关键论点、重要数据或证据。
-5.  **视觉与表达特点**：（如果能从文本推断）PPT在视觉设计或表达上有何特点？（例如，图表为主，文字密集，案例驱动等）。
-6.  **潜在的演讲亮点与改进建议**：这份PPT的演讲亮点可能在哪里？有无明显的改进空间（从内容结构、清晰度等方面）？
-7.  **总结性概述**：给出一个简短的整体总结。(请确保总结在50字以内)
-注意：
-1. 输出纯文本、而非markdown格式
-2. 字数控制在50字以内
-""" # 修改了默认prompt中对字数的要求
+#         prompt_to_use = custom_prompt if custom_prompt else """请基于以下提供的PPT演示文稿的提取内容（JSON格式），用中文分析这个演示文稿，请覆盖以下方面：
+# 1.  **核心主题与目标受众**：PPT试图传达的核心信息是什么？主要面向哪些听众？
+# 2.  **结构与逻辑流程**：PPT的组织结构如何？（例如，问题-解决方案，时间顺序，主题分类等）。各部分之间是如何衔接的？
+# 3.  **关键幻灯片内容摘要**：逐页或分章节概括每张（或每组重要）幻灯片的主要观点和信息。
+# 4.  **关键论点/数据/证据**：识别出支撑核心主题的关键论点、重要数据或证据。
+# 5.  **视觉与表达特点**：（如果能从文本推断）PPT在视觉设计或表达上有何特点？（例如，图表为主，文字密集，案例驱动等）。
+# 6.  **潜在的演讲亮点与改进建议**：这份PPT的演讲亮点可能在哪里？有无明显的改进空间（从内容结构、清晰度等方面）？
+# 7.  **总结性概述**：给出一个简短的整体总结。(请确保总结在50字以内)
+# 注意：
+# 1. 输出纯文本、而非markdown格式
+# 2. 字数控制在50字以内
+# """ # 修改了默认prompt中对字数的要求
 
-        user_content = f"{prompt_to_use}\n\n# 演示文稿提取内容 (JSON):\n```json\n{content_str}\n```"
+        # user_content = f"{prompt_to_use}\n\n# 演示文稿提取内容 (JSON):\n```json\n{content_str}\n```"
         # logger.debug(f"发送给 LLM 的 User Content (部分): {user_content[:500]}...") # 内容可能很大
 
         try:
@@ -1157,7 +1157,6 @@ class PPTSummarizer:
                     {"role": "system", "content": file_description_prompt},
                     {"role": "user", "content": content_str}
                 ],
-                temperature=0.3,
                 top_p=0.8
             )
             summary = response.choices[0].message.content
@@ -1689,7 +1688,7 @@ class DocumentSummarizer:
             response = self.client.chat.completions.create(
                 model=self.model_name,
                 messages=[
-                    {"role": "system", "content": prompt_to_use},
+                    {"role": "system", "content": file_description_prompt},
                     {"role": "user", "content": f"文档提取内容 (JSON):\n```json\n{content_str}\n```"}
                 ],
                 temperature=0.3,
@@ -1714,140 +1713,7 @@ class DocumentSummarizer:
 
     # compare_documents 和 process_directory 方法与您之前提供的一致
     # 它们应该能够正确地调用更新后的 summarize_document，进而处理URL
-    # (此处省略，因为它们逻辑上依赖 summarize_document 的输入处理能力)
-    def compare_documents(self, file_paths_or_urls: List[str], custom_prompt: Optional[str] = None) -> str:
-        logger.info(f"开始比较多个文档: {file_paths_or_urls}")
-        if len(file_paths_or_urls) < 2:
-            logger.warning("需要至少两个文档文件进行比较。")
-            return "错误：需要至少两个文档文件进行比较。"
-
-        all_contents_data = []
-        for item_path in file_paths_or_urls:
-            logger.info(f"正在为比较提取内容: {item_path}")
-            file_ext = ""
-            if self._is_valid_url(item_path):
-                parsed_url_path = urlparse(item_path).path
-                file_ext = os.path.splitext(parsed_url_path)[1].lower()
-            else:
-                file_ext = os.path.splitext(item_path)[1].lower()
-            
-            content_data = {}
-            if file_ext == '.pdf':
-                content_data = self.extract_pdf_content(item_path)
-            elif file_ext == '.docx':
-                content_data = self.extract_docx_content(item_path)
-            else:
-                logger.warning(f"跳过不支持的文件格式或无法从URL推断格式进行比较: {item_path}")
-                continue
-            
-            if "错误" not in content_data and content_data.get("内容"):
-                all_contents_data.append(content_data)
-            else:
-                logger.warning(f"跳过文件 {item_path}，因提取内容失败或为空。错误详情: {content_data.get('错误')}")
-        
-        if len(all_contents_data) < 2:
-            logger.error(f"未能成功提取至少两个文档的内容进行比较。有效提取数: {len(all_contents_data)}")
-            return f"错误：未能成功提取至少两个文档的内容以供比较（成功提取 {len(all_contents_data)} 个）。"
-
-        try:
-            contents_str = json.dumps(all_contents_data, ensure_ascii=False, indent=2)
-            logger.info(f"多个文档提取内容合并后的字符串长度: {len(contents_str)}")
-            MAX_CONTENTS_STR_LEN = 100000 # 根据128k模型调整
-            if len(contents_str) > MAX_CONTENTS_STR_LEN:
-                logger.warning(f"多个文档内容字符串过长 ({len(contents_str)} chars)，将截断。可能影响比较质量。")
-                placeholder_text = "\"...[内容JSON数组因过长被截断]...\"}]"
-                cutoff_point = MAX_CONTENTS_STR_LEN - len(placeholder_text)
-                if cutoff_point > 0:
-                    contents_str = contents_str[:cutoff_point] + placeholder_text
-                else:
-                    contents_str = contents_str[:MAX_CONTENTS_STR_LEN]
-        except Exception as e:
-            logger.error(f"序列化多个文档提取内容时出错: {e}", exc_info=True)
-            return "序列化多个文档内容时发生内部错误。"
-
-        prompt_to_use = custom_prompt if custom_prompt else """请基于以下提供的多个文档的提取内容（JSON格式数组），用中文深入比较这些文档的异同点。分析应包括：
-1.  **核心主题与目标的对比**：各文档的核心议题和主要目标分别是什么？有何异同？
-2.  **内容覆盖范围与深度的比较**：在共同或相关主题上，各文档的内容覆盖广度和探讨深度如何？各自有无独特的侧重点或遗漏？
-3.  **结构与论证逻辑的差异**：各文档的组织结构（如章节安排、论点呈现顺序）和逻辑推演方式有何不同？
-4.  **关键信息、论点与证据的对比**：它们提出的关键信息、核心论点及支撑证据是相似、互补还是存在差异甚至矛盾？
-5.  **受众与风格的判断**：从内容和表达推断，各文档可能的目标受众和沟通风格（如学术、商业、技术、通俗等）有何不同？
-6.  **综合评价与洞察**：综合来看，这些文档在信息传递、论证力度、完整性等方面各自的优势和不足是什么？能从中获得哪些交叉验证的结论或新的洞察？"""
-        
-        user_content = f"{prompt_to_use}\n\n# 各文档提取内容 (JSON数组):\n```json\n{contents_str}\n```"
-
-        try:
-            logger.info(f"向 LLM ({self.model_name}) 发送请求进行文档比较...")
-            response = self.client.chat.completions.create(
-                model=self.model_name,
-                messages=[
-                    {"role": "system", "content": "你是一位顶级的跨文档分析专家，擅长从多个复杂文档中找出深层联系与差异。"},
-                    {"role": "user", "content": user_content}
-                ],
-                temperature=0.3,
-                top_p=0.8
-            )
-            comparison_summary = response.choices[0].message.content if response.choices[0].message else ""
-            logger.info(f"LLM 文档比较结果接收成功，长度: {len(comparison_summary)}")
-            return comparison_summary if comparison_summary else "未能从模型获取有效的比较结果。"
-        except Exception as e:
-            logger.error(f"调用 LLM ({self.model_name}) 比较文档时出错: {e}", exc_info=True)
-            return f"比较文档时与AI服务通信失败: {str(e)}"
-
-    def process_directory(self, directory_path: str, output_file: str):
-        logger.info(f"开始处理目录: {directory_path}，输出到: {output_file}")
-        try:
-            dir_path = Path(directory_path)
-            if not dir_path.is_dir():
-                logger.error(f"提供的路径 '{directory_path}' 不是一个有效的目录。")
-                return
-
-            doc_files = []
-            for ext in ['.pdf', '.docx']:
-                doc_files.extend(list(dir_path.rglob(f'*{ext}')))
-            
-            if not doc_files:
-                logger.warning(f"在目录 '{directory_path}' 及其子目录中没有找到支持的文档文件 (.pdf, .docx)。")
-                Path(output_file).write_text(f"目录 '{directory_path}' 中未找到支持的文档文件。\n", encoding='utf-8')
-                return
-            
-            logger.info(f"在 '{directory_path}' 中找到 {len(doc_files)} 个文档文件: {[str(f) for f in doc_files]}")
-
-            all_summaries_content = []
-            successful_summaries = 0
-            for doc_file_path_obj in tqdm(doc_files, desc="逐个处理目录中的文档"):
-                doc_file_path = str(doc_file_path_obj) # 转为字符串
-                logger.info(f"正在处理文件: {doc_file_path}")
-                summary = self.summarize_document(doc_file_path)
-                
-                # 更新错误检查逻辑
-                is_error = False
-                error_keywords = ["不支持的文件格式", "无法处理文档", "错误：", "分析文档时与AI服务通信失败", "序列化文档内容时发生内部错误", "未能从模型获取有效的总结内容"]
-                if not summary: # 空总结也是一种失败
-                    is_error = True
-                else:
-                    for keyword in error_keywords:
-                        if keyword in summary:
-                            is_error = True
-                            break
-                
-                if not is_error:
-                    all_summaries_content.append(f"--- 文件: {doc_file_path_obj.name} ---\n{summary}\n\n")
-                    successful_summaries +=1
-                else:
-                    all_summaries_content.append(f"--- 文件: {doc_file_path_obj.name} ---\n总结失败或文件无效/不支持。\n详细信息: {summary or '无返回内容'}\n\n")
-                
-                if len(doc_files) > 1 and doc_file_path_obj != doc_files[-1]:
-                     time.sleep(1)
-
-            report_header = f"文档批量处理总结报告\n处理文档总数: {len(doc_files)}\n成功总结数量: {successful_summaries}\n\n"
-            final_report_content = report_header + "".join(all_summaries_content)
-
-            Path(output_file).write_text(final_report_content, encoding='utf-8')
-            logger.info(f"所有文档的总结报告已保存到: {output_file}")
-
-        except Exception as e:
-            logger.error(f"处理目录 '{directory_path}' 时发生意外错误: {e}", exc_info=True)
-
+    
 class VideoSummarizer:
     def __init__(self, api_key: str, base_url: str):
         """
@@ -1965,130 +1831,6 @@ class VideoSummarizer:
         except Exception as e:
             logger.error(f"使用模型分析视频 '{video_url_for_api}' 时出错: {e}", exc_info=True)
             return f"分析视频时发生错误: {str(e)}"
-
-    def compare_videos(self, video_sources: List[str], prompt: Optional[str] = None) -> str:
-        """
-        比较多段视频内容。
-        
-        Args:
-            video_sources: 包含多个视频URL或本地文件路径的列表。
-            prompt: 用户自定义的比较提示词。
-        Returns:
-            视频的比较结果文本，或错误信息。
-        """
-        logger.info(f"开始处理视频比较，共 {len(video_sources)} 个源。")
-        if len(video_sources) < 2:
-            logger.warning("需要至少两个视频进行比较，当前提供数量不足。")
-            return "错误：需要至少两个视频进行比较。"
-            
-        valid_video_urls_for_api: List[Dict[str, Dict[str, str]]] = [] # 存储 {"type": "video_url", "video_url": {"url": ...}}
-        
-        for source_idx, source in enumerate(video_sources):
-            logger.debug(f"处理比较列表中的源 #{source_idx + 1}: {source}")
-            if self.is_valid_url(source):
-                valid_video_urls_for_api.append({"type": "video_url", "video_url": {"url": source}})
-                logger.info(f"有效URL已添加到比较列表: {source}")
-            elif self.is_valid_file(source):
-                logger.warning(f"比较功能暂不支持本地视频文件: {source}。此视频将从比较中排除。")
-                # TODO: 实现本地文件上传并获取URL的逻辑
-            else:
-                logger.warning(f"无效的视频源，已从比较列表中排除: {source}")
-        
-        if len(valid_video_urls_for_api) < 2:
-            logger.warning(f"经过验证，有效视频URL数量 ({len(valid_video_urls_for_api)}) 不足两个，无法进行比较。")
-            return f"错误：没有足够的有效视频URL（至少需要2个，实际有效 {len(valid_video_urls_for_api)} 个）进行比较。"
-            
-        if prompt is None:
-            prompt = """请基于提供的多段视频，用中文详细对比分析它们之间的异同点，包括但不限于：
-1.  **内容与主题**：各视频的核心主题是什么？它们在叙事内容上有何相似之处和明显差异？
-2.  **关键场景与事件**：对比各视频中的关键场景或重要事件，它们是如何呈现的？有无对应或对比关系？
-3.  **人物与表现**：如果视频中有人物，对比他们在不同视频中的角色、行为或情感表达。
-4.  **视觉风格与氛围**：各视频的拍摄手法、色调、剪辑节奏、背景音乐等视觉和听觉元素有何不同？营造的整体氛围有何差异？
-5.  **目标与信息传递**：这些视频各自试图传递什么信息或达到什么目的？它们在实现这些目标的方式上有何不同？"""
-            logger.debug("使用默认提示词进行视频比较。")
-        else:
-            logger.debug(f"使用自定义提示词进行视频比较: '{prompt[:100]}...'")
-            
-        try:
-            # 构建单个user消息，包含所有视频URL和文本提示
-            user_content_list: List[Dict[str, any]] = []
-            user_content_list.extend(valid_video_urls_for_api) # 添加所有视频URL对象
-            user_content_list.append({"type": "text", "text": prompt}) # 添加文本提示
-
-            messages_payload = [
-                {
-                    "role": "system",
-                    "content": [{"type": "text", "text": "你是一位顶级的视频对比分析专家，能够敏锐地捕捉多个视频间的细微差别和深层联系。"}]
-                },
-                {
-                    "role": "user",
-                    "content": user_content_list
-                }
-            ]
-            
-            logger.info(f"向模型 '{self.model_name}' 发送 {len(valid_video_urls_for_api)} 个视频的比较请求。")
-            response = self.client.chat.completions.create(
-                model=self.model_name,
-                messages=messages_payload # type: ignore
-            )
-            
-            comparison_summary = response.choices[0].message.content
-            logger.info(f"成功从模型获取视频比较结果。结果长度: {len(comparison_summary) if comparison_summary else 0} 字符。")
-            return comparison_summary if comparison_summary else "未能从模型获取有效的比较结果。"
-            
-        except Exception as e:
-            logger.error(f"使用模型比较视频时出错: {e}", exc_info=True)
-            return f"比较视频时发生错误: {str(e)}"
-
-    def process_video_list(self, video_sources: List[str], output_file: str):
-        """
-        处理视频URL列表，对每个视频生成总结，并将所有总结写入一个报告文件。
-        
-        Args:
-            video_sources: 包含多个视频URL或本地文件路径的列表。
-            output_file: 保存所有总结报告的文件路径。
-        """
-        logger.info(f"开始批量处理视频列表，共 {len(video_sources)} 个源，输出到: {output_file}")
-        if not video_sources:
-            logger.warning("输入的视频源列表为空，无需处理。")
-            Path(output_file).write_text("输入的视频源列表为空。\n", encoding='utf-8')
-            return
-
-        all_summaries_content: List[str] = []
-        successful_summaries = 0
-        
-        for idx, video_source in enumerate(tqdm(video_sources, desc="批量处理视频中")):
-            logger.info(f"正在处理列表中的视频 #{idx + 1}: {video_source}")
-            summary = self.summarize_video(video_source) # summarize_video内部已处理URL/文件路径判断
-            
-            # 为报告确定源的名称
-            source_name = ""
-            if self.is_valid_url(video_source):
-                source_name = video_source
-            elif self.is_valid_file(video_source): # 尽管目前不支持处理，但仍记录文件名
-                source_name = os.path.basename(video_source)
-            else:
-                source_name = f"无效源 ({video_source})"
-
-            if summary and not summary.startswith("❌") and not summary.startswith("⚠️") and not summary.startswith("分析视频时发生错误"):
-                all_summaries_content.append(f"--- 视频源: {source_name} ---\n{summary}\n\n")
-                successful_summaries +=1
-            else:
-                all_summaries_content.append(f"--- 视频源: {source_name} ---\n总结失败或跳过。\n详细信息: {summary}\n\n")
-            
-            if idx < len(video_sources) - 1: # 如果不是最后一个视频，则等待
-                logger.debug(f"等待1秒以控制API调用频率...")
-                time.sleep(1) 
-
-        report_header = f"视频批量处理总结报告\n处理视频总数: {len(video_sources)}\n成功总结数量: {successful_summaries}\n\n"
-        final_report_content = report_header + "".join(all_summaries_content)
-
-        try:
-            Path(output_file).write_text(final_report_content, encoding='utf-8')
-            logger.info(f"视频批量处理完成。总结报告已保存到: {output_file}")
-        except Exception as e:
-            logger.error(f"保存总结报告到 '{output_file}' 时出错: {e}", exc_info=True)
-
 
 
 if __name__ == "__main__":

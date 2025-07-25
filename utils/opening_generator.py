@@ -214,10 +214,11 @@ class OpeningGenerator:
 你是一位专业的销售开场白设计师。请基于以下信息，生成自然、专业、个性化的微信开场白。
 
 ## 角色信息
-- 微信昵称：{wechat_name}
-- 公司信息：{knowledge}
+- 微信昵称：
+{wechat_name}
+- 公司信息：
+{knowledge}
 - 可以发送的数据：
-
 {send_ai_data}
 ---
 ## 开场白要求

@@ -4,12 +4,10 @@ import os
 import aiohttp
 import asyncio
 from datetime import datetime
-from tools.database import DatabaseManager
+from core.database_core import db_manager
 from utils.logger_config import get_utils_logger
 
 logger = get_utils_logger()
-
-db = DatabaseManager()
 
 async def send_order_notification(tenant_id,task_id,session_id,order_notification):
     """
@@ -113,6 +111,8 @@ async def send_prohibit_notify(tenant_id,task_id,strategy_id,prohibit_list, sale
         response: 响应
     """
     for prohibit in prohibit_list:
+        # 将一个单引号替换为两个单引号
+        escaped_prohibit = prohibit.replace("'", "''")
         insert_query = f"""
         INSERT INTO sale_forbidden (
         strategy_id,
@@ -123,15 +123,19 @@ async def send_prohibit_notify(tenant_id,task_id,strategy_id,prohibit_list, sale
         is_del
     ) VALUES (
         '{strategy_id}',
-        '{prohibit}',
+        '{escaped_prohibit}',
         '{tenant_id}',
         'admin',
         NOW(),
         0
     );
         """
-        db.execute_insert(insert_query)
+        db_manager.execute_insert(insert_query)
+    logger.info(f"待插入销售流程: {sale_flow}")
     for i,flow in enumerate(sale_flow):
+        # 将一个单引号替换为两个单引号
+        escaped_title = flow['title'].replace("'", "''")
+        escaped_description = str(flow['description']).replace("'", "''")
         insert_query = f"""
         INSERT INTO sale_process (
             strategy_id,
@@ -144,8 +148,8 @@ async def send_prohibit_notify(tenant_id,task_id,strategy_id,prohibit_list, sale
             is_del
         ) VALUES (
             '{strategy_id}',
-            '{flow['title']}',
-            "{flow['description']}",
+            '{escaped_title}',
+            '{escaped_description}',
             '{i}',
             '{tenant_id}',
             'admin',
@@ -155,15 +159,15 @@ async def send_prohibit_notify(tenant_id,task_id,strategy_id,prohibit_list, sale
 
         """
         logger.info(f"插入销售流程: {insert_query}")
-        db.execute_insert(insert_query)
+        db_manager.execute_insert(insert_query)
     update_status_query = f"""
     UPDATE sale_strategy SET status = {status} WHERE id = {strategy_id} AND tenant_id = {tenant_id} AND task_id = {task_id};
     """
-    db.execute_update(update_status_query)
+    db_manager.execute_update(update_status_query)
     update_reply_query = f"""
     UPDATE sale_strategy SET reply_cycle = 72, reply_times = 2 WHERE id = {strategy_id} AND tenant_id = {tenant_id} AND task_id = {task_id};
     """
-    db.execute_update(update_reply_query)
+    db_manager.execute_update(update_reply_query)
     return True
 
 async def send_chat_test(tenant_id,task_id,chat_test):
@@ -235,25 +239,31 @@ async def send_chat(tenant_id,task_id,session_id,belong_chat_id,chat_content):
         collaborate_dic = chat_content.get("collaborate_list", [])
         collaborate_list = [collaborate['content'] for collaborate in collaborate_dic]
     for collaborate in collaborate_list:
+        escaped_collaborate = collaborate.replace("'", "''")
         insert_query = f"""
         INSERT INTO sale_wechat_matter (
             content,
+            belong_wechat_id,
+            wechat_id,
             tenant_id,
-            task_id,
             create_by,
             create_time,
             is_del
         ) VALUES (
-            '{collaborate}',
+            '{escaped_collaborate}',
+            '{belong_chat_id}',
+            '{session_id}',
             '{tenant_id}',
-            '{task_id}',
             'admin',
             NOW(),
             0
         );
         """
         logger.info(f"插入协作事项: {insert_query}")
-        db.execute_insert(insert_query)
+        try:
+            await asyncio.to_thread(db_manager.execute_insert, insert_query)
+        except Exception as e:
+            logger.error(f"插入协作事项失败: {e}")
     url = "http://120.77.8.73/sale/wechat/message/send"
     headers = {
         "Content-Type": "application/json"
@@ -272,7 +282,7 @@ async def send_chat(tenant_id,task_id,session_id,belong_chat_id,chat_content):
             async with session.post(url, headers=headers, json=data) as response:
                 return await response.json()
     except Exception as e:
-        print(f"发送聊天通知失败: {e}")
+        logger.error(f"发送聊天通知失败: {e}")
         return {"status": "failed",
                 "tenant_id": tenant_id,
                 "task_id": task_id,

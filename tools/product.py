@@ -1,4 +1,7 @@
-from tools.database import DatabaseManager
+from core.database_core import db_manager
+import logging
+
+logger = logging.getLogger(__name__)
 
 def get_product_by_task_id(task_id: int) -> dict:
     """
@@ -16,7 +19,6 @@ def get_product_by_task_id(task_id: int) -> dict:
     """
     try:
         # 初始化数据库管理器
-        db_manager = DatabaseManager()
         
         # 首先查询sale_task_product表获取所有product_id
         task_product_query = f"""
@@ -26,6 +28,7 @@ def get_product_by_task_id(task_id: int) -> dict:
             AND is_del = 0
         """
         task_product_result = db_manager.execute_query(task_product_query)
+        logging.info(f"task_product_result: {task_product_result}")
         
         if not task_product_result:
             return {

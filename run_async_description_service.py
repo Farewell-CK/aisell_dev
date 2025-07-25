@@ -22,7 +22,7 @@ if __name__ == "__main__":
     # 配置服务器参数
     host = os.getenv("HOST", "0.0.0.0")
     port = int(os.getenv("PORT", 11431))
-    reload = os.getenv("RELOAD", "false").lower() == "true"
+    reload = os.getenv("RELOAD", "True").lower() == "true"
     
     logger.info("启动异步文档总结API服务...")
     logger.info(f"服务地址: http://{host}:{port}")

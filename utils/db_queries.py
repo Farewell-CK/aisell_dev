@@ -1,5 +1,5 @@
-from tools.database import DatabaseManager
-db_manager = DatabaseManager()
+import logging
+from core.database_core import db_manager
 
 
 def select_ai_data(tenant_id: int, task_id: int) -> list[dict]:
@@ -46,7 +46,7 @@ def select_base_info(tenant_id: int, task_id: int) -> list[dict]:
                 sale_user_role sur ON su.id = sur.user_id
             WHERE
                 su.tenant_id = {tenant_id}       -- 筛选特定租户
-                AND spr.id = {task_id}         -- 筛选特定角色
+                AND sur.id = {task_id}         -- 筛选特定角色
                 AND swa.is_del = 0                -- 确保微信账号未被逻辑删除
                 AND su.is_del = 0                 -- 确保用户未被逻辑删除
                 AND sur.is_del = 0                -- 确保用户-角色关联未被逻辑删除
@@ -61,7 +61,6 @@ def select_wechat_name(tenant_id: int,  wechat_id: str) -> str:
     根据租户ID、任务ID和微信ID，查询微信昵称。
     Args:
         tenant_id: 租户ID
-        task_id: 任务ID
         wechat_id: 微信ID
     Returns:
         str: 微信昵称
@@ -216,12 +215,12 @@ def select_sale_system_prompt(tenant_id : int, task_id : int) -> str:
                 AND sp.is_del = 0;
         """
         result = db_manager.execute_query(query)
-        print(f"销售提示词是: {result}")
+        logging.info(f"销售系统提示词是: {result}")
         return result[0]['system_prompt']
     except Exception as e:
-        return f"查询销售系统提示词失败: {str(e)}"
+        return ""
 
-def select_forbidden_content(tenant_id : int, task_id : int) -> str:
+def select_forbidden_content(tenant_id : int, task_id : int) -> list:
     """
     查询禁止内容
     """
@@ -245,7 +244,8 @@ def select_forbidden_content(tenant_id : int, task_id : int) -> str:
         if result:
             for item in result:
                 forbidden_content.append(item['forbidden_content'])
-        return format_forbidden_content(forbidden_content)
+        # return format_forbidden_content(forbidden_content)
+        return forbidden_content
     except Exception as e:
         return [f"查询禁止内容失败: {str(e)}"]
     
@@ -278,12 +278,12 @@ def select_sale_process(tenant_id : int, task_id : int) -> str:
             for item in result:
                 sale_process.append({
                     'title': item['process_title'],
-                    'text': item['process_text'],
+                    'description': item['process_text'],
                     'sort': item['sort']
                 })
-        return format_sale_process(sale_process)
+        return sale_process
     except Exception as e:
-        return [f"查询销售流程失败: {str(e)}"]
+        return []
 
 def select_collaborate_matters(tenant_id : int, task_id : int) -> list[dict]:
     """
@@ -298,6 +298,8 @@ def select_collaborate_matters(tenant_id : int, task_id : int) -> list[dict]:
                     如果查询失败或无结果，返回空列表（或根据需要处理异常）。
     """
     try:
+        filter_res = ["客户追问价格", "客户发送不同消息类型", "回复不确定项处理"]
+        filter_titles = "', '".join(filter_res)
         query = f"""
             SELECT
                 sc.id AS collaborate_id,
@@ -311,7 +313,8 @@ def select_collaborate_matters(tenant_id : int, task_id : int) -> list[dict]:
                 st.tenant_id = {tenant_id}
                 AND st.id = {task_id}
                 AND sc.is_del = 0
-                AND st.is_del = 0;
+                AND st.is_del = 0
+                AND sc.title NOT IN ('{filter_titles}');
             """
         result = db_manager.execute_query(query)
         return result
@@ -412,4 +415,121 @@ def update_sale_prompt(task_id: int, tenant_id: int, system_prompt: str = None, 
         print(f"更新提示词失败，任务ID={task_id}, 租户ID={tenant_id}: {e}") # Failed to update prompt
         pass
 
+from typing import Optional # 确保有这一行
+
+def update_customer_portrait(tenant_id: int, belong_wechat_id: str, wechat_id: str, **kwargs):
+    """
+    更新客户画像信息（必须确保tenant_id, belong_wechat_id, wechat_id 的值是request_data中的值,不可以自己随便生成）
+    
+    这个函数用于动态更新客户的基本信息，支持部分字段更新。函数会根据传入的参数
+    智能判断哪些字段需要更新，只更新有值的字段，避免覆盖已有的有效数据。
+    
+    必需参数：
+        tenant_id: 租户ID，用于数据隔离
+        belong_wechat_id: 所属微信ID，标识客户所属的微信账号
+        wechat_id: 微信ID，客户的唯一标识
+        
+    可选关键字参数（通过**kwargs传入）：
+        phone: 手机号，支持更新客户的联系电话
+        name: 姓名，支持更新客户的真实姓名
+        industry: 行业，支持更新客户所在行业信息
+        department: 部门，支持更新客户所在部门
+        company: 公司，支持更新客户所在公司名称
+        post: 职位，支持更新客户的职位信息
+        company_size: 公司规模，支持更新客户公司的规模信息
+        city: 城市，支持更新客户所在城市
+        update_by: 更新人，记录本次更新的操作人，默认为'ai_sale_v2'
+    
+    使用示例：
+        # 只更新姓名和手机号
+        update_customer_portrait(1, 123, 456, name="张三", phone="13800138000")
+        
+        # 更新多个字段
+        update_customer_portrait(1, 123, 456, name="张三", company="ABC公司", post="经理")
+    
+    Returns:
+        str: 操作结果描述
+            - "更新客户画像成功": 更新操作成功完成
+            - "没有需要更新的字段": 所有可选字段都为空，无需更新
+            - "更新客户画像失败": 更新操作失败，具体错误信息会记录在日志中
+    """
+    try:
+        # 从kwargs中提取参数，设置默认值
+        phone = kwargs.get('phone')
+        name = kwargs.get('name')
+        industry = kwargs.get('industry')
+        department = kwargs.get('department')
+        company = kwargs.get('company')
+        post = kwargs.get('post')
+        company_size = kwargs.get('company_size')
+        city = kwargs.get('city')
+        update_by = kwargs.get('update_by', 'ai_sale_v2')
+        
+        # 构建动态更新字段
+        update_fields = []
+        
+        # 检查每个字段是否有值，有值则添加到更新列表中
+        if phone is not None and phone.strip():
+            safe_phone = phone.strip().replace("'", "''")  # 转义单引号
+            update_fields.append(f"phone = '{safe_phone}'")
+            
+        if name is not None and name.strip():
+            safe_name = name.strip().replace("'", "''")
+            update_fields.append(f"name = '{safe_name}'")
+            
+        if industry is not None and industry.strip():
+            safe_industry = industry.strip().replace("'", "''")
+            update_fields.append(f"industry = '{safe_industry}'")
+            
+        if department is not None and department.strip():
+            safe_department = department.strip().replace("'", "''")
+            update_fields.append(f"department = '{safe_department}'")
+            
+        if company is not None and company.strip():
+            safe_company = company.strip().replace("'", "''")
+            update_fields.append(f"company = '{safe_company}'")
+            
+        if post is not None and post.strip():
+            safe_post = post.strip().replace("'", "''")
+            update_fields.append(f"post = '{safe_post}'")
+            
+        if company_size is not None and company_size.strip():
+            safe_company_size = company_size.strip().replace("'", "''")
+            update_fields.append(f"company_size = '{safe_company_size}'")
+            
+        if city is not None and city.strip():
+            safe_city = city.strip().replace("'", "''")
+            update_fields.append(f"city = '{safe_city}'")
+        
+        # 如果没有需要更新的字段，直接返回成功
+        if not update_fields:
+            return "没有需要更新的字段"
+        
+        # 添加固定的更新字段
+        safe_update_by = update_by.replace("'", "''")
+        update_fields.append(f"update_by = '{safe_update_by}'")
+        update_fields.append("update_time = NOW()")
+        
+        # 构建SQL查询
+        query = f"""
+            UPDATE sale_wechat_contact
+            SET
+                {', '.join(update_fields)}
+            WHERE
+                tenant_id = {tenant_id} AND
+                belong_wechat_id = '{belong_wechat_id}' AND
+                wechat_id = '{wechat_id}';
+        """
+        
+        # 执行更新
+        db_manager.execute_update(query)
+        logging.info(f"更新客户画像的sql是: {query}")
+        # 记录日志
+        updated_fields = [field.split(' = ')[0] for field in update_fields if ' = ' in field and 'update_by' not in field]
+        logging.info(f"成功更新客户画像：tenant_id={tenant_id}, belong_wechat_id={belong_wechat_id}, wechat_id={wechat_id}, 更新字段={updated_fields}")
+        return "更新客户画像成功"
+        
+    except Exception as e:
+        logging.error(f"更新客户画像失败：{e}")
+        return "更新客户画像失败"
     

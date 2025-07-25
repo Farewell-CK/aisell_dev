@@ -1,6 +1,6 @@
 api_keys:
   qwen:
-    api_key: sk-ad30851f6a47453a8b2c56ec4da32957
+    api_key: sk-0a965a916d164d14b91b30d186f29786
     base_url: https://dashscope.aliyuncs.com/compatible-mode/v1
   deepseek:
     api_key: sk-d0dcd1cb9600485d951f604146e3f1ea
@@ -8,6 +8,9 @@ api_keys:
   ernie:
     api_key: bce-v3/ALTAK-wKuFEIj8EXZqIDOquAnsT/678c3407baba1a9b64ab889a7f7becd7dc3a4591
     base_url: https://qianfan.baidubce.com/v2
+  ark:
+    api_key: 3f6f728d-633a-4285-b75e-7691516fd7aa
+    base_url: https://ark.cn-beijing.volces.com/api/v3
   gaode:
     api_key: af8a9fd3dac89fe58d1ab4a2fa142a30
   

@@ -1,0 +1,86 @@
+2025-07-25 14:50:42 - summarizer - ERROR - summarize_document:1608 - 无法提取或内容为空: /tmp/tmp7ppuybrg.pdf。错误: 未能提取任何文本内容（可能是图片型PDF或加密PDF）
+2025-07-25 15:13:22 - test - ERROR - parse_agent_response:115 - JSON解析失败: Expecting value: line 1 column 1 (char 0), 原始响应: 明白了，您好，我是绿灯智能的销售顾问小林，专注于为企业提供数字化销售支持，我们的AI销售数字员工能高效找客户、聊客户，想了解下您目前销售团队的情况，比如团队规模、获客方式等，方便吗~ 
+
+```json
+{
+   "content_list": [
+      {
+         "type": "text",
+         "content": "明白了，您好，我是绿灯智能的销售顾问小林，专注于为企业提供数字化销售支持，我们的AI销售数字员工能高效找客户、聊客户，想了解下您目前销售团队的情况，比如团队规模、获客方式等，方便吗~"
+      }
+   ],
+   "collaborate_list": [],
+   "follow_up": {
+      "is_follow_up": 1,
+      "follow_up_content": ["您目前销售团队规模大概多少人呢", "主要通过哪些渠道获取客户"]
+   },
+   "need_assistance": 0
+}
+2025-07-25 15:13:53 - test - ERROR - parse_agent_response:115 - JSON解析失败: Expecting value: line 1 column 1 (char 0), 原始响应: 我是绿灯智能的销售顾问小林，负责推广AI销售数字员工解决方案，能帮助您高效找客户、聊客户，想了解下您的业务情况~
+
+```json
+{
+   "content_list": [
+      {
+         "type": "text",
+         "content": "我是绿灯智能的销售顾问小林，负责推广AI销售数字员工解决方案，能帮助您高效找客户、聊客户，想了解下您的业务情况~"
+      }
+   ],
+   "collaborate_list": [],
+   "follow_up": {
+      "is_follow_up": 1,
+      "follow_up_content": ["您目前是怎么获取客户的呢", "是否遇到过客户跟进效率低的问题"]
+   },
+   "need_assistance": 0
+}
+2025-07-25 15:53:44 - test - ERROR - parse_agent_response:115 - JSON解析失败: Expecting value: line 1 column 1 (char 0), 原始响应: 好的，我的沟通规则主要是简洁高效、精准回应，比如通过开放式提问挖掘您的具体需求，避免使用晦涩语言，确保交流清晰明了，您觉得这样可以吗~
+
+```json
+{
+   "content_list": [
+      {
+         "type": "text",
+         "content": "好的，我的沟通规则主要是简洁高效、精准回应，比如通过开放式提问挖掘您的具体需求，避免使用晦涩语言，确保交流清晰明了，您觉得这样可以吗~"
+      }
+   ],
+   "collaborate_list": [],
+   "follow_up": {
+      "is_follow_up": 1,
+      "follow_up_content": ["您对销售线索获取有遇到什么难点吗", "是否考虑过数字化工具来提升效率"]
+   },
+   "need_assistance": 0
+}
+2025-07-25 15:54:09 - test - ERROR - parse_agent_response:115 - JSON解析失败: Expecting value: line 1 column 1 (char 0), 原始响应: 明白了，没问题，我会注意沟通方式，那我们可以聊聊您目前在客户获取上的一些挑战吗~
+
+```json
+{
+   "content_list": [
+      {
+         "type": "text",
+         "content": "明白了，没问题，我会注意沟通方式，那我们可以聊聊您目前在客户获取上的一些挑战吗~"
+      }
+   ],
+   "collaborate_list": [],
+   "follow_up": {
+      "is_follow_up": 1,
+      "follow_up_content": ["您觉得当前客户获取效率如何", "有没有考虑优化方式"]
+   },
+   "need_assistance": 0
+}
+2025-07-25 15:54:48 - test - ERROR - parse_agent_response:115 - JSON解析失败: Expecting value: line 1 column 1 (char 0), 原始响应: 收到，那我直接进入主题，我们的AI销售数字员工能自主筛选销售线索、自动化沟通客户，您目前的销售团队规模和获客方式方便分享一下吗~
+
+```json
+{
+   "content_list": [
+      {
+         "type": "text",
+         "content": "收到，那我直接进入主题，我们的AI销售数字员工能自主筛选销售线索、自动化沟通客户，您目前的销售团队规模和获客方式方便分享一下吗~"
+      }
+   ],
+   "collaborate_list": [],
+   "follow_up": {
+      "is_follow_up": 1,
+      "follow_up_content": ["您觉得现有获客渠道效果如何", "是否遇到过客户资产难以管理的问题"]
+   },
+   "need_assistance": 0
+}

@@ -36,7 +36,7 @@ session_service = DatabaseSessionService(
 
 # 初始化 Runner，将 root_agent 与配置好的数据库会话服务关联
 runner = Runner(
-    app_name="ai_sales_agent",
+    app_name="ai_sales_agent_v2",
     agent=root_agent,
     session_service=session_service,
 )

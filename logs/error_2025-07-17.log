@@ -1,0 +1,385 @@
+2025-07-17 15:37:00 - test - ERROR - process_agent_background:169 - 后台处理失败 - user_id: 69, session_id: 1234, error: string indices must be integers, not 'str'
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/test.py", line 112, in process_agent_background
+    agent_response_text = loop.run_until_complete(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 203, in run_async
+    async for event in invocation_context.agent.run_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/llm_agent.py", line 275, in _run_async_impl
+    async for event in self._llm_flow.run_async(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 282, in run_async
+    async for event in self._run_one_step_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 314, in _run_one_step_async
+    async for llm_response in self._call_llm_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 499, in _call_llm_async
+    if response := await self._handle_before_model_callback(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 582, in _handle_before_model_callback
+    before_model_callback_content = await before_model_callback_content
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/tools/callbacks.py", line 223, in dynamic_one_to_N_agent_instruction_before_model
+    new_instruction = await get_one_to_N_prompt(current_tenant_id, current_task_id)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/prompts/prompts.py", line 361, in get_one_to_N_prompt
+    sale_flow = restore_sale_flow_format(origin_sale_flow)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/tools/tools.py", line 166, in restore_sale_flow_format
+    restored_text += f"{i}. {item['title']}\n"
+                             ~~~~^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+2025-07-17 15:40:28 - test - ERROR - process_agent_background:133 - JSON解析失败: Expecting property name enclosed in double quotes: line 18 column 1 (char 285), 原始响应: ```json
+{
+   "content_list": [
+   {
+      "type": "text",
+      "content": "您好很高兴为您服务"
+   },
+   {
+      "type": "text",
+      "content": "请问有什么可以帮您的吗"
+   }
+   ],
+   "collaborate_list": [],
+   "follow_up": {
+      "is_follow_up": 0,
+      "follow_up_content": []
+   },
+   "need_assistance": 1,
+}
+```
+2025-07-17 15:49:31 - test - ERROR - process_agent_background:133 - JSON解析失败: Expecting property name enclosed in double quotes: line 18 column 1 (char 295), 原始响应: {
+   "content_list": [
+   {
+      "type": "text",
+      "content": "您好有什么可以帮助您的吗"
+   },
+   {
+      "type": "text",
+      "content": "我们提供专业的商标注册和专利申请服务"
+   }
+   ],
+   "collaborate_list": [],
+   "follow_up": {
+      "is_follow_up": 0,
+      "follow_up_content": []
+   },
+   "need_assistance": 1,
+}
+2025-07-17 15:53:15 - test - ERROR - process_agent_background:133 - JSON解析失败: Expecting property name enclosed in double quotes: line 18 column 1 (char 285), 原始响应: {
+   "content_list": [
+   {
+      "type": "text",
+      "content": "您好很高兴为您服务"
+   },
+   {
+      "type": "text",
+      "content": "请问有什么可以帮您的吗"
+   }
+   ],
+   "collaborate_list": [],
+   "follow_up": {
+      "is_follow_up": 0,
+      "follow_up_content": []
+   },
+   "need_assistance": 1,
+}
+2025-07-17 17:16:41 - test - ERROR - process_agent_background:133 - JSON解析失败: Extra data: line 23 column 1 (char 393), 原始响应: {
+   "content_list": [
+   {
+      "type": "text",
+      "content": "没关系，很高兴认识您"
+   },
+   {
+      "type": "text",
+      "content": "我是您的销售顾问，专注于提供专业的服务"
+   },
+   {
+      "type": "text",
+      "content": "或许我们可以从您的需求开始聊起"
+   }
+   ],
+   "collaborate_list": [],
+   "follow_up": {
+      "is_follow_up": 1,
+      "follow_up_content": ["客户表示不认识", "已尝试建立信任", "引导客户需求"]
+   },
+   "need_assistance": 1
+}
+``````json
+{
+   "content_list": [
+   {
+      "type": "text",
+      "content": "看来您可能有些疑惑"
+   },
+   {
+      "type": "text",
+      "content": "不用担心，我的目标是帮助您解决问题"
+   },
+   {
+      "type": "text",
+      "content": "您可以告诉我目前需要什么帮助吗"
+   }
+   ],
+   "collaborate_list": [],
+   "follow_up": {
+      "is_follow_up": 1,
+      "follow_up_content": ["客户提到乌索", "保持专业态度", "继续引导需求"]
+   },
+   "need_assistance": 1
+}
+2025-07-17 17:19:17 - test - ERROR - process_agent_background:133 - JSON解析失败: Extra data: line 23 column 1 (char 384), 原始响应: {
+   "content_list": [
+   {
+      "type": "text",
+      "content": "看来您提到了一些有趣的词语"
+   },
+   {
+      "type": "text",
+      "content": "不过我们还是回到您的需求上吧"
+   },
+   {
+      "type": "text",
+      "content": "您需要什么样的帮助呢"
+   }
+   ],
+   "collaborate_list": [],
+   "follow_up": {
+      "is_follow_up": 1,
+      "follow_up_content": ["客户提到乌索", "保持专业态度", "继续引导需求"]
+   },
+   "need_assistance": 1
+}
+``````json
+{
+   "content_list": [
+   {
+      "type": "text",
+      "content": "哇达西天才加那一喏，听起来很有趣"
+   },
+   {
+      "type": "text",
+      "content": "不过我更关心您目前的需求"
+   },
+   {
+      "type": "text",
+      "content": "可以和我具体说说吗"
+   }
+   ],
+   "collaborate_list": [],
+   "follow_up": {
+      "is_follow_up": 1,
+      "follow_up_content": ["客户语言较模糊", "尝试拉回主题", "关注客户需求"]
+   },
+   "need_assistance": 1
+}
+2025-07-17 17:24:16 - test - ERROR - process_agent_background:133 - JSON解析失败: Extra data: line 23 column 1 (char 381), 原始响应: {
+   "content_list": [
+   {
+      "type": "text",
+      "content": "看来您有很多有趣的想法"
+   },
+   {
+      "type": "text",
+      "content": "不过为了更好地帮助您"
+   },
+   {
+      "type": "text",
+      "content": "能否具体说说您的需求呢"
+   }
+   ],
+   "collaborate_list": [],
+   "follow_up": {
+      "is_follow_up": 1,
+      "follow_up_content": ["客户持续模糊语言", "尝试拉回主题", "关注客户需求"]
+   },
+   "need_assistance": 1
+}
+``````json
+{
+   "content_list": [
+   {
+      "type": "text",
+      "content": "咦？是有什么特别的事情吗"
+   },
+   {
+      "type": "text",
+      "content": "如果有什么需要帮助的可以告诉我"
+   },
+   {
+      "type": "text",
+      "content": "我一直在这里为您服务"
+   }
+   ],
+   "collaborate_list": [],
+   "follow_up": {
+      "is_follow_up": 1,
+      "follow_up_content": ["客户疑问语气", "提供支持", "等待客户需求"]
+   },
+   "need_assistance": 1
+}
+2025-07-17 17:42:27 - test - ERROR - process_agent_background:169 - 后台处理失败 - user_id: 41, session_id: WJE1193342535, error: get_one_to_N_prompt() missing 1 required positional argument: 'wechat_name'
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/test.py", line 112, in process_agent_background
+    agent_response_text = loop.run_until_complete(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 203, in run_async
+    async for event in invocation_context.agent.run_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/llm_agent.py", line 275, in _run_async_impl
+    async for event in self._llm_flow.run_async(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 282, in run_async
+    async for event in self._run_one_step_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 314, in _run_one_step_async
+    async for llm_response in self._call_llm_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 499, in _call_llm_async
+    if response := await self._handle_before_model_callback(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 582, in _handle_before_model_callback
+    before_model_callback_content = await before_model_callback_content
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/tools/callbacks.py", line 223, in dynamic_one_to_N_agent_instruction_before_model
+    new_instruction = await get_one_to_N_prompt(current_tenant_id, current_task_id)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: get_one_to_N_prompt() missing 1 required positional argument: 'wechat_name'
+2025-07-17 19:25:34 - test - ERROR - process_agent_background:169 - 后台处理失败 - user_id: 41, session_id: WJE1193342535, error: name 'wechat_name' is not defined
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/test.py", line 112, in process_agent_background
+    agent_response_text = loop.run_until_complete(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 203, in run_async
+    async for event in invocation_context.agent.run_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/llm_agent.py", line 275, in _run_async_impl
+    async for event in self._llm_flow.run_async(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 282, in run_async
+    async for event in self._run_one_step_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 314, in _run_one_step_async
+    async for llm_response in self._call_llm_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 499, in _call_llm_async
+    if response := await self._handle_before_model_callback(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 582, in _handle_before_model_callback
+    before_model_callback_content = await before_model_callback_content
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/tools/callbacks.py", line 223, in dynamic_one_to_N_agent_instruction_before_model
+    new_instruction = await get_one_to_N_prompt(current_tenant_id, current_task_id, wechat_name)
+                                                                                    ^^^^^^^^^^^
+NameError: name 'wechat_name' is not defined
+2025-07-17 21:22:19 - asyncio - ERROR - default_exception_handler:1833 - Task was destroyed but it is pending!
+task: <Task pending name='Task-12' coro=<Logging.async_success_handler() running at /home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/litellm_logging.py:1732>>
+2025-07-17 21:22:19 - asyncio - ERROR - default_exception_handler:1833 - Task was destroyed but it is pending!
+task: <Task pending name='Task-13' coro=<<async_generator_athrow without __name__>()>>
+2025-07-17 21:22:19 - test - ERROR - process_agent_background:169 - 后台处理失败 - user_id: 41, session_id: wxid_8d9ory4pas3422, error: The last_update_time provided in the session object '2025-07-17 21:22:08' is earlier than the update_time in the storage_session '2025-07-17 21:22:18'. Please check if it is a stale session.
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/test.py", line 112, in process_agent_background
+    agent_response_text = loop.run_until_complete(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 205, in run_async
+    await self.session_service.append_event(session=session, event=event)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/sessions/database_session_service.py", line 533, in append_event
+    raise ValueError(
+ValueError: The last_update_time provided in the session object '2025-07-17 21:22:08' is earlier than the update_time in the storage_session '2025-07-17 21:22:18'. Please check if it is a stale session.
+2025-07-17 21:22:28 - test - ERROR - process_agent_background:133 - JSON解析失败: Extra data: line 19 column 1 (char 302), 原始响应: {
+   "content_list": [
+   {
+      "type": "text",
+      "content": "我们公司名为绿灯智能"
+   },
+   {
+      "type": "text",
+      "content": "专注于提供智能家居解决方案"
+   }
+   ],
+   "collaborate_list": [],
+   "follow_up": {
+      "is_follow_up": 1, 
+      "follow_up_content": ["详细介绍智能家居服务"]
+   },
+   "need_assistance": 1
+}
+``````json
+{
+   "content_list": [
+   {
+      "type": "text",
+      "content": "比如我们的智能照明系统"
+   },
+   {
+      "type": "text",
+      "content": "可以根据您的日常习惯自动调节亮度和色温"
+   }
+   ],
+   "collaborate_list": [],
+   "follow_up": {
+      "is_follow_up": 1, 
+      "follow_up_content": ["继续介绍具体案例"]
+   },
+   "need_assistance": 1
+}
+2025-07-17 21:51:47 - test - ERROR - process_agent_background:175 - 后台处理失败 - user_id: 41, session_id: wxid_8d9ory4pas3422, error: The last_update_time provided in the session object '2025-07-17 21:51:40' is earlier than the update_time in the storage_session '2025-07-17 21:51:45'. Please check if it is a stale session.
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/test.py", line 146, in process_agent_background
+    agent_response_text = asyncio.run(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 205, in run_async
+    await self.session_service.append_event(session=session, event=event)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/sessions/database_session_service.py", line 533, in append_event
+    raise ValueError(
+ValueError: The last_update_time provided in the session object '2025-07-17 21:51:40' is earlier than the update_time in the storage_session '2025-07-17 21:51:45'. Please check if it is a stale session.
+2025-07-17 22:23:49 - test - ERROR - process_agent_background:175 - 后台处理失败 - user_id: 41, session_id: wxid_8d9ory4pas3422, error: The last_update_time provided in the session object '2025-07-17 22:23:35' is earlier than the update_time in the storage_session '2025-07-17 22:23:42'. Please check if it is a stale session.
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/test.py", line 146, in process_agent_background
+    agent_response_text = asyncio.run(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 205, in run_async
+    await self.session_service.append_event(session=session, event=event)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/sessions/database_session_service.py", line 533, in append_event
+    raise ValueError(
+ValueError: The last_update_time provided in the session object '2025-07-17 22:23:35' is earlier than the update_time in the storage_session '2025-07-17 22:23:42'. Please check if it is a stale session.

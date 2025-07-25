@@ -1,6 +1,4 @@
-from tools.database import DatabaseManager
-
-db_manager = DatabaseManager()
+from core.database_core import db_manager
 
 def create_sale_prompt_table():
     """

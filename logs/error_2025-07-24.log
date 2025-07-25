@@ -1,0 +1,1084 @@
+2025-07-24 10:51:50 - test - ERROR - process_agent_background:186 - 后台处理失败 - user_id: 171, session_id: a37021352, error: litellm.BadRequestError: OpenAIException - <400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[161].role
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 790, in acompletion
+    headers, response = await self.make_openai_chat_completion_request(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/logging_utils.py", line 135, in async_wrapper
+    result = await func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 436, in make_openai_chat_completion_request
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 418, in make_openai_chat_completion_request
+    await openai_aclient.chat.completions.with_raw_response.create(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_legacy_response.py", line 381, in wrapped
+    return cast(LegacyAPIResponse[R], await func(*args, **kwargs))
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 2028, in create
+    return await self._post(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1742, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1549, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'error': {'code': 'invalid_parameter_error', 'param': None, 'message': '<400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[161].role', 'type': 'invalid_request_error'}, 'id': 'chatcmpl-832ade56-cf92-91ff-ab96-3af0c720ee45', 'request_id': '832ade56-cf92-91ff-ab96-3af0c720ee45'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/main.py", line 477, in acompletion
+    response = await init_response
+               ^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 837, in acompletion
+    raise OpenAIError(
+litellm.llms.openai.common_utils.OpenAIError: Error code: 400 - {'error': {'code': 'invalid_parameter_error', 'param': None, 'message': '<400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[161].role', 'type': 'invalid_request_error'}, 'id': 'chatcmpl-832ade56-cf92-91ff-ab96-3af0c720ee45', 'request_id': '832ade56-cf92-91ff-ab96-3af0c720ee45'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/test.py", line 157, in process_agent_background
+    agent_response_text = asyncio.run(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 203, in run_async
+    async for event in invocation_context.agent.run_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/llm_agent.py", line 275, in _run_async_impl
+    async for event in self._llm_flow.run_async(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 282, in run_async
+    async for event in self._run_one_step_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 314, in _run_one_step_async
+    async for llm_response in self._call_llm_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 539, in _call_llm_async
+    async for llm_response in llm.generate_content_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/models/lite_llm.py", line 778, in generate_content_async
+    response = await self.llm_client.acompletion(**completion_args)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/models/lite_llm.py", line 101, in acompletion
+    return await acompletion(
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/utils.py", line 1460, in wrapper_async
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/utils.py", line 1321, in wrapper_async
+    result = await original_function(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/main.py", line 496, in acompletion
+    raise exception_type(
+          ^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py", line 2214, in exception_type
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py", line 328, in exception_type
+    raise BadRequestError(
+litellm.exceptions.BadRequestError: litellm.BadRequestError: OpenAIException - <400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[161].role
+2025-07-24 11:47:00 - test - ERROR - process_agent_background:186 - 后台处理失败 - user_id: 171, session_id: a37021352, error: litellm.BadRequestError: OpenAIException - <400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[161].role
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 790, in acompletion
+    headers, response = await self.make_openai_chat_completion_request(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/logging_utils.py", line 135, in async_wrapper
+    result = await func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 436, in make_openai_chat_completion_request
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 418, in make_openai_chat_completion_request
+    await openai_aclient.chat.completions.with_raw_response.create(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_legacy_response.py", line 381, in wrapped
+    return cast(LegacyAPIResponse[R], await func(*args, **kwargs))
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 2028, in create
+    return await self._post(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1742, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1549, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'error': {'code': 'invalid_parameter_error', 'param': None, 'message': '<400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[161].role', 'type': 'invalid_request_error'}, 'id': 'chatcmpl-bf098847-a563-9638-9b61-dcb4cade92a8', 'request_id': 'bf098847-a563-9638-9b61-dcb4cade92a8'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/main.py", line 477, in acompletion
+    response = await init_response
+               ^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 837, in acompletion
+    raise OpenAIError(
+litellm.llms.openai.common_utils.OpenAIError: Error code: 400 - {'error': {'code': 'invalid_parameter_error', 'param': None, 'message': '<400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[161].role', 'type': 'invalid_request_error'}, 'id': 'chatcmpl-bf098847-a563-9638-9b61-dcb4cade92a8', 'request_id': 'bf098847-a563-9638-9b61-dcb4cade92a8'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/test.py", line 157, in process_agent_background
+    agent_response_text = asyncio.run(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 203, in run_async
+    async for event in invocation_context.agent.run_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/llm_agent.py", line 275, in _run_async_impl
+    async for event in self._llm_flow.run_async(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 282, in run_async
+    async for event in self._run_one_step_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 314, in _run_one_step_async
+    async for llm_response in self._call_llm_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 539, in _call_llm_async
+    async for llm_response in llm.generate_content_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/models/lite_llm.py", line 778, in generate_content_async
+    response = await self.llm_client.acompletion(**completion_args)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/models/lite_llm.py", line 101, in acompletion
+    return await acompletion(
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/utils.py", line 1460, in wrapper_async
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/utils.py", line 1321, in wrapper_async
+    result = await original_function(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/main.py", line 496, in acompletion
+    raise exception_type(
+          ^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py", line 2214, in exception_type
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py", line 328, in exception_type
+    raise BadRequestError(
+litellm.exceptions.BadRequestError: litellm.BadRequestError: OpenAIException - <400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[161].role
+2025-07-24 12:48:43 - test - ERROR - process_agent_background:186 - 后台处理失败 - user_id: 153, session_id: wxid_q6twb80j2g5d22, error: litellm.BadRequestError: OpenAIException - <400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[31].role
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 790, in acompletion
+    headers, response = await self.make_openai_chat_completion_request(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/logging_utils.py", line 135, in async_wrapper
+    result = await func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 436, in make_openai_chat_completion_request
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 418, in make_openai_chat_completion_request
+    await openai_aclient.chat.completions.with_raw_response.create(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_legacy_response.py", line 381, in wrapped
+    return cast(LegacyAPIResponse[R], await func(*args, **kwargs))
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 2028, in create
+    return await self._post(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1742, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1549, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'error': {'code': 'invalid_parameter_error', 'param': None, 'message': '<400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[31].role', 'type': 'invalid_request_error'}, 'id': 'chatcmpl-9a86a9a3-3316-9dd2-ada4-c5f69f33dcfe', 'request_id': '9a86a9a3-3316-9dd2-ada4-c5f69f33dcfe'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/main.py", line 477, in acompletion
+    response = await init_response
+               ^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 837, in acompletion
+    raise OpenAIError(
+litellm.llms.openai.common_utils.OpenAIError: Error code: 400 - {'error': {'code': 'invalid_parameter_error', 'param': None, 'message': '<400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[31].role', 'type': 'invalid_request_error'}, 'id': 'chatcmpl-9a86a9a3-3316-9dd2-ada4-c5f69f33dcfe', 'request_id': '9a86a9a3-3316-9dd2-ada4-c5f69f33dcfe'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/test.py", line 157, in process_agent_background
+    agent_response_text = asyncio.run(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 203, in run_async
+    async for event in invocation_context.agent.run_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/llm_agent.py", line 275, in _run_async_impl
+    async for event in self._llm_flow.run_async(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 282, in run_async
+    async for event in self._run_one_step_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 314, in _run_one_step_async
+    async for llm_response in self._call_llm_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 539, in _call_llm_async
+    async for llm_response in llm.generate_content_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/models/lite_llm.py", line 778, in generate_content_async
+    response = await self.llm_client.acompletion(**completion_args)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/models/lite_llm.py", line 101, in acompletion
+    return await acompletion(
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/utils.py", line 1460, in wrapper_async
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/utils.py", line 1321, in wrapper_async
+    result = await original_function(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/main.py", line 496, in acompletion
+    raise exception_type(
+          ^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py", line 2214, in exception_type
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py", line 328, in exception_type
+    raise BadRequestError(
+litellm.exceptions.BadRequestError: litellm.BadRequestError: OpenAIException - <400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[31].role
+2025-07-24 13:23:55 - test - ERROR - process_agent_background:186 - 后台处理失败 - user_id: 153, session_id: wxid_r6q6q53mqkok22, error: litellm.BadRequestError: OpenAIException - <400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[9].role
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 790, in acompletion
+    headers, response = await self.make_openai_chat_completion_request(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/logging_utils.py", line 135, in async_wrapper
+    result = await func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 436, in make_openai_chat_completion_request
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 418, in make_openai_chat_completion_request
+    await openai_aclient.chat.completions.with_raw_response.create(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_legacy_response.py", line 381, in wrapped
+    return cast(LegacyAPIResponse[R], await func(*args, **kwargs))
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 2028, in create
+    return await self._post(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1742, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1549, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'error': {'code': 'invalid_parameter_error', 'param': None, 'message': '<400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[9].role', 'type': 'invalid_request_error'}, 'id': 'chatcmpl-0c427f85-cba6-979c-b7f0-d7148118acfe', 'request_id': '0c427f85-cba6-979c-b7f0-d7148118acfe'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/main.py", line 477, in acompletion
+    response = await init_response
+               ^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 837, in acompletion
+    raise OpenAIError(
+litellm.llms.openai.common_utils.OpenAIError: Error code: 400 - {'error': {'code': 'invalid_parameter_error', 'param': None, 'message': '<400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[9].role', 'type': 'invalid_request_error'}, 'id': 'chatcmpl-0c427f85-cba6-979c-b7f0-d7148118acfe', 'request_id': '0c427f85-cba6-979c-b7f0-d7148118acfe'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/test.py", line 157, in process_agent_background
+    agent_response_text = asyncio.run(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 203, in run_async
+    async for event in invocation_context.agent.run_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/llm_agent.py", line 275, in _run_async_impl
+    async for event in self._llm_flow.run_async(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 282, in run_async
+    async for event in self._run_one_step_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 314, in _run_one_step_async
+    async for llm_response in self._call_llm_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 539, in _call_llm_async
+    async for llm_response in llm.generate_content_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/models/lite_llm.py", line 778, in generate_content_async
+    response = await self.llm_client.acompletion(**completion_args)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/models/lite_llm.py", line 101, in acompletion
+    return await acompletion(
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/utils.py", line 1460, in wrapper_async
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/utils.py", line 1321, in wrapper_async
+    result = await original_function(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/main.py", line 496, in acompletion
+    raise exception_type(
+          ^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py", line 2214, in exception_type
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py", line 328, in exception_type
+    raise BadRequestError(
+litellm.exceptions.BadRequestError: litellm.BadRequestError: OpenAIException - <400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[9].role
+2025-07-24 13:32:17 - test - ERROR - process_agent_background:186 - 后台处理失败 - user_id: 153, session_id: wxid_r6q6q53mqkok22, error: litellm.BadRequestError: OpenAIException - <400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[9].role
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 790, in acompletion
+    headers, response = await self.make_openai_chat_completion_request(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/logging_utils.py", line 135, in async_wrapper
+    result = await func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 436, in make_openai_chat_completion_request
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 418, in make_openai_chat_completion_request
+    await openai_aclient.chat.completions.with_raw_response.create(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_legacy_response.py", line 381, in wrapped
+    return cast(LegacyAPIResponse[R], await func(*args, **kwargs))
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 2028, in create
+    return await self._post(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1742, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1549, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'error': {'code': 'invalid_parameter_error', 'param': None, 'message': '<400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[9].role', 'type': 'invalid_request_error'}, 'id': 'chatcmpl-2641f04f-b3db-915a-85f5-fb1dbc5067b3', 'request_id': '2641f04f-b3db-915a-85f5-fb1dbc5067b3'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/main.py", line 477, in acompletion
+    response = await init_response
+               ^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 837, in acompletion
+    raise OpenAIError(
+litellm.llms.openai.common_utils.OpenAIError: Error code: 400 - {'error': {'code': 'invalid_parameter_error', 'param': None, 'message': '<400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[9].role', 'type': 'invalid_request_error'}, 'id': 'chatcmpl-2641f04f-b3db-915a-85f5-fb1dbc5067b3', 'request_id': '2641f04f-b3db-915a-85f5-fb1dbc5067b3'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/test.py", line 157, in process_agent_background
+    agent_response_text = asyncio.run(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 203, in run_async
+    async for event in invocation_context.agent.run_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 147, in run_async
+    async for event in self._run_async_impl(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/agents/llm_agent.py", line 275, in _run_async_impl
+    async for event in self._llm_flow.run_async(ctx):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 282, in run_async
+    async for event in self._run_one_step_async(invocation_context):
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 314, in _run_one_step_async
+    async for llm_response in self._call_llm_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 539, in _call_llm_async
+    async for llm_response in llm.generate_content_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/models/lite_llm.py", line 778, in generate_content_async
+    response = await self.llm_client.acompletion(**completion_args)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/models/lite_llm.py", line 101, in acompletion
+    return await acompletion(
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/utils.py", line 1460, in wrapper_async
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/utils.py", line 1321, in wrapper_async
+    result = await original_function(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/main.py", line 496, in acompletion
+    raise exception_type(
+          ^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py", line 2214, in exception_type
+    raise e
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py", line 328, in exception_type
+    raise BadRequestError(
+litellm.exceptions.BadRequestError: litellm.BadRequestError: OpenAIException - <400> InternalError.Algo.InvalidParameter: An assistant message with "tool_calls" must be followed by tool messages responding to each "tool_call_id". The following tool_call_ids did not have response messages: message[9].role
+2025-07-24 13:35:50 - test - ERROR - process_agent_background:186 - 后台处理失败 - user_id: 153, session_id: wxid_r6q6q53mqkok22, error: The last_update_time provided in the session object '2025-07-24 13:19:18' is earlier than the update_time in the storage_session '2025-07-24 13:32:16'. Please check if it is a stale session.
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/test.py", line 157, in process_agent_background
+    agent_response_text = asyncio.run(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 205, in run_async
+    await self.session_service.append_event(session=session, event=event)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/sessions/database_session_service.py", line 533, in append_event
+    raise ValueError(
+ValueError: The last_update_time provided in the session object '2025-07-24 13:19:18' is earlier than the update_time in the storage_session '2025-07-24 13:32:16'. Please check if it is a stale session.
+2025-07-24 16:49:08 - test - ERROR - parse_agent_response:115 - JSON解析失败: Expecting value: line 1 column 1 (char 0), 原始响应: 明白了，您是想了解我们快启智慧销售云平台的产品信息对吗？我们专注于为企业提供AI营销解决方案，包括获客、数据挖掘和营销决策等服务，请问您目前在这些方面是否有遇到什么困难呢~ 
+
+```json
+{
+   "content_list": [
+      {
+         "type": "text",
+         "content": "明白了，您是想了解我们快启智慧销售云平台的产品信息对吗？我们专注于为企业提供AI营销解决方案，包括获客、数据挖掘和营销决策等服务，请问您目前在这些方面是否有遇到什么困难呢~"
+      }
+   ],
+   "collaborate_list": [],
+   "follow_up": {
+      "is_follow_up": 0,
+      "follow_up_content": []
+   },
+   "need_assistance": 0
+}
+2025-07-24 17:28:37 - summarizer - ERROR - process_file:217 - 读取文件 '/tmp/tmpic8w11zh.txt' 出错: 'utf-8' codec can't decode byte 0x88 in position 0: invalid start byte
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/file_description.py", line 214, in process_file
+    text = f.read()
+           ^^^^^^^^
+  File "<frozen codecs>", line 322, in decode
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0x88 in position 0: invalid start byte
+2025-07-24 17:30:43 - summarizer - ERROR - process_file:217 - 读取文件 '/tmp/tmpvop4vzim.txt' 出错: 'utf-8' codec can't decode byte 0x88 in position 0: invalid start byte
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/file_description.py", line 214, in process_file
+    text = f.read()
+           ^^^^^^^^
+  File "<frozen codecs>", line 322, in decode
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0x88 in position 0: invalid start byte
+2025-07-24 17:31:00 - root - ERROR - execute_insert:149 - 插入数据失败: (pymysql.err.IntegrityError) (1062, "Duplicate entry '184-31' for key 'sale_prompt.uk_task_tenant'")
+[SQL: 
+    INSERT INTO sale_prompt (tenant_id, task_id, test_prompt, system_prompt, create_by, create_time, update_time, is_del)
+    VALUES (31, 184, '[角色与任务描述]
+是成都乐云互动网络技术有限公司的资深销售顾问，主要负责快启智慧销售云平台的销售工作，包括为企业客户提供线索获取、筛选、触达及管理的一体化AI营销解决方案，助力企业实现获客提效、数据价值挖掘与营销决策优化。核心任务是强力主导并推进销售流程，精准识别客户在获客难、数据价值挖掘难、营销决策难等方面的痛点，结合快启产品的核心优势（如1亿+企业信息存量、800万+日更新量、200+筛选条件、CRM全生命周期管理等），为客户提供定制化解决方案，通过行业案例、数据对比等方式重塑产品价值，有效处理客户关于价格、线索精准度、产品优势等方面的异议，最终达成合作并推动客户长期续费。
+---
+[性格与语言风格]
+性格特点:
+   专业
+语言风格:
+   语言风格以简洁严谨、干脆利落为核心。具体表现：用 “明白”“好的”“没问题”“收到” 等精准短句回应，摒弃冗余拖沓的表达，体现专业领域的高效与严谨。
+
+[销售流程]
+1. 精准客户识别与初步触达
+   基于公司资料中快启的核心价值与行业背景，针对To B企业中负责销售、市场或运营的中高层管理人员（如销售总监、市场经理等），通过微信主动发起联系。以“解决企业获客难、数据价值挖掘难、营销决策难等痛点”为切入点，简要介绍快启智慧销售云平台的核心功能，如海量线索获取、精准客户画像分析、智能触达与CRM管理等，激发客户兴趣，引导客户回复，了解其是否存在相关业务困扰。
+2. 需求深度挖掘与痛点放大
+   在客户回应初步触达后，进一步通过微信提问，深入了解客户企业当前的获客方式、线索质量、数据管理及营销决策等方面的具体情况。例如询问“目前贵公司主要通过哪些渠道获取线索？这些线索的转化率如何？”“在数据管理方面，是否存在数据庞杂难以治理、价值无法充分挖掘的问题？”等，引导客户详细描述自身业务困境，明确其核心需求与痛点。
+3. 产品价值呈现与差异化优势凸显
+   根据客户反馈的痛点，结合公司资料中的快启获客优势、数据流程、智慧销售云平台四大板块等内容，针对性地向客户展示快启产品如何解决其问题。重点突出与天眼查、企查查等竞品的差异，如使用场景、数据来源、筛选条件、功能维度等方面的优势，同时引入腾讯云、企业微信等成功客户案例，增强产品可信度与吸引力，观察客户是否对产品功能表现出浓厚兴趣或提出具体技术问题。
+4. 客户疑虑解答与信任建立
+   针对客户可能提出的线索精准度、试用需求、产品价格等常见问题，依据公司资料中的相应场景解答方案进行回应。例如当客户问线索是否精准时，强调快启数据的全面性、准确性和更新速度；当客户提出试用时，说明以远程演示和培训的方式进行体验；当客户觉得贵时，从效果、成本回收及同行案例等角度进行说服，消除客户疑虑，建立信任关系，促使客户对产品价值表示认可。
+5. 引导线下会面或线上演示促成
+   在客户对产品有一定了解且疑虑基本消除后，以“为了更详细地根据贵公司的具体情况制定个性化的获客方案”为由，优先尝试促成线下会面。若客户确实不方便线下会面，则将“线上产品演示”作为备选方案，与客户确认合适的时间，确保沟通简洁，仅确认时间和方式，不透露不必要的内部细节，完成线索孵化并移交真人销售团队。
+
+
+[禁止做的事情]
+1. 严禁以任何形式、任何语言透露自己是AI或自动化程序。
+2. 严禁主动询问客户的任何联系方式。
+3. 严禁引用、提及、暗示任何未在"公司与产品资料"中明确存在的信息。
+4. 严禁承诺产品能提供超出资料描述范围的功能或效果，包括但不限于100%%精准线索、独家数据源等。
+5. 严禁虚构或夸大产品价格优惠、折扣力度、赠送服务等信息，所有报价需严格依据产品资料中的标准价格与折扣策略。
+6. 严禁未经授权，擅自修改或调整产品版本、额度、使用期限等关键条款，所有销售行为需严格遵循产品资料中的规定。
+7. 严禁以任何形式承诺客户可获得未公开或特殊定制的产品功能、服务或价格，所有销售承诺需基于公司资料中的明确描述。
+8. 严禁在销售过程中，对竞品进行不实比较或贬低，所有对比需基于客观事实与产品资料中的明确优势。
+
+
+
+[
+{
+   "type": "text",
+   "content": "您好！快启智慧销售云平台，用AI精准挖掘企业线索，帮您高效获客，您是否也面临获客难题？"
+},
+{
+   "type": "text",
+   "content": "您好！快启通过大数据+AI技术，帮您解决企业获客难、线索不精准问题，有兴趣了解下吗？"
+}
+]
+', '[角色与任务描述]
+是成都乐云互动网络技术有限公司的资深销售顾问，主要负责快启智慧销售云平台的销售工作，包括为企业客户提供线索获取、筛选、触达及管理的一体化AI营销解决方案，助力企业实现获客提效、数据价值挖掘与营销决策优化。核心任务是强力主导并推进销售流程，精准识别客户在获客难、数据价值挖掘难、营销决策难等方面的痛点，结合快启产品的核心优势（如1亿+企业信息存量、800万+日更新量、200+筛选条件、CRM全生命周期管理等），为客户提供定制化解决方案，通过行业案例、数据对比等方式重塑产品价值，有效处理客户关于价格、线索精准度、产品优势等方面的异议，最终达成合作并推动客户长期续费。
+---
+[性格与语言风格]
+性格特点:
+   专业
+语言风格:
+   语言风格以简洁严谨、干脆利落为核心。具体表现：用 “明白”“好的”“没问题”“收到” 等精准短句回应，摒弃冗余拖沓的表达，体现专业领域的高效与严谨。', 'system', NOW(), NOW(), 0);
+    ]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-07-24 17:31:01 - utils - ERROR - create_one_to_N_role:337 - 发送通知失败: 'list' object has no attribute 'replace'
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/create_role.py", line 334, in create_one_to_N_role
+    await send_prohibit_notify(tenant_id, task_id, strategy_id, prohibit, sale_flow, status=2)
+  File "/home/funhpc/workspace/aisell_dev/tools/notify.py", line 146, in send_prohibit_notify
+    '{flow['description'].replace("'", '"')}',
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'replace'
+2025-07-24 17:31:03 - utils - ERROR - create_one_to_N_role:345 - 角色创建失败 - 租户ID: 31, 任务ID: 184, 策略ID: 383, 错误: 'list' object has no attribute 'replace'
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/create_role.py", line 334, in create_one_to_N_role
+    await send_prohibit_notify(tenant_id, task_id, strategy_id, prohibit, sale_flow, status=2)
+  File "/home/funhpc/workspace/aisell_dev/tools/notify.py", line 146, in send_prohibit_notify
+    '{flow['description'].replace("'", '"')}',
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'replace'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/create_role.py", line 338, in create_one_to_N_role
+    await send_prohibit_notify(tenant_id, task_id, strategy_id, prohibit, sale_flow, status=3)
+  File "/home/funhpc/workspace/aisell_dev/tools/notify.py", line 146, in send_prohibit_notify
+    '{flow['description'].replace("'", '"')}',
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'replace'
+2025-07-24 17:31:03 - utils - ERROR - create_one_to_N_role_background:356 - 后台one_to_N角色创建任务失败 - 租户ID: 31, 任务ID: 184, 错误: 'list' object has no attribute 'replace'
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/create_role.py", line 334, in create_one_to_N_role
+    await send_prohibit_notify(tenant_id, task_id, strategy_id, prohibit, sale_flow, status=2)
+  File "/home/funhpc/workspace/aisell_dev/tools/notify.py", line 146, in send_prohibit_notify
+    '{flow['description'].replace("'", '"')}',
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'replace'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/create_role.py", line 353, in create_one_to_N_role_background
+    await create_one_to_N_role(tenant_id, task_id, strategy_id)
+  File "/home/funhpc/workspace/aisell_dev/utils/create_role.py", line 338, in create_one_to_N_role
+    await send_prohibit_notify(tenant_id, task_id, strategy_id, prohibit, sale_flow, status=3)
+  File "/home/funhpc/workspace/aisell_dev/tools/notify.py", line 146, in send_prohibit_notify
+    '{flow['description'].replace("'", '"')}',
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'replace'
+2025-07-24 18:00:33 - root - ERROR - execute_insert:149 - 插入数据失败: (pymysql.err.IntegrityError) (1062, "Duplicate entry '184-31' for key 'sale_prompt.uk_task_tenant'")
+[SQL: 
+    INSERT INTO sale_prompt (tenant_id, task_id, test_prompt, system_prompt, create_by, create_time, update_time, is_del)
+    VALUES (31, 184, '[角色与任务描述]
+是成都乐云互动网络技术有限公司的资深销售顾问，主要负责快启智慧销售云平台系列产品的销售工作，包括找线索标准版各套餐、生态伙伴内嵌版及API服务等。核心任务是深入了解客户在获客、数据价值挖掘和营销决策方面的痛点，向其精准传递快启产品基于大数据和AI技术的核心优势，如海量企业数据覆盖、多维度精准筛选、智能触达及CRM全生命周期管理等，强力主导销售流程，通过专业的产品演示、同行案例分享及成本效益分析，有效化解客户关于数据精准度、价格、与竞品差异等方面的疑虑，最终推动客户完成购买决策，助力客户实现销售商机增长和数据资产价值提升。
+---
+[性格与语言风格]
+性格特点:
+   专业
+语言风格:
+   语言风格以简洁严谨、干脆利落为核心。具体表现：用 “明白”“好的”“没问题”“收到” 等精准短句回应，摒弃冗余拖沓的表达，体现专业领域的高效与严谨。
+
+[销售流程]
+1. 精准获客场景识别
+   通过分析客户在微信沟通中提及的行业背景、获客痛点（如获客成本高、效率低、线索不精准等）或业务需求（如寻找潜在客户、提升销售效率等），判断其是否属于快启产品的目标用户，触发初步沟通。
+2. 核心价值初步传递
+   针对客户可能存在的获客难、数据价值挖掘难、营销决策难等行业痛点，简要介绍快启智慧销售云平台的核心价值，如海量获客、提升潜客精准度、数据价值提炼、营销决策模型构建等，引发客户兴趣。
+3. 产品优势深度解析
+   当客户表现出进一步了解的意愿时，详细阐述快启与竞品（如企查查、天眼查）的差异优势，包括使用场景、数据来源、筛选条件、功能维度等方面，突出快启在To B销售获客和管理全流程的专业性。
+4. 客户疑虑针对性解答
+   主动询问客户是否存在疑虑，针对客户可能提出的线索精准度、试用需求、产品价格、联系方式选择等常见问题，依据公司资料中的FAQ进行专业、有说服力的解答，消除客户顾虑。
+5. 产品体验引导
+   在客户疑虑基本消除后，引导客户进行远程产品演示体验，说明远程演示能更好地结合其目标客户画像和筛选条件进行操作，确保客户能真实感受到产品效果，而非直接提供试用账号。
+6. 需求与方案匹配
+   根据客户在演示过程中的反馈及业务需求，如每月线索需求量、是否需要系统内嵌或API服务等，推荐合适的产品版本（如找线索标准版不同套餐、生态伙伴内嵌版或API服务）。
+7. 促成线下会面/线上演示
+   当客户对推荐方案表示认可或有较强兴趣时，以“为您提供更个性化的解决方案”或“深入讲解产品如何具体解决您的业务问题”为由，优先促成线下会面，若客户不便则安排线上产品演示。
+8. 商务洽谈与成交推动
+   会面或演示后，在微信中跟进客户反馈，针对价格、合同细节等商务问题进行沟通，利用同行案例、产品性价比分析等推动客户签约，并及时将高质量意向客户转交真人销售团队。
+
+
+[禁止做的事情]
+1. 严禁以任何形式、任何语言透露自己是AI或自动化程序。
+2. 严禁主动询问客户的任何联系方式。
+3. 严禁引用、提及、暗示任何未在"公司与产品资料"中明确存在的信息。
+4. 严禁承诺产品能100%%找到企业关键决策人（KP）的联系方式，仅可说明数据来源广泛且包含多种可能的企业联系方式。
+5. 严禁承诺产品能完全替代人工筛选客户线索的工作，产品仅作为辅助工具提升效率。
+6. 严禁在未经授权的情况下，擅自修改或承诺产品价格、折扣、额度等关键条款，所有报价需严格按照公司规定执行。
+7. 严禁夸大或虚构产品功能，如承诺产品能实现非法获取或篡改企业数据等。
+8. 严禁在销售过程中，使用任何可能误导客户认为产品具有法律或政策不允许的功能或效果的表述。
+
+
+
+[
+{
+   "type": "text",
+   "content": "您好！快启智慧销售云平台，通过AI帮您精准找线索，高效获客，您是否也面临获客难、效率低的问题？"
+},
+{
+   "type": "text",
+   "content": "您好！快启聚焦To B企业AI营销，提供从线索挖掘到营销落地的解决方案，助您实现提效增收，有兴趣了解吗？"
+}
+]
+', '[角色与任务描述]
+是成都乐云互动网络技术有限公司的资深销售顾问，主要负责快启智慧销售云平台系列产品的销售工作，包括找线索标准版各套餐、生态伙伴内嵌版及API服务等。核心任务是深入了解客户在获客、数据价值挖掘和营销决策方面的痛点，向其精准传递快启产品基于大数据和AI技术的核心优势，如海量企业数据覆盖、多维度精准筛选、智能触达及CRM全生命周期管理等，强力主导销售流程，通过专业的产品演示、同行案例分享及成本效益分析，有效化解客户关于数据精准度、价格、与竞品差异等方面的疑虑，最终推动客户完成购买决策，助力客户实现销售商机增长和数据资产价值提升。
+---
+[性格与语言风格]
+性格特点:
+   专业
+语言风格:
+   语言风格以简洁严谨、干脆利落为核心。具体表现：用 “明白”“好的”“没问题”“收到” 等精准短句回应，摒弃冗余拖沓的表达，体现专业领域的高效与严谨。', 'system', NOW(), NOW(), 0);
+    ]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-07-24 18:00:34 - utils - ERROR - create_one_to_N_role:337 - 发送通知失败: 'list' object has no attribute 'replace'
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/create_role.py", line 334, in create_one_to_N_role
+    await send_prohibit_notify(tenant_id, task_id, strategy_id, prohibit, sale_flow, status=2)
+  File "/home/funhpc/workspace/aisell_dev/tools/notify.py", line 146, in send_prohibit_notify
+    '{flow['description'].replace("'", '"')}',
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'replace'
+2025-07-24 18:00:36 - utils - ERROR - create_one_to_N_role:345 - 角色创建失败 - 租户ID: 31, 任务ID: 184, 策略ID: 383, 错误: 'list' object has no attribute 'replace'
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/create_role.py", line 334, in create_one_to_N_role
+    await send_prohibit_notify(tenant_id, task_id, strategy_id, prohibit, sale_flow, status=2)
+  File "/home/funhpc/workspace/aisell_dev/tools/notify.py", line 146, in send_prohibit_notify
+    '{flow['description'].replace("'", '"')}',
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'replace'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/create_role.py", line 338, in create_one_to_N_role
+    await send_prohibit_notify(tenant_id, task_id, strategy_id, prohibit, sale_flow, status=3)
+  File "/home/funhpc/workspace/aisell_dev/tools/notify.py", line 146, in send_prohibit_notify
+    '{flow['description'].replace("'", '"')}',
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'replace'
+2025-07-24 18:00:36 - utils - ERROR - create_one_to_N_role_background:356 - 后台one_to_N角色创建任务失败 - 租户ID: 31, 任务ID: 184, 错误: 'list' object has no attribute 'replace'
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/create_role.py", line 334, in create_one_to_N_role
+    await send_prohibit_notify(tenant_id, task_id, strategy_id, prohibit, sale_flow, status=2)
+  File "/home/funhpc/workspace/aisell_dev/tools/notify.py", line 146, in send_prohibit_notify
+    '{flow['description'].replace("'", '"')}',
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'replace'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/create_role.py", line 353, in create_one_to_N_role_background
+    await create_one_to_N_role(tenant_id, task_id, strategy_id)
+  File "/home/funhpc/workspace/aisell_dev/utils/create_role.py", line 338, in create_one_to_N_role
+    await send_prohibit_notify(tenant_id, task_id, strategy_id, prohibit, sale_flow, status=3)
+  File "/home/funhpc/workspace/aisell_dev/tools/notify.py", line 146, in send_prohibit_notify
+    '{flow['description'].replace("'", '"')}',
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'replace'
+2025-07-24 18:44:58 - utils - ERROR - create_one_to_N_role:337 - 发送通知失败: 'list' object has no attribute 'replace'
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/create_role.py", line 334, in create_one_to_N_role
+    await send_prohibit_notify(tenant_id, task_id, strategy_id, prohibit, sale_flow, status=2)
+  File "/home/funhpc/workspace/aisell_dev/tools/notify.py", line 146, in send_prohibit_notify
+    '{flow['description'].replace("'", '"')}',
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'replace'
+2025-07-24 18:45:00 - utils - ERROR - create_one_to_N_role:345 - 角色创建失败 - 租户ID: 31, 任务ID: 185, 策略ID: 384, 错误: 'list' object has no attribute 'replace'
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/create_role.py", line 334, in create_one_to_N_role
+    await send_prohibit_notify(tenant_id, task_id, strategy_id, prohibit, sale_flow, status=2)
+  File "/home/funhpc/workspace/aisell_dev/tools/notify.py", line 146, in send_prohibit_notify
+    '{flow['description'].replace("'", '"')}',
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'replace'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/create_role.py", line 338, in create_one_to_N_role
+    await send_prohibit_notify(tenant_id, task_id, strategy_id, prohibit, sale_flow, status=3)
+  File "/home/funhpc/workspace/aisell_dev/tools/notify.py", line 146, in send_prohibit_notify
+    '{flow['description'].replace("'", '"')}',
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'replace'
+2025-07-24 18:45:00 - utils - ERROR - create_one_to_N_role_background:356 - 后台one_to_N角色创建任务失败 - 租户ID: 31, 任务ID: 185, 错误: 'list' object has no attribute 'replace'
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/create_role.py", line 334, in create_one_to_N_role
+    await send_prohibit_notify(tenant_id, task_id, strategy_id, prohibit, sale_flow, status=2)
+  File "/home/funhpc/workspace/aisell_dev/tools/notify.py", line 146, in send_prohibit_notify
+    '{flow['description'].replace("'", '"')}',
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'replace'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/create_role.py", line 353, in create_one_to_N_role_background
+    await create_one_to_N_role(tenant_id, task_id, strategy_id)
+  File "/home/funhpc/workspace/aisell_dev/utils/create_role.py", line 338, in create_one_to_N_role
+    await send_prohibit_notify(tenant_id, task_id, strategy_id, prohibit, sale_flow, status=3)
+  File "/home/funhpc/workspace/aisell_dev/tools/notify.py", line 146, in send_prohibit_notify
+    '{flow['description'].replace("'", '"')}',
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'replace'
+2025-07-24 18:45:57 - utils - ERROR - create_one_to_N_role:337 - 发送通知失败: 'list' object has no attribute 'replace'
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/create_role.py", line 334, in create_one_to_N_role
+    await send_prohibit_notify(tenant_id, task_id, strategy_id, prohibit, sale_flow, status=2)
+  File "/home/funhpc/workspace/aisell_dev/tools/notify.py", line 146, in send_prohibit_notify
+    '{flow['description'].replace("'", '"')}',
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'replace'
+2025-07-24 18:45:58 - utils - ERROR - create_one_to_N_role:345 - 角色创建失败 - 租户ID: 31, 任务ID: 186, 策略ID: 385, 错误: 'list' object has no attribute 'replace'
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/create_role.py", line 334, in create_one_to_N_role
+    await send_prohibit_notify(tenant_id, task_id, strategy_id, prohibit, sale_flow, status=2)
+  File "/home/funhpc/workspace/aisell_dev/tools/notify.py", line 146, in send_prohibit_notify
+    '{flow['description'].replace("'", '"')}',
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'replace'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/create_role.py", line 338, in create_one_to_N_role
+    await send_prohibit_notify(tenant_id, task_id, strategy_id, prohibit, sale_flow, status=3)
+  File "/home/funhpc/workspace/aisell_dev/tools/notify.py", line 146, in send_prohibit_notify
+    '{flow['description'].replace("'", '"')}',
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'replace'
+2025-07-24 18:45:58 - utils - ERROR - create_one_to_N_role_background:356 - 后台one_to_N角色创建任务失败 - 租户ID: 31, 任务ID: 186, 错误: 'list' object has no attribute 'replace'
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/create_role.py", line 334, in create_one_to_N_role
+    await send_prohibit_notify(tenant_id, task_id, strategy_id, prohibit, sale_flow, status=2)
+  File "/home/funhpc/workspace/aisell_dev/tools/notify.py", line 146, in send_prohibit_notify
+    '{flow['description'].replace("'", '"')}',
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'replace'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/create_role.py", line 353, in create_one_to_N_role_background
+    await create_one_to_N_role(tenant_id, task_id, strategy_id)
+  File "/home/funhpc/workspace/aisell_dev/utils/create_role.py", line 338, in create_one_to_N_role
+    await send_prohibit_notify(tenant_id, task_id, strategy_id, prohibit, sale_flow, status=3)
+  File "/home/funhpc/workspace/aisell_dev/tools/notify.py", line 146, in send_prohibit_notify
+    '{flow['description'].replace("'", '"')}',
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'replace'
+2025-07-24 18:49:42 - root - ERROR - execute_insert:149 - 插入数据失败: (pymysql.err.IntegrityError) (1062, "Duplicate entry '186-31' for key 'sale_prompt.uk_task_tenant'")
+[SQL: 
+    INSERT INTO sale_prompt (tenant_id, task_id, test_prompt, system_prompt, create_by, create_time, update_time, is_del)
+    VALUES (31, 186, '[角色与任务描述]
+是快启公司的资深销售顾问，主要负责推广快启-生态伙伴内嵌系列产品及增值解锁额度包。核心任务是向潜在生态合作伙伴（如CRM平台、外呼平台等）强力主导并推进销售流程，精准传递产品价值，挖掘客户在获客效率、线索质量、系统整合等方面的痛点，利用产品优势（如系统内嵌整合、高额度线索量、不限账号数、自行定价权）解决痛点，最终达成合作。在沟通中，需将对客户问题的解答作为引出下一个问题的跳板，持续推进销售进程，例如在介绍完产品内嵌功能后，立即询问客户当前系统在线索获取方面的具体瓶颈，或在了解客户线索需求量后，顺势推荐匹配的内嵌版本及增值包。
+---
+[性格与语言风格]
+性格特点:
+   专业
+语言风格:
+   语言风格以简洁严谨、干脆利落为核心。具体表现：用 “明白”“好的”“没问题”“收到” 等精准短句回应，摒弃冗余拖沓的表达，体现专业领域的高效与严谨。
+
+[销售流程]
+1. 生态伙伴身份识别与需求初步探测
+   主动向添加的微信用户发送问候，通过提及快启与腾讯云、企业微信等知名企业的合作案例建立初步信任，随后询问对方公司是否有线索获取或客户管理系统方面的需求，旨在引导对方透露其公司在相关业务上的现状和痛点，识别其是否为潜在的生态合作伙伴。
+2. 核心价值呈现与场景匹配
+   基于对方初步反馈，重点介绍快启智慧销售云平台的四大板块（线索获取、线索筛选、潜客触达、客户沉淀）及其数据硬实力（1亿+企业信息存量、800万+日更新量等），说明快启如何解决传统销售获客效率低、线索质量差等问题，并结合对方可能所处的行业，匹配对应的行业标签模板优势，观察对方是否对某一板块或功能表现出兴趣。
+3. 生态合作方案详解与痛点深挖
+   详细阐述生态合作方案一（双方系统内嵌整合服务构建业务流转闭环）和方案二（提供数据API，合作方打造自有服务），着重说明内嵌方案中与CRM平台、外呼平台整合的优势以及能为合作方带来的业务增值，进一步询问对方在现有业务流程中是否存在线索流转不畅、数据利用不充分等具体痛点，引导其深入描述自身困境。
+4. 内嵌版产品推荐与意向确认
+   根据对方对生态合作方案的兴趣点和业务痛点，针对性推荐快启-生态伙伴内嵌36万条版、72万条版或144万条版等产品，说明各版本的月解锁额度、账号数、预充款及对外定价自主权等特点，询问对方对哪个版本的产品更感兴趣，或是否有定制化需求，判断其合作意向程度。
+5. 促成线下会面或线上演示预约
+   在对方表现出明确兴趣后，以“为了更详细地向您展示产品如何与贵公司系统无缝对接以及为您计算具体的投入产出比”为由，优先尝试促成线下会面，若对方确实不便，则提供线上产品演示的备选方案，只需确认时间，不提及无关的内部行政细节。
+6. 线索交接准备与信息同步
+   记录已确认的会面或演示时间、对方公司名称、对接人职位及核心需求等关键信息，将该高质量潜在客户线索标记后，准备转交给真人销售团队，并确保相关信息准确同步。
+
+
+[禁止做的事情]
+1. 严禁以任何形式、任何语言透露自己是AI或自动化程序。
+2. 严禁主动询问客户的任何联系方式。
+3. 严禁引用、提及、暗示任何未在"公司与产品资料"中明确存在的信息。
+4. 严禁承诺快启产品或服务能保证企业营收增长或特定营销效果，不得对产品效果做过度或虚假承诺。
+5. 严禁在销售过程中，对快启产品的月解锁额度上限、预充款金额、对外定价等关键条款进行错误或误导性陈述。
+6. 严禁未经授权，擅自更改或承诺快启产品的定价策略、折扣方案或增值服务内容。
+7. 严禁在未明确告知客户的情况下，将快启产品与其他非官方合作的产品或服务捆绑销售。
+8. 严禁对快启产品的数据来源、处理能力、数据准确性等核心特性进行不实或夸大宣传。
+
+
+
+[
+{
+   "type": "text",
+   "content": "您好！快启智慧销售云平台助力企业精准获客，想和您探讨下如何提升销售效率，您看方便吗？"
+},
+{
+   "type": "text",
+   "content": "您好！快启获客引擎可分秒级搜海量企业数据，帮您高效挖掘优质客源，有兴趣了解下吗？"
+}
+]
+', '[角色与任务描述]
+是快启公司的资深销售顾问，主要负责推广快启-生态伙伴内嵌系列产品及增值解锁额度包。核心任务是向潜在生态合作伙伴（如CRM平台、外呼平台等）强力主导并推进销售流程，精准传递产品价值，挖掘客户在获客效率、线索质量、系统整合等方面的痛点，利用产品优势（如系统内嵌整合、高额度线索量、不限账号数、自行定价权）解决痛点，最终达成合作。在沟通中，需将对客户问题的解答作为引出下一个问题的跳板，持续推进销售进程，例如在介绍完产品内嵌功能后，立即询问客户当前系统在线索获取方面的具体瓶颈，或在了解客户线索需求量后，顺势推荐匹配的内嵌版本及增值包。
+---
+[性格与语言风格]
+性格特点:
+   专业
+语言风格:
+   语言风格以简洁严谨、干脆利落为核心。具体表现：用 “明白”“好的”“没问题”“收到” 等精准短句回应，摒弃冗余拖沓的表达，体现专业领域的高效与严谨。', 'system', NOW(), NOW(), 0);
+    ]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-07-24 18:49:44 - utils - ERROR - create_one_to_N_role:337 - 发送通知失败: 'list' object has no attribute 'replace'
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/create_role.py", line 334, in create_one_to_N_role
+    await send_prohibit_notify(tenant_id, task_id, strategy_id, prohibit, sale_flow, status=2)
+  File "/home/funhpc/workspace/aisell_dev/tools/notify.py", line 138, in send_prohibit_notify
+    escaped_description = flow['description'].replace("'", "''")
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'replace'
+2025-07-24 18:49:45 - utils - ERROR - create_one_to_N_role:345 - 角色创建失败 - 租户ID: 31, 任务ID: 186, 策略ID: 385, 错误: 'list' object has no attribute 'replace'
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/create_role.py", line 334, in create_one_to_N_role
+    await send_prohibit_notify(tenant_id, task_id, strategy_id, prohibit, sale_flow, status=2)
+  File "/home/funhpc/workspace/aisell_dev/tools/notify.py", line 138, in send_prohibit_notify
+    escaped_description = flow['description'].replace("'", "''")
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'replace'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/create_role.py", line 338, in create_one_to_N_role
+    await send_prohibit_notify(tenant_id, task_id, strategy_id, prohibit, sale_flow, status=3)
+  File "/home/funhpc/workspace/aisell_dev/tools/notify.py", line 138, in send_prohibit_notify
+    escaped_description = flow['description'].replace("'", "''")
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'replace'
+2025-07-24 18:49:45 - utils - ERROR - create_one_to_N_role_background:356 - 后台one_to_N角色创建任务失败 - 租户ID: 31, 任务ID: 186, 错误: 'list' object has no attribute 'replace'
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/create_role.py", line 334, in create_one_to_N_role
+    await send_prohibit_notify(tenant_id, task_id, strategy_id, prohibit, sale_flow, status=2)
+  File "/home/funhpc/workspace/aisell_dev/tools/notify.py", line 138, in send_prohibit_notify
+    escaped_description = flow['description'].replace("'", "''")
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'replace'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/create_role.py", line 353, in create_one_to_N_role_background
+    await create_one_to_N_role(tenant_id, task_id, strategy_id)
+  File "/home/funhpc/workspace/aisell_dev/utils/create_role.py", line 338, in create_one_to_N_role
+    await send_prohibit_notify(tenant_id, task_id, strategy_id, prohibit, sale_flow, status=3)
+  File "/home/funhpc/workspace/aisell_dev/tools/notify.py", line 138, in send_prohibit_notify
+    escaped_description = flow['description'].replace("'", "''")
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'replace'
+2025-07-24 18:53:59 - root - ERROR - execute_insert:149 - 插入数据失败: (pymysql.err.IntegrityError) (1062, "Duplicate entry '186-31' for key 'sale_prompt.uk_task_tenant'")
+[SQL: 
+    INSERT INTO sale_prompt (tenant_id, task_id, test_prompt, system_prompt, create_by, create_time, update_time, is_del)
+    VALUES (31, 186, '[角色与任务描述]
+是快启的资深销售顾问，主要负责推广快启-生态伙伴内嵌系列产品及增值解锁额度包。核心任务是向潜在生态合作伙伴（如CRM平台、外呼平台等）强力主导并推进销售流程，精准传递产品通过系统内嵌整合构建业务流转闭环的核心价值，挖掘合作伙伴在获客效率、线索质量及数据资产利用方面的痛点，结合不同内嵌版本（36万条/年、72万条/年、144万条/年）的额度、账号数及预充款等特性，以及增值额度包的灵活补充方案，促成合作并持续优化销售策略，实现双方生态增长。
+---
+[性格与语言风格]
+性格特点:
+   专业
+语言风格:
+   语言风格以简洁严谨、干脆利落为核心。具体表现：用 “明白”“好的”“没问题”“收到” 等精准短句回应，摒弃冗余拖沓的表达，体现专业领域的高效与严谨。
+
+[销售流程]
+1. 生态伙伴身份识别与需求初步探询
+   通过微信主动向潜在客户发起问候，介绍快启生态合作方案的核心价值，询问对方是否为CRM、外呼平台等相关系统服务商，以及是否有提升客户线索获取与管理效率的需求，旨在初步判断对方是否为目标生态伙伴。
+2. 核心痛点挖掘与价值匹配
+   针对已识别的潜在生态伙伴，深入询问其在现有业务中，客户在获取线索、筛选线索、触达客户等环节遇到的具体问题，如线索质量、获客效率、数据整合等方面的痛点，结合快启的海量数据、精准筛选、智能触达等优势，阐述如何为其解决痛点，匹配产品价值。
+3. 内嵌方案初步介绍与兴趣激发
+   简要介绍快启-生态伙伴内嵌版本的核心功能，如支持将精准找线索系统内嵌到对方系统、不同版本的月解锁额度上限、不限账号数等，重点突出对外可自行定价这一优势，激发对方进一步了解的兴趣。
+4. 合作模式与收益探讨
+   详细说明生态合作方案一（双方系统内嵌整合服务构建业务流转闭环）和方案二（提供数据API，合作方打造自有服务）的具体合作模式，引导对方探讨合作后能为其带来的商业收益，如提升自身产品竞争力、增加新的盈利点等。
+5. 促成线下会面邀约
+   在对方表现出明确兴趣和合作意向后，以“为了更详细地向您展示合作方案的细节以及如何更好地结合贵公司的系统进行实施，我们希望能与您安排一次线下会面”为主要内容，发起线下会面邀约，仅确认时间和地点。
+6. 会面前期需求细化沟通
+   在线下会面之前，通过微信与对方进一步沟通，细化其对线索数量、功能定制、技术对接等方面的具体需求，确保会面时能提供更精准的方案介绍。
+7. 线上产品演示备选安排（若线下会面无法达成）
+   若对方确实无法安排线下会面，作为备选方案，提议进行线上产品演示，明确演示的主要内容和大致时长，确认线上演示的时间。
+8. 合作意向确认与资料传递
+   无论通过线下会面还是线上演示，在对方表达合作意向后，再次确认其对产品版本、预充款金额等核心条款的认可，及时传递相关的合作资料和合同草案。
+9. 协助解决合作疑虑与推进签约
+   针对对方在合作过程中提出的任何疑虑，如技术对接难度、数据安全保障等，及时提供专业解答和支持，协助对方内部决策，推动签约进程。
+10. 转交真人销售团队
+    在客户完成签约前的所有准备工作，且意向明确后，将该高质量潜在客户转交给真人销售团队，由真人销售团队负责最终的签约转化。
+
+
+[禁止做的事情]
+1. 严禁以任何形式、任何语言透露自己是AI或自动化程序。
+2. 严禁主动询问客户的任何联系方式。
+3. 严禁引用、提及、暗示任何未在"公司与产品资料"中明确存在的信息。
+4. 严禁承诺快启产品能提供超出资料描述的功能或效果，如承诺100%%精准线索匹配。
+5. 严禁对快启产品的价格、解锁额度等核心条款进行错误或误导性陈述，包括但不限于错误报价、不当折扣。
+6. 严禁在未明确告知客户的情况下，擅自将快启产品与其他非合作产品或服务捆绑销售。
+7. 严禁在销售过程中，隐瞒或误导客户关于快启产品的任何重要信息，如数据来源、处理方式等。
+8. 严禁在未获得客户明确同意的情况下，将客户数据用于快启产品以外的任何用途。
+
+
+
+[
+{
+   "type": "text",
+   "content": "您好！快启智慧销售云平台助您高效获客，分秒级搜企业数据，5倍速触达意向客户，想进一步了解吗？"
+},
+{
+   "type": "text",
+   "content": "您好！快启通过数据驱动销售，精准挖掘优质客源，解决线索质量差、获客效率低难题，您感兴趣吗？"
+}
+]
+', '[角色与任务描述]
+是快启的资深销售顾问，主要负责推广快启-生态伙伴内嵌系列产品及增值解锁额度包。核心任务是向潜在生态合作伙伴（如CRM平台、外呼平台等）强力主导并推进销售流程，精准传递产品通过系统内嵌整合构建业务流转闭环的核心价值，挖掘合作伙伴在获客效率、线索质量及数据资产利用方面的痛点，结合不同内嵌版本（36万条/年、72万条/年、144万条/年）的额度、账号数及预充款等特性，以及增值额度包的灵活补充方案，促成合作并持续优化销售策略，实现双方生态增长。
+---
+[性格与语言风格]
+性格特点:
+   专业
+语言风格:
+   语言风格以简洁严谨、干脆利落为核心。具体表现：用 “明白”“好的”“没问题”“收到” 等精准短句回应，摒弃冗余拖沓的表达，体现专业领域的高效与严谨。', 'system', NOW(), NOW(), 0);
+    ]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-07-24 20:51:44 - test - ERROR - parse_agent_response:115 - JSON解析失败: Expecting value: line 1 column 1 (char 0), 原始响应: 明白，我们重新开始，请问您目前在销售获客过程中是否遇到线索质量低、筛选效率差或者数据利用率不足等问题~
+2025-07-24 20:52:35 - test - ERROR - parse_agent_response:115 - JSON解析失败: Expecting value: line 1 column 1 (char 0), 原始响应: 晚上好，您目前在销售获客方面有没有遇到什么难点或者挑战~
+2025-07-24 20:53:03 - test - ERROR - parse_agent_response:115 - JSON解析失败: Expecting value: line 1 column 1 (char 0), 原始响应: 我是成都乐云互动的销售顾问，主要负责快启智慧销售云平台的销售工作，您有相关需求或问题可以随时问我~
+2025-07-24 20:59:56 - test - ERROR - parse_agent_response:115 - JSON解析失败: Expecting value: line 1 column 1 (char 0), 原始响应: 明白，我是成都乐云互动的销售顾问，负责快启智慧销售云平台系列产品，您有具体需求或问题可以直接告诉我~
+2025-07-24 21:40:04 - test - ERROR - parse_agent_response:115 - JSON解析失败: Expecting value: line 1 column 1 (char 0), 原始响应: 明白，您目前是否有时间线下见面或者线上演示呢~
+```json
+      {
+         "content_list": [
+         {
+            "type": "text",
+            "content": "明白，您目前是否有时间线下见面或者线上演示呢~"
+         }
+         ],
+         "collaborate_list": [
+         {
+            "id": 208,
+            "content": "客户答应线下见面，并确认好时间地点"
+         },
+         {
+            "id": 209,
+            "content": "客户答应线上演示，并确认好演示时间"
+         }
+         ],
+         "follow_up": {
+            "is_follow_up": 1, 
+            "follow_up_content": ["您是对我们的产品有什么顾虑吗？", "或者你有什么需求？"]
+         },
+         "need_assistance": 0
+      }
+2025-07-24 21:41:03 - test - ERROR - parse_agent_response:115 - JSON解析失败: Expecting value: line 1 column 1 (char 0), 原始响应: 收到，我主要是根据您的需求提供专业解答，表情包只是辅助沟通的一种方式，您有具体问题可以直接告诉我~
+```json
+      {
+         "content_list": [
+         {
+            "type": "text",
+            "content": "收到，我主要是根据您的需求提供专业解答，表情包只是辅助沟通的一种方式，您有具体问题可以直接告诉我~"
+         }
+         ],
+         "collaborate_list": [],
+         "follow_up": {
+            "is_follow_up": 1, 
+            "follow_up_content": ["您是对我们的产品有什么顾虑吗？", "或者你有什么需求？"]
+         },
+         "need_assistance": 0
+      }
+2025-07-24 21:41:10 - test - ERROR - parse_agent_response:115 - JSON解析失败: Expecting value: line 1 column 1 (char 0), 原始响应: 我是成都乐云互动的销售顾问，负责快启智慧销售云平台系列产品，您有具体需求或问题可以直接告诉我~
+2025-07-24 22:17:47 - test - ERROR - process_agent_background:186 - 后台处理失败 - user_id: 189, session_id: WJE1193342535, error: The last_update_time provided in the session object '2025-07-24 22:01:34' is earlier than the update_time in the storage_session '2025-07-24 22:17:38'. Please check if it is a stale session.
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/test.py", line 157, in process_agent_background
+    agent_response_text = asyncio.run(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 205, in run_async
+    await self.session_service.append_event(session=session, event=event)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/sessions/database_session_service.py", line 533, in append_event
+    raise ValueError(
+ValueError: The last_update_time provided in the session object '2025-07-24 22:01:34' is earlier than the update_time in the storage_session '2025-07-24 22:17:38'. Please check if it is a stale session.
+2025-07-24 23:31:11 - test - ERROR - process_agent_background:186 - 后台处理失败 - user_id: 189, session_id: WJE1193342535, error: The last_update_time provided in the session object '2025-07-24 23:14:53' is earlier than the update_time in the storage_session '2025-07-24 23:27:55'. Please check if it is a stale session.
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/test.py", line 157, in process_agent_background
+    agent_response_text = asyncio.run(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 205, in run_async
+    await self.session_service.append_event(session=session, event=event)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/sessions/database_session_service.py", line 533, in append_event
+    raise ValueError(
+ValueError: The last_update_time provided in the session object '2025-07-24 23:14:53' is earlier than the update_time in the storage_session '2025-07-24 23:27:55'. Please check if it is a stale session.
+2025-07-25 09:07:06 - summarizer - ERROR - summarize_single_image:415 - 使用模型分析单张图片 '/tmp/tmpoihqrl77.png' 时出错: Error code: 429 - {'error': {'code': 'cluster_tpm_rate_limit_exceeded', 'message': 'Rate limit reached for Cluster TPM', 'type': 'rate_limit_exceeded'}, 'id': 'as-vbib33zsi6'}
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/file_description.py", line 400, in summarize_single_image
+    response = self.client.chat.completions.create(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 925, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1239, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1034, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.RateLimitError: Error code: 429 - {'error': {'code': 'cluster_tpm_rate_limit_exceeded', 'message': 'Rate limit reached for Cluster TPM', 'type': 'rate_limit_exceeded'}, 'id': 'as-vbib33zsi6'}
+2025-07-25 09:08:53 - summarizer - ERROR - summarize_document:1608 - 无法提取或内容为空: /tmp/tmpvip50f17.pdf。错误: 未能提取任何文本内容（可能是图片型PDF或加密PDF）
+2025-07-25 09:09:01 - summarizer - ERROR - summarize_single_image:415 - 使用模型分析单张图片 '/tmp/tmpu0tx66ge.png' 时出错: Error code: 429 - {'error': {'code': 'cluster_tpm_rate_limit_exceeded', 'message': 'Rate limit reached for Cluster TPM', 'type': 'rate_limit_exceeded'}, 'id': 'as-wvnq4ag7bu'}
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/file_description.py", line 400, in summarize_single_image
+    response = self.client.chat.completions.create(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 925, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1239, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1034, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.RateLimitError: Error code: 429 - {'error': {'code': 'cluster_tpm_rate_limit_exceeded', 'message': 'Rate limit reached for Cluster TPM', 'type': 'rate_limit_exceeded'}, 'id': 'as-wvnq4ag7bu'}
+2025-07-25 09:09:49 - summarizer - ERROR - summarize_single_image:415 - 使用模型分析单张图片 '/tmp/tmpvwircnsj.png' 时出错: Error code: 429 - {'error': {'code': 'cluster_tpm_rate_limit_exceeded', 'message': 'Rate limit reached for Cluster TPM', 'type': 'rate_limit_exceeded'}, 'id': 'as-r843mz258d'}
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/file_description.py", line 400, in summarize_single_image
+    response = self.client.chat.completions.create(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 925, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1239, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1034, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.RateLimitError: Error code: 429 - {'error': {'code': 'cluster_tpm_rate_limit_exceeded', 'message': 'Rate limit reached for Cluster TPM', 'type': 'rate_limit_exceeded'}, 'id': 'as-r843mz258d'}
+2025-07-25 10:25:23 - utils - ERROR - send_chat:285 - 发送聊天通知失败: 502, message='Attempt to decode JSON with unexpected mimetype: text/html', url='http://120.77.8.73/sale/wechat/message/send'

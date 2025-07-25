@@ -93,26 +93,39 @@ def process_agent_background(request: AgentRequest):
     def parse_agent_response(agent_response_text):
         """
         解析智能体返回的文本，返回list[dict]或dict
+        支持以下情况：
+        1. 只包含json代码块
+        2. 普通文本+json代码块
+        3. 多个json代码块
+        4. 只包含普通文本（无法json解析时忽略）
         """
+        import re
         responses = []
-        if "``````json" in agent_response_text:
-            agent_response_text_list = agent_response_text.split("``````json")
+        # 匹配所有 ```json ... ``` 代码块
+        json_blocks = re.findall(r"```json(.*?)```", agent_response_text, re.DOTALL)
+        if json_blocks:
+            for block in json_blocks:
+                cleaned = block.strip()
+                if not cleaned:
+                    continue
+                try:
+                    responses.append(json.loads(cleaned))
+                except Exception as e:
+                    logger.error(f"JSON解析失败: {e}, 原始响应: {cleaned}")
         else:
-            agent_response_text_list = [agent_response_text]
-
-        for item in agent_response_text_list:
-            cleaned = item.strip()
+            # 没有代码块，尝试整体解析
+            cleaned = agent_response_text.strip()
+            # 去除多余的反引号
             if cleaned.startswith("```json"):
                 cleaned = cleaned[7:]
             if cleaned.endswith("```"):
                 cleaned = cleaned[:-3]
             cleaned = cleaned.strip()
-            if not cleaned:
-                continue
-            try:
-                responses.append(json.loads(cleaned))
-            except Exception as e:
-                logger.error(f"JSON解析失败: {e}, 原始响应: {cleaned}")
+            if cleaned:
+                try:
+                    responses.append(json.loads(cleaned))
+                except Exception as e:
+                    logger.error(f"JSON解析失败: {e}, 原始响应: {cleaned}")
         return responses
 
     def send_notify(agent_response):

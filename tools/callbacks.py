@@ -47,6 +47,7 @@ def check_prompt_protection(callback_context: CallbackContext) -> Optional[types
         r"你的指令",
         r"你的规则",
         r"你是谁开发",
+        r"*重新开始你的*",
     ]
 
     if isinstance(user_input, list):

@@ -6,10 +6,10 @@ api_keys:
     api_key: sk-d0dcd1cb9600485d951f604146e3f1ea
     base_url: https://api.deepseek.com
   ernie:
-    api_key: bce-v3/ALTAK-wKuFEIj8EXZqIDOquAnsT/678c3407baba1a9b64ab889a7f7becd7dc3a4591
+    api_key: bce-v3/ALTAK-4CBgQAmOQnONWxsu7fzI0/628e07cbb46a3f28e1d14946697afa873fc002aa
     base_url: https://qianfan.baidubce.com/v2
   ark:
-    api_key: 3f6f728d-633a-4285-b75e-7691516fd7aa
+    api_key: bd83e99b-5c87-4cf4-87d8-9879c9d29b8e
     base_url: https://ark.cn-beijing.volces.com/api/v3
   gaode:
     api_key: af8a9fd3dac89fe58d1ab4a2fa142a30

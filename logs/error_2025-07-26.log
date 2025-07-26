@@ -1,0 +1,84 @@
+2025-07-26 14:52:35 - test - ERROR - process_agent_background:199 - 后台处理失败 - user_id: 146, session_id: WJE1193342535, error: The last_update_time provided in the session object '2025-07-26 14:36:18' is earlier than the update_time in the storage_session '2025-07-26 14:43:00'. Please check if it is a stale session.
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/test.py", line 170, in process_agent_background
+    agent_response_text = asyncio.run(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 205, in run_async
+    await self.session_service.append_event(session=session, event=event)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/sessions/database_session_service.py", line 533, in append_event
+    raise ValueError(
+ValueError: The last_update_time provided in the session object '2025-07-26 14:36:18' is earlier than the update_time in the storage_session '2025-07-26 14:43:00'. Please check if it is a stale session.
+2025-07-26 15:29:12 - test - ERROR - process_agent_background:199 - 后台处理失败 - user_id: 214, session_id: WJE1193342535, error: The last_update_time provided in the session object '2025-07-26 15:12:54' is earlier than the update_time in the storage_session '2025-07-26 15:22:46'. Please check if it is a stale session.
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/test.py", line 170, in process_agent_background
+    agent_response_text = asyncio.run(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 205, in run_async
+    await self.session_service.append_event(session=session, event=event)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/sessions/database_session_service.py", line 533, in append_event
+    raise ValueError(
+ValueError: The last_update_time provided in the session object '2025-07-26 15:12:54' is earlier than the update_time in the storage_session '2025-07-26 15:22:46'. Please check if it is a stale session.
+2025-07-26 15:34:55 - test - ERROR - process_agent_background:199 - 后台处理失败 - user_id: 214, session_id: WJE1193342535, error: The last_update_time provided in the session object '2025-07-26 15:18:35' is earlier than the update_time in the storage_session '2025-07-26 15:22:46'. Please check if it is a stale session.
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/test.py", line 170, in process_agent_background
+    agent_response_text = asyncio.run(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 205, in run_async
+    await self.session_service.append_event(session=session, event=event)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/sessions/database_session_service.py", line 533, in append_event
+    raise ValueError(
+ValueError: The last_update_time provided in the session object '2025-07-26 15:18:35' is earlier than the update_time in the storage_session '2025-07-26 15:22:46'. Please check if it is a stale session.
+2025-07-26 19:08:06 - test - ERROR - process_agent_background:199 - 后台处理失败 - user_id: 214, session_id: wxid_rgyumyfn8dc212, error: The last_update_time provided in the session object '2025-07-26 18:51:49' is earlier than the update_time in the storage_session '2025-07-26 19:07:30'. Please check if it is a stale session.
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/test.py", line 170, in process_agent_background
+    agent_response_text = asyncio.run(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 205, in run_async
+    await self.session_service.append_event(session=session, event=event)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/sessions/database_session_service.py", line 533, in append_event
+    raise ValueError(
+ValueError: The last_update_time provided in the session object '2025-07-26 18:51:49' is earlier than the update_time in the storage_session '2025-07-26 19:07:30'. Please check if it is a stale session.

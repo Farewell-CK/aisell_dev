@@ -192,9 +192,10 @@ async def chat_qwen(prompt : str) -> str:
         response: 响应
     """
     api_key = config.get_api_key('qwen', 'api_key')
+    base_url = config.get_api_key('qwen', 'base_url')
     client = OpenAI(
         api_key=api_key,
-        base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",
+        base_url=base_url,
     )
     completion = client.chat.completions.create(
         model="qwen-plus-latest",

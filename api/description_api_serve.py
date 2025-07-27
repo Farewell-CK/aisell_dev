@@ -22,6 +22,7 @@ import uuid
 import asyncio
 from pydantic import BaseModel
 import threading
+from utils.config_loader import ConfigLoader
 
 # 获取API服务的日志记录器
 logger = get_api_logger()
@@ -29,17 +30,25 @@ logger = get_api_logger()
 # 加载环境变量
 load_dotenv()
 
+config = ConfigLoader()
+
+qwen_base_url = config.get_api_key('qwen', 'base_url')
+qwen_api_key = config.get_api_key('qwen', 'api_key')
+ernie_base_url = config.get_api_key('ernie', 'base_url')
+ernie_api_key = config.get_api_key('ernie', 'api_key')
+
 # 获取API密钥
 # API_KEY = os.getenv("Ernie_API_KEY", "bce-v3/ALTAK-wKuFEIj8EXZqIDOquAnsT/678c3407baba1a9b64ab889a7f7becd7dc3a4591")
-API_KEY = 'bce-v3/ALTAK-cezjDqTjarAi7KJqkjxsf/e821050b6df24c4b721c5dfd5c32f9126dfca856'
+# API_KEY = 'bce-v3/ALTAK-cezjDqTjarAi7KJqkjxsf/e821050b6df24c4b721c5dfd5c32f9126dfca856'
+API_KEY = ernie_api_key
 if not API_KEY:
     raise ValueError("未找到ERNIE_API_KEY环境变量")
-qwen_api_key = os.getenv("Qwen_API_KEY")
-if not qwen_api_key:
-    raise ValueError("未找到Qwen_API_KEY环境变量")
-qwen_base_url = os.getenv("Qwen_BASE_URL")
-if not qwen_base_url:
-    raise ValueError("未找到Qwen_BASE_URL环境变量")
+# qwen_api_key = os.getenv("Qwen_API_KEY")
+# if not qwen_api_key:
+#     raise ValueError("未找到Qwen_API_KEY环境变量")
+# qwen_base_url = os.getenv("Qwen_BASE_URL")
+# if not qwen_base_url:
+#     raise ValueError("未找到Qwen_BASE_URL环境变量")
 
 # 创建FastAPI应用
 app = FastAPI(

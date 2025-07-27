@@ -16,3 +16,5 @@ api_keys:
   
   openweather:
     api_key: fdfaba4dcbf1ddb354b4b30337b4dea4
+  send_url:
+    url: http://120.77.8.73/sale/wechat/message/send

@@ -7,6 +7,11 @@ from datetime import datetime
 from core.database_core import db_manager
 from utils.logger_config import get_utils_logger
 from utils.db_queries import select_wechat_name
+from utils.config_loader import ConfigLoader
+
+config = ConfigLoader()
+
+send_url = config.get_api_key('send_url', 'url')
 
 logger = get_utils_logger()
 
@@ -266,7 +271,7 @@ async def send_chat(tenant_id,task_id,session_id,wechat_id,belong_chat_id,chat_c
             await asyncio.to_thread(db_manager.execute_insert, insert_query)
         except Exception as e:
             logger.error(f"插入协作事项失败: {e}")
-    url = "http://120.77.8.73/sale/wechat/message/send"
+    url = send_url
     headers = {
         "Content-Type": "application/json"
     }

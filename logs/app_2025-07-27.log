@@ -116,3 +116,27 @@
 2025-07-27 12:58:18 - summarizer - WARNING - __init__:1339 - 注意: 当前 summarize_document 方法会将整个提取的文档内容作为单个JSON字符串发送给LLM。即使 ernie-4.5-turbo-128k 支持长上下文，对于超大文档，将结构化JSON直接传入仍需注意实际token消耗和成本。类中定义的 chunk_size, overlap_size 和 split_text 方法目前未用于对提取的文档原始文本内容进行分块总结。如需更精细或成本优化的超长文档处理，请考虑修改 summarize_document 以实现基于原始文本的分块和可能的分层总结策略。
 2025-07-27 12:58:18 - summarizer - INFO - __init__:1729 - VideoSummarizer 初始化完成。API base_url: https://dashscope.aliyuncs.com/compatible-mode/v1, Model: qwen-vl-max-latest
 2025-07-27 12:58:18 - summarizer - WARNING - __init__:1730 - 当前版本主要支持通过 URL 处理视频。本地视频文件处理功能尚未完全实现。
+2025-07-27 12:58:36 - google_adk.google.adk.sessions.database_session_service - INFO - __init__:330 - Local timezone: Asia/Shanghai
+2025-07-27 13:00:22 - api - INFO - shutdown_event:209 - 角色创建服务正在关闭
+2025-07-27 13:00:27 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for gemini-.* from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-27 13:00:27 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/endpoints\/.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-27 13:00:27 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/publishers\/google\/models\/gemini.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-27 13:00:27 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for gemini-.* from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-27 13:00:27 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/endpoints\/.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-27 13:00:27 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/publishers\/google\/models\/gemini.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-27 13:00:28 - api - INFO - startup_event:204 - 角色创建服务启动完成
+2025-07-27 13:00:28 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for gemini-.* from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-27 13:00:28 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/endpoints\/.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-27 13:00:28 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/publishers\/google\/models\/gemini.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-27 13:00:28 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for gemini-.* from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-27 13:00:28 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/endpoints\/.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-27 13:00:28 - google_adk.google.adk.models.registry - INFO - _register:64 - Updating LLM class for projects\/.+\/locations\/.+\/publishers\/google\/models\/gemini.+ from <class 'google.adk.models.google_llm.Gemini'> to <class 'google.adk.models.google_llm.Gemini'>
+2025-07-27 13:00:28 - summarizer - INFO - __init__:46 - TextSummarizer 初始化完成。Chunk size: 4000, Overlap size: 200
+2025-07-27 13:00:28 - summarizer - INFO - __init__:309 - ImageSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2/, Model: ernie-4.5-turbo-vl-preview
+2025-07-27 13:00:28 - summarizer - INFO - __init__:540 - TableSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2
+2025-07-27 13:00:28 - summarizer - INFO - __init__:905 - PPTSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2/, Model: ernie-4.5-turbo-128k
+2025-07-27 13:00:28 - summarizer - INFO - __init__:906 - 确保 LibreOffice (soffice) 已安装并在系统 PATH 中，以便支持 .ppt 文件转换。
+2025-07-27 13:00:29 - summarizer - INFO - __init__:1335 - DocumentSummarizer 初始化完成。API base_url: https://qianfan.baidubce.com/v2/, Model: ernie-4.5-turbo-128k, Chunk Size: 4000, Overlap Size: 200
+2025-07-27 13:00:29 - summarizer - WARNING - __init__:1339 - 注意: 当前 summarize_document 方法会将整个提取的文档内容作为单个JSON字符串发送给LLM。即使 ernie-4.5-turbo-128k 支持长上下文，对于超大文档，将结构化JSON直接传入仍需注意实际token消耗和成本。类中定义的 chunk_size, overlap_size 和 split_text 方法目前未用于对提取的文档原始文本内容进行分块总结。如需更精细或成本优化的超长文档处理，请考虑修改 summarize_document 以实现基于原始文本的分块和可能的分层总结策略。
+2025-07-27 13:00:29 - summarizer - INFO - __init__:1729 - VideoSummarizer 初始化完成。API base_url: https://dashscope.aliyuncs.com/compatible-mode/v1, Model: qwen-vl-max-latest
+2025-07-27 13:00:29 - summarizer - WARNING - __init__:1730 - 当前版本主要支持通过 URL 处理视频。本地视频文件处理功能尚未完全实现。

@@ -78,7 +78,7 @@ def select_wechat_name(tenant_id: int,  wechat_id: str) -> str:
         result = db_manager.execute_query(query)
         return result[0]['wechat_nickname']
     except Exception as e:
-        return f"查询微信昵称失败: {str(e)}"
+        return f"客户"
 
 def select_talk_style(tenant_id: int, task_id: int) -> list[dict]:
     """

@@ -5,7 +5,7 @@ from prompts.prompts import input_process_prompt, scheduler_prompt, customer_por
 from tools.callbacks import check_prompt_protection, dynamic_one_to_N_agent_instruction_before_model
 from tools.input_process import image_comprehension, video_comprehension, read_file, get_detailed_time
 from tools.core_logic import select_file
-from utils.db_queries import select_collaborate_matters, select_product
+from utils.db_queries import select_collaborate_matters, select_product, select_wechat_name
 from utils.db_insert import insert_customer_behavior
 from utils.db_queries import update_customer_portrait
 config = ConfigLoader()
@@ -34,7 +34,7 @@ one_to_N_agent = LlmAgent(
     name="one_to_N_agent",
     description="公司的销售人员，负责与客户进行沟通，并根据客户的需求，回复客户信息。完成销售任务。",
     instruction=one_to_N_prompt,
-    tools=[image_comprehension, video_comprehension,read_file,get_detailed_time,update_customer_portrait,insert_customer_behavior, select_collaborate_matters, select_file, select_product],
+    tools=[image_comprehension, video_comprehension,read_file,get_detailed_time,update_customer_portrait,insert_customer_behavior, select_collaborate_matters, select_file, select_product,select_wechat_name],
     before_model_callback=dynamic_one_to_N_agent_instruction_before_model,
     before_agent_callback=check_prompt_protection,
 )

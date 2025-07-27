@@ -6,6 +6,7 @@ import asyncio
 from datetime import datetime
 from core.database_core import db_manager
 from utils.logger_config import get_utils_logger
+from utils.db_queries import select_wechat_name
 
 logger = get_utils_logger()
 
@@ -192,7 +193,7 @@ async def send_chat_test(tenant_id,task_id,chat_test):
     response = requests.post(url, headers=headers, data=json.dumps(data))
     return response.json()
 
-async def send_chat(tenant_id,task_id,session_id,belong_chat_id,chat_content):
+async def send_chat(tenant_id,task_id,session_id,wechat_id,belong_chat_id,chat_content):
     """
     发送聊天内容通知
     Args:
@@ -237,7 +238,8 @@ async def send_chat(tenant_id,task_id,session_id,belong_chat_id,chat_content):
         collaborate_list = []
     else:
         collaborate_dic = chat_content.get("collaborate_list", [])
-        collaborate_list = [collaborate['content'] for collaborate in collaborate_dic]
+        wechat_name = select_wechat_name(tenant_id, wechat_id)
+        collaborate_list = [collaborate['content'].replace("客户", wechat_name) for collaborate in collaborate_dic]
     for collaborate in collaborate_list:
         escaped_collaborate = collaborate.replace("'", "''")
         insert_query = f"""

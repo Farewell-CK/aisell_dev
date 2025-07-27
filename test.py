@@ -138,6 +138,7 @@ def process_agent_background(request: AgentRequest):
                 task_id=request.task_id,
                 session_id=request.session_id,
                 belong_chat_id=request.belong_chat_id,
+                wechat_id=request.wechat_id,
                 chat_content=agent_response
             ))
             logger.info(f"通知发送成功 - user_id: {user_id}, session_id: {current_session_id}")
@@ -205,6 +206,7 @@ def process_agent_background(request: AgentRequest):
                 task_id=request.task_id,
                 session_id=request.session_id,
                 belong_chat_id=request.belong_chat_id,
+                wechat_id=request.wechat_id,
                 chat_content=error_msg
             ))
         except Exception as notify_error:

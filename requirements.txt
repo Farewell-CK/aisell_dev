@@ -1,23 +1,48 @@
-openai
-python-dotenv
-opencv-python
-python-pptx 
-PyPDF2
-python-docx
-google-adk
-pandas
-openpyxl
-tqdm
-Pillow
-pymysql
-jupyter
-# pywin32
+# AI和机器学习相关
+openai>=1.0.0
 dashscope
-pyyaml
 litellm
+google-adk
+google-genai
+
+# Web框架和API
 fastapi>=0.68.0
 uvicorn>=0.15.0
 pydantic>=1.8.0
 python-multipart>=0.0.5
-openai>=1.0.0
+
+# 数据库相关
+pymysql
+sqlalchemy
+pandas
+openpyxl
+
+# 文件处理
+opencv-python
+python-pptx
+PyPDF2
+python-docx
+pdfplumber
+docx
+Pillow
+
+# 配置和环境
+python-dotenv
+pyyaml
+
+# HTTP客户端
+requests
 aiohttp>=3.8.0
+
+# 工具库
+tqdm
+jupyter
+
+# 农历和节日相关
+lunarcalendar
+
+# 系统相关（通常不需要安装，但列出以供参考）
+# pywin32  # Windows系统专用，Linux/Mac不需要
+
+# 开发工具（可选）
+# jupyter

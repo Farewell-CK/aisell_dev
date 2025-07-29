@@ -20,34 +20,54 @@ class DatabaseConnector:
 
     def _create_engine(self):
         db_conf = self.config.get('database', {})
-        user = db_conf.get('username', 'root')
-        password = db_conf.get('password', '123456')
-        host = db_conf.get('host', 'localhost')
-        port = db_conf.get('port', 3306)
-        dbname = db_conf.get('name', "sale")
         driver = db_conf.get('driver', 'mysql+pymysql')
-        charset = db_conf.get('charset', 'utf8mb4')
+        
+        # 根据驱动类型创建不同的连接URL
+        if driver == 'sqlite':
+            # SQLite配置
+            database_path = db_conf.get('database_path', 'database/sale.db')
+            # 确保目录存在
+            db_dir = os.path.dirname(database_path)
+            if db_dir:  # 只有当目录不为空时才创建
+                os.makedirs(db_dir, exist_ok=True)
+            url = f"sqlite:///{database_path}"
+            
+            # SQLite不需要复杂的连接池配置
+            return sqlalchemy.create_engine(
+                url,
+                pool_size=1,
+                max_overflow=0,
+                pool_pre_ping=True
+            )
+        else:
+            # MySQL配置
+            user = db_conf.get('username', 'root')
+            password = db_conf.get('password', '123456')
+            host = db_conf.get('host', 'localhost')
+            port = db_conf.get('port', 3306)
+            dbname = db_conf.get('name', "sale")
+            charset = db_conf.get('charset', 'utf8mb4')
 
-        url = f"{driver}://{user}:{password}@{host}:{port}/{dbname}?charset={charset}"
+            url = f"{driver}://{user}:{password}@{host}:{port}/{dbname}?charset={charset}"
 
-        # ✅ 从配置中读取连接池参数
-        pool_size = db_conf.get('pool_size', 5)
-        max_overflow = db_conf.get('max_overflow', 10)
-        pool_recycle = db_conf.get('pool_recycle', 3600)
-        pool_pre_ping = db_conf.get('pool_pre_ping', True) # 默认开启
-        pool_timeout = db_conf.get('pool_timeout', 30)
-        connect_timeout = db_conf.get('connect_timeout', 10)
+            # ✅ 从配置中读取连接池参数
+            pool_size = db_conf.get('pool_size', 5)
+            max_overflow = db_conf.get('max_overflow', 10)
+            pool_recycle = db_conf.get('pool_recycle', 3600)
+            pool_pre_ping = db_conf.get('pool_pre_ping', True) # 默认开启
+            pool_timeout = db_conf.get('pool_timeout', 30)
+            connect_timeout = db_conf.get('connect_timeout', 10)
 
-        # ✅ 将所有参数传入 create_engine
-        return sqlalchemy.create_engine(
-            url,
-            pool_size=pool_size,
-            max_overflow=max_overflow,
-            pool_recycle=pool_recycle,
-            pool_pre_ping=pool_pre_ping,
-            pool_timeout=pool_timeout,
-            connect_args={'connect_timeout': connect_timeout}
-        )
+            # ✅ 将所有参数传入 create_engine
+            return sqlalchemy.create_engine(
+                url,
+                pool_size=pool_size,
+                max_overflow=max_overflow,
+                pool_recycle=pool_recycle,
+                pool_pre_ping=pool_pre_ping,
+                pool_timeout=pool_timeout,
+                connect_args={'connect_timeout': connect_timeout}
+            )
 
     def get_engine(self):
         """

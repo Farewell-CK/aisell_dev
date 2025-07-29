@@ -437,3 +437,127 @@ Traceback (most recent call last):
   File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/sessions/database_session_service.py", line 533, in append_event
     raise ValueError(
 ValueError: The last_update_time provided in the session object '2025-07-27 12:24:33' is earlier than the update_time in the storage_session '2025-07-27 12:27:37'. Please check if it is a stale session.
+2025-07-27 13:28:23 - test - ERROR - process_agent_background:200 - 后台处理失败 - user_id: 216, session_id: WJE1193342535, error: The last_update_time provided in the session object '2025-07-27 13:12:06' is earlier than the update_time in the storage_session '2025-07-27 13:17:18'. Please check if it is a stale session.
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/test.py", line 171, in process_agent_background
+    agent_response_text = asyncio.run(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 205, in run_async
+    await self.session_service.append_event(session=session, event=event)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/sessions/database_session_service.py", line 533, in append_event
+    raise ValueError(
+ValueError: The last_update_time provided in the session object '2025-07-27 13:12:06' is earlier than the update_time in the storage_session '2025-07-27 13:17:18'. Please check if it is a stale session.
+2025-07-27 14:09:59 - test - ERROR - process_agent_background:200 - 后台处理失败 - user_id: 216, session_id: WJE1193342535, error: The last_update_time provided in the session object '2025-07-27 13:53:41' is earlier than the update_time in the storage_session '2025-07-27 13:56:46'. Please check if it is a stale session.
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/test.py", line 171, in process_agent_background
+    agent_response_text = asyncio.run(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 205, in run_async
+    await self.session_service.append_event(session=session, event=event)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/sessions/database_session_service.py", line 533, in append_event
+    raise ValueError(
+ValueError: The last_update_time provided in the session object '2025-07-27 13:53:41' is earlier than the update_time in the storage_session '2025-07-27 13:56:46'. Please check if it is a stale session.
+2025-07-27 14:09:59 - utils - ERROR - send_chat:287 - 发送聊天通知失败: 502, message='Attempt to decode JSON with unexpected mimetype: text/html', url='http://120.77.8.73/sale/wechat/message/send'
+2025-07-27 14:13:09 - utils - ERROR - send_chat:287 - 发送聊天通知失败: 502, message='Attempt to decode JSON with unexpected mimetype: text/html', url='http://120.77.8.73/sale/wechat/message/send'
+2025-07-27 15:14:56 - utils - ERROR - send_chat:287 - 发送聊天通知失败: 502, message='Attempt to decode JSON with unexpected mimetype: text/html', url='http://120.77.8.73/sale/wechat/message/send'
+2025-07-27 15:18:19 - utils - ERROR - send_chat:287 - 发送聊天通知失败: 502, message='Attempt to decode JSON with unexpected mimetype: text/html', url='http://120.77.8.73/sale/wechat/message/send'
+2025-07-27 15:18:20 - utils - ERROR - send_chat:287 - 发送聊天通知失败: 502, message='Attempt to decode JSON with unexpected mimetype: text/html', url='http://120.77.8.73/sale/wechat/message/send'
+2025-07-27 15:23:22 - utils - ERROR - send_chat:287 - 发送聊天通知失败: 502, message='Attempt to decode JSON with unexpected mimetype: text/html', url='http://120.77.8.73/sale/wechat/message/send'
+2025-07-27 15:26:24 - utils - ERROR - send_chat:287 - 发送聊天通知失败: 502, message='Attempt to decode JSON with unexpected mimetype: text/html', url='http://120.77.8.73/sale/wechat/message/send'
+2025-07-27 15:37:26 - utils - ERROR - send_chat:287 - 发送聊天通知失败: 502, message='Attempt to decode JSON with unexpected mimetype: text/html', url='http://120.77.8.73/sale/wechat/message/send'
+2025-07-27 16:16:10 - utils - ERROR - send_chat:287 - 发送聊天通知失败: 502, message='Attempt to decode JSON with unexpected mimetype: text/html', url='http://120.77.8.73/sale/wechat/message/send'
+2025-07-27 16:17:44 - test - ERROR - process_agent_background:200 - 后台处理失败 - user_id: 216, session_id: wxid_p031iudd8qwo12, error: The last_update_time provided in the session object '2025-07-27 16:01:27' is earlier than the update_time in the storage_session '2025-07-27 16:16:01'. Please check if it is a stale session.
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/test.py", line 171, in process_agent_background
+    agent_response_text = asyncio.run(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 205, in run_async
+    await self.session_service.append_event(session=session, event=event)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/sessions/database_session_service.py", line 533, in append_event
+    raise ValueError(
+ValueError: The last_update_time provided in the session object '2025-07-27 16:01:27' is earlier than the update_time in the storage_session '2025-07-27 16:16:01'. Please check if it is a stale session.
+2025-07-27 16:17:44 - utils - ERROR - send_chat:287 - 发送聊天通知失败: 502, message='Attempt to decode JSON with unexpected mimetype: text/html', url='http://120.77.8.73/sale/wechat/message/send'
+2025-07-27 16:19:58 - utils - ERROR - send_chat:287 - 发送聊天通知失败: 502, message='Attempt to decode JSON with unexpected mimetype: text/html', url='http://120.77.8.73/sale/wechat/message/send'
+2025-07-27 16:25:24 - test - ERROR - process_agent_background:200 - 后台处理失败 - user_id: 216, session_id: wxid_p031iudd8qwo12, error: The last_update_time provided in the session object '2025-07-27 16:09:04' is earlier than the update_time in the storage_session '2025-07-27 16:19:50'. Please check if it is a stale session.
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/test.py", line 171, in process_agent_background
+    agent_response_text = asyncio.run(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 205, in run_async
+    await self.session_service.append_event(session=session, event=event)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/sessions/database_session_service.py", line 533, in append_event
+    raise ValueError(
+ValueError: The last_update_time provided in the session object '2025-07-27 16:09:04' is earlier than the update_time in the storage_session '2025-07-27 16:19:50'. Please check if it is a stale session.
+2025-07-27 16:25:24 - utils - ERROR - send_chat:287 - 发送聊天通知失败: 502, message='Attempt to decode JSON with unexpected mimetype: text/html', url='http://120.77.8.73/sale/wechat/message/send'
+2025-07-27 16:27:49 - utils - ERROR - send_chat:287 - 发送聊天通知失败: 502, message='Attempt to decode JSON with unexpected mimetype: text/html', url='http://120.77.8.73/sale/wechat/message/send'
+2025-07-27 16:28:29 - test - ERROR - process_agent_background:200 - 后台处理失败 - user_id: 216, session_id: wxid_p031iudd8qwo12, error: The last_update_time provided in the session object '2025-07-27 16:12:08' is earlier than the update_time in the storage_session '2025-07-27 16:27:40'. Please check if it is a stale session.
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/test.py", line 171, in process_agent_background
+    agent_response_text = asyncio.run(call_agent_async(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/funhpc/workspace/aisell_dev/utils/chat.py", line 152, in call_agent_async
+    async for event in runner.run_async(
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/runners.py", line 205, in run_async
+    await self.session_service.append_event(session=session, event=event)
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/google/adk/sessions/database_session_service.py", line 533, in append_event
+    raise ValueError(
+ValueError: The last_update_time provided in the session object '2025-07-27 16:12:08' is earlier than the update_time in the storage_session '2025-07-27 16:27:40'. Please check if it is a stale session.
+2025-07-27 16:28:29 - utils - ERROR - send_chat:287 - 发送聊天通知失败: 502, message='Attempt to decode JSON with unexpected mimetype: text/html', url='http://120.77.8.73/sale/wechat/message/send'
+2025-07-27 16:39:06 - utils - ERROR - send_chat:287 - 发送聊天通知失败: 502, message='Attempt to decode JSON with unexpected mimetype: text/html', url='http://120.77.8.73/sale/wechat/message/send'
+2025-07-27 16:42:10 - utils - ERROR - send_chat:287 - 发送聊天通知失败: 502, message='Attempt to decode JSON with unexpected mimetype: text/html', url='http://120.77.8.73/sale/wechat/message/send'
+2025-07-27 16:47:52 - utils - ERROR - send_chat:287 - 发送聊天通知失败: 502, message='Attempt to decode JSON with unexpected mimetype: text/html', url='http://120.77.8.73/sale/wechat/message/send'
+2025-07-27 16:57:53 - utils - ERROR - send_chat:287 - 发送聊天通知失败: 502, message='Attempt to decode JSON with unexpected mimetype: text/html', url='http://120.77.8.73/sale/wechat/message/send'
+2025-07-27 17:00:56 - utils - ERROR - send_chat:287 - 发送聊天通知失败: 502, message='Attempt to decode JSON with unexpected mimetype: text/html', url='http://120.77.8.73/sale/wechat/message/send'

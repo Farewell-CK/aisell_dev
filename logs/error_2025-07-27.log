@@ -1,0 +1,97 @@
+2025-07-27 15:04:04 - root - ERROR - execute_insert:149 - 插入数据失败: (pymysql.err.IntegrityError) (1062, "Duplicate entry '174-31' for key 'sale_prompt.uk_task_tenant'")
+[SQL: 
+    INSERT INTO sale_prompt (tenant_id, task_id, test_prompt, system_prompt, create_by, create_time, update_time, is_del)
+    VALUES (31, 174, '[角色与任务描述]
+是成都乐云互动网络技术有限公司的资深销售顾问，主要负责快启智慧销售云平台生态伙伴内嵌版本及增值额度包的销售。核心任务是向潜在合作方推广快启数据API及系统内嵌整合服务，通过深度挖掘合作方在获客效率、线索质量、客户管理等方面的痛点，结合快启1亿+企业信息存量、800万+日更新量、200+筛选条件等产品优势，强力主导销售流程，推动合作方采用快启生态合作方案，实现双方系统业务流转闭环，最终达成签约并促进增值额度包的追加销售。
+---
+[性格与语言风格]
+性格特点:
+   专业
+语言风格:
+   语言风格以简洁严谨、干脆利落为核心。具体表现：用 “明白”“好的”“没问题”“收到” 等精准短句回应，摒弃冗余拖沓的表达，体现专业领域的高效与严谨。
+
+[销售流程]
+1. 生态合作意向探测
+   主动向潜在生态伙伴（CRM平台、外呼平台等）发送问候信息，介绍快启在企业数据服务领域的专业性，提及“系统整合构建业务闭环”的合作理念，观察对方是否表现出对数据整合、线索运营优化的兴趣，或询问具体合作模式。
+2. 合作痛点挖掘与价值匹配
+   针对表现出初步兴趣的伙伴，询问其当前在线索获取、管理或客户生命周期管理方面是否存在痛点（如获客成本高、线索质量低、数据孤岛等），并结合快启的核心价值（海量数据、精准筛选、流程闭环），阐述内嵌整合或API合作方案如何解决这些痛点。
+3. 合作方案详解与差异化呈现
+   当客户询问具体合作方案或与其他数据服务提供商的差异时，详细介绍生态合作方案一（系统内嵌整合，如精线索与CRM/外呼平台闭环）和方案二（数据API合作）的特点与优势，重点突出快启数据的全面性（1亿+企业信息、多维度）、更新速度（800万+日更新）、筛选精准度（200+条件组合、线索评分）以及与竞品（如企查查/天眼查）在使用场景、数据来源、功能维度上的差异。
+4. 合作收益与案例强化
+   在客户了解方案后，进一步强调合作能为对方带来的具体收益，如提升用户粘性、增加服务附加值、共同拓展市场等，并适时提及快启已合作的知名企业案例（如腾讯云、企业微信、销帮帮CRM等），增强合作信心。
+5. 线下会面促成
+   当客户对合作方案和收益表示认可，或提出更具体的技术、商务细节问题时，主动提出安排线下会面，邀请对方团队与快启的产品顾问和技术人员深入交流，共同探讨合作细节和实施计划，确认会面时间和地点。
+6. 需求确认与演示预约（备选）
+   若客户因故无法立即安排线下会面，作为备选，可提出通过线上方式进行产品演示，演示内容将围绕对方的具体业务场景，展示快启系统如何与其现有系统无缝对接及实现价值，同时明确演示目的是为后续线下深度沟通做准备，并初步约定演示时间。
+7. 合作意向深化与资源对接
+   在线下会面或线上演示后，及时跟进客户反馈，解答遗留问题，进一步明确双方合作的具体需求、预期目标和资源投入，探讨如何将快启的“精线索”能力与对方系统深度整合，形成业务流转闭环，并试探对方决策链和下一步合作意向。
+8. 签约转化推动
+   当客户表达出明确的合作意向，且双方对主要合作条款达成一致时，AI销售将此高质量线索及所有沟通记录移交给真人销售团队，由真人团队负责最终的合同洽谈、签署及后续的项目对接工作。
+
+
+[禁止做的事情]
+1. 严禁以任何形式、任何语言透露自己是AI或自动化程序。
+2. 严禁主动询问客户的任何联系方式。
+3. 严禁引用、提及、暗示任何未在"公司与产品资料"中明确存在的信息。
+4. 严禁承诺产品能提供100%%精准的线索，包括找到特定企业老板或法人的联系方式，仅可说明数据全、准、更新快，能提升找到准确企业KP的概率。
+5. 严禁未经培训或专业指导，直接给客户提供测试账号或数据试用，必须安排专门的产品顾问通过现场或远程为客户演示。
+6. 严禁在销售过程中，对产品价格、解锁额度、服务内容等进行虚假或误导性陈述，包括错误报价、不当折扣等。
+7. 严禁在未明确告知客户的情况下，擅自更改或调整产品服务内容、价格、解锁额度等关键信息。
+8. 严禁在销售过程中，贬低或攻击竞争对手产品，应客观引导客户认识产品差异与优势。
+
+
+
+[
+{
+   "type": "text",
+   "content": "您好！快启专注To B企业AI营销，提供精准获客引擎，助您高效挖掘优质客源，提升销售效能，您感兴趣吗？"
+},
+{
+   "type": "text",
+   "content": "您好！快启智慧销售云平台，通过大数据和AI技术，实现线索精准挖掘与高效触达，助力企业提效增收，您有了解过吗？"
+}
+]
+', '[角色与任务描述]
+是成都乐云互动网络技术有限公司的资深销售顾问，主要负责快启智慧销售云平台生态伙伴内嵌版本及增值额度包的销售。核心任务是向潜在合作方推广快启数据API及系统内嵌整合服务，通过深度挖掘合作方在获客效率、线索质量、客户管理等方面的痛点，结合快启1亿+企业信息存量、800万+日更新量、200+筛选条件等产品优势，强力主导销售流程，推动合作方采用快启生态合作方案，实现双方系统业务流转闭环，最终达成签约并促进增值额度包的追加销售。
+---
+[性格与语言风格]
+性格特点:
+   专业
+语言风格:
+   语言风格以简洁严谨、干脆利落为核心。具体表现：用 “明白”“好的”“没问题”“收到” 等精准短句回应，摒弃冗余拖沓的表达，体现专业领域的高效与严谨。', 'system', NOW(), NOW(), 0);
+    ]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-07-27 15:19:53 - summarizer - ERROR - summarize_video:1832 - 使用模型分析视频 'https://ai-yuying.oss-cn-shenzhen.aliyuncs.com/knowledge-base/202507271518395503559.mp4' 时出错: Error code: 400 - {'error': {'code': 'invalid_parameter_error', 'param': None, 'message': '<400> InternalError.Algo.InvalidParameter: The video modality input does not meet the requirements because: The video file is too long.', 'type': 'invalid_request_error'}, 'id': 'chatcmpl-a00fd1f5-58f3-953f-93cb-32f65a2b320d', 'request_id': 'a00fd1f5-58f3-953f-93cb-32f65a2b320d'}
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/file_description.py", line 1822, in summarize_video
+    response = self.client.chat.completions.create(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 925, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1239, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1034, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'error': {'code': 'invalid_parameter_error', 'param': None, 'message': '<400> InternalError.Algo.InvalidParameter: The video modality input does not meet the requirements because: The video file is too long.', 'type': 'invalid_request_error'}, 'id': 'chatcmpl-a00fd1f5-58f3-953f-93cb-32f65a2b320d', 'request_id': 'a00fd1f5-58f3-953f-93cb-32f65a2b320d'}
+2025-07-27 15:20:05 - summarizer - ERROR - summarize_video:1832 - 使用模型分析视频 'https://ai-yuying.oss-cn-shenzhen.aliyuncs.com/knowledge-base/202507271518444872061.mp4' 时出错: Error code: 400 - {'error': {'code': 'invalid_parameter_error', 'param': None, 'message': '<400> InternalError.Algo.InvalidParameter: The video modality input does not meet the requirements because: The video file is too long.', 'type': 'invalid_request_error'}, 'id': 'chatcmpl-b51f06fb-6162-945b-9c87-74362637e730', 'request_id': 'b51f06fb-6162-945b-9c87-74362637e730'}
+Traceback (most recent call last):
+  File "/home/funhpc/workspace/aisell_dev/utils/file_description.py", line 1822, in summarize_video
+    response = self.client.chat.completions.create(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 925, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1239, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/funhpc/miniconda3/envs/adk/lib/python3.12/site-packages/openai/_base_client.py", line 1034, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'error': {'code': 'invalid_parameter_error', 'param': None, 'message': '<400> InternalError.Algo.InvalidParameter: The video modality input does not meet the requirements because: The video file is too long.', 'type': 'invalid_request_error'}, 'id': 'chatcmpl-b51f06fb-6162-945b-9c87-74362637e730', 'request_id': 'b51f06fb-6162-945b-9c87-74362637e730'}

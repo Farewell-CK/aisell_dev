@@ -1,20 +1,20 @@
 api_keys:
   qwen:
-    api_key: sk-0a965a916d164d14b91b30d186f29786
+    api_key: sk-
     base_url: https://dashscope.aliyuncs.com/compatible-mode/v1
   deepseek:
-    api_key: sk-d0dcd1cb9600485d951f604146e3f1ea
+    api_key: sk-
     base_url: https://api.deepseek.com
   ernie:
-    api_key: bce-v3/ALTAK-4CBgQAmOQnONWxsu7fzI0/628e07cbb46a3f28e1d14946697afa873fc002aa
+    api_key: bce-v3/ALTAK-/
     base_url: https://qianfan.baidubce.com/v2
   ark:
-    api_key: bd83e99b-5c87-4cf4-87d8-9879c9d29b8e
+    api_key: cfv
     base_url: https://ark.cn-beijing.volces.com/api/v3
   gaode:
-    api_key: af8a9fd3dac89fe58d1ab4a2fa142a30
+    api_key: fv
   
   openweather:
-    api_key: fdfaba4dcbf1ddb354b4b30337b4dea4
+    api_key: fdfef30337b4dea4
   send_url:
     url: http://120.77.8.73/sale/wechat/message/send

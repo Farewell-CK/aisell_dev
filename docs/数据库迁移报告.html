@@ -1,0 +1,4899 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="utf-8">
+            <title>数据库迁移报告</title>
+            <style>
+                body { font-family: Arial, sans-serif; margin: 20px; }
+                .header { background-color: #f0f0f0; padding: 20px; border-radius: 5px; }
+                .table-info { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+                .schema { background-color: #f9f9f9; padding: 10px; margin: 10px 0; }
+                .error { color: red; }
+            </style>
+        </head>
+        <body>
+            <div class="header">
+                <h1>数据库迁移报告</h1>
+                <p><strong>源数据库:</strong> sale</p>
+                <p><strong>生成时间:</strong> 2025-07-29 16:23:42</p>
+                <p><strong>表数量:</strong> 47</p>
+            </div>
+        
+                <div class="table-info">
+                    <h2>表: app_states</h2>
+                    <p><strong>字段数量:</strong> 3</p>
+                    <p><strong>数据状态:</strong> 有数据</p>
+                    <div class="schema">
+                        <h3>表结构:</h3>
+                        <table border="1" style="border-collapse: collapse; width: 100%;">
+                            <tr><th>字段名</th><th>类型</th><th>允许NULL</th><th>默认值</th></tr>
+                
+                        <tr>
+                            <td>app_name</td>
+                            <td>varchar(128)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>state</td>
+                            <td>longtext</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_time</td>
+                            <td>datetime</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="table-info">
+                    <h2>表: events</h2>
+                    <p><strong>字段数量:</strong> 17</p>
+                    <p><strong>数据状态:</strong> 有数据</p>
+                    <div class="schema">
+                        <h3>表结构:</h3>
+                        <table border="1" style="border-collapse: collapse; width: 100%;">
+                            <tr><th>字段名</th><th>类型</th><th>允许NULL</th><th>默认值</th></tr>
+                
+                        <tr>
+                            <td>id</td>
+                            <td>varchar(128)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>app_name</td>
+                            <td>varchar(128)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>user_id</td>
+                            <td>varchar(128)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>session_id</td>
+                            <td>varchar(128)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>invocation_id</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>author</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>branch</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>timestamp</td>
+                            <td>datetime</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>content</td>
+                            <td>longtext</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>actions</td>
+                            <td>blob</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>long_running_tool_ids_json</td>
+                            <td>text</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>grounding_metadata</td>
+                            <td>longtext</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>partial</td>
+                            <td>tinyint(1)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>turn_complete</td>
+                            <td>tinyint(1)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>error_code</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>error_message</td>
+                            <td>varchar(1024)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>interrupted</td>
+                            <td>tinyint(1)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="table-info">
+                    <h2>表: sale_ai_data</h2>
+                    <p><strong>字段数量:</strong> 14</p>
+                    <p><strong>数据状态:</strong> 有数据</p>
+                    <div class="schema">
+                        <h3>表结构:</h3>
+                        <table border="1" style="border-collapse: collapse; width: 100%;">
+                            <tr><th>字段名</th><th>类型</th><th>允许NULL</th><th>默认值</th></tr>
+                
+                        <tr>
+                            <td>id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>type</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>ai_text</td>
+                            <td>text</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>file_id</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>url</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>ai_status</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_by</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_time</td>
+                            <td>datetime</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>is_del</td>
+                            <td>tinyint</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>tenant_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="table-info">
+                    <h2>表: sale_co_chatgroup</h2>
+                    <p><strong>字段数量:</strong> 12</p>
+                    <p><strong>数据状态:</strong> 有数据</p>
+                    <div class="schema">
+                        <h3>表结构:</h3>
+                        <table border="1" style="border-collapse: collapse; width: 100%;">
+                            <tr><th>字段名</th><th>类型</th><th>允许NULL</th><th>默认值</th></tr>
+                
+                        <tr>
+                            <td>id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>collaborate_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>wechat_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>start_text</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_by</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_time</td>
+                            <td>datetime</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>is_del</td>
+                            <td>tinyint</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>tenant_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="table-info">
+                    <h2>表: sale_co_chatgroup_wechat</h2>
+                    <p><strong>字段数量:</strong> 11</p>
+                    <p><strong>数据状态:</strong> 有数据</p>
+                    <div class="schema">
+                        <h3>表结构:</h3>
+                        <table border="1" style="border-collapse: collapse; width: 100%;">
+                            <tr><th>字段名</th><th>类型</th><th>允许NULL</th><th>默认值</th></tr>
+                
+                        <tr>
+                            <td>id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>chatgroup_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>wechat_id</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_by</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_time</td>
+                            <td>datetime</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>is_del</td>
+                            <td>tinyint</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>tenant_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="table-info">
+                    <h2>表: sale_co_inform</h2>
+                    <p><strong>字段数量:</strong> 12</p>
+                    <p><strong>数据状态:</strong> 有数据</p>
+                    <div class="schema">
+                        <h3>表结构:</h3>
+                        <table border="1" style="border-collapse: collapse; width: 100%;">
+                            <tr><th>字段名</th><th>类型</th><th>允许NULL</th><th>默认值</th></tr>
+                
+                        <tr>
+                            <td>id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>collaborate_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>wechat_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>inform_text</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_by</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_time</td>
+                            <td>datetime</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>is_del</td>
+                            <td>tinyint</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>tenant_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="table-info">
+                    <h2>表: sale_co_inform_wechat</h2>
+                    <p><strong>字段数量:</strong> 12</p>
+                    <p><strong>数据状态:</strong> 有数据</p>
+                    <div class="schema">
+                        <h3>表结构:</h3>
+                        <table border="1" style="border-collapse: collapse; width: 100%;">
+                            <tr><th>字段名</th><th>类型</th><th>允许NULL</th><th>默认值</th></tr>
+                
+                        <tr>
+                            <td>id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>inform_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>wechat_id</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>type</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_by</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_time</td>
+                            <td>datetime</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>is_del</td>
+                            <td>tinyint</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>tenant_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="table-info">
+                    <h2>表: sale_co_intervention</h2>
+                    <p><strong>字段数量:</strong> 13</p>
+                    <p><strong>数据状态:</strong> 有数据</p>
+                    <div class="schema">
+                        <h3>表结构:</h3>
+                        <table border="1" style="border-collapse: collapse; width: 100%;">
+                            <tr><th>字段名</th><th>类型</th><th>允许NULL</th><th>默认值</th></tr>
+                
+                        <tr>
+                            <td>id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>collaborate_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>wechat_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>type</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>send_text</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_by</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_time</td>
+                            <td>datetime</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>is_del</td>
+                            <td>tinyint</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>tenant_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="table-info">
+                    <h2>表: sale_collaborate</h2>
+                    <p><strong>字段数量:</strong> 14</p>
+                    <p><strong>数据状态:</strong> 有数据</p>
+                    <div class="schema">
+                        <h3>表结构:</h3>
+                        <table border="1" style="border-collapse: collapse; width: 100%;">
+                            <tr><th>字段名</th><th>类型</th><th>允许NULL</th><th>默认值</th></tr>
+                
+                        <tr>
+                            <td>id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>task_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>type</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>title</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>text</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>status</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_by</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_time</td>
+                            <td>datetime</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>is_del</td>
+                            <td>tinyint</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>tenant_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="table-info">
+                    <h2>表: sale_file</h2>
+                    <p><strong>字段数量:</strong> 18</p>
+                    <p><strong>数据状态:</strong> 有数据</p>
+                    <div class="schema">
+                        <h3>表结构:</h3>
+                        <table border="1" style="border-collapse: collapse; width: 100%;">
+                            <tr><th>字段名</th><th>类型</th><th>允许NULL</th><th>默认值</th></tr>
+                
+                        <tr>
+                            <td>id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>endpoint</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>bucket_name</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>file_path</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>original_file_name</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>file_name</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>file_size</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>file_url</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>file_type</td>
+                            <td>int</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>source_type</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_by</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_time</td>
+                            <td>datetime</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>is_del</td>
+                            <td>tinyint</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>tenant_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="table-info">
+                    <h2>表: sale_forbidden</h2>
+                    <p><strong>字段数量:</strong> 11</p>
+                    <p><strong>数据状态:</strong> 有数据</p>
+                    <div class="schema">
+                        <h3>表结构:</h3>
+                        <table border="1" style="border-collapse: collapse; width: 100%;">
+                            <tr><th>字段名</th><th>类型</th><th>允许NULL</th><th>默认值</th></tr>
+                
+                        <tr>
+                            <td>id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>strategy_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>text</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_by</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_time</td>
+                            <td>datetime</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>is_del</td>
+                            <td>tinyint</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>tenant_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="table-info">
+                    <h2>表: sale_knowledge</h2>
+                    <p><strong>字段数量:</strong> 11</p>
+                    <p><strong>数据状态:</strong> 有数据</p>
+                    <div class="schema">
+                        <h3>表结构:</h3>
+                        <table border="1" style="border-collapse: collapse; width: 100%;">
+                            <tr><th>字段名</th><th>类型</th><th>允许NULL</th><th>默认值</th></tr>
+                
+                        <tr>
+                            <td>id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>title</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>text</td>
+                            <td>text</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_by</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_time</td>
+                            <td>datetime</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>is_del</td>
+                            <td>tinyint</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>tenant_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="table-info">
+                    <h2>表: sale_plat_device</h2>
+                    <p><strong>字段数量:</strong> 11</p>
+                    <p><strong>数据状态:</strong> 有数据</p>
+                    <div class="schema">
+                        <h3>表结构:</h3>
+                        <table border="1" style="border-collapse: collapse; width: 100%;">
+                            <tr><th>字段名</th><th>类型</th><th>允许NULL</th><th>默认值</th></tr>
+                
+                        <tr>
+                            <td>id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>tenant_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>register_code</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>device_no</td>
+                            <td>varchar(64)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_by</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_time</td>
+                            <td>datetime</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>is_del</td>
+                            <td>tinyint</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="table-info">
+                    <h2>表: sale_plat_role</h2>
+                    <p><strong>字段数量:</strong> 9</p>
+                    <p><strong>数据状态:</strong> 有数据</p>
+                    <div class="schema">
+                        <h3>表结构:</h3>
+                        <table border="1" style="border-collapse: collapse; width: 100%;">
+                            <tr><th>字段名</th><th>类型</th><th>允许NULL</th><th>默认值</th></tr>
+                
+                        <tr>
+                            <td>id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>role_name</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_by</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_time</td>
+                            <td>datetime</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>is_del</td>
+                            <td>tinyint</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="table-info">
+                    <h2>表: sale_plat_tenant</h2>
+                    <p><strong>字段数量:</strong> 15</p>
+                    <p><strong>数据状态:</strong> 有数据</p>
+                    <div class="schema">
+                        <h3>表结构:</h3>
+                        <table border="1" style="border-collapse: collapse; width: 100%;">
+                            <tr><th>字段名</th><th>类型</th><th>允许NULL</th><th>默认值</th></tr>
+                
+                        <tr>
+                            <td>id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>mobile_no</td>
+                            <td>varchar(11)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>password</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>name</td>
+                            <td>varchar(64)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>device_amount</td>
+                            <td>int</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>effective_start_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>effective_end_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>is_disabled</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_by</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_time</td>
+                            <td>datetime</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>is_del</td>
+                            <td>tinyint</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="table-info">
+                    <h2>表: sale_plat_user</h2>
+                    <p><strong>字段数量:</strong> 10</p>
+                    <p><strong>数据状态:</strong> 有数据</p>
+                    <div class="schema">
+                        <h3>表结构:</h3>
+                        <table border="1" style="border-collapse: collapse; width: 100%;">
+                            <tr><th>字段名</th><th>类型</th><th>允许NULL</th><th>默认值</th></tr>
+                
+                        <tr>
+                            <td>id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>username</td>
+                            <td>varchar(64)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>password</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_by</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_time</td>
+                            <td>datetime</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>is_del</td>
+                            <td>tinyint</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="table-info">
+                    <h2>表: sale_plat_user_role</h2>
+                    <p><strong>字段数量:</strong> 10</p>
+                    <p><strong>数据状态:</strong> 有数据</p>
+                    <div class="schema">
+                        <h3>表结构:</h3>
+                        <table border="1" style="border-collapse: collapse; width: 100%;">
+                            <tr><th>字段名</th><th>类型</th><th>允许NULL</th><th>默认值</th></tr>
+                
+                        <tr>
+                            <td>id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>user_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>role_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_by</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_time</td>
+                            <td>datetime</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>is_del</td>
+                            <td>tinyint</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="table-info">
+                    <h2>表: sale_process</h2>
+                    <p><strong>字段数量:</strong> 13</p>
+                    <p><strong>数据状态:</strong> 有数据</p>
+                    <div class="schema">
+                        <h3>表结构:</h3>
+                        <table border="1" style="border-collapse: collapse; width: 100%;">
+                            <tr><th>字段名</th><th>类型</th><th>允许NULL</th><th>默认值</th></tr>
+                
+                        <tr>
+                            <td>id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>strategy_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>title</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>text</td>
+                            <td>varchar(1024)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>sort</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_by</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_time</td>
+                            <td>datetime</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>is_del</td>
+                            <td>tinyint</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>tenant_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="table-info">
+                    <h2>表: sale_product</h2>
+                    <p><strong>字段数量:</strong> 19</p>
+                    <p><strong>数据状态:</strong> 有数据</p>
+                    <div class="schema">
+                        <h3>表结构:</h3>
+                        <table border="1" style="border-collapse: collapse; width: 100%;">
+                            <tr><th>字段名</th><th>类型</th><th>允许NULL</th><th>默认值</th></tr>
+                
+                        <tr>
+                            <td>id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>name</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>type</td>
+                            <td>int</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>description</td>
+                            <td>text</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>url</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>status</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>price_unit</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>sale_unit</td>
+                            <td>int</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>standard_price</td>
+                            <td>decimal(10,2)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>lowest_price</td>
+                            <td>decimal(10,2)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_by</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_time</td>
+                            <td>datetime</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>is_del</td>
+                            <td>tinyint</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>tenant_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>strategy</td>
+                            <td>varchar(100)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="table-info">
+                    <h2>表: sale_product_file</h2>
+                    <p><strong>字段数量:</strong> 11</p>
+                    <p><strong>数据状态:</strong> 有数据</p>
+                    <div class="schema">
+                        <h3>表结构:</h3>
+                        <table border="1" style="border-collapse: collapse; width: 100%;">
+                            <tr><th>字段名</th><th>类型</th><th>允许NULL</th><th>默认值</th></tr>
+                
+                        <tr>
+                            <td>id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>product_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>file_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_by</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_time</td>
+                            <td>datetime</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>is_del</td>
+                            <td>tinyint</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>tenant_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="table-info">
+                    <h2>表: sale_prologue</h2>
+                    <p><strong>字段数量:</strong> 13</p>
+                    <p><strong>数据状态:</strong> 有数据</p>
+                    <div class="schema">
+                        <h3>表结构:</h3>
+                        <table border="1" style="border-collapse: collapse; width: 100%;">
+                            <tr><th>字段名</th><th>类型</th><th>允许NULL</th><th>默认值</th></tr>
+                
+                        <tr>
+                            <td>id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>strategy_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>content</td>
+                            <td>text</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_by</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_time</td>
+                            <td>datetime</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>is_del</td>
+                            <td>tinyint</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>tenant_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>type</td>
+                            <td>varchar(100)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>is_valid</td>
+                            <td>int</td>
+                            <td>YES</td>
+                            <td>1</td>
+                        </tr>
+                    
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="table-info">
+                    <h2>表: sale_prologue_data</h2>
+                    <p><strong>字段数量:</strong> 11</p>
+                    <p><strong>数据状态:</strong> 有数据</p>
+                    <div class="schema">
+                        <h3>表结构:</h3>
+                        <table border="1" style="border-collapse: collapse; width: 100%;">
+                            <tr><th>字段名</th><th>类型</th><th>允许NULL</th><th>默认值</th></tr>
+                
+                        <tr>
+                            <td>id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>prologue_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_by</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_time</td>
+                            <td>datetime</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>is_del</td>
+                            <td>tinyint</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>tenant_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>data_id</td>
+                            <td>int</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="table-info">
+                    <h2>表: sale_prompt</h2>
+                    <p><strong>字段数量:</strong> 12</p>
+                    <p><strong>数据状态:</strong> 有数据</p>
+                    <div class="schema">
+                        <h3>表结构:</h3>
+                        <table border="1" style="border-collapse: collapse; width: 100%;">
+                            <tr><th>字段名</th><th>类型</th><th>允许NULL</th><th>默认值</th></tr>
+                
+                        <tr>
+                            <td>id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>task_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>tenant_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>system_prompt</td>
+                            <td>text</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>test_prompt</td>
+                            <td>text</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_by</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td>system</td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_time</td>
+                            <td>datetime</td>
+                            <td>NO</td>
+                            <td>CURRENT_TIMESTAMP</td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>is_del</td>
+                            <td>tinyint</td>
+                            <td>NO</td>
+                            <td>0</td>
+                        </tr>
+                    
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="table-info">
+                    <h2>表: sale_role</h2>
+                    <p><strong>字段数量:</strong> 10</p>
+                    <p><strong>数据状态:</strong> 有数据</p>
+                    <div class="schema">
+                        <h3>表结构:</h3>
+                        <table border="1" style="border-collapse: collapse; width: 100%;">
+                            <tr><th>字段名</th><th>类型</th><th>允许NULL</th><th>默认值</th></tr>
+                
+                        <tr>
+                            <td>id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>role_name</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_by</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_time</td>
+                            <td>datetime</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>is_del</td>
+                            <td>tinyint</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>tenant_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="table-info">
+                    <h2>表: sale_strategy</h2>
+                    <p><strong>字段数量:</strong> 16</p>
+                    <p><strong>数据状态:</strong> 有数据</p>
+                    <div class="schema">
+                        <h3>表结构:</h3>
+                        <table border="1" style="border-collapse: collapse; width: 100%;">
+                            <tr><th>字段名</th><th>类型</th><th>允许NULL</th><th>默认值</th></tr>
+                
+                        <tr>
+                            <td>id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>task_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>talk_style</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>reply_cycle</td>
+                            <td>int</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>reply_times</td>
+                            <td>int</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>maintenance_cycle</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>is_greeting</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_by</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_time</td>
+                            <td>datetime</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>is_del</td>
+                            <td>tinyint</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>tenant_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>status</td>
+                            <td>int</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="table-info">
+                    <h2>表: sale_strategy_file</h2>
+                    <p><strong>字段数量:</strong> 11</p>
+                    <p><strong>数据状态:</strong> 有数据</p>
+                    <div class="schema">
+                        <h3>表结构:</h3>
+                        <table border="1" style="border-collapse: collapse; width: 100%;">
+                            <tr><th>字段名</th><th>类型</th><th>允许NULL</th><th>默认值</th></tr>
+                
+                        <tr>
+                            <td>id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>strategy_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>file_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_by</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_time</td>
+                            <td>datetime</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>is_del</td>
+                            <td>tinyint</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>tenant_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="table-info">
+                    <h2>表: sale_strategy_userlog</h2>
+                    <p><strong>字段数量:</strong> 17</p>
+                    <p><strong>数据状态:</strong> 有数据</p>
+                    <div class="schema">
+                        <h3>表结构:</h3>
+                        <table border="1" style="border-collapse: collapse; width: 100%;">
+                            <tr><th>字段名</th><th>类型</th><th>允许NULL</th><th>默认值</th></tr>
+                
+                        <tr>
+                            <td>id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>strategy_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>type</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>operator</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>field_name</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>field_id</td>
+                            <td>int</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>old_text</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>new_text</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_by</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_time</td>
+                            <td>datetime</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>is_del</td>
+                            <td>tinyint</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>tenant_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>operator_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="table-info">
+                    <h2>表: sale_task</h2>
+                    <p><strong>字段数量:</strong> 12</p>
+                    <p><strong>数据状态:</strong> 有数据</p>
+                    <div class="schema">
+                        <h3>表结构:</h3>
+                        <table border="1" style="border-collapse: collapse; width: 100%;">
+                            <tr><th>字段名</th><th>类型</th><th>允许NULL</th><th>默认值</th></tr>
+                
+                        <tr>
+                            <td>id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>name</td>
+                            <td>text</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>status</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_by</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_time</td>
+                            <td>datetime</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>is_del</td>
+                            <td>tinyint</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>tenant_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>find_clue_status</td>
+                            <td>int</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="table-info">
+                    <h2>表: sale_task_clue</h2>
+                    <p><strong>字段数量:</strong> 23</p>
+                    <p><strong>数据状态:</strong> 有数据</p>
+                    <div class="schema">
+                        <h3>表结构:</h3>
+                        <table border="1" style="border-collapse: collapse; width: 100%;">
+                            <tr><th>字段名</th><th>类型</th><th>允许NULL</th><th>默认值</th></tr>
+                
+                        <tr>
+                            <td>id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>wechat_no</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>phone</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>company_name</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>company_introduction</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>position</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>type</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>status</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>wechat_id</td>
+                            <td>int</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>task_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_by</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_time</td>
+                            <td>datetime</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>is_del</td>
+                            <td>tinyint</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>tenant_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>expect_add_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>is_scheduled</td>
+                            <td>int</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>preference</td>
+                            <td>int</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>phone_mark</td>
+                            <td>varchar(64)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>batch_no</td>
+                            <td>varchar(32)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="table-info">
+                    <h2>表: sale_task_data</h2>
+                    <p><strong>字段数量:</strong> 11</p>
+                    <p><strong>数据状态:</strong> 有数据</p>
+                    <div class="schema">
+                        <h3>表结构:</h3>
+                        <table border="1" style="border-collapse: collapse; width: 100%;">
+                            <tr><th>字段名</th><th>类型</th><th>允许NULL</th><th>默认值</th></tr>
+                
+                        <tr>
+                            <td>id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>task_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>data_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_by</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_time</td>
+                            <td>datetime</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>is_del</td>
+                            <td>tinyint</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>tenant_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="table-info">
+                    <h2>表: sale_task_knowledge</h2>
+                    <p><strong>字段数量:</strong> 11</p>
+                    <p><strong>数据状态:</strong> 有数据</p>
+                    <div class="schema">
+                        <h3>表结构:</h3>
+                        <table border="1" style="border-collapse: collapse; width: 100%;">
+                            <tr><th>字段名</th><th>类型</th><th>允许NULL</th><th>默认值</th></tr>
+                
+                        <tr>
+                            <td>id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>task_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>knowledge_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_by</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_time</td>
+                            <td>datetime</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>is_del</td>
+                            <td>tinyint</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>tenant_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="table-info">
+                    <h2>表: sale_task_product</h2>
+                    <p><strong>字段数量:</strong> 11</p>
+                    <p><strong>数据状态:</strong> 有数据</p>
+                    <div class="schema">
+                        <h3>表结构:</h3>
+                        <table border="1" style="border-collapse: collapse; width: 100%;">
+                            <tr><th>字段名</th><th>类型</th><th>允许NULL</th><th>默认值</th></tr>
+                
+                        <tr>
+                            <td>id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>task_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>product_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_by</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_time</td>
+                            <td>datetime</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>is_del</td>
+                            <td>tinyint</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>tenant_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="table-info">
+                    <h2>表: sale_task_wechat</h2>
+                    <p><strong>字段数量:</strong> 12</p>
+                    <p><strong>数据状态:</strong> 有数据</p>
+                    <div class="schema">
+                        <h3>表结构:</h3>
+                        <table border="1" style="border-collapse: collapse; width: 100%;">
+                            <tr><th>字段名</th><th>类型</th><th>允许NULL</th><th>默认值</th></tr>
+                
+                        <tr>
+                            <td>id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>task_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>wechat_id</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_by</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_time</td>
+                            <td>datetime</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>is_del</td>
+                            <td>tinyint</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>tenant_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>add_status</td>
+                            <td>int</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="table-info">
+                    <h2>表: sale_testchat_message</h2>
+                    <p><strong>字段数量:</strong> 19</p>
+                    <p><strong>数据状态:</strong> 有数据</p>
+                    <div class="schema">
+                        <h3>表结构:</h3>
+                        <table border="1" style="border-collapse: collapse; width: 100%;">
+                            <tr><th>字段名</th><th>类型</th><th>允许NULL</th><th>默认值</th></tr>
+                
+                        <tr>
+                            <td>id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>task_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>source</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>sender</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>message_server_id</td>
+                            <td>int</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>is_send</td>
+                            <td>int</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>content_type</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>content</td>
+                            <td>varchar(512)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>ext</td>
+                            <td>varchar(512)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>belong_user</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>testchat_id</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_by</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_time</td>
+                            <td>datetime</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>is_del</td>
+                            <td>tinyint</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>tenant_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="table-info">
+                    <h2>表: sale_user</h2>
+                    <p><strong>字段数量:</strong> 12</p>
+                    <p><strong>数据状态:</strong> 有数据</p>
+                    <div class="schema">
+                        <h3>表结构:</h3>
+                        <table border="1" style="border-collapse: collapse; width: 100%;">
+                            <tr><th>字段名</th><th>类型</th><th>允许NULL</th><th>默认值</th></tr>
+                
+                        <tr>
+                            <td>id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>mobile_no</td>
+                            <td>varchar(11)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>password</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>avatar</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_by</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_time</td>
+                            <td>datetime</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>is_del</td>
+                            <td>tinyint</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>tenant_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="table-info">
+                    <h2>表: sale_user_role</h2>
+                    <p><strong>字段数量:</strong> 11</p>
+                    <p><strong>数据状态:</strong> 有数据</p>
+                    <div class="schema">
+                        <h3>表结构:</h3>
+                        <table border="1" style="border-collapse: collapse; width: 100%;">
+                            <tr><th>字段名</th><th>类型</th><th>允许NULL</th><th>默认值</th></tr>
+                
+                        <tr>
+                            <td>id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>user_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>role_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_by</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_time</td>
+                            <td>datetime</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>is_del</td>
+                            <td>tinyint</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>tenant_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="table-info">
+                    <h2>表: sale_wechat_account</h2>
+                    <p><strong>字段数量:</strong> 17</p>
+                    <p><strong>数据状态:</strong> 有数据</p>
+                    <div class="schema">
+                        <h3>表结构:</h3>
+                        <table border="1" style="border-collapse: collapse; width: 100%;">
+                            <tr><th>字段名</th><th>类型</th><th>允许NULL</th><th>默认值</th></tr>
+                
+                        <tr>
+                            <td>id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>wechat_id</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>wechat_no</td>
+                            <td>varchar(255)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>wechat_nickname</td>
+                            <td>varchar(255)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>avatar</td>
+                            <td>varchar(255)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>is_online</td>
+                            <td>int</td>
+                            <td>YES</td>
+                            <td>1</td>
+                        </tr>
+                    
+                        <tr>
+                            <td>device_no</td>
+                            <td>varchar(255)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>first_login_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>last_login_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_by</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_time</td>
+                            <td>datetime</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>is_del</td>
+                            <td>tinyint</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>tenant_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="table-info">
+                    <h2>表: sale_wechat_behavior</h2>
+                    <p><strong>字段数量:</strong> 13</p>
+                    <p><strong>数据状态:</strong> 有数据</p>
+                    <div class="schema">
+                        <h3>表结构:</h3>
+                        <table border="1" style="border-collapse: collapse; width: 100%;">
+                            <tr><th>字段名</th><th>类型</th><th>允许NULL</th><th>默认值</th></tr>
+                
+                        <tr>
+                            <td>id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>belong_wechat_id</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>wechat_id</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>title</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>content</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_by</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_time</td>
+                            <td>datetime</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>is_del</td>
+                            <td>tinyint</td>
+                            <td>NO</td>
+                            <td>0</td>
+                        </tr>
+                    
+                        <tr>
+                            <td>tenant_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="table-info">
+                    <h2>表: sale_wechat_contact</h2>
+                    <p><strong>字段数量:</strong> 26</p>
+                    <p><strong>数据状态:</strong> 有数据</p>
+                    <div class="schema">
+                        <h3>表结构:</h3>
+                        <table border="1" style="border-collapse: collapse; width: 100%;">
+                            <tr><th>字段名</th><th>类型</th><th>允许NULL</th><th>默认值</th></tr>
+                
+                        <tr>
+                            <td>id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>belong_wechat_id</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>wechat_id</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>wechat_no</td>
+                            <td>varchar(255)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>wechat_nickname</td>
+                            <td>varchar(255)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>remark</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>name</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>avatar</td>
+                            <td>varchar(255)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>phone</td>
+                            <td>varchar(255)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>industry</td>
+                            <td>varchar(255)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>company_size</td>
+                            <td>varchar(255)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>company</td>
+                            <td>varchar(255)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>department</td>
+                            <td>varchar(255)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>post</td>
+                            <td>varchar(255)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>city</td>
+                            <td>varchar(255)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>type</td>
+                            <td>tinyint</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>is_required_help</td>
+                            <td>int</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>is_ai_hosting</td>
+                            <td>tinyint</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_by</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_time</td>
+                            <td>datetime</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>is_del</td>
+                            <td>tinyint</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>tenant_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="table-info">
+                    <h2>表: sale_wechat_follow</h2>
+                    <p><strong>字段数量:</strong> 15</p>
+                    <p><strong>数据状态:</strong> 有数据</p>
+                    <div class="schema">
+                        <h3>表结构:</h3>
+                        <table border="1" style="border-collapse: collapse; width: 100%;">
+                            <tr><th>字段名</th><th>类型</th><th>允许NULL</th><th>默认值</th></tr>
+                
+                        <tr>
+                            <td>id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>belong_wechat_id</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>wechat_id</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>content</td>
+                            <td>varchar(4096)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>cron_expression</td>
+                            <td>varchar(32)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>finish_time</td>
+                            <td>datetime</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>is_executed</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_by</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_time</td>
+                            <td>datetime</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>is_del</td>
+                            <td>tinyint</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>tenant_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="table-info">
+                    <h2>表: sale_wechat_group_stranger</h2>
+                    <p><strong>字段数量:</strong> 12</p>
+                    <p><strong>数据状态:</strong> 有数据</p>
+                    <div class="schema">
+                        <h3>表结构:</h3>
+                        <table border="1" style="border-collapse: collapse; width: 100%;">
+                            <tr><th>字段名</th><th>类型</th><th>允许NULL</th><th>默认值</th></tr>
+                
+                        <tr>
+                            <td>id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>wechat_group_id</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>wechat_id</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>wechat_group_nickname</td>
+                            <td>varchar(255)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_by</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_time</td>
+                            <td>datetime</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>is_del</td>
+                            <td>tinyint</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>tenant_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="table-info">
+                    <h2>表: sale_wechat_matter</h2>
+                    <p><strong>字段数量:</strong> 12</p>
+                    <p><strong>数据状态:</strong> 有数据</p>
+                    <div class="schema">
+                        <h3>表结构:</h3>
+                        <table border="1" style="border-collapse: collapse; width: 100%;">
+                            <tr><th>字段名</th><th>类型</th><th>允许NULL</th><th>默认值</th></tr>
+                
+                        <tr>
+                            <td>id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>belong_wechat_id</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>wechat_id</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>content</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_by</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_time</td>
+                            <td>datetime</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>is_del</td>
+                            <td>tinyint</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>tenant_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="table-info">
+                    <h2>表: sale_wechat_message</h2>
+                    <p><strong>字段数量:</strong> 20</p>
+                    <p><strong>数据状态:</strong> 有数据</p>
+                    <div class="schema">
+                        <h3>表结构:</h3>
+                        <table border="1" style="border-collapse: collapse; width: 100%;">
+                            <tr><th>字段名</th><th>类型</th><th>允许NULL</th><th>默认值</th></tr>
+                
+                        <tr>
+                            <td>id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>belong_wechat_id</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>source_wechat_id</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>sender_wechat_id</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>message_server_id</td>
+                            <td>varchar(128)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>ref_message_server_id</td>
+                            <td>varchar(128)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>is_send</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>content_type</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>content</td>
+                            <td>varchar(4096)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>ext</td>
+                            <td>varchar(512)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>type</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>message_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_by</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_time</td>
+                            <td>datetime</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>is_del</td>
+                            <td>tinyint</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>tenant_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="table-info">
+                    <h2>表: sale_wechat_revisit</h2>
+                    <p><strong>字段数量:</strong> 14</p>
+                    <p><strong>数据状态:</strong> 有数据</p>
+                    <div class="schema">
+                        <h3>表结构:</h3>
+                        <table border="1" style="border-collapse: collapse; width: 100%;">
+                            <tr><th>字段名</th><th>类型</th><th>允许NULL</th><th>默认值</th></tr>
+                
+                        <tr>
+                            <td>id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>belong_wechat_id</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>wechat_id</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>cron_expression</td>
+                            <td>varchar(32)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>finish_time</td>
+                            <td>datetime</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>is_executed</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_by</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_time</td>
+                            <td>datetime</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>is_del</td>
+                            <td>tinyint</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>tenant_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="table-info">
+                    <h2>表: sale_wechat_stranger</h2>
+                    <p><strong>字段数量:</strong> 12</p>
+                    <p><strong>数据状态:</strong> 有数据</p>
+                    <div class="schema">
+                        <h3>表结构:</h3>
+                        <table border="1" style="border-collapse: collapse; width: 100%;">
+                            <tr><th>字段名</th><th>类型</th><th>允许NULL</th><th>默认值</th></tr>
+                
+                        <tr>
+                            <td>id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>wechat_id</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>wechat_nickname</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>avatar</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_by</td>
+                            <td>varchar(256)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_time</td>
+                            <td>datetime</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_by</td>
+                            <td>varchar(256)</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>delete_time</td>
+                            <td>datetime</td>
+                            <td>YES</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>is_del</td>
+                            <td>tinyint</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>tenant_id</td>
+                            <td>int</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="table-info">
+                    <h2>表: sessions</h2>
+                    <p><strong>字段数量:</strong> 6</p>
+                    <p><strong>数据状态:</strong> 有数据</p>
+                    <div class="schema">
+                        <h3>表结构:</h3>
+                        <table border="1" style="border-collapse: collapse; width: 100%;">
+                            <tr><th>字段名</th><th>类型</th><th>允许NULL</th><th>默认值</th></tr>
+                
+                        <tr>
+                            <td>app_name</td>
+                            <td>varchar(128)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>user_id</td>
+                            <td>varchar(128)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>id</td>
+                            <td>varchar(128)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>state</td>
+                            <td>longtext</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>create_time</td>
+                            <td>datetime</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_time</td>
+                            <td>datetime</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="table-info">
+                    <h2>表: user_states</h2>
+                    <p><strong>字段数量:</strong> 4</p>
+                    <p><strong>数据状态:</strong> 有数据</p>
+                    <div class="schema">
+                        <h3>表结构:</h3>
+                        <table border="1" style="border-collapse: collapse; width: 100%;">
+                            <tr><th>字段名</th><th>类型</th><th>允许NULL</th><th>默认值</th></tr>
+                
+                        <tr>
+                            <td>app_name</td>
+                            <td>varchar(128)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>user_id</td>
+                            <td>varchar(128)</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>state</td>
+                            <td>longtext</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        <tr>
+                            <td>update_time</td>
+                            <td>datetime</td>
+                            <td>NO</td>
+                            <td></td>
+                        </tr>
+                    
+                        </table>
+                    </div>
+                </div>
+                
+        </body>
+        </html>
+        

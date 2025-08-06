@@ -1,0 +1,14 @@
+database:
+  host: 120.77.8.73
+  port: 9010
+  username: root
+  password: sale159753
+  name: sale
+  driver: 'mysql+pymysql'
+  charset: 'utf8mb4' # 明确字符集
+  pool_size: 10
+  max_overflow: 30
+  pool_recycle: 3600   # (秒) 连接回收时间，必须小于MySQL的wait_timeout
+  pool_pre_ping: true  # 每次使用前检查连接有效性
+  pool_timeout: 30     # (秒) 从连接池获取连接的超时时间
+  connect_timeout: 10  # (秒) 建立新连接的超时时间
